@@ -9,6 +9,6 @@ public class IsAliveController {
 
     @GetMapping("/isAlive")
     ResponseEntity<String> isAlive() {
-        return ResponseEntity.ok("Alive and kickin'");
+        return ResponseEntity.ok("Hello, I'm living :)");
     }
 }
