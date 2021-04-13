@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-        dockerfile true
-    }
+    agent any
     options {
         timestamps()
     }
@@ -9,6 +7,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
+                sh 'docker build -t springtest -f Dockerfile'
             }
         }
         stage('Test') {
@@ -19,6 +18,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+                sh 'docker run -d -p 8081:8080 springtest'
                 sh 'docker ps'
             }
         }

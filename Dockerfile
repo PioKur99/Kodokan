@@ -5,7 +5,7 @@ COPY server/mvnw .
 COPY server/.mvn .mvn
 COPY server/pom.xml .
 COPY server/src src
-RUN chmod +x server/mvnw
+RUN chmod +x mvnw
 RUN ./mvnw clean install -DskipTests
 RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 
