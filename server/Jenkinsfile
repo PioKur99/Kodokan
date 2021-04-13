@@ -3,7 +3,6 @@ pipeline {
         dockerfile true
     }
     options {
-        ansiColor('xterm')
         timestamps()
     }
     stages {
