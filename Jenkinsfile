@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'openjdk:11-jdk'
+            args '--network jenkins -e DOCKER_HOST=tcp://localhost:2375'
+        }
+    }
     options {
         timestamps()
     }
@@ -7,7 +12,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh 'docker build -t springtest:latest .'
+                docker.build("springtest:latest")
             }
         }
         stage('Test') {
