@@ -7,7 +7,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh 'docker build -t springtest:latest'
+                sh 'docker build -t springtest:latest .'
             }
         }
         stage('Test') {
