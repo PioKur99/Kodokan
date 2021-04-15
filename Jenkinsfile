@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'openjdk:11-jdk'
-            args '--network jenkins -e DOCKER_HOST=tcp://localhost:2375'
-        }
-    }
+    agent any
     options {
         timestamps()
     }
