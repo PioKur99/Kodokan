@@ -1,7 +1,5 @@
 pipeline {
-    agent docker {
-        image 'openjdk:11-jdk'
-    }
+    agent any
     options {
         timestamps()
     }
