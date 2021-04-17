@@ -18,7 +18,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                sh 'docker run -d --network jenkins -p 8081:8080 springtest'
+                sh 'docker stop spring-test'
+                sh 'docker run --name spring-test -d -rm -p 8081:8081 springtest'
                 sh 'docker ps'
             }
         }
