@@ -1,0 +1,15 @@
+<div class="row-layout row">
+  <div *ngFor="let item of northwindCategories" class="column-layout column">
+    <igx-card type="outlined" class="card">
+      <igx-card-header>
+        <h3 igxCardHeaderTitle>Karnet miesięczny</h3>
+        <h5 igxCardHeaderSubtitle>Cena 100 zł</h5>
+      </igx-card-header>
+      <igx-card-actions class="actions">
+        <button igxButton="flat" [disabled]="false" class="button">
+          Kup
+        </button>
+      </igx-card-actions>
+    </igx-card>
+  </div>
+</div>

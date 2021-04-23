@@ -1,0 +1,44 @@
+<div class="row-layout row">
+  <igx-navbar class="navigation-bar">
+    <button igxButton="icon" [disabled]="false" type="icon" igxNavbarAction [igxToggleAction]="navigationDrawer" class="icon-button">
+      <igx-icon>menu</igx-icon>
+    </button>
+    <div igxNavbarTitle>
+      <div>Panel członka klubu</div>
+      <button igxButton="flat" [disabled]="false" class="button">
+        Button
+      </button>
+      <button igxButton="flat" [disabled]="false" class="button">
+        Button
+      </button>
+    </div>
+    <button igxButton="icon" [disabled]="false" type="icon" class="icon-button">
+      <igx-icon>search</igx-icon>
+    </button>
+    <button igxButton="icon" [disabled]="false" type="icon" class="icon-button">
+      <igx-icon>favorite</igx-icon>
+    </button>
+    <button igxButton="icon" [disabled]="false" type="icon" class="icon-button">
+      <igx-icon>more_vert</igx-icon>
+    </button>
+  </igx-navbar>
+</div>
+<div class="row-layout_1 row">
+  <div class="column-layout column">
+    <igx-nav-drawer position="left" [pinThreshold]="1024" [pin]="true" [isOpen]="true" #navigationDrawer class="navigation-drawer">
+      <ng-template igxDrawer>
+        <span [isHeader]="false" igxDrawerItem routerLink="/packages">
+          <igx-icon [active]="true" font="material">account_circle</igx-icon>
+          <span class="navigation-drawer_1">KARNETY</span>
+        </span>
+        <span [isHeader]="false" igxDrawerItem routerLink="/personal-data">
+          <igx-icon [active]="true" font="material">account_circle</igx-icon>
+          <span class="navigation-drawer_1">MOJE DANE</span>
+        </span>
+      </ng-template>
+    </igx-nav-drawer>
+  </div>
+  <div class="views-container">
+    <router-outlet></router-outlet>
+  </div>
+</div>

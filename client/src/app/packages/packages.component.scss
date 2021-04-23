@@ -1,0 +1,38 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+.row-layout {
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: space-evenly;
+  flex: 1 1 auto;
+}
+.column-layout {
+  align-items: stretch;
+  flex: 1 0 auto;
+  position: relative;
+  margin: 5px;
+}
+.card {
+  flex: 0 0 auto;
+  height: max-content;
+}
+.actions {
+  min-width: 50px;
+  min-height: 40px;
+}
+.button {
+  height: max-content;
+  min-width: min-content;
+  flex: 0 0 auto;
+}
+.row {
+  display: flex;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+}

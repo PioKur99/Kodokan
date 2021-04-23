@@ -1,0 +1,45 @@
+/* You can add global styles to this file, and also import other style files */
+// Standard CSS normalize, comment out if not required or using a different module
+@import "~minireset.css/minireset";
+
+
+
+html, body {
+  height: 100%;
+}
+
+@import '~igniteui-angular/lib/core/styles/themes/index';
+
+@include igx-core();
+$custom-palette: igx-palette(
+	$primary: #d90000,
+	$secondary: #6c757d,
+	$surface: #242939,
+	$error: #ff717a,
+	$success: #28a745,
+	$warn: #ffc107,
+	$info: #17a2b8,
+	$grays: #ffffff);
+@include igx-theme($palette: $custom-palette, $schema: $dark-bootstrap-schema, $elevation: false, $roundness: 0.5);
+
+@include igx-typography($font-family: "Playfair Display", $type-scale: $default-type-scale);
+$igx-background-color: igx-color($custom-palette, 'surface');
+$igx-foreground-color: igx-contrast-color($custom-palette, 'surface');
+:root {
+	@include igx-palette-vars($custom-palette);
+
+	body {
+		background: $igx-background-color;
+		color: $igx-foreground-color;
+	}
+}
+
+.igx-typography {
+	h1, h2, h3, h4, h5, h6, p {
+		margin: 0;
+	}
+}
+
+.outer-wrapper > *:not(router-outlet) {
+  width: 100%;
+}
