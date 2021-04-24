@@ -4,14 +4,15 @@ import { Routes, RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './error-routing/not-found/not-found.component';
 import { UncaughtErrorComponent } from './error-routing/error/uncaught-error.component';
 import { ErrorRoutingModule } from './error-routing/error-routing.module';
-import { PackagesComponent } from './packages/packages.component';
-import { PersonalDataComponent } from './personal-data/personal-data.component';
+import { ReceptionistPanelComponent } from './receptionist-panel/receptionist-panel.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'packages', pathMatch: 'full' },
+  { path: '', redirectTo: 'client-panel1/packages1', pathMatch: 'full' },
   { path: 'error', component: UncaughtErrorComponent },
-  { path: 'packages', component: PackagesComponent, data: { text: 'packages' } },
-  { path: 'personal-data', component: PersonalDataComponent, data: { text: 'personal-data' } },
+  { path: 'client-panel', loadChildren: () => import('./client-panel/client-panel.module').then(m => m.ClientPanelModule) },
+  { path: 'receptionist-panel', component: ReceptionistPanelComponent, data: { text: 'receptionist-panel' } },
+  { path: 'client-panel1', loadChildren: () => import('./client-panel1/client-panel1.module').then(m => m.ClientPanel1Module) },
+  { path: 'register-user', loadChildren: () => import('./register-user/register-user.module').then(m => m.RegisterUserModule) },
   { path: '**', component: PageNotFoundComponent } // must always be last
 ];
 

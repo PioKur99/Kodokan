@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NorthwindService } from '../services/northwind.service';
+import { NorthwindService } from '../../services/northwind.service';
 
 @Component({
   selector: 'app-packages',
