@@ -12,7 +12,6 @@ export const routes: Routes = [
   { path: 'client-panel', loadChildren: () => import('./client-panel/client-panel.module').then(m => m.ClientPanelModule) },
   { path: 'receptionist-panel', component: ReceptionistPanelComponent, data: { text: 'receptionist-panel' } },
   { path: 'client-panel1', loadChildren: () => import('./client-panel1/client-panel1.module').then(m => m.ClientPanel1Module) },
-  { path: 'register-user', loadChildren: () => import('./register-user/register-user.module').then(m => m.RegisterUserModule) },
   { path: '**', component: PageNotFoundComponent } // must always be last
 ];
 
