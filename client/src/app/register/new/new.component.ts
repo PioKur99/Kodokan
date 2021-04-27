@@ -25,11 +25,11 @@ export class NewComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    console.log(this.http.post<any>("http://172.18.0.3:8081/members", {
+    this.http.post<any>("http://172.18.0.3:8081/members", {
       "firstName": "Lukasz",
       "lastName": "Wazny",
       "pesel": "mojpesel"
-    }));
+    }).subscribe(data=> console.log(data));
   }
 
 }
