@@ -6,11 +6,28 @@ import {
 	IgxIconModule,
 	IgxNavbarModule,
 	IgxRippleModule,
-	IgxButtonModule
+	IgxButtonModule,
+	IgxNavigationDrawerModule,
+	IgxLayoutModule,
+	IgxToggleModule,
+	IgxInputGroupModule,
+    IgxTooltipModule
 } from 'igniteui-angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NewComponent } from './new/new.component';
 import { RegisteredComponent } from './registered/registered.component';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { LottieModule } from 'ngx-lottie';
+import player from 'lottie-web';
+
+import { HttpClientModule } from '@angular/common/http';
+
+export function playerFactory() {
+  return player;
+}
+
 @NgModule({
     declarations: [
         RegisterComponent,
@@ -23,7 +40,15 @@ import { RegisteredComponent } from './registered/registered.component';
         IgxIconModule,
         IgxNavbarModule,
         IgxRippleModule,
-        IgxButtonModule
+        IgxButtonModule,
+        IgxNavigationDrawerModule,
+        IgxLayoutModule,
+        IgxToggleModule,
+        FormsModule,
+        IgxInputGroupModule,
+        IgxTooltipModule,
+        LottieModule.forRoot({ player: playerFactory }),
+        HttpClientModule
     ]
 })
 export class RegisterModule {

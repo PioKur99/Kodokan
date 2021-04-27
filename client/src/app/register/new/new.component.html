@@ -1,1 +1,59 @@
-<p>new works!</p>
+<div igxLayout igxLayoutDir="column" igxLayoutItemAlign="center">
+    <div class="input" igxFlex>
+        <div igxLayout igxLayoutDir="row">
+            <igx-input-group>
+                <input igxInput name="name" type="text" required="required" [(ngModel)]="client.name">
+                <label igxLabel for="name">
+                    Imię
+                </label>
+            </igx-input-group>
+            <div igxFlexShrink #target="tooltipTarget" [igxTooltipTarget]="nameTooltip">
+                <span class="iconify help" data-icon="bx-bx-help-circle" data-inline="false"></span>
+            </div>
+
+        </div>
+    </div>
+    <div class="input" igxFlex>
+        <igx-input-group>
+            <input igxInput name="surname" type="text" required="required" [(ngModel)]="client.surname">
+            <label igxLabel for="surname">
+                Nazwisko
+            </label>
+        </igx-input-group>
+    </div>
+    <div class="input" igxFlex>
+        <igx-input-group>
+            <input igxInput name="living" type="text" required="required" [(ngModel)]="client.living">
+            <label igxLabel for="living">
+                Adres zamieszkania
+            </label>
+        </igx-input-group>
+    </div>
+    <div class="input" igxFlex>
+        <igx-input-group>
+            <input igxInput name="pesel" type="text" required="required" [(ngModel)]="client.pesel">
+            <label igxLabel for="pesel">
+                PESEL
+            </label>
+        </igx-input-group>
+    </div>
+    <div class="input" igxFlex>
+        <igx-input-group>
+            <input igxInput name="grandma" type="text" [(ngModel)]="client.grandma">
+            <label igxLabel for="grandma">
+                Imię babci
+            </label>
+        </igx-input-group>
+    </div>
+    <div class="input" igxFlex>
+        <button igxButton="raised" igxRipple="white">
+            Zarejestruj
+        </button>
+    </div>
+</div>
+
+<ng-lottie [options]="options"></ng-lottie>
+
+<div #nameTooltip="tooltip" igxTooltip>
+    Podaj swoje imię
+</div>

@@ -1,5 +1,7 @@
+
+<div igxLayout igxLayoutDir="column">
 <igx-navbar>
-    <button igxButton="icon" igxRipple="white" igxNavbarAction>
+    <button igxButton="icon" igxRipple="white" [igxToggleAction]="drawer" igxNavbarAction>
         <igx-icon>menu</igx-icon>
     </button>
     <div igxNavbarTitle>
@@ -8,7 +10,27 @@
     <igx-icon name="info_outline"></igx-icon>
     <igx-icon name="more_vert"></igx-icon>
 </igx-navbar>
-<div class="views-container">
-    <router-outlet></router-outlet>
+<div igxFlex>
+    <div igxLayout igxLayoutDir="row">
+        <div igxFlexShrink>
+            <igx-nav-drawer #drawer position="left">
+                <ng-template igxDrawer>
+                    <!-- Here's an example showing how you would specify drawer items. -->
+                    <span igxDrawerItem routerLink="/register/new">
+                        Nowy
+                    </span>
+                    <span igxDrawerItem routerLink="/register/registered">
+                        Zarejestrowano
+                    </span>
+                </ng-template>
+            </igx-nav-drawer>
+        </div>
+        <div igxFlex>
+            <div class="views-container">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 
