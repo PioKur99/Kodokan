@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-registered',
@@ -8,13 +7,9 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class RegisteredComponent implements OnInit {
 
-  memberId;
-  registeredUsers = ["Łukasz Ważny", "Ferdynand Kiepski", "Tom Cruise"];
-
-  constructor(private route: ActivatedRoute) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.memberId = this.route.snapshot.paramMap.get('id');
   }
 
 }
