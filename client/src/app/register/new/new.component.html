@@ -46,7 +46,7 @@
         </igx-input-group>
     </div>
     <div class="input" igxFlex>
-        <button igxButton="raised" igxRipple="white">
+        <button igxButton="raised" igxRipple="white" (click)="registerUser()">
             Zarejestruj
         </button>
     </div>
@@ -57,3 +57,6 @@
 <div #nameTooltip="tooltip" igxTooltip>
     Podaj swoje imię
 </div>
+
+
+<igx-dialog #dialog message={{dialogWindowMessage}} leftButtonLabel="OK" (onLeftButtonSelect)="dialog.close()" rightButtonLabel="CANCEL" (onRightButtonSelect)="dialog.close()" [closeOnOutsideSelect]="true"></igx-dialog>

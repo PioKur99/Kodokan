@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { AnimationOptions } from 'ngx-lottie';
 import { NewClient } from 'src/app/data/client/new-client';
-import {HttpClient} from '@angular/common/http';
+import { RegisterService } from 'src/app/services/register.service';
 
 @Component({
   selector: 'app-new',
@@ -18,18 +19,37 @@ export class NewComponent implements OnInit {
     grandma:""
   };
 
+  dialogWindowMessage:String = "";
+
+  @ViewChild('dialog') dialog;
+
   options: AnimationOptions = {
     path: 'https://assets3.lottiefiles.com/packages/lf20_n5icqxkw.json',
   };
 
-  constructor(private http: HttpClient) { }
+  constructor(private registerService:RegisterService, private router:Router) { }
 
   ngOnInit(): void {
-    this.http.post<any>("http://172.18.0.3:8081/members", {
-      "firstName": "Lukasz",
-      "lastName": "Wazny",
-      "pesel": "mojpesel"
-    }).subscribe(data=> console.log(data));
+    
+  }
+
+  registerUser(){
+
+    if(this.client.name==""){
+      this.dialogWindowMessage = "Musisz podać imię!";
+      this.dialog.open();
+    } else {
+      this.registerService.registerUser(this.client).subscribe(
+        message => {
+          this.router.navigate(['/register/registered', {id: message}]);
+        },
+        error => {
+          this.dialogWindowMessage = error.error;
+          this.dialog.open();
+        } 
+      )
+    }
+
   }
 
 }

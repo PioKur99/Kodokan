@@ -12,17 +12,27 @@ html, body {
 
 @include igx-core();
 $custom-palette: igx-palette(
-	$primary: #d90000,
-	$secondary: #6c757d,
-	$surface: #242939,
-	$error: #ff717a,
+	$primary: #DAA520,
+	$secondary: #ff00ea,
+	$surface: #3f3f3f,
+	$error: #FF0000,
 	$success: #28a745,
 	$warn: #ffc107,
 	$info: #17a2b8,
 	$grays: #ffffff);
-@include igx-theme($palette: $custom-palette, $schema: $dark-bootstrap-schema, $elevation: false, $roundness: 0.5);
+@include igx-theme($palette: $custom-palette, $schema: $dark-bootstrap-schema, $elevation: false, $roundness: 1);
 
-@include igx-typography($font-family: "Playfair Display", $type-scale: $default-type-scale);
+$colorful-card: igx-card-theme(
+    $background: #202020,
+    $header-text-color: #FEFEFE,
+    $subtitle-text-color: #DAA520,
+    $content-text-color: #FEFEFE,
+);
+
+@include igx-card($colorful-card);
+
+
+@include igx-typography($font-family: "Lato", $type-scale: $default-type-scale);
 $igx-background-color: igx-color($custom-palette, 'surface');
 $igx-foreground-color: igx-contrast-color($custom-palette, 'surface');
 :root {
