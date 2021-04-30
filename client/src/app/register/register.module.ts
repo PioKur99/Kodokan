@@ -45,7 +45,6 @@ export function playerFactory() {
         IgxInputGroupModule,
         IgxTooltipModule,
         LottieModule.forRoot({ player: playerFactory }),
-        HttpClientModule,
         IgxDialogModule
     ]
 })
