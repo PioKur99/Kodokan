@@ -1,0 +1,30 @@
+<header class="header">
+    <button igxButton="raised" igxRipple="white" class="header__button">
+        + DODAJ KLIENTA
+    </button>
+    <button igxButton="raised" igxRipple="white" class="header__button">
+        + ZAREJESTRUJ WEJŚCIE
+    </button>
+    <img class="header__logo" src="">
+</header>
+<nav class="nav">
+    <h2 class="nav__title">MENU</h2>
+    <section class="buttons">
+        <button igxButton="raised" igxRipple="white" class="buttons__item" routerLink='customers'>
+            KLIENCI
+        </button><button igxButton="raised" igxRipple="white" class="buttons__item">
+            WEJŚCIA
+        </button><button igxButton="raised" igxRipple="white" class="buttons__item">
+            KARTY CZŁONKOWSKIE
+        </button><button igxButton="raised" igxRipple="white" class="buttons__item">
+            KARNETY
+        </button>
+    </section>
+    <button igxButton="raised" igxRipple="white" class="nav__backBtn">
+        <igx-icon name="arrow_back" isActive="true"></igx-icon>
+    </button>
+</nav>
+<section class="component">
+    <router-outlet name="primary"></router-outlet>
+</section>
+
