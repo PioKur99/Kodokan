@@ -16,22 +16,21 @@ public class UserDetails {
             @AttributeOverride(name = "value", column = @Column(name = "email"))
     })
     private Email email;
+
     @Embedded
     @AttributeOverrides(value = {
             @AttributeOverride(name = "value", column = @Column(name = "identity_number"))
     })
     private Pesel identity_number;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private Address address;
+
     private String password;
     private String first_name;
     private String last_name;
     private boolean gender;
-
-    /*@OneToOne
-    private Customer customer;*/
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    private Address address;
     private String phone;
     private byte image; //Tego typu nie jestem pewien, tymczasowo
 

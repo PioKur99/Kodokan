@@ -2,15 +2,10 @@ package pl.kodokan.fcp.server.customer.controller;
 
 public class CustomerDto {
 
-    private Long card_id;
-    private Long card_state;
-    private String discipline;
-
     private String email;
     private String password;
     private String first_name;
     private String last_name;
-    private String pesel;
     private boolean gender;
     private String identity_number;
     private String phone;
@@ -22,27 +17,19 @@ public class CustomerDto {
     private String postal_code;
 
     public Long getCard_id() {
-        return card_id;
-    }
-
-    public void setCard_id(Long card_id) {
-        this.card_id = card_id;
-    }
-
-    public Long getCard_state() {
-        return card_state;
-    }
-
-    public void setCard_state(Long card_state) {
-        this.card_state = card_state;
+        return null;
     }
 
     public String getDiscipline() {
-        return discipline;
+        return null;
     }
 
-    public void setDiscipline(String discipline) {
-        this.discipline = discipline;
+    public Long getCard_state() {
+        return null;
+    }
+
+    public Long getFamily_id() {
+        return null;
     }
 
     public String getEmail() {
@@ -75,14 +62,6 @@ public class CustomerDto {
 
     public void setLast_name(String last_name) {
         this.last_name = last_name;
-    }
-
-    public String getPesel() {
-        return pesel;
-    }
-
-    public void setPesel(String pesel) {
-        this.pesel = pesel;
     }
 
     public boolean isGender() {

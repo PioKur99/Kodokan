@@ -10,12 +10,14 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long card_id;
-    private Long card_state;
-    private String discipline;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private UserDetails userDetails;
+    //todo: tabela Family
+
+    private Long card_id;
+    private Long card_state;
+    private String discipline;
 
     public UserDetails getUserDetails() {
         return userDetails;
