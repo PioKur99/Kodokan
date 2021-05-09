@@ -91,4 +91,13 @@ public class PeselServiceImpl implements PeselService {
         }
         return checkSum;
     }
+
+    @Override
+    public boolean isGenderCorrect(Pesel pesel) {
+        //todo: zakladam ze true to mezczyzna ale to nie musi tak byc, w razie czego do poprawki
+        if(Character.getNumericValue(pesel.getValue().charAt(9)) % 2 == 0)
+            return false;
+        else
+            return true;
+    }
 }
