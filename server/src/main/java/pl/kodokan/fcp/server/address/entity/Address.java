@@ -9,20 +9,19 @@ import javax.persistence.Id;
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long address_id;
-    private Long user_id; //todo: taki sam jak address_id, pewnie da sie zrobic lepiej
+    private Long user_id;
 
     private String street_address;
     private String city;
     private String voivodeship;
     private String postal_code;
 
-    public Long getAddress_id() {
-        return address_id;
+    public Long getUser_id() {
+        return user_id;
     }
 
-    public void setAddress_id(Long user_id) {
-        this.address_id = user_id;
+    public void setUser_id(Long user_id) {
+        this.user_id = user_id;
     }
 
     public String getStreet_address() {

@@ -1,12 +1,5 @@
 package pl.kodokan.fcp.server.customer.controller;
 
-import pl.kodokan.fcp.server.address.entity.Address;
-import pl.kodokan.fcp.server.customer.entity.Email;
-import pl.kodokan.fcp.server.customer.entity.Pesel;
-
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-
 public class CustomerDto {
 
     private Long card_id;

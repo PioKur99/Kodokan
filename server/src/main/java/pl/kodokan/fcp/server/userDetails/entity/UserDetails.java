@@ -1,8 +1,7 @@
 package pl.kodokan.fcp.server.userDetails.entity;
 
 import pl.kodokan.fcp.server.address.entity.Address;
-import pl.kodokan.fcp.server.customer.entity.Email;
-import pl.kodokan.fcp.server.customer.entity.Pesel;
+import pl.kodokan.fcp.server.customer.entity.Customer;
 
 import javax.persistence.*;
 
@@ -12,20 +11,53 @@ public class UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long user_id;
 
-    private Long customer_id;
-
+    @Embedded
+    @AttributeOverrides(value = {
+            @AttributeOverride(name = "value", column = @Column(name = "email"))
+    })
     private Email email;
+    @Embedded
+    @AttributeOverrides(value = {
+            @AttributeOverride(name = "value", column = @Column(name = "identity_number"))
+    })
+    private Pesel identity_number;
+
     private String password;
     private String first_name;
     private String last_name;
-    private Pesel pesel;
     private boolean gender;
-    private String identity_number;
-    @OneToOne
+
+    /*@OneToOne
+    private Customer customer;*/
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private Address address;
     private String phone;
     private byte image; //Tego typu nie jestem pewien, tymczasowo
+
+    public Pesel getIdentity_number() {
+        return identity_number;
+    }
+
+    public void setIdentity_number(Pesel identity_nuber) {
+        this.identity_number = identity_nuber;
+    }
+
+    /*public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }*/
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 
     public Long getUser_id() {
         return user_id;
@@ -67,36 +99,12 @@ public class UserDetails {
         this.last_name = last_name;
     }
 
-    public Pesel getPesel() {
-        return pesel;
-    }
-
-    public void setPesel(Pesel pesel) {
-        this.pesel = pesel;
-    }
-
     public boolean isGender() {
         return gender;
     }
 
     public void setGender(boolean gender) {
         this.gender = gender;
-    }
-
-    public String getIdentity_number() {
-        return identity_number;
-    }
-
-    public void setIdentity_number(String identity_number) {
-        this.identity_number = identity_number;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
     }
 
     public String getPhone() {

@@ -1,4 +1,4 @@
-package pl.kodokan.fcp.server.customer.entity;
+package pl.kodokan.fcp.server.userDetails.entity;
 
 import javax.persistence.Embeddable;
 

@@ -13,8 +13,8 @@ public class Customer {
     private Long card_id;
     private Long card_state;
     private String discipline;
-    @OneToOne
-    @JoinColumn(name = "customer_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
     private UserDetails userDetails;
 
     public UserDetails getUserDetails() {
