@@ -4,9 +4,11 @@ import org.springframework.stereotype.Service;
 import pl.kodokan.fcp.server.customer.entity.Customer;
 import pl.kodokan.fcp.server.customer.exception.IncorrectGenderException;
 import pl.kodokan.fcp.server.customer.exception.IncorrectPeselException;
+import pl.kodokan.fcp.server.customer.exception.RepeatedPeselException;
 import pl.kodokan.fcp.server.customer.repository.CustomerRepository;
 
 import javax.transaction.Transactional;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -27,10 +29,13 @@ public class CustomerService {
     public Long addCustomer(Customer customer) {
         //todo: walidacja in progress
 
-        if(peselService.isCorrect(customer.getUserDetails().getIdentity_number()) == false)
+        if(!peselService.isCorrect(customer.getUserDetails().getIdentity_number()))
             throw new IncorrectPeselException();
         if(peselService.isGenderCorrect(customer.getUserDetails().getIdentity_number()) != customer.getUserDetails().isGender())
             throw new IncorrectGenderException();
+        if(repo.findAllPesels().stream().anyMatch(n -> n.getValue().equals(customer.getUserDetails().getIdentity_number().getValue())))
+            throw new RepeatedPeselException();
+
 
         return save(customer).getId();
     }

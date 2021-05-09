@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import pl.kodokan.fcp.server.customer.exception.IncorrectGenderException;
 import pl.kodokan.fcp.server.customer.exception.IncorrectPeselException;
+import pl.kodokan.fcp.server.customer.exception.RepeatedPeselException;
 
 @RestControllerAdvice
 public class CustomerAdvice {
@@ -17,4 +18,8 @@ public class CustomerAdvice {
     @ExceptionHandler(IncorrectGenderException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     String incorrectGenderHandler(IncorrectGenderException ex) {return "Gender is incorrect!";}
+
+    @ExceptionHandler(RepeatedPeselException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    String repeatedPeselHandler(RepeatedPeselException ex) {return "Pesel already exists!";}
 }
