@@ -9,6 +9,7 @@ export class ReceptionistPanelComponent implements OnInit {
 
   constructor() { }
 
+  linkCustomers = [{outlets:{ primary:['customers']}}]
   ngOnInit(): void {
   }
 
