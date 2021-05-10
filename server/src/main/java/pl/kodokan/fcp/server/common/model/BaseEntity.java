@@ -1,4 +1,4 @@
-package pl.kodokan.fcp.server.model;
+package pl.kodokan.fcp.server.common.model;
 
 import lombok.Getter;
 import lombok.Setter;
