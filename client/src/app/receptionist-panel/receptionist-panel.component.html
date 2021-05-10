@@ -1,27 +1,27 @@
 <header class="header">
-    <button igxButton="raised" igxRipple="white" class="header__button">
+    <button igxButton="raised" igxRipple="white" class="header__button" [routerLink]="linkAddAClient">
         + DODAJ KLIENTA
     </button>
-    <button igxButton="raised" igxRipple="white" class="header__button">
+    <button igxButton="raised" igxRipple="white" class="header__button" [routerLink]="linkEntry">
         + ZAREJESTRUJ WEJŚCIE
     </button>
-    <img class="header__logo" src="">
+    <img class="header__logo" src="../../assets/logoKodokanWektorowo.svg">
 </header>
 <nav class="nav">
     <h2 class="nav__title">MENU</h2>
     <section class="buttons">
         <button igxButton="raised" igxRipple="white" class="buttons__item" [routerLink]="linkCustomers">
             KLIENCI
-        </button><button igxButton="raised" igxRipple="white" class="buttons__item">
+        </button><button igxButton="raised" igxRipple="white" class="buttons__item" [routerLink]="linkEntrance">
             WEJŚCIA
-        </button><button igxButton="raised" igxRipple="white" class="buttons__item">
+        </button><button igxButton="raised" igxRipple="white" class="buttons__item" [routerLink]="linkMembership">
             KARTY CZŁONKOWSKIE
-        </button><button igxButton="raised" igxRipple="white" class="buttons__item">
+        </button><button igxButton="raised" igxRipple="white" class="buttons__item" [routerLink]="linkPasses">
             KARNETY
         </button>
     </section>
-    <button igxButton="raised" igxRipple="white" class="nav__backBtn">
-        <igx-icon name="arrow_back" isActive="true"></igx-icon>
+    <button igxButton="icon" class="nav__backBtn" routerLink="">
+        <igx-icon fontSet="material">arrow_back</igx-icon>
     </button>
 </nav>
 <section class="component">

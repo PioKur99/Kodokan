@@ -10,11 +10,21 @@ import {
     IgxIconModule
 } from 'igniteui-angular';
 import { CustomersComponent } from './customers/customers.component';
+import { EntranceComponent } from './entrance/entrance.component';
+import { MembershipCardsComponent } from './membership-cards/membership-cards.component';
+import { PassesComponent } from './passes/passes.component';
+import { AddAClientComponent } from './add-a-client/add-a-client.component';
+import { EntryRegistrationComponent } from './entry-registration/entry-registration.component';
 
 @NgModule({
     declarations: [
         ReceptionistPanelComponent,
-        CustomersComponent
+        CustomersComponent,
+        EntranceComponent,
+        MembershipCardsComponent,
+        PassesComponent,
+        AddAClientComponent,
+        EntryRegistrationComponent
     ],
     imports: [
         CommonModule,

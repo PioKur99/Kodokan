@@ -16,6 +16,10 @@
     border-radius: 0;
     background-color: rgba(0, 0, 0, 0.26);
   }
+
+  &__logo {
+    height: 90%;
+  }
 }
 
 .nav {
@@ -40,6 +44,14 @@
   &__backBtn {
     align-self: flex-start;
     margin-left: 5%;
+    padding: 5%;
+    background: white;
+
+    &--content {
+      width: 30px;
+      height: 30px;
+      color: black;
+    }
   }
 }
 
@@ -50,14 +62,17 @@
   flex-direction: column;
   justify-content: space-around;
 
+
   &__item {
-    padding: 5%;
+    padding: 10% 5%;
     border-radius: 0;
     font-size: 20px;
+    background-color: #3f3f3f;
+    color: #DAA520;
   }
 }
 
 .component {
   width: 70%;
-  margin: 12vh 0 0 25%;
+  margin: 15vh 0 0 27.5%;
 }
