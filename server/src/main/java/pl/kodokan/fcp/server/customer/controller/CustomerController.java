@@ -4,11 +4,11 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import pl.kodokan.fcp.server.customer.entity.Customer;
 import pl.kodokan.fcp.server.customer.service.CustomerService;
 
@@ -36,4 +36,11 @@ public class CustomerController {
 
         return ResponseEntity.ok(result);
     }
+
+    @RequestMapping(value = "/image", produces = {MediaType.IMAGE_PNG_VALUE, "application/json"})
+    public ResponseEntity<?> uploadImage(@RequestParam("imageFile") MultipartFile file,
+                                         @RequestParam("imageName") String name) {
+        return new ResponseEntity<>(name, HttpStatus.CREATED);
+    }
+
 }

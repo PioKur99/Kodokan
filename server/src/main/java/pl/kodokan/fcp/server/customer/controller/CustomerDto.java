@@ -25,7 +25,7 @@ public class CustomerDto {
     }
 
     public Long getCard_state() {
-        return null;
+        return 0L;
     }
 
     public Long getFamily_id() {

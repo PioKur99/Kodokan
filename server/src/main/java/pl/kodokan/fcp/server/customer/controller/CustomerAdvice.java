@@ -4,9 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import pl.kodokan.fcp.server.customer.exception.IncorrectGenderException;
-import pl.kodokan.fcp.server.customer.exception.IncorrectPeselException;
-import pl.kodokan.fcp.server.customer.exception.RepeatedPeselException;
+import pl.kodokan.fcp.server.customer.exception.*;
 
 @RestControllerAdvice
 public class CustomerAdvice {
@@ -22,4 +20,12 @@ public class CustomerAdvice {
     @ExceptionHandler(RepeatedPeselException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     String repeatedPeselHandler(RepeatedPeselException ex) {return "Pesel already exists!";}
+
+    @ExceptionHandler(RepeatedEmailException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    String repeatedEmailHandler(RepeatedEmailException ex) {return "Email already exists!";}
+
+    @ExceptionHandler(IncorrectEmailException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    String incorrectEmailException(IncorrectEmailException ex) {return "Email is incorrect!";}
 }

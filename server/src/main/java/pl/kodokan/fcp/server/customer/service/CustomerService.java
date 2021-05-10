@@ -2,9 +2,7 @@ package pl.kodokan.fcp.server.customer.service;
 
 import org.springframework.stereotype.Service;
 import pl.kodokan.fcp.server.customer.entity.Customer;
-import pl.kodokan.fcp.server.customer.exception.IncorrectGenderException;
-import pl.kodokan.fcp.server.customer.exception.IncorrectPeselException;
-import pl.kodokan.fcp.server.customer.exception.RepeatedPeselException;
+import pl.kodokan.fcp.server.customer.exception.*;
 import pl.kodokan.fcp.server.customer.repository.CustomerRepository;
 
 import javax.transaction.Transactional;
@@ -16,10 +14,12 @@ public class CustomerService {
 
     private final CustomerRepository repo;
     private final PeselService peselService;
+    private final EmailService emailService;
 
-    public CustomerService(CustomerRepository customerRepository, PeselService peselService) {
+    public CustomerService(CustomerRepository customerRepository, PeselService peselService, EmailService emailService) {
         this.repo = customerRepository;
         this.peselService = peselService;
+        this.emailService = emailService;
     }
 
     Customer save(Customer customer) {
@@ -35,7 +35,10 @@ public class CustomerService {
             throw new IncorrectGenderException();
         if(repo.findAllPesels().stream().anyMatch(n -> n.getValue().equals(customer.getUserDetails().getIdentity_number().getValue())))
             throw new RepeatedPeselException();
-
+        if(!emailService.isCorrect(customer.getUserDetails().getEmail()))
+            throw new IncorrectEmailException();
+        if(repo.findAllEmails().stream().anyMatch(n -> n.getValue().equals((customer.getUserDetails().getEmail().getValue()))))
+            throw new RepeatedEmailException();
 
         return save(customer).getId();
     }
