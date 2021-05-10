@@ -4,6 +4,8 @@ import pl.kodokan.fcp.server.address.entity.Address;
 import pl.kodokan.fcp.server.customer.entity.Customer;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class UserDetails {
@@ -27,10 +29,15 @@ public class UserDetails {
     @JoinColumn(name = "user_id")
     private Address address;
 
+    @NotEmpty(message = "Password cannot be empty")
     private String password;
+    @NotEmpty(message = "First name cannot be empty")
     private String first_name;
+    @NotEmpty(message = "Last name cannot be empty")
     private String last_name;
+    @NotNull(message = "Gender cannot be empty")
     private boolean gender;
+    @NotEmpty(message = "Phone number cannot be empty")
     private String phone;
     private byte image; //Tego typu nie jestem pewien, tymczasowo
 

@@ -6,6 +6,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import pl.kodokan.fcp.server.customer.exception.*;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import java.util.Set;
+
 @RestControllerAdvice
 public class CustomerAdvice {
 
@@ -28,4 +32,17 @@ public class CustomerAdvice {
     @ExceptionHandler(IncorrectEmailException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     String incorrectEmailException(IncorrectEmailException ex) {return "Email is incorrect!";}
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    String constraintViolationException(ConstraintViolationException ex) {
+
+        StringBuilder message = new StringBuilder();
+        Set<ConstraintViolation<?>> violations = ex.getConstraintViolations();
+        for (ConstraintViolation<?> violation : violations) {
+            message.append(violation.getMessage().concat("; "));
+        }
+
+        return message.toString();
+    }
 }

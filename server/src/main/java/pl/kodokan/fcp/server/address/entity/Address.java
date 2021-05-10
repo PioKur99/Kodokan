@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Address {
@@ -11,9 +12,13 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long user_id;
 
+    @NotEmpty(message = "Street address cannot be empty")
     private String street_address;
+    @NotEmpty(message = "City cannot be empty!")
     private String city;
+    @NotEmpty(message = "Voivodeship cannot be empty")
     private String voivodeship;
+    @NotEmpty(message = "Postal code cannot be empty")
     private String postal_code;
 
     public Long getUser_id() {
