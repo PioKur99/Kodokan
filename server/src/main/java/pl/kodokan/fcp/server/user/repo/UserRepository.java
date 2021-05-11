@@ -1,7 +1,9 @@
 package pl.kodokan.fcp.server.user.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import pl.kodokan.fcp.server.user.model.UserDetails;
+import org.springframework.stereotype.Repository;
+import pl.kodokan.fcp.server.user.model.UserData;
 
-public interface UserRepository extends JpaRepository<UserDetails, Long> {
+@Repository
+public interface UserRepository extends JpaRepository<UserData, Long> {
 }

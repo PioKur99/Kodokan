@@ -15,5 +15,5 @@ public class Address extends BaseEntity {
 
     @OneToOne
     @MapsId
-    private UserDetails userDetails;
+    private UserData userData;
 }
