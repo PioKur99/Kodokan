@@ -5,6 +5,7 @@ import lombok.Setter;
 import pl.kodokan.fcp.server.common.model.BaseEntity;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
@@ -13,7 +14,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 @Entity
 public class UserDetails extends BaseEntity {
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @PrimaryKeyJoinColumn
     private Address address;
 
