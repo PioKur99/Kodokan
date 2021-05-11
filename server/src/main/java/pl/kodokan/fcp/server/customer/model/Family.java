@@ -5,10 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import pl.kodokan.fcp.server.common.model.BaseEntity;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Collections;
 import java.util.HashSet;
@@ -30,7 +27,7 @@ public class Family extends BaseEntity {
     @JoinColumn
     private Customer mother;
 
-    @OneToMany(mappedBy = "family")
+    @OneToMany(mappedBy = "family", cascade = CascadeType.PERSIST)
     @Setter(AccessLevel.NONE) // don't use setter but control adding / removing singe child
     @Getter(AccessLevel.NONE) // use custom safe getter
     private Set<Customer> children = new HashSet<>();
