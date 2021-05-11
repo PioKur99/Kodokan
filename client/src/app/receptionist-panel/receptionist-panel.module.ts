@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReceptionistPanelRoutingModule } from './receptionist-panel-routing.module';
 import { ReceptionistPanelComponent } from './receptionist-panel.component';
-//import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
     IgxRippleModule,
     IgxButtonModule,
     IgxBottomNavModule,
-    IgxIconModule
+    IgxIconModule,
+    IgxDialogModule
 } from 'igniteui-angular';
 import { CustomersComponent } from './customers/customers.component';
 import { EntranceComponent } from './entrance/entrance.component';
@@ -15,6 +15,7 @@ import { MembershipCardsComponent } from './membership-cards/membership-cards.co
 import { PassesComponent } from './passes/passes.component';
 import { AddAClientComponent } from './add-a-client/add-a-client.component';
 import { EntryRegistrationComponent } from './entry-registration/entry-registration.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
     declarations: [
@@ -29,11 +30,12 @@ import { EntryRegistrationComponent } from './entry-registration/entry-registrat
     imports: [
         CommonModule,
         ReceptionistPanelRoutingModule,
-        //BrowserAnimationsModule,
         IgxRippleModule,
         IgxButtonModule,
         IgxBottomNavModule,
-        IgxIconModule
+        IgxIconModule,
+        //BrowserAnimationsModule,
+        IgxDialogModule
     ]
 })
 export class ReceptionistPanelModule {
