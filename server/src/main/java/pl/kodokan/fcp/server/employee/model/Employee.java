@@ -23,13 +23,13 @@ public class Employee extends BaseEntity {
     @JoinTable
     private Set<Role> roles = new HashSet<>();
 
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "employee_id")
     private List<TimeSheet> timeSheets = new LinkedList<>();
 
     @Setter(AccessLevel.NONE) // don't use setter but control adding / removing singe role
     @Getter(AccessLevel.NONE) // use custom safe getter
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "employee_id")
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TrainingSchedule> schedules = new LinkedList<>();
     
     public void addRole(Role role) {

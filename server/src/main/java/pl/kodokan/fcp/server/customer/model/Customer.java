@@ -14,8 +14,19 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 public class Customer extends BaseEntity {
+
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "id", column = @Column(name = "card_id")),
+            @AttributeOverride(name = "state", column = @Column(name = "card_state"))
+    })
+    Card card;
+
+    @Enumerated(EnumType.STRING)
+    Discipline mainDiscipline;
 
     @OneToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn
