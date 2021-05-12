@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.NaturalId;
 import pl.kodokan.fcp.server.common.model.BaseEntity;
-import pl.kodokan.fcp.server.employee.model.Role;
+import pl.kodokan.fcp.server.user.model.Role;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinTable;

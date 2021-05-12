@@ -1,9 +1,10 @@
-package pl.kodokan.fcp.server.employee.model;
+package pl.kodokan.fcp.server.user.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.NaturalId;
+import org.springframework.security.core.GrantedAuthority;
 import pl.kodokan.fcp.server.common.model.BaseEntity;
 
 import javax.persistence.Entity;
@@ -11,13 +12,18 @@ import java.util.Objects;
 
 @Entity
 @Getter @Setter @NoArgsConstructor
-public class Role extends BaseEntity {
+public class Role extends BaseEntity implements GrantedAuthority {
 
     @NaturalId // unique and not-null out of the box
     private String name;
 
     public Role(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String getAuthority() {
+        return name;
     }
 
     @Override
