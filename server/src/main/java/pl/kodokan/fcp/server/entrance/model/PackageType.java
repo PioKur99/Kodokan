@@ -13,9 +13,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-@Getter
-@Setter
 @Entity
+@Getter @Setter
 public class PackageType extends BaseEntity {
 
     @Setter(AccessLevel.NONE) // don't use setter but control adding / removing singe role

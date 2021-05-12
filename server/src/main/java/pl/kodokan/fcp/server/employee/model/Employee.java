@@ -8,13 +8,10 @@ import pl.kodokan.fcp.server.common.model.BaseEntity;
 import pl.kodokan.fcp.server.user.model.UserData;
 
 import javax.persistence.*;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
-@Getter
-@Setter
 @Entity
+@Getter @Setter
 public class Employee extends BaseEntity {
 
     @OneToOne(optional = false, cascade = CascadeType.ALL)
@@ -29,7 +26,7 @@ public class Employee extends BaseEntity {
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "employee_id")
-    private Set<TimeSheet> timeSheets = new HashSet<>();
+    private List<TimeSheet> timeSheets = new LinkedList<>();
     
     public void addRole(Role role) {
         roles.add(role);
@@ -39,8 +36,8 @@ public class Employee extends BaseEntity {
         timeSheets.add(sheet);
     }
 
-    public Set<TimeSheet> getTimeSheets() {
+    public List<TimeSheet> getTimeSheets() {
         // return safe copy of collection
-        return Collections.unmodifiableSet(timeSheets);
+        return Collections.unmodifiableList(timeSheets);
     }
 }

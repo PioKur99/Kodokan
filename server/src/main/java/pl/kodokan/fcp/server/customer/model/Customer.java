@@ -7,9 +7,8 @@ import pl.kodokan.fcp.server.user.model.UserData;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
 @Entity
+@Getter @Setter
 public class Customer extends BaseEntity {
 
 

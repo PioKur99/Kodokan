@@ -8,9 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
-@Getter
-@Setter
 @Entity
+@Getter @Setter
 public class Address extends BaseEntity {
 
     @OneToOne

@@ -6,8 +6,7 @@ import pl.kodokan.fcp.server.common.model.BaseEntity;
 
 import javax.persistence.Entity;
 
-@Getter
-@Setter
 @Entity
+@Getter @Setter
 public class TimeSheet extends BaseEntity {
 }

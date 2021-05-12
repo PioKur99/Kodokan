@@ -11,9 +11,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-@Getter
-@Setter
 @Entity
+@Getter @Setter
 public class Family extends BaseEntity {
 
     @NotNull
