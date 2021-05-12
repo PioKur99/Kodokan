@@ -25,13 +25,11 @@ public class Customer extends BaseEntity {
      * Family to which this customer belongs as child
      */
     @ManyToOne
-    @JoinColumn
     private Family family;
 
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "customer_id")
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Package> packages = new LinkedList<>();
 
     @Getter(AccessLevel.NONE)
@@ -40,6 +38,7 @@ public class Customer extends BaseEntity {
     private List<Entrance> entrances = new LinkedList<>();
 
     public void addPackage(Package pack) {
+        pack.setCustomer(this);
         packages.add(pack);
     }
 

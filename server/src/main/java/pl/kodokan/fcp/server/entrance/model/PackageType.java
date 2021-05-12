@@ -25,8 +25,7 @@ public class PackageType extends BaseEntity {
      */
     @Setter(AccessLevel.NONE) // don't use setter but control adding / removing singe role
     @Getter(AccessLevel.NONE) // use custom safe getter
-    @ManyToMany
-    @JoinTable
+    @ManyToMany @JoinTable
     private Set<Role> roles = new HashSet<>();
 
     public void addRole(Role role) {

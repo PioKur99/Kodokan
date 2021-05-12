@@ -2,6 +2,7 @@ package pl.kodokan.fcp.server.customer.model;
 
 import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.kodokan.fcp.server.common.model.BaseEntity;
 
@@ -12,7 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Getter @Setter
+@Getter @Setter @NoArgsConstructor
 public class Family extends BaseEntity {
 
     @NotNull
@@ -26,10 +27,20 @@ public class Family extends BaseEntity {
     @JoinColumn
     private Customer mother;
 
-    @OneToMany(mappedBy = "family", cascade = CascadeType.PERSIST)
     @Setter(AccessLevel.NONE) // don't use setter but control adding / removing singe child
     @Getter(AccessLevel.NONE) // use custom safe getter
+    @OneToMany(mappedBy = "family", cascade = CascadeType.PERSIST)
     private Set<Customer> children = new HashSet<>();
+
+    public Family(@NotNull String name) {
+        this.name = name;
+    }
+
+    public Family(@NotNull String name, Customer father, Customer mother) {
+        this.name = name;
+        this.father = father;
+        this.mother = mother;
+    }
 
     public Set<Customer> getChildren() {
         // returns a safe copy of the set

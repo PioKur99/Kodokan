@@ -5,11 +5,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.kodokan.fcp.server.common.model.BaseEntity;
 import pl.kodokan.fcp.server.customer.model.Customer;
+import pl.kodokan.fcp.server.employee.model.TrainingSchedule;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
 
 @Entity
 @Getter @Setter @NoArgsConstructor
