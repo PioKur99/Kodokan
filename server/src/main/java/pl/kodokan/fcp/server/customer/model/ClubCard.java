@@ -10,7 +10,7 @@ import javax.persistence.Enumerated;
 
 @Embeddable
 @Getter @Setter
-public class Card {
+public class ClubCard {
 
     @NaturalId
     Long id;
