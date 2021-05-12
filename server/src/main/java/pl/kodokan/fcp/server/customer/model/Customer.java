@@ -1,14 +1,20 @@
 package pl.kodokan.fcp.server.customer.model;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import pl.kodokan.fcp.server.common.model.BaseEntity;
+import pl.kodokan.fcp.server.entrance.model.Package;
 import pl.kodokan.fcp.server.user.model.UserData;
 
 import javax.persistence.*;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 public class Customer extends BaseEntity {
 
 
@@ -22,4 +28,19 @@ public class Customer extends BaseEntity {
     @ManyToOne
     @JoinColumn
     private Family family;
+
+    @Getter(AccessLevel.NONE)
+    @Setter(AccessLevel.NONE)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "customer_id")
+    private List<Package> packages = new LinkedList<>();
+
+    public void addPackage(Package pack) {
+        packages.add(pack);
+    }
+
+    public List<Package> getPackages() {
+        // returns safe copy of list
+        return Collections.unmodifiableList(packages);
+    }
 }
