@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.userdetails.UserDetails;
 import pl.kodokan.fcp.server.common.model.BaseEntity;
+import pl.kodokan.fcp.server.entrance.model.TrainingSchedule;
 import pl.kodokan.fcp.server.user.model.UserData;
 
 import javax.persistence.*;
@@ -27,9 +28,18 @@ public class Employee extends BaseEntity {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "employee_id")
     private List<TimeSheet> timeSheets = new LinkedList<>();
+
+    @Setter(AccessLevel.NONE) // don't use setter but control adding / removing singe role
+    @Getter(AccessLevel.NONE) // use custom safe getter
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TrainingSchedule> schedules = new LinkedList<>();
     
     public void addRole(Role role) {
         roles.add(role);
+    }
+
+    public void addSchedule(TrainingSchedule schedule) {
+        schedules.add(schedule);
     }
 
     public void addTimeSheet(TimeSheet sheet) {
@@ -39,5 +49,10 @@ public class Employee extends BaseEntity {
     public List<TimeSheet> getTimeSheets() {
         // return safe copy of collection
         return Collections.unmodifiableList(timeSheets);
+    }
+
+    public List<TrainingSchedule> getSchedules() {
+        // return safe copy of collection
+        return Collections.unmodifiableList(schedules);
     }
 }
