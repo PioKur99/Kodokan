@@ -12,6 +12,15 @@ import javax.persistence.OneToOne;
 @Getter @Setter
 public class Address extends BaseEntity {
 
+    /**
+     * Street name + building number
+     */
+    private String addressLine;
+
+    private String city;
+    private String voivodeship;
+    private String postalCode;
+
     @OneToOne
     @MapsId
     private UserData userData;
