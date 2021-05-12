@@ -7,6 +7,8 @@ import pl.kodokan.fcp.server.common.model.BaseEntity;
 import pl.kodokan.fcp.server.customer.model.Customer;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,6 +16,15 @@ import java.util.List;
 @Entity
 @Getter @Setter
 public class Package extends BaseEntity {
+
+    @NotNull
+    private LocalDateTime purchaseDateTime;
+
+    @NotNull
+    private LocalDateTime endDateTime;
+
+    @NotNull
+    private boolean paid = false;
 
     /**
      * Customer this package belongs to
