@@ -5,9 +5,14 @@ import lombok.Getter;
 @Getter
 public enum Discipline {
 
-    // TODO Add other disciplines
     KRAV_MAGA("Krav Maga"),
     MUAY_THAI("Muay Thai");
+    KICK_BOXING("Kick boxing");
+    BJJ("Brazylijskie Jiu Jitsu");
+    MMA("Mieszane Sztuki Walki");
+    BOKS("Boks");
+    GRAPPLING("Grappling");
+    JUDO("Judo");
 
     private final String name;
 
