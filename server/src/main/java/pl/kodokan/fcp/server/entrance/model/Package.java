@@ -5,10 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import pl.kodokan.fcp.server.common.model.BaseEntity;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,6 +19,9 @@ public class Package extends BaseEntity {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "package_id")
     private List<PackageFreeze> freezes = new LinkedList<>();
+
+    @ManyToOne
+    private PackageType packageType;
 
     public void addFreeze(PackageFreeze freeze) {
         freezes.add(freeze);
