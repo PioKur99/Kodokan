@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.*;
 
 @Entity
@@ -21,6 +23,31 @@ public class PackageType extends BaseEntity {
     private String name;
 
     /**
+     * How many days are Packages of this type valid
+     */
+    @NotNull
+    private Integer validityDays;
+
+    @NotNull
+    private Integer entranceLimit;
+
+    private boolean paymentMandatory = true;
+
+    @NotNull
+    private BigDecimal price;
+
+    /**
+     * Whether Packages of this type are addressed to families
+     */
+    private boolean forFamily = false;
+
+    /**
+     * Whether Packages of this type are linked to a partner system (ex. OK System, My Benefit, etc.)
+     */
+    private boolean withPartnerSystem = false;
+
+
+    /**
      * Roles which are allowed to add packages with this PackageType
      */
     @Setter(AccessLevel.NONE) // don't use setter but control adding / removing singe role
@@ -28,6 +55,10 @@ public class PackageType extends BaseEntity {
     @ManyToMany @JoinTable
     private Set<Role> roles = new HashSet<>();
 
+    /**
+     * Add user role which is allowed to create new packages of this type
+     * @param role
+     */
     public void addRole(Role role) {
         roles.add(role);
     }
