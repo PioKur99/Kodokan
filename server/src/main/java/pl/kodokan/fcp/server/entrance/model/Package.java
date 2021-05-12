@@ -23,6 +23,11 @@ public class Package extends BaseEntity {
     @ManyToOne
     private PackageType packageType;
 
+    @Getter(AccessLevel.NONE)
+    @Setter(AccessLevel.NONE)
+    @OneToMany(mappedBy = "packg")
+    private List<Entrance> entrances;
+
     public void addFreeze(PackageFreeze freeze) {
         freezes.add(freeze);
     }
@@ -30,5 +35,9 @@ public class Package extends BaseEntity {
     public List<PackageFreeze> getFreezes() {
         // returns safe copy of freezes
         return Collections.unmodifiableList(freezes);
+    }
+
+    public int countEntrances() {
+        return entrances.size();
     }
 }

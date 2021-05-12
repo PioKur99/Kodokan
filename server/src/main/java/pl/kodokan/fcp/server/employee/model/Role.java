@@ -6,9 +6,7 @@ import lombok.Setter;
 import org.hibernate.annotations.NaturalId;
 import pl.kodokan.fcp.server.common.model.BaseEntity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity

@@ -20,6 +20,9 @@ public class PackageType extends BaseEntity {
     @NaturalId // not-null and unique out of the box
     private String name;
 
+    /**
+     * Roles which are allowed to add packages with this PackageType
+     */
     @Setter(AccessLevel.NONE) // don't use setter but control adding / removing singe role
     @Getter(AccessLevel.NONE) // use custom safe getter
     @ManyToMany
@@ -30,11 +33,17 @@ public class PackageType extends BaseEntity {
         roles.add(role);
     }
 
-    public Set<Role> getRoles() {
+    /**
+     * Returns a set of roles which are allowed to add packages with this PackageType
+     * @return
+     */
+    public Set<Role> getRequiredRoles() {
         // returns a safe copy of the set
         return Collections.unmodifiableSet(roles);
     }
 
+    @Getter(AccessLevel.NONE)
+    @Setter(AccessLevel.NONE)
     @OneToMany(mappedBy = "packageType")
     private List<Package> packages;
 

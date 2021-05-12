@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import pl.kodokan.fcp.server.common.model.BaseEntity;
+import pl.kodokan.fcp.server.entrance.model.Entrance;
 import pl.kodokan.fcp.server.entrance.model.Package;
 import pl.kodokan.fcp.server.user.model.UserData;
 
@@ -13,10 +14,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
+@Getter @Setter
 public class Customer extends BaseEntity {
-
 
     @OneToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn
@@ -34,6 +33,11 @@ public class Customer extends BaseEntity {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id")
     private List<Package> packages = new LinkedList<>();
+
+    @Getter(AccessLevel.NONE)
+    @Setter(AccessLevel.NONE)
+    @OneToMany(mappedBy = "customer")
+    private List<Entrance> entrances = new LinkedList<>();
 
     public void addPackage(Package pack) {
         packages.add(pack);
