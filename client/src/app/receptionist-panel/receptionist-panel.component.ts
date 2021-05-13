@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
+//TODO: <Zapewnić, aby cały czas był dostęp do aktualnie zalogowanej recepcjonistki.>
+
 @Component({
   selector: 'app-receptionist-panel',
   templateUrl: './receptionist-panel.component.html',
@@ -18,13 +20,13 @@ export class ReceptionistPanelComponent implements OnInit {
   linkEntry = [{ outlets: { primary: ['entry-registration'] } }]
 
   ngOnInit(): void {
-    if (this.loginAuth == true) {
+    if (this.loginAuth == true) { // jeżeli jest true poprostu odpal stronę 
       return;
-    } else {
+    } else { // jeżeli jest false == nie jest zalogowany, wyświetl alert który przekieruje na strone logowania
       if (confirm("Nie jesteś zalogowany!")) {
-        this.router.navigate(["/login"])
+        this.router.navigate(["/login"]) //tutaj można podmienić ścieżkę do logowania 
       } else {
-        this.router.navigate(["/login"])
+        this.router.navigate(["/login"]) //tutaj można podmienić ścieżkę do logowania 
       }
     }
   }
