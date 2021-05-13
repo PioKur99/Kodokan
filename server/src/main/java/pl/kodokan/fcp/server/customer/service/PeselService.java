@@ -1,6 +1,5 @@
 package pl.kodokan.fcp.server.customer.service;
 
-import pl.kodokan.fcp.server.customer.exception.IncorrectPeselException;
 import pl.kodokan.fcp.server.userDetails.entity.Pesel;
 
 public interface PeselService {

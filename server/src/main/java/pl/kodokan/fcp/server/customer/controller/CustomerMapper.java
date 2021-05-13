@@ -4,7 +4,10 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import pl.kodokan.fcp.server.customer.entity.Customer;
 
-@Mapper(componentModel = "spring")
+import java.util.Base64;
+
+
+@Mapper(componentModel = "spring", imports = Base64.class)
 public interface CustomerMapper {
 
     @Mapping(source = "userDetails.email.value", target = "email")
@@ -14,7 +17,7 @@ public interface CustomerMapper {
     @Mapping(source = "userDetails.gender", target = "gender")
     @Mapping(source = "userDetails.identity_number.value", target = "identity_number")
     @Mapping(source = "userDetails.phone", target = "phone")
-    @Mapping(source = "userDetails.image", target = "image")
+    @Mapping(target = "userDetails.image", expression = "java(Base64.getEncoder().encodeToString(value))")
     @Mapping(source = "userDetails.address.street_address", target = "street_address")
     @Mapping(source = "userDetails.address.city", target = "city")
     @Mapping(source = "userDetails.address.voivodeship", target = "voivodeship")
@@ -28,7 +31,7 @@ public interface CustomerMapper {
     @Mapping(target = "userDetails.gender", source = "gender")
     @Mapping(target = "userDetails.identity_number.value", source = "identity_number")
     @Mapping(target = "userDetails.phone", source = "phone")
-    @Mapping(target = "userDetails.image", source = "image")
+    @Mapping(target = "userDetails.image", expression = "java(Base64.getDecoder().decode(customerDto.getImage()))")
     @Mapping(target = "userDetails.address.street_address", source = "street_address")
     @Mapping(target = "userDetails.address.city", source = "city")
     @Mapping(target = "userDetails.address.voivodeship", source = "voivodeship")

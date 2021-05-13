@@ -8,6 +8,7 @@ import pl.kodokan.fcp.server.customer.exception.*;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+import java.io.IOException;
 import java.util.Set;
 
 @RestControllerAdvice
@@ -33,6 +34,7 @@ public class CustomerAdvice {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     String incorrectEmailException(IncorrectEmailException ex) {return "Email is incorrect!";}
 
+    //TODO: jezeli w oficjalnych wersjach nie będzie adnotacji notNull to łapanie tego wyjątku okazać się może zbędne
     @ExceptionHandler(ConstraintViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     String constraintViolationException(ConstraintViolationException ex) {
@@ -45,4 +47,8 @@ public class CustomerAdvice {
 
         return message.toString();
     }
+
+    @ExceptionHandler(ErrorReadingImageException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    String errorReadingImageException(ErrorReadingImageException ex) {return "Error while reading customer image!";}
 }

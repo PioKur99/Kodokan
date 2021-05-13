@@ -13,19 +13,10 @@ public class Customer {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private UserDetails userDetails;
-    //todo: tabela Family
 
     private Long card_id;
     private Long card_state;
     private String discipline;
-
-    public UserDetails getUserDetails() {
-        return userDetails;
-    }
-
-    public void setUserDetails(UserDetails userDetails) {
-        this.userDetails = userDetails;
-    }
 
     public Long getId() {
         return id;
@@ -33,6 +24,14 @@ public class Customer {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public UserDetails getUserDetails() {
+        return userDetails;
+    }
+
+    public void setUserDetails(UserDetails userDetails) {
+        this.userDetails = userDetails;
     }
 
     public Long getCard_id() {

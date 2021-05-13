@@ -4,7 +4,6 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 public class Pesel {
-
     private String value;
 
     public String getValue() {

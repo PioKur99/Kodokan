@@ -1,7 +1,6 @@
 package pl.kodokan.fcp.server.customer.controller;
 
 public class CustomerDto {
-
     private String email;
     private String password;
     private String first_name;
@@ -9,12 +8,15 @@ public class CustomerDto {
     private boolean gender;
     private String identity_number;
     private String phone;
-    private byte image; //Tego typu nie jestem pewien, tymczasowo
+    private String image;
 
     private String street_address;
     private String city;
     private String voivodeship;
     private String postal_code;
+
+    //card_id, discipline, family_id; ustawiamy na NULL
+    //card_state ustawiamy na 0
 
     public Long getCard_id() {
         return null;
@@ -24,12 +26,15 @@ public class CustomerDto {
         return null;
     }
 
+    //TODO: public Family getFamily() {return null}; do wykorzystania jak już się połączy z resztą encji i będzie Family w projekcie
+
     public Long getCard_state() {
         return 0L;
     }
 
-    public Long getFamily_id() {
-        return null;
+
+    public String getImage() {
+        return image;
     }
 
     public String getEmail() {
@@ -88,11 +93,7 @@ public class CustomerDto {
         this.phone = phone;
     }
 
-    public byte getImage() {
-        return image;
-    }
-
-    public void setImage(byte image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

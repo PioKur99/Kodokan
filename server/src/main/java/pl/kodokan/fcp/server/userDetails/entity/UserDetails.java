@@ -1,7 +1,6 @@
 package pl.kodokan.fcp.server.userDetails.entity;
 
 import pl.kodokan.fcp.server.address.entity.Address;
-import pl.kodokan.fcp.server.customer.entity.Customer;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -39,31 +38,8 @@ public class UserDetails {
     private boolean gender;
     @NotEmpty(message = "Phone number cannot be empty")
     private String phone;
-    private byte image; //Tego typu nie jestem pewien, tymczasowo
-
-    public Pesel getIdentity_number() {
-        return identity_number;
-    }
-
-    public void setIdentity_number(Pesel identity_nuber) {
-        this.identity_number = identity_nuber;
-    }
-
-    /*public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }*/
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
+    @Lob
+    private byte[] image; //Tego typu nie jestem pewien
 
     public Long getUser_id() {
         return user_id;
@@ -79,6 +55,22 @@ public class UserDetails {
 
     public void setEmail(Email email) {
         this.email = email;
+    }
+
+    public Pesel getIdentity_number() {
+        return identity_number;
+    }
+
+    public void setIdentity_number(Pesel identity_number) {
+        this.identity_number = identity_number;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public String getPassword() {
@@ -121,11 +113,11 @@ public class UserDetails {
         this.phone = phone;
     }
 
-    public byte getImage() {
+    public byte[] getImage() {
         return image;
     }
 
-    public void setImage(byte image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 }
