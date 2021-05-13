@@ -10,6 +10,7 @@ html, body {
 
 @import '~igniteui-angular/lib/core/styles/themes/index';
 
+
 @include igx-core();
 $custom-palette: igx-palette(
 	$primary: #DAA520,
@@ -30,6 +31,27 @@ $colorful-card: igx-card-theme(
 );
 
 @include igx-card($colorful-card);
+
+$custom-input-group: igx-input-group-theme(
+  $filled-text-color: #DAA520,
+  $focused-text-color: #DAA520,
+  $idle-text-color: #DAA520,
+  $idle-bottom-line-color: #DAA520,
+  $interim-bottom-line-color: #DAA520,
+  $hover-bottom-line-color: #DAA520,
+  $focused-secondary-color: #DAA520,
+
+);
+@include igx-css-vars($custom-input-group);
+
+$custom-navbar-theme: igx-navbar-theme(
+    $text-color: #3f3f3f,
+    $background: #DAA520,
+    $idle-icon-color: #4d4d4d,
+    $hover-icon-color: #b48a1e,
+);
+@include igx-css-vars($custom-navbar-theme);
+
 
 
 @include igx-typography($font-family: "Lato", $type-scale: $default-type-scale);
@@ -55,3 +77,6 @@ $igx-foreground-color: igx-contrast-color($custom-palette, 'surface');
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+

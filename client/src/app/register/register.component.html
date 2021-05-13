@@ -1,0 +1,156 @@
+<igx-navbar title="Rejestracja" actionButtonIcon="arrow_back" [isActionButtonVisible]="canGoBack()"
+(action)="navigateBack()">
+  <igx-icon name="info_outline"></igx-icon>
+  <igx-icon name="more_vert"></igx-icon>
+</igx-navbar>
+  <mat-horizontal-stepper linear #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Utwórz konto</ng-template>
+        <div class="inputs">
+            <igx-input-group>
+              <input  igxInput name="email" type="email" required="required" formControlName="firstCtrl">
+              <label igxLabel for="email">
+                E-mail
+              </label>
+            </igx-input-group>
+            <igx-input-group>
+              <input igxInput name="phone" type="text" required="required" formControlName="secondCtrl">
+              <label igxLabel for="phone">
+                 Telefon kontaktowy
+              </label>
+            </igx-input-group>
+            <igx-input-group>
+              <input igxInput name="password" type="password" required="required" formControlName="thirdCtrl">
+              <label igxLabel for="password">
+                 Hasło
+              </label>
+            </igx-input-group>
+            <igx-input-group>
+              <input igxInput name="repeatPassword" type="password" required="required" formControlName="fourthCtrl">
+              <label igxLabel for="repeatPassword">
+                 Powtórz hasło
+              </label>
+            </igx-input-group>
+
+        <div class="centered">
+          <div>
+            <a href="">
+              <button igxButton="flat" igxRipple="white">
+                Regulamin
+              </button>
+            </a>
+            <a href="">
+              <button igxButton="flat" igxRipple="white">
+                Polityka prywatności
+              </button>
+            </a>
+          </div>
+          <div>
+          <igx-checkbox [checked]="true" >
+            Akceptuję politykę prywatności i regulamin klubu
+          </igx-checkbox>
+          </div>
+        </div>
+      </div>
+        <div>
+          <button mat-button  igxButton="raised" igxRipple="white" matStepperNext>
+            DALEJ
+          </button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" [optional]="isOptional">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Wprowadź dane osobowe</ng-template>
+        <div class="inputs">
+          <div class="container">
+
+              <span id="plec">Płeć:</span>
+
+              <igx-radio-group [alignment]="alignment">
+                <igx-radio name="foo" value="1" >
+                  Kobieta
+                </igx-radio>
+                <igx-radio name="foo" value="2" >
+                  Mężczyzna
+                </igx-radio>
+              </igx-radio-group>
+
+          </div>
+          <div>
+            <igx-input-group>
+              <input  igxInput name="name" type="email" required="required" formControlName="firstCtrl">
+              <label igxLabel for="name">
+                Imię
+              </label>
+            </igx-input-group>
+            <igx-input-group>
+              <input  igxInput name="surname" type="email" required="required" formControlName="secondCtrl">
+              <label igxLabel for="surname">
+                Nazwisko
+              </label>
+            </igx-input-group>
+            <igx-input-group>
+              <input  igxInput name="pesel" type="email" required="required" formControlName="thirdCtrl">
+              <label igxLabel for="pesel">
+                PESEL
+              </label>
+            </igx-input-group>
+            <igx-input-group>
+              <input  igxInput name="street" type="email" required="required" formControlName="fourthCtrl">
+              <label igxLabel for="street">
+                Ulica i numer domu
+              </label>
+            </igx-input-group>
+            <igx-input-group>
+              <input  igxInput name="local" type="email"  formControlName="fifthCtrl">
+              <label igxLabel for="local">
+                Numer lokalu
+              </label>
+            </igx-input-group>
+            <igx-input-group>
+              <input  igxInput name="city" type="email" required="required" formControlName="sixthCtrl">
+              <label igxLabel for="city">
+                Miasto
+              </label>
+            </igx-input-group>
+            <igx-input-group>
+              <input  igxInput name="area" type="email" required="required" formControlName="seventhCtrl">
+              <label igxLabel for="area">
+                Kod pocztowy
+              </label>
+            </igx-input-group>
+            <igx-input-group>
+              <input  igxInput name="email" type="email" required="required" formControlName="eighthCtrl">
+              <label igxLabel for="email">
+                Województwo
+              </label>
+            </igx-input-group>
+          </div>
+        </div>
+        <div>
+          <button mat-button  igxButton="raised" igxRipple="white" matStepperPrevious id="previous">
+            WSTECZ
+          </button>
+          <button mat-button  igxButton="raised" igxRipple="white" matStepperNext>
+            DALEJ
+          </button>
+
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="thirdFormGroup" [optional]="isOptional">
+      <form [formGroup]="thirdFormGroup">
+        <ng-template matStepLabel>Dodaj swoje zdjęcie</ng-template>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Sprawdź poprawność danych</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>

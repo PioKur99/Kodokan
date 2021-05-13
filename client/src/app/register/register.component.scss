@@ -1,0 +1,63 @@
+.mat-stepper-vertical{
+  padding: 0 100px 24px 100px;
+}
+
+.mat-stepper-horizontal {
+
+    background-color: transparent;
+    padding: 2% 10% 24px 10%;
+  }
+  
+.mat-form-field {
+  margin-top: 16px;
+  
+}
+.igx-button--raised{
+  float: right;
+  margin-top: 30px;
+  background-color: #ffffffa6;
+}
+
+igx-navbar{
+  font-family: Helvetica, sans-serif;
+}
+.centered{
+  text-align: center;
+  margin-top: 50px;
+}
+igx-checkbox{
+  margin-top: 10px;
+}
+igx-input-group{
+  margin: 0%;
+}
+.inputs{
+  padding: 2% 30% 10px 30%;
+}
+
+::ng-deep .mat-step-header  .mat-step-icon-selected {
+  background-color: #DAA520;
+  color: white;
+}
+
+
+
+::ng-deep .mat-step-header .mat-step-label.mat-step-label-active{
+  color: white;
+}
+::ng-deep  .mat-step-header .mat-step-icon-state-edit{
+  background-color: #DAA520;
+}
+#previous{
+  float: left;
+}
+.container{
+  justify-content: space-between;
+}
+igx-radio-group{
+  float: right;
+}
+#plec{
+  color: #DAA520;
+  margin-left: 0%;
+}
