@@ -1,3 +1,6 @@
+
+
+
 <igx-navbar title="Rejestracja" actionButtonIcon="arrow_back" [isActionButtonVisible]="canGoBack()"
 (action)="navigateBack()">
   <igx-icon name="info_outline"></igx-icon>
@@ -7,31 +10,41 @@
     <mat-step [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup">
         <ng-template matStepLabel>Utwórz konto</ng-template>
+        
+       
         <div class="inputs">
+        
             <igx-input-group>
-              <input  igxInput name="email" type="email" required="required" formControlName="firstCtrl">
+              <input  igxInput name="email" type="email" required="required" formControlName="firstCtrl" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" [(ngModel)]="client.email">
               <label igxLabel for="email">
                 E-mail
               </label>
             </igx-input-group>
             <igx-input-group>
-              <input igxInput name="phone" type="text" required="required" formControlName="secondCtrl">
+              <input (keypress)="numberOnly($event)" igxInput name="phone" type="tel" required="required" formControlName="secondCtrl" minlength="7" maxlength="16" [(ngModel)]="client.phoneNumber">
               <label igxLabel for="phone">
                  Telefon kontaktowy
               </label>
+              <igx-suffix>
+                <igx-icon>phone</igx-icon>
+            </igx-suffix>
             </igx-input-group>
             <igx-input-group>
-              <input igxInput name="password" type="password" required="required" formControlName="thirdCtrl">
+              <input igxInput name="password" type="password" required="required" formControlName="thirdCtrl" [(ngModel)]="password" minlength="7" (keyup)="onPressPassword()">
               <label igxLabel for="password">
                  Hasło
               </label>
             </igx-input-group>
             <igx-input-group>
-              <input igxInput name="repeatPassword" type="password" required="required" formControlName="fourthCtrl">
+              <input  igxInput name="repeatPassword" type="password" required="required" formControlName="fourthCtrl" [(ngModel)]="repeatedPassword" minlength="7" (keyup)="onSetTimout()" (keyup)="onPressPassword()">
               <label igxLabel for="repeatPassword">
                  Powtórz hasło
               </label>
             </igx-input-group>
+
+            <div class="warnings">
+              <p *ngIf="false" >Hasła muszą być takie same!</p>
+            </div>
 
         <div class="centered">
           <div>
@@ -47,15 +60,15 @@
             </a>
           </div>
           <div>
-          <igx-checkbox [checked]="true" >
+          <igx-checkbox type="checkbox" name="agreement" value="yes" [checked]="isChecked"  (change)="onClickCheckBox()" >
             Akceptuję politykę prywatności i regulamin klubu
           </igx-checkbox>
           </div>
         </div>
       </div>
         <div>
-          <button mat-button  igxButton="raised" igxRipple="white" matStepperNext>
-            DALEJ
+          <button mat-button  igxButton="raised" igxRipple="white" matStepperNext class="rightBtn greyBtn" [disabled]="isDisabled" (click)="onClickNextBtn()">
+            DALEJ 
           </button>
         </div>
       </form>
@@ -63,77 +76,77 @@
     <mat-step [stepControl]="secondFormGroup" [optional]="isOptional">
       <form [formGroup]="secondFormGroup">
         <ng-template matStepLabel>Wprowadź dane osobowe</ng-template>
+        <form class="container">
+
+          <span class="yellowText">Płeć:</span>
+
+          <igx-radio-group [alignment]="alignment">
+            <igx-radio   name="foo" value="Kobieta" (change)="onItemChange($event)">
+              Kobieta
+            </igx-radio>
+            <igx-radio    name="foo" value="Mężczyzna" (change)="onItemChange($event)">
+              Mężczyzna
+            </igx-radio>
+          </igx-radio-group>
+
+        </form>
         <div class="inputs">
-          <div class="container">
-
-              <span id="plec">Płeć:</span>
-
-              <igx-radio-group [alignment]="alignment">
-                <igx-radio name="foo" value="1" >
-                  Kobieta
-                </igx-radio>
-                <igx-radio name="foo" value="2" >
-                  Mężczyzna
-                </igx-radio>
-              </igx-radio-group>
-
-          </div>
           <div>
             <igx-input-group>
-              <input  igxInput name="name" type="email" required="required" formControlName="firstCtrl">
+              <input  igxInput name="name" type="text" required="required" formControlName="firstCtrl" [(ngModel)]="client.name" maxlength="25">
               <label igxLabel for="name">
                 Imię
               </label>
             </igx-input-group>
             <igx-input-group>
-              <input  igxInput name="surname" type="email" required="required" formControlName="secondCtrl">
+              <input  igxInput name="surname" type="text" required="required" formControlName="secondCtrl" [(ngModel)]="client.surname" maxlength="25">
               <label igxLabel for="surname">
                 Nazwisko
               </label>
             </igx-input-group>
             <igx-input-group>
-              <input  igxInput name="pesel" type="email" required="required" formControlName="thirdCtrl">
+              <input  igxInput name="pesel" (keypress)="numberOnly($event)" type="text" required="required" formControlName="thirdCtrl" [(ngModel)]="client.pesel" maxlength="25">
               <label igxLabel for="pesel">
                 PESEL
               </label>
             </igx-input-group>
             <igx-input-group>
-              <input  igxInput name="street" type="email" required="required" formControlName="fourthCtrl">
+              <input  igxInput name="street" type="text" required="required" formControlName="fourthCtrl" [(ngModel)]="client.street" maxlength="25">
               <label igxLabel for="street">
                 Ulica i numer domu
               </label>
             </igx-input-group>
             <igx-input-group>
-              <input  igxInput name="local" type="email"  formControlName="fifthCtrl">
+              <input  igxInput name="local" type="text" (keypress)="numberOnly($event)" formControlName="fifthCtrl" [(ngModel)]="client.localNumber" maxlength="5">
               <label igxLabel for="local">
                 Numer lokalu
               </label>
             </igx-input-group>
             <igx-input-group>
-              <input  igxInput name="city" type="email" required="required" formControlName="sixthCtrl">
+              <input  igxInput name="city" type="text" required="required" formControlName="sixthCtrl" [(ngModel)]="client.city" maxlength="25">
               <label igxLabel for="city">
                 Miasto
               </label>
             </igx-input-group>
             <igx-input-group>
-              <input  igxInput name="area" type="email" required="required" formControlName="seventhCtrl">
-              <label igxLabel for="area">
+              <input  igxInput name="postCode" (keypress)="numberOnly($event)" type="text" required="required" formControlName="seventhCtrl" [(ngModel)]="client.postCode" maxlength="10">
+              <label igxLabel for="postCode">
                 Kod pocztowy
               </label>
             </igx-input-group>
             <igx-input-group>
-              <input  igxInput name="email" type="email" required="required" formControlName="eighthCtrl">
-              <label igxLabel for="email">
+              <input  igxInput name="province" type="text" required="required" formControlName="eighthCtrl" [(ngModel)]="client.province" maxlength="15">
+              <label igxLabel for="province">
                 Województwo
               </label>
             </igx-input-group>
           </div>
         </div>
         <div>
-          <button mat-button  igxButton="raised" igxRipple="white" matStepperPrevious id="previous">
+          <button mat-button  igxButton="outlined" igxRipple="white" matStepperPrevious id="previous">
             WSTECZ
           </button>
-          <button mat-button  igxButton="raised" igxRipple="white" matStepperNext>
+          <button mat-button  igxButton="raised" igxRipple="white" matStepperNext class="rightBtn greyBtn">
             DALEJ
           </button>
 
@@ -143,14 +156,151 @@
     <mat-step [stepControl]="thirdFormGroup" [optional]="isOptional">
       <form [formGroup]="thirdFormGroup">
         <ng-template matStepLabel>Dodaj swoje zdjęcie</ng-template>
+        <div>
+          <webcam [height]="400" 
+                  [width]="1000" 
+                  [trigger]="triggerObservable"
+                      (imageCapture)="handleImage($event)" *ngIf="!client.image">
+           </webcam>
+           <div class="snapshot" *ngIf="client.image">
+            <img [height]="225" 
+            [width]="550"  [src]="client.image.imageAsDataUrl"/>
+          </div>
+          <div class="photoBtn">
+            <button  igxButton="raised" igxRipple="white" class="actionBtn greyBtn" (click)="triggerSnapshot();" *ngIf="!client.image">
+              Zrób zdjęcie
+            </button>
+            <button igxButton="raised" igxRipple="white" class="actionBtn greyBtn" (click)="reset();" *ngIf="client.image" >
+              Resetuj
+            </button>
+          </div>
+        </div>
+        <button mat-button  igxButton="outlined" igxRipple="white" matStepperPrevious id="previous">
+          WSTECZ
+        </button>
+        <button mat-button  igxButton="raised" igxRipple="white" matStepperNext class="rightBtn greyBtn">
+          DALEJ
+        </button>
+
       </form>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Sprawdź poprawność danych</ng-template>
-      <p>You are now done.</p>
+      <div class="mainContainer">
+        <div class="mainContainerOne">
+          <div class="containerOne">
+            <div class="labels">
+              <igx-input-group>
+                <input igxInput name="name" type="text"  disabled="disabled" >
+                <label igxLabel for="name">
+                  {{client.name}}
+                </label>
+              </igx-input-group>
+            </div>
+            <div class="labels">
+              <igx-input-group>
+                <input igxInput name="surname" type="text"  disabled="disabled" >
+                <label igxLabel for="surname">
+                  {{client.surname}}
+                </label>
+              </igx-input-group>
+            </div>
+            <div class="labels">
+              <igx-input-group>
+                <input igxInput name="sex" type="text"  disabled="disabled" >
+                <label igxLabel for="sex">
+                  {{client.sex}}
+                </label>
+              </igx-input-group>
+            </div>
+            <div class="labels">
+              <igx-input-group>
+                <input igxInput name="pesel" type="text"  disabled="disabled" >
+                <label igxLabel for="pesel">
+                  {{client.pesel}}
+                </label>
+              </igx-input-group>
+            </div>
+          </div>
+          <div class="containerTwo">
+            <div class="labels">
+              <igx-input-group>
+                <input igxInput name="street" type="text"  disabled="disabled" >
+                <label igxLabel for="street">
+                  {{client.street}}
+                </label>
+              </igx-input-group>
+            </div>
+            <div class="labels" >
+              <igx-input-group>
+                <input igxInput name="localNumber" type="text"  disabled="disabled" >
+                <label igxLabel for="localNumber">
+                  {{client.localNumber}}
+                </label>
+              </igx-input-group>
+            </div>
+            <div class="labels">
+              <igx-input-group>
+                <input igxInput name="city" type="text"  disabled="disabled" >
+                <label igxLabel for="city">
+                  {{client.city}}
+                </label>
+              </igx-input-group>
+            </div>
+            <div class="labels" *ngIf="client.postCode">
+              <igx-input-group>
+                <input igxInput name="postCode" type="text"  disabled="disabled" >
+                <label igxLabel for="postCode">
+                  {{client.postCode}}
+                </label>
+              </igx-input-group>
+            </div>
+            <div class="labels">
+              <igx-input-group>
+                <input igxInput name="province" type="text"  disabled="disabled" >
+                <label igxLabel for="province">
+                  {{client.province}}
+                </label>
+              </igx-input-group>
+            </div>
+          </div>
+          <div class="containerThree">
+            <div class="labels">
+              <igx-input-group>
+                <input igxInput name="email" type="text"  disabled="disabled" >
+                <label igxLabel for="email">
+                  {{client.email}}
+                </label>
+              </igx-input-group>
+            </div>
+            <div class="labels">
+              <igx-input-group>
+                <input igxInput name="phoneNumber" type="text"  disabled="disabled" >
+                <label igxLabel for="phoneNumber">
+                  {{client.phoneNumber}}
+                </label>
+              </igx-input-group>
+            </div>
+          </div>
+        </div>
+        <div class="mainContainerTwo">
+          <div class="snapshot" *ngIf="client.image">
+            <img [height]="225" 
+            [width]="550"  [src]="client.image.imageAsDataUrl"/>
+          </div>
+        </div>
+      </div>
+
+   
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
+        <button mat-button  igxButton="outlined" igxRipple="white" matStepperPrevious id="previous">
+          WSTECZ
+        </button>
+        <button mat-button  igxButton="raised" igxRipple="white" matStepperNext class="rightBtn greyBtn">
+          Rejestruj
+        </button>
       </div>
     </mat-step>
   </mat-horizontal-stepper>
+
+

@@ -9,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatStepperModule } from '@angular/material/stepper';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { WebcamModule } from 'ngx-webcam';
 import {
 	IgxInputGroupModule,
 	IgxIconModule,
@@ -16,7 +17,9 @@ import {
 	IgxRippleModule,
 	IgxButtonModule,
 	IgxCheckboxModule,
-	IgxRadioModule
+	IgxRadioModule,
+	IgxButtonGroupModule,
+	IgxToastModule
 } from 'igniteui-angular';
 @NgModule({
     declarations: [
@@ -24,6 +27,7 @@ import {
         RegisterComponent
     ],
     imports: [
+        WebcamModule,
         FormsModule,
         ReactiveFormsModule,
         MatStepperModule,
@@ -40,7 +44,9 @@ import {
         IgxRippleModule,
         IgxButtonModule,
         IgxCheckboxModule,
-        IgxRadioModule
+        IgxRadioModule,
+        IgxButtonGroupModule,
+        IgxToastModule
     ],
     providers: [],
     bootstrap: [AppComponent]

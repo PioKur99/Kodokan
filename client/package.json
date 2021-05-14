@@ -28,7 +28,8 @@
     "lottie-web": "^5.7.8",
     "minireset.css": "~0.0.4",
     "ngx-lottie": "^6.4.0",
-    "rxjs": "~6.6.0",
+    "ngx-webcam": "^0.3.2",
+    "rxjs": "^6.6.7",
     "tslib": "^2.0.0",
     "web-animations-js": "^2.3.2",
     "zone.js": "~0.11.3"
