@@ -1,12 +1,12 @@
-package pl.kodokan.fcp.server.service;
+package pl.kodokan.fcp.server.discipline.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.kodokan.fcp.server.dto.DisciplineDTO;
-import pl.kodokan.fcp.server.exception.CustomerNotExist;
-import pl.kodokan.fcp.server.model.Customer;
-import pl.kodokan.fcp.server.model.Discipline;
-import pl.kodokan.fcp.server.repository.CustomerRepository;
+import pl.kodokan.fcp.server.discipline.dto.DisciplineDTO;
+import pl.kodokan.fcp.server.discipline.exception.CustomerNotExistException;
+import pl.kodokan.fcp.server.discipline.model.Customer;
+import pl.kodokan.fcp.server.discipline.model.Discipline;
+import pl.kodokan.fcp.server.discipline.repository.CustomerRepository;
 
 import java.util.Optional;
 
@@ -22,7 +22,7 @@ public class DisciplineService {
 
     private Customer findCustomerById(Long id){
         final Optional<Customer> optionalCustomer = customerRepository.findById(id);
-        return optionalCustomer.orElseThrow(CustomerNotExist::new);
+        return optionalCustomer.orElseThrow(CustomerNotExistException::new);
     }
 
     @Transactional
@@ -35,7 +35,6 @@ public class DisciplineService {
     }
 
     public Discipline getUserDiscipline(Long id) {
-        final Customer customer = findCustomerById(id);
-        return customer.getDiscipline();
+       return findCustomerById(id).getDiscipline();
     }
 }

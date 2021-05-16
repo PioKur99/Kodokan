@@ -1,8 +1,8 @@
-package pl.kodokan.fcp.server.repository;
+package pl.kodokan.fcp.server.discipline.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import pl.kodokan.fcp.server.model.Customer;
+import pl.kodokan.fcp.server.discipline.model.Customer;
 
 import java.util.Optional;
 

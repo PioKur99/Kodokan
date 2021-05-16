@@ -1,4 +1,4 @@
-package pl.kodokan.fcp.server.model;
+package pl.kodokan.fcp.server.discipline.model;
 
 /*
 @ToDo
@@ -7,5 +7,5 @@ package pl.kodokan.fcp.server.model;
 
 public enum Discipline {
     KARATE,
-    TABATA;
+    TABAT;
 }

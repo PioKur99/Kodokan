@@ -1,12 +1,13 @@
-package pl.kodokan.fcp.server.controller;
+package pl.kodokan.fcp.server.discipline.controller;
 
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.v3.oas.annotations.Operation;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.kodokan.fcp.server.dto.DisciplineDTO;
-import pl.kodokan.fcp.server.model.Discipline;
-import pl.kodokan.fcp.server.service.DisciplineService;
+import pl.kodokan.fcp.server.discipline.dto.DisciplineDTO;
+import pl.kodokan.fcp.server.discipline.model.Discipline;
+import pl.kodokan.fcp.server.discipline.service.DisciplineService;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,8 +31,8 @@ public class DisciplineController {
     })
     @ResponseBody
     @PatchMapping
-    public Discipline updateCustomerDiscipline(@RequestBody DisciplineDTO disciplineDto){
-        return disciplineService.updateDiscipline(disciplineDto);
+    public ResponseEntity<Discipline> updateCustomerDiscipline(@RequestBody DisciplineDTO disciplineDto){
+        return ResponseEntity.ok(disciplineService.updateDiscipline(disciplineDto));
     }
 
     @Operation(summary = "Get customer disciplne")
@@ -41,16 +42,16 @@ public class DisciplineController {
     })
     @ResponseBody
     @GetMapping(value = "/{id}")
-    public Discipline getUserDiscipline(@PathVariable Long id){
-        return disciplineService.getUserDiscipline(id);
+    public ResponseEntity<Discipline> getUserDiscipline(@PathVariable Long id){
+        return ResponseEntity.ok(disciplineService.getUserDiscipline(id));
     }
 
     @Operation(summary = "Get all disciplines")
     @ApiResponse(code = 200 , message = "All disciplines")
     @ResponseBody
     @GetMapping
-    public List<Discipline> findAll(){
-        return Arrays.stream(Discipline.values()).collect(Collectors.toList());
+    public ResponseEntity<List<Discipline>> findAll(){
+        return ResponseEntity.ok(Arrays.stream(Discipline.values()).collect(Collectors.toList()));
     }
 
 
