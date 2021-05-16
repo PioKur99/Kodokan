@@ -93,7 +93,7 @@ public class PeselServiceImpl implements PeselService {
     }
 
     @Override
-    public boolean isGenderCorrect(Pesel pesel) {
+    public boolean isMale(Pesel pesel) {
         //todo: zakladam ze true to mezczyzna ale to nie musi tak byc, w razie czego do poprawki
         if(Character.getNumericValue(pesel.getValue().charAt(9)) % 2 == 0)
             return false;

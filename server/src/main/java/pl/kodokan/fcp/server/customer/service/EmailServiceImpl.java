@@ -7,7 +7,7 @@ import pl.kodokan.fcp.server.userDetails.entity.Email;
 @Service
 public class EmailServiceImpl implements EmailService {
     @Override
-    public boolean isCorrect(Email email) {
-        return EmailValidator.getInstance().isValid(email.getValue());
+    public boolean isCorrect(String email) {
+        return EmailValidator.getInstance().isValid(email);
     }
 }
