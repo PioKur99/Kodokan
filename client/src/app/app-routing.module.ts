@@ -8,11 +8,13 @@ import { ErrorRoutingModule } from './error-routing/error-routing.module';
 export const routes: Routes = [
   { path: '', redirectTo: '', pathMatch: 'full' },
   { path: 'error', component: UncaughtErrorComponent },
+  { path: 'receptionist-panel', loadChildren: () => import('./receptionist-panel/receptionist-panel.module').then(m => m.ReceptionistPanelModule) },
   { path: '**', component: PageNotFoundComponent } // must always be last
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes), ErrorRoutingModule],
+  imports: [RouterModule.forRoot(routes), 
+    ErrorRoutingModule],
   exports: [RouterModule, ErrorRoutingModule]
 })
 export class AppRoutingModule {
