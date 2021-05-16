@@ -1,0 +1,39 @@
+.mainButton {
+    background-color: #828282;
+    color: #DAA520;
+    border-radius: 0;
+    padding: 100px;
+    width: 350px;
+    height: 100px;
+    margin: 50px;
+    font-size: 25px;
+    transition: all 0.2s;
+}
+
+.mainButton:hover, .add-memb-new:hover {
+    transform: translateY(-0.25em);
+    box-shadow: 0 0 0.5em #DAA520;
+}
+
+.layout-box {
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    max-width: 1300px;
+}
+
+.dmbl {
+    position: absolute;
+    top: 30%;
+    right: 0%;
+}
+
+@media (max-width: 1400px) {
+    .layout-box{
+        max-width: 800px;
+        margin: auto;
+    }
+
+
+}
