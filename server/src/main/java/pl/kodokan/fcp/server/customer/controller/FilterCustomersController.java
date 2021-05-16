@@ -7,8 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.kodokan.fcp.server.customer.dto.FilteredCustomersDTO;
 import pl.kodokan.fcp.server.customer.dto.FiltersDTO;
+import pl.kodokan.fcp.server.customer.model.Customer;
 import pl.kodokan.fcp.server.customer.service.FilterCustomersService;
+import pl.kodokan.fcp.server.user.model.UserData;
+
+import java.util.*;
 
 @RestController
 @RequestMapping("/customers")
@@ -24,7 +29,7 @@ public class FilterCustomersController {
     })
     @ResponseBody
     @PostMapping()
-    ResponseEntity<String> getListOfCustomers(@RequestBody FiltersDTO filters){
+    ResponseEntity<List<FilteredCustomersDTO>> getListOfCustomers(@RequestBody FiltersDTO filters){
         return new ResponseEntity<>(service.getFilteredList(filters), HttpStatus.OK);
     }
 

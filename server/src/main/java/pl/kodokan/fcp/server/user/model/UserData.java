@@ -15,4 +15,7 @@ public class UserData extends BaseEntity {
     @PrimaryKeyJoinColumn
     private Address address;
 
+    private String firstName;
+    private String lastName;
+    private Long phone;
 }

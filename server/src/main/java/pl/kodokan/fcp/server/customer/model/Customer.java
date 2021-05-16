@@ -23,4 +23,6 @@ public class Customer extends BaseEntity {
     @ManyToOne
     @JoinColumn
     private Family family;
+
+    private Long cardId;
 }
