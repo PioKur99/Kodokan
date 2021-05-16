@@ -1,9 +1,9 @@
-package pl.kodokan.fcp.server.discipline.dto;
+package pl.kodokan.fcp.server.dto;
 
 
 import lombok.Getter;
 import lombok.Setter;
-import pl.kodokan.fcp.server.discipline.model.Discipline;
+import pl.kodokan.fcp.server.model.Discipline;
 
 @Getter
 @Setter

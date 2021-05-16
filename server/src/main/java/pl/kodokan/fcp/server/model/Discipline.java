@@ -1,4 +1,4 @@
-package pl.kodokan.fcp.server.discipline.model;
+package pl.kodokan.fcp.server.model;
 
 /*
 @ToDo

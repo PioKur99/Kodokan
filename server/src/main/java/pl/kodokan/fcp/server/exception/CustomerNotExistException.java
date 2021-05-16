@@ -1,4 +1,4 @@
-package pl.kodokan.fcp.server.discipline.exception;
+package pl.kodokan.fcp.server.exception;
 
 public class CustomerNotExistException extends RuntimeException{
 

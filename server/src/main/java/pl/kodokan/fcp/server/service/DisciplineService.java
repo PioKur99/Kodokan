@@ -1,12 +1,12 @@
-package pl.kodokan.fcp.server.discipline.service;
+package pl.kodokan.fcp.server.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.kodokan.fcp.server.discipline.dto.DisciplineDTO;
-import pl.kodokan.fcp.server.discipline.exception.CustomerNotExistException;
-import pl.kodokan.fcp.server.discipline.model.Customer;
-import pl.kodokan.fcp.server.discipline.model.Discipline;
-import pl.kodokan.fcp.server.discipline.repository.CustomerRepository;
+import pl.kodokan.fcp.server.dto.DisciplineDTO;
+import pl.kodokan.fcp.server.exception.CustomerNotExistException;
+import pl.kodokan.fcp.server.model.Customer;
+import pl.kodokan.fcp.server.model.Discipline;
+import pl.kodokan.fcp.server.repository.CustomerRepository;
 
 import java.util.Optional;
 

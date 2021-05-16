@@ -1,13 +1,13 @@
-package pl.kodokan.fcp.server.discipline.controller;
+package pl.kodokan.fcp.server.controller;
 
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.kodokan.fcp.server.discipline.dto.DisciplineDTO;
-import pl.kodokan.fcp.server.discipline.model.Discipline;
-import pl.kodokan.fcp.server.discipline.service.DisciplineService;
+import pl.kodokan.fcp.server.dto.DisciplineDTO;
+import pl.kodokan.fcp.server.model.Discipline;
+import pl.kodokan.fcp.server.service.DisciplineService;
 
 import java.util.Arrays;
 import java.util.List;

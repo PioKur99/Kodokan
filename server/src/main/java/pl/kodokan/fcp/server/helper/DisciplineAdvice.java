@@ -1,12 +1,12 @@
-package pl.kodokan.fcp.server.discipline.helper;
+package pl.kodokan.fcp.server.helper;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import pl.kodokan.fcp.server.discipline.dto.DisciplineAdviceDTO;
-import pl.kodokan.fcp.server.discipline.exception.CustomerNotExistException;
+import pl.kodokan.fcp.server.dto.DisciplineAdviceDTO;
+import pl.kodokan.fcp.server.exception.CustomerNotExistException;
 
 @RestControllerAdvice
 public class DisciplineAdvice {

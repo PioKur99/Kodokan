@@ -1,4 +1,4 @@
-package pl.kodokan.fcp.server.discipline.dto;
+package pl.kodokan.fcp.server.dto;
 
 import lombok.Getter;
 import lombok.Setter;
