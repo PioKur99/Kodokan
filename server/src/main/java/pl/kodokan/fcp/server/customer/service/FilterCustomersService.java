@@ -14,11 +14,21 @@ public class FilterCustomersService {
     CustomerRepository repo;
 
     public List<FilteredCustomersDTO> getFilteredList(FiltersDTO filters){
-        List<FilteredCustomersDTO> obj = repo.getCustomers(filters.getFirstName(), filters.getLastName());
-//        List<FilteredCustomersDTO> dto = new ArrayList<>();
-//        for(Object[] o : obj){
-//            FilteredCustomersDTO d = new FilteredCustomersDTO(o[0],o[1],o[2]);
-//        }
+        String cardIDStr = "";
+        if(filters.getCardId() == null){
+            cardIDStr = "";
+        }else{
+            cardIDStr = Long.toString(filters.getCardId());
+        }
+
+        String phoneStr = "";
+        if(filters.getPhoneNumber() == null){
+            phoneStr = "";
+        }else{
+            phoneStr = Long.toString(filters.getPhoneNumber());
+        }
+        List<FilteredCustomersDTO> obj = repo.getCustomers(filters.getFirstName(), filters.getLastName(), cardIDStr, phoneStr);
+
         return obj;
     }
 }
