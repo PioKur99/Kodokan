@@ -16,11 +16,7 @@ import pl.kodokan.fcp.server.entrance.service.EntranceService;
 @RequestMapping("/entrance")
 public class EntranceController {
 
-    @Autowired
     EntranceService entranceService;
-
-    @Autowired
-    EntranceMapperImpl entranceMapper;
 
     @Operation(summary = "Add new entrance")
     @ApiResponses(value = {
@@ -29,8 +25,7 @@ public class EntranceController {
     })
     @PostMapping
     ResponseEntity<Long> addEntrance(@RequestBody EntranceDto entranceDto) {
-        Entrance entrance = entranceMapper.toEntity(entranceDto);
-        Long result = entranceService.addEntrance(entrance);
+        Long result = entranceService.addEntrance(entranceDto);
         return ResponseEntity.ok(result);
     }
 }

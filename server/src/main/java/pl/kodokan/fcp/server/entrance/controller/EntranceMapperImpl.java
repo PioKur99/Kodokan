@@ -23,7 +23,6 @@ public class EntranceMapperImpl implements EntranceMapper {
     public EntranceDto toDto(Entrance entrance) {
         return new EntranceDto(
                 entrance.getCustomer().getId(),
-                entrance.getPackg().getId(),
                 entrance.getTraining().getId()
         );
     }
@@ -32,7 +31,7 @@ public class EntranceMapperImpl implements EntranceMapper {
     public Entrance toEntity(EntranceDto entranceDto) {
         return new Entrance(
                 customerRepository.findById(entranceDto.getCustomerId()).orElse(null),
-                packageRepository.findById(entranceDto.getPackageId()).orElse(null),
+                null,
                 trainingScheduleRepository.findById(entranceDto.getTrainingId()).orElse(null)
         );
     }

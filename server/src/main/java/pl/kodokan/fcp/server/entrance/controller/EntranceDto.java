@@ -9,7 +9,6 @@ import lombok.Setter;
 public class EntranceDto {
 
     private Long customerId;
-    private Long packageId;
     private Long trainingId;
 
     public Long getCustomerId() {
@@ -18,14 +17,6 @@ public class EntranceDto {
 
     public void setCustomerId(Long customerId) {
         this.customerId = customerId;
-    }
-
-    public Long getPackageId() {
-        return packageId;
-    }
-
-    public void setPackageId(Long packageId) {
-        this.packageId = packageId;
     }
 
     public Long getTrainingId() {
