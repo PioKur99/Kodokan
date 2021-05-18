@@ -1,1 +1,52 @@
-<p>customers works!</p>
+<div class="container">
+<igx-input-group type="search">
+    <igx-prefix>
+        <igx-icon>search</igx-icon>
+    </igx-prefix>
+    <input #input1 igxInput placeholder="Search" class="input"/>
+    <igx-suffix>
+        <igx-icon>mic</igx-icon>
+    </igx-suffix>
+</igx-input-group>
+<div class="drop-down">
+    <button class="drop-down__button" igxButton="raised" [igxToggleAction]="dropdown" [igxDropDownItemNavigation]="dropdown" >
+        Filtry
+    </button>
+    <igx-drop-down #dropdown class="drop-down__item">
+        <igx-drop-down-item>
+            <igx-checkbox>
+                imię
+            </igx-checkbox>
+        </igx-drop-down-item>
+        <igx-drop-down-item>
+            <igx-checkbox>
+                nazwisko
+            </igx-checkbox>
+        </igx-drop-down-item>
+        <igx-drop-down-item>
+            <igx-checkbox>
+                dyscyplina
+            </igx-checkbox>
+        </igx-drop-down-item>
+        <igx-drop-down-item>
+            <igx-checkbox>
+                numer telefonu
+            </igx-checkbox>
+        </igx-drop-down-item>
+        <igx-drop-down-item>
+            <igx-checkbox>
+                numer karty
+            </igx-checkbox>
+        </igx-drop-down-item>
+    </igx-drop-down>
+</div>
+
+<table>
+    <tr class="row row--first">
+       <td class="column column--first">Imię i nazwisko</td> <td class="column column--second"></td> <td class="column column--third"></td>
+    </tr>
+    <tr class="row">
+       <td class="column column--first">Oliwier Gębczyński</td> <td class="column column--second"><button class="button-table">Pokaż</button></td> <td class="column column--third"><button class="button-table">Usuń</button></td>
+    </tr>
+ </table>
+</div>
