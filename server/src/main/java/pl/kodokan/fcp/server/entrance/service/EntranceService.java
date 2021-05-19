@@ -16,6 +16,7 @@ import pl.kodokan.fcp.server.entrance.repo.EntranceRepository;
 
 import javax.transaction.Transactional;
 import javax.validation.constraints.Null;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -47,6 +48,9 @@ public class EntranceService {
             throw new NullPointerException("No customer with given ID!");
         }
 
+        //jednorazowka - mozesz miec kilka, to taki karnet, ktory ma limit wejsc = 1, ten ma priorytet
+        //normalny - w danym okresie czasu tylko jeden aktywny karnet
+
         List<Package> customerPackages = customer.get().getPackages();
 
         List<Package> customerValidPackages = customerPackages.stream()
@@ -61,7 +65,6 @@ public class EntranceService {
         if (customerValidPackages.isEmpty() == true) {
 
             //Czy jest karnet z pusta data?
-            //TODO: To jeszcze do zweryfikowania jak otrzymam info zwrotne od Lukasza
             //jezeli karnet jest z pusta data to ustawiamy date koncowa na dzien odbicia + validityDays
             Optional<Package> packageWithEmptyEndDate = customerPackages.stream()
                     .filter(n -> n.getEndDateTime() == null)
@@ -80,14 +83,20 @@ public class EntranceService {
 
             //Sprawdzam, czy jest jakis okresowy, jak jest to na niego wchodzi, jak nie wchodzi na dowolna jednorazowke
             if (customerValidPackages.stream().anyMatch(n -> n.getPackageType().getEntranceLimit() > 1)) {
+
                 toEntrance = customerValidPackages.stream().filter(n -> n.getPackageType().getEntranceLimit() > 1).findFirst().get();
 
                 //Jezeli karnet jest zawieszony to odwieszamy ew. zmieniajac odpowiednie daty
                 //Zakladam, ze moze byc tylko jedno zawieszenie z czasem przed now
-                //TODO: roznice miedzy data koncowa zawieszenia a aktualną odejmuje od daty waznosci karnetu
-                toEntrance.getFreezes().stream()
+                //roznice miedzy data koncowa zawieszenia a aktualną odejmuje od daty waznosci karnetu
+                PackageFreeze packageFreeze = toEntrance.getFreezes().stream()
                         .filter(n -> n.getEndDateTime().isAfter(now))
-                        .findFirst().get().setEndDateTime(now);
+                        .findFirst().get();
+
+                Duration dateDiffrance = Duration.between(now, packageFreeze.getEndDateTime());
+                toEntrance.setEndDateTime(toEntrance.getEndDateTime().minusDays(dateDiffrance.toDays() ));
+                packageFreeze.setEndDateTime(now);
+
 
                 //TODO: Alternatywnie, gdyby powyzsze nie dzialalo zgodnie z oczekiwaniami
                 /*List<PackageFreeze> freezes = entrance.getPackg().getFreezes();
@@ -104,12 +113,6 @@ public class EntranceService {
         }
 
         entrance.setPackg(toEntrance);
-
-
-        //jednorazowka - mozesz miec kilka, to taki karnet, ktory ma limit wejsc = 1, ten ma priorytet
-        //normalny - w danym okresie czasu tylko jeden aktywny karnet
-
-        //multisportem i ok system sie nie przejmuje
 
         //Zarejestrowano wejscie, przypisania dzieja sie w maperze
         return save(entrance).getId();
