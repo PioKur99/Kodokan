@@ -10,7 +10,7 @@ export class EntryRegistrationComponent implements OnInit {
 
   trainingList: Training[]
   //__trainingList: Training[]
-
+  cosiek: Boolean
   constructor() { 
     this.trainingList = [{id: 1,name: "MMA"},
     {id: 2,name: "BOX"},
@@ -21,7 +21,9 @@ export class EntryRegistrationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
   }
 
+  entryRegistration(): void{
+    this.cosiek=true 
+  }
 }
