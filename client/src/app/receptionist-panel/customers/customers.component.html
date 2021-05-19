@@ -1,12 +1,9 @@
 <div class="container">
-<igx-input-group type="search">
+<igx-input-group type="search" class="search">
     <igx-prefix>
         <igx-icon>search</igx-icon>
     </igx-prefix>
     <input #input1 igxInput placeholder="Search" class="input"/>
-    <igx-suffix>
-        <igx-icon>mic</igx-icon>
-    </igx-suffix>
 </igx-input-group>
 <div class="drop-down">
     <button class="drop-down__button" igxButton="raised" [igxToggleAction]="dropdown" [igxDropDownItemNavigation]="dropdown" >
