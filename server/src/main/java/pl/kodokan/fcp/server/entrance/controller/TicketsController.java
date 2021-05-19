@@ -6,10 +6,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.kodokan.fcp.server.entrance.dto.PackageDTO;
 import pl.kodokan.fcp.server.entrance.model.PackageType;
 import pl.kodokan.fcp.server.entrance.service.TicketsService;
@@ -22,7 +19,7 @@ public class TicketsController{
     @Autowired
     TicketsService service;
 
-    @GetMapping("/tickets-with-partner-system")
+    @GetMapping("/packages-with-partner-system")
     @Operation(summary = "Get tickets with enabled partner system")
     @ResponseBody
     @ApiResponses(value={
@@ -30,5 +27,16 @@ public class TicketsController{
     })
     ResponseEntity<List<PackageDTO>> getPartnerSystemPackages(){
         return new ResponseEntity<>(service.getPartnerSystemPackages(), HttpStatus.OK);
+    }
+
+    @PutMapping("/pay-for-ticket/{id}")
+    @Operation(summary = "Pay for ticket")
+    @ResponseBody
+    @ApiResponses(value = {
+            @ApiResponse(code=200,message = "Successfully paid for ticket"),
+            @ApiResponse(code=400,message = "Provided wrong ticket ID")
+    })
+    ResponseEntity<Long> payForTicket(@PathVariable Long id){
+        return new ResponseEntity<>(service.payForTicket(id),HttpStatus.OK);
     }
 }
