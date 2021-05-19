@@ -16,6 +16,7 @@ import { PassesComponent } from './passes/passes.component';
 import { AddAClientComponent } from './add-a-client/add-a-client.component';
 import { EntryRegistrationComponent } from './entry-registration/entry-registration.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { IgxInputGroupModule } from "igniteui-angular";
 
 @NgModule({
     declarations: [
@@ -35,7 +36,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         IgxBottomNavModule,
         IgxIconModule,
         //BrowserAnimationsModule,
-        IgxDialogModule
+        IgxDialogModule,
+        IgxInputGroupModule
+
     ]
 })
 export class ReceptionistPanelModule {

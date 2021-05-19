@@ -1,1 +1,19 @@
-<p>entry-registration works!</p>
+<article class="card-number">
+    <form>
+        <igx-input-group>
+            <input igxInput name="fullName" type="text" />
+            <label igxLabel for="fullName">Wprowadź numer karty członkowskiej</label>
+        </igx-input-group>
+    </form>
+</article>
+
+<section class="buttons">
+    <div *ngFor="let training of trainingList">
+        <!--FIXME: powinno być rozmieszczone odpowiednio-->
+        <div>
+            <button igxButton="raised" igxRipple="white" class="buttons__item">
+                {{training.name}}
+            </button>
+        </div>
+    </div>
+</section>
