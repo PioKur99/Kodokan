@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
-    @Query("SELECT new pl.kodokan.fcp.server.customer.dto.FilteredCustomersDTO(u.id,ud.firstName,ud.lastName) FROM Customer u LEFT JOIN UserData ud ON u.id=ud.id WHERE ud.firstName LIKE %:firstName% AND ud.lastName LIKE %:lastName% AND CAST(u.cardId as text) LIKE %:cardID% AND CAST(ud.phone as text) LIKE %:phone%")
+    @Query("SELECT new pl.kodokan.fcp.server.customer.dto.FilteredCustomersDTO(u.id,ud.firstName,ud.lastName) FROM Customer u LEFT JOIN UserData ud ON u.userData=ud.id WHERE ud.firstName LIKE %:firstName% AND ud.lastName LIKE %:lastName% AND CAST(u.cardId as text) LIKE %:cardID% AND CAST(ud.phone as text) LIKE %:phone%")
     List<FilteredCustomersDTO> getCustomers(@Param("firstName") String firstName, @Param("lastName") String lastName, @Param("cardID") String cardID, @Param("phone") String phone);
 
 }
