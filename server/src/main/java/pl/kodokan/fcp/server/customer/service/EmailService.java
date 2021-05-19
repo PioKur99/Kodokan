@@ -1,7 +1,13 @@
 package pl.kodokan.fcp.server.customer.service;
 
+import org.apache.commons.validator.routines.EmailValidator;
+import org.springframework.stereotype.Service;
 import pl.kodokan.fcp.server.userDetails.entity.Email;
 
-public interface EmailService {
-    boolean isCorrect(String email);
+@Service
+public class EmailService implements EmailService {
+    @Override
+    public boolean isCorrect(String email) {
+        return EmailValidator.getInstance().isValid(email);
+    }
 }
