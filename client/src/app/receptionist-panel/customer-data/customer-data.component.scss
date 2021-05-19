@@ -1,0 +1,55 @@
+.Labels {
+    color: #DAA520;
+    font-weight: 600;
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    max-width: 70%;
+    margin-left: 10%;
+    margin-top: 15%;
+}
+
+.profile-pic {
+    max-width: 200px;
+    max-height: 250px;
+    border: 3px solid #BDBDBD;
+}
+
+.label-group-1 {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.label-group-2 {
+    margin-right: 50px;
+}
+
+.Buttons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 10%;
+    margin-left: 10%;
+    max-width: 800px;
+
+    button {
+        color: #3F3F3F;
+        background-color: #BDBDBD;
+        border-radius: 4px;
+        height: 70px;
+        width: 200px;
+        transition: 0.2s;
+        margin: 30px
+    }
+
+    button:hover {
+
+        color: #BDBDBD;
+        background-color: #DAA520;
+        
+    }
+
+}
