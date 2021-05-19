@@ -12,7 +12,7 @@ import pl.kodokan.fcp.server.exception.CustomerNotExistException;
 public class DisciplineAdvice {
 
     @ExceptionHandler(CustomerNotExistException.class)
-    public ResponseEntity<DisciplineAdviceDTO> handleCustomerNotExist(CustomerNotExistException exception){
+    public ResponseEntity<DisciplineAdviceDTO> handleCustomerNotExist(CustomerNotExistException exception) {
         final DisciplineAdviceDTO adviceDTO = new DisciplineAdviceDTO();
         adviceDTO.setErrorMsg("Customer does not exist in db");
         adviceDTO.setErrorClass(exception.getClass().getName());
@@ -20,7 +20,7 @@ public class DisciplineAdvice {
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<DisciplineAdviceDTO> handleHttpMessageNotReadableException(HttpMessageNotReadableException exception){
+    public ResponseEntity<DisciplineAdviceDTO> handleHttpMessageNotReadableException(HttpMessageNotReadableException exception) {
         final DisciplineAdviceDTO adviceDTO = new DisciplineAdviceDTO();
         adviceDTO.setErrorMsg(exception.getMessage());
         adviceDTO.setErrorClass(exception.getClass().getName());

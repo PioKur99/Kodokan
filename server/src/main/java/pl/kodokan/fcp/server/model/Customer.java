@@ -2,11 +2,8 @@ package pl.kodokan.fcp.server.model;
 
 import lombok.Getter;
 import lombok.Setter;
-<<<<<<< HEAD
-=======
 import pl.kodokan.fcp.server.exception.MaximumCardState;
 import pl.kodokan.fcp.server.exception.MinimumCardState;
->>>>>>> main
 
 import javax.persistence.*;
 

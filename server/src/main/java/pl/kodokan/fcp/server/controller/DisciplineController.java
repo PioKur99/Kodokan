@@ -31,29 +31,28 @@ public class DisciplineController {
     })
     @ResponseBody
     @PatchMapping
-    public ResponseEntity<Discipline> updateCustomerDiscipline(@RequestBody DisciplineDTO disciplineDto){
+    public ResponseEntity<Discipline> updateCustomerDiscipline(@RequestBody DisciplineDTO disciplineDto) {
         return ResponseEntity.ok(disciplineService.updateDiscipline(disciplineDto));
     }
 
     @Operation(summary = "Get customer disciplne")
     @ApiResponses(value = {
-            @ApiResponse(code = 200,message = "User discipline"),
-            @ApiResponse(code = 400,message = "Cannot get user discipline")
+            @ApiResponse(code = 200, message = "User discipline"),
+            @ApiResponse(code = 400, message = "Cannot get user discipline")
     })
     @ResponseBody
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Discipline> getUserDiscipline(@PathVariable Long id){
+    public ResponseEntity<Discipline> getUserDiscipline(@PathVariable Long id) {
         return ResponseEntity.ok(disciplineService.getUserDiscipline(id));
     }
 
     @Operation(summary = "Get all disciplines")
-    @ApiResponse(code = 200 , message = "All disciplines")
+    @ApiResponse(code = 200, message = "All disciplines")
     @ResponseBody
     @GetMapping
-    public ResponseEntity<List<Discipline>> findAll(){
+    public ResponseEntity<List<Discipline>> findAll() {
         return ResponseEntity.ok(Arrays.stream(Discipline.values()).collect(Collectors.toList()));
     }
-
 
 
 }

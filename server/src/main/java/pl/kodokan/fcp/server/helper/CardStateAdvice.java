@@ -13,15 +13,15 @@ import pl.kodokan.fcp.server.exception.MinimumCardState;
 @RestControllerAdvice
 public class CardStateAdvice {
     @ExceptionHandler(CustomerNotPresent.class)
-    ResponseEntity<CardStateAdviceDTO> customerNotPresent(CustomerNotPresent ex){
+    ResponseEntity<CardStateAdviceDTO> customerNotPresent(CustomerNotPresent ex) {
         final CardStateAdviceDTO adviceDTO = new CardStateAdviceDTO();
         adviceDTO.setErrorMsg("Customer with this ID doesn't exist in database");
         adviceDTO.setErrorClass(ex.getClass().getName());
-        return new ResponseEntity<>(adviceDTO,HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(adviceDTO, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(MaximumCardState.class)
-    ResponseEntity<CardStateAdviceDTO> maximumCardStateHandler(MaximumCardState exception){
+    ResponseEntity<CardStateAdviceDTO> maximumCardStateHandler(MaximumCardState exception) {
         final CardStateAdviceDTO adviceDTO = new CardStateAdviceDTO();
         adviceDTO.setErrorMsg("Card is already received, so you can't increment it");
         adviceDTO.setErrorClass(exception.getClass().getName());
@@ -29,7 +29,7 @@ public class CardStateAdvice {
     }
 
     @ExceptionHandler(MinimumCardState.class)
-    ResponseEntity<CardStateAdviceDTO> minimumCardStateHandler(MinimumCardState exception){
+    ResponseEntity<CardStateAdviceDTO> minimumCardStateHandler(MinimumCardState exception) {
         final CardStateAdviceDTO adviceDTO = new CardStateAdviceDTO();
         adviceDTO.setErrorMsg("Card state of this customer is unpaid, so you can't lower it");
         adviceDTO.setErrorClass(exception.getClass().getName());
@@ -37,7 +37,7 @@ public class CardStateAdvice {
     }
 
     @ExceptionHandler(ConversionFailedException.class)
-    ResponseEntity<CardStateAdviceDTO> conversationFailed(ConversionFailedException ex){
+    ResponseEntity<CardStateAdviceDTO> conversationFailed(ConversionFailedException ex) {
         final CardStateAdviceDTO adviceDTO = new CardStateAdviceDTO();
         adviceDTO.setErrorMsg("Make sure to use correct enum values");
         adviceDTO.setErrorClass(ex.getClass().getName());

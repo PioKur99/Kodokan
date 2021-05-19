@@ -7,9 +7,6 @@ public enum CardState {
     PICKUP, // customer can pick up
     RECEIVED; // customer has picked up the card
 
-    private CardState next;
-    private CardState previous;
-
     static {
         NOT_PAID.previous = null;
         NOT_PAID.next = PAID;
@@ -22,6 +19,9 @@ public enum CardState {
         RECEIVED.previous = PICKUP;
         RECEIVED.next = null;
     }
+
+    private CardState next;
+    private CardState previous;
 
     public CardState getNext() {
         return next;

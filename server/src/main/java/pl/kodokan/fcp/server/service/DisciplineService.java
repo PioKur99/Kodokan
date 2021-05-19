@@ -20,7 +20,7 @@ public class DisciplineService {
         this.customerRepository = customerRepository;
     }
 
-    private Customer findCustomerById(Long id){
+    private Customer findCustomerById(Long id) {
         final Optional<Customer> optionalCustomer = customerRepository.findById(id);
         return optionalCustomer.orElseThrow(CustomerNotExistException::new);
     }
@@ -35,6 +35,6 @@ public class DisciplineService {
     }
 
     public Discipline getUserDiscipline(Long id) {
-       return findCustomerById(id).getDiscipline();
+        return findCustomerById(id).getDiscipline();
     }
 }

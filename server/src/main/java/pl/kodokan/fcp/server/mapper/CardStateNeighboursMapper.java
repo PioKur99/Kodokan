@@ -8,8 +8,8 @@ import pl.kodokan.fcp.server.model.CardState;
 @Mapper(componentModel = "spring")
 public interface CardStateNeighboursMapper {
 
-    @Mapping(source = "cardState.previous", target="previous")
-    @Mapping(source = "cardState.next", target="next")
+    @Mapping(source = "cardState.previous", target = "previous")
+    @Mapping(source = "cardState.next", target = "next")
     @Mapping(source = "cardState", target = "actual")
     CardStateNeighboursDTO toDTO(CardState cardState);
 }

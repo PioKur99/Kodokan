@@ -8,6 +8,6 @@ import pl.kodokan.fcp.server.model.Discipline;
 @Getter
 @Setter
 public class DisciplineDTO {
-private Long id;
-private Discipline discipline;
+    private Long id;
+    private Discipline discipline;
 }
