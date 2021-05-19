@@ -39,7 +39,7 @@ import { FormsModule } from '@angular/forms';
         IgxButtonModule,
         IgxBottomNavModule,
         IgxIconModule,
-        IgxDialogModule,
+        IgxDialogModule
     ]
 })
 export class ReceptionistPanelModule {
