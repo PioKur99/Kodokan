@@ -21,7 +21,6 @@ public class EntranceService {
         }
         else{
             throw new EntranceNotFoundException("Entrance with customerId " + customerId + " packageId " + packageId + " doesn't exist.");
-
         }
     }
 
