@@ -7,9 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CustomerEditDataComponent implements OnInit {
 
+  //todo: wyświetlanie odpowiednich dialogów
+
+   dialogSelector: string = "";
+   whichDialog: boolean = true;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  manageDialogs() {
+    this.whichDialog ?  this.dialogSelector = "dialog1.open()" : this.dialogSelector = "dialog2.open()"
+    return this.dialogSelector;
   }
 
 }

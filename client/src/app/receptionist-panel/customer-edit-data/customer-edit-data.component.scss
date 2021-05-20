@@ -1,3 +1,20 @@
+@import '~igniteui-angular/lib/core/styles/themes/index';
+
+//Nie mam pojęcia dlaczego to nie działa
+
+$my-dialog-theme: igx-dialog-theme(
+    $background: #011627,
+    $title-color: #ECAA53,
+    $message-color: #FEFEFE,
+    $border-radius: .3,
+);
+
+
+:host {
+    @include igx-css-vars($my-dialog-theme);
+}
+
+//
 
 .edit-label {
     color: #BDBDBD;

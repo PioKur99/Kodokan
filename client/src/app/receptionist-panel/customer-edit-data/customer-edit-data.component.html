@@ -45,12 +45,18 @@
 </section>
 
 <div class = "accept">
-    <button igxButton="raised" igxRipple="white" (click)="dialog.open()">ZATWIERDŹ</button>
+    <button igxButton="raised" igxRipple="white" (click)="dialog1.open()">ZATWIERDŹ</button>
+</div>
+
+<div igxOverlayOutlet>
+    <igx-dialog #dialog1 #dialog message="Udało się!" 
+    leftButtonLabel="OK" (onLeftButtonSelect)="dialog1.close()"  
+    [closeOnOutsideSelect]="true">
+    </igx-dialog>
 </div>
 
 
-<igx-dialog #dialog message="Udało się!" 
-leftButtonLabel="OK" (onLeftButtonSelect)="dialog.close()"  
+<igx-dialog #dialog2 #dialog message="Nie udało się" leftButtonLabel="OK" 
+(onLeftButtonSelect)="dialog2.close()"  
 [closeOnOutsideSelect]="true">
 </igx-dialog>
-

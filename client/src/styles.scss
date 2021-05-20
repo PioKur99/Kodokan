@@ -44,6 +44,16 @@ $igx-foreground-color: igx-contrast-color($custom-palette, 'surface');
 	}
 }
 
+$my-dialog-theme: igx-dialog-theme(
+    $background: #011627,
+    $title-color: #ECAA53,
+    $message-color: #FEFEFE,
+    $border-radius: .3,
+);
+
+
+@include igx-css-vars($my-dialog-theme);
+
 .igx-typography {
 	h1, h2, h3, h4, h5, h6, p {
 		margin: 0;
