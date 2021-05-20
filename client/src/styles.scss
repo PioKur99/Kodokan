@@ -53,7 +53,6 @@ $custom-navbar-theme: igx-navbar-theme(
 @include igx-css-vars($custom-navbar-theme);
 
 
-
 @include igx-typography($font-family: "Lato", $type-scale: $default-type-scale);
 $igx-background-color: igx-color($custom-palette, 'surface');
 $igx-foreground-color: igx-contrast-color($custom-palette, 'surface');

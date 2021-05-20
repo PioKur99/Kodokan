@@ -13,4 +13,5 @@ export class Client {
     postCode: String;
     province: String;
     image: WebcamImage;
+    image64: String;
 }

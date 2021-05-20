@@ -1,17 +1,16 @@
 
 
 
-<igx-navbar title="Rejestracja" actionButtonIcon="arrow_back" [isActionButtonVisible]="canGoBack()"
-(action)="navigateBack()">
-  <igx-icon name="info_outline"></igx-icon>
-  <igx-icon name="more_vert"></igx-icon>
+<igx-navbar title="Rejestracja" actionButtonIcon="arrow_back" [isActionButtonVisible]="canGoBack()" (action)="navigateBack()">
+  <img src="../../assets/logoKodokanWektorowo.svg" width="50" id="logo">
 </igx-navbar>
   <mat-horizontal-stepper linear #stepper>
     <mat-step [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup">
         <ng-template matStepLabel>Utwórz konto</ng-template>
-        
-       
+        <!--************************************************************-->
+
+        <!--*****************************************************-->
         <div class="inputs">
         
             <igx-input-group>
@@ -156,29 +155,59 @@
     <mat-step [stepControl]="thirdFormGroup" [optional]="isOptional">
       <form [formGroup]="thirdFormGroup">
         <ng-template matStepLabel>Dodaj swoje zdjęcie</ng-template>
-        <div>
-          <webcam [height]="400" 
-                  [width]="1000" 
-                  [trigger]="triggerObservable"
-                      (imageCapture)="handleImage($event)" *ngIf="!client.image">
-           </webcam>
-           <div class="snapshot" *ngIf="client.image">
-            <img [height]="225" 
-            [width]="550"  [src]="client.image.imageAsDataUrl"/>
-          </div>
+        <!--****************CAMERA******************************************-->
+        <div class="photo-container"> 
           <div class="photoBtn">
-            <button  igxButton="raised" igxRipple="white" class="actionBtn greyBtn" (click)="triggerSnapshot();" *ngIf="!client.image">
+            <igx-input-group>
+              <input igxInput type="file" multiple (change)="fileChangeEvent($event)" />
+            </igx-input-group>
+            <button    igxButton="raised" igxRipple="white" class="actionBtn greyBtn" (click)="triggerSnapshot();" [disabled]="client.image64">
               Zrób zdjęcie
             </button>
-            <button igxButton="raised" igxRipple="white" class="actionBtn greyBtn" (click)="reset();" *ngIf="client.image" >
-              Resetuj
-            </button>
+            <button igxButton="raised" igxRipple="white" class="actionBtn greyBtn" (click)="reset();" *ngIf="client.image64" >
+              Spróbuj ponownie
+            </button> 
+          </div>
+          <!--*****************************************************-->
+          <div>
+            <webcam [height]="400" 
+                    [width]="1000" 
+                    [trigger]="triggerObservable"
+                    (imageCapture)="handleImage($event)" *ngIf="!client.image64">
+            </webcam>
+            <image-cropper *ngIf="displayCameraCropper"
+                          [imageBase64]="client.image.imageAsDataUrl"
+                          [maintainAspectRatio]="true"
+                          [aspectRatio]="3 / 4"
+                          [cropperMinWidth]="200"
+
+                          format="jpg"
+                          (imageCropped)="imageCropped($event)"
+                          (imageLoaded)="imageLoaded()"
+                          (cropperReady)="cropperReady()"
+                          (loadImageFailed)="loadImageFailed()"
+                          [resizeToWidth]="100"
+            ></image-cropper>
+            <image-cropper *ngIf="imageChangedEvent"
+                          [imageChangedEvent]="imageChangedEvent"
+                          [maintainAspectRatio]="true"
+                          [aspectRatio]="3 / 4"
+                          [cropperMinWidth]="200"
+                          format="jpg"
+                          (imageCropped)="imageCropped($event)"
+                          (imageLoaded)="imageLoaded()"
+                          (cropperReady)="cropperReady()"
+                          (loadImageFailed)="loadImageFailed()"
+                          [resizeToWidth]="256"
+            ></image-cropper>
           </div>
         </div>
+
+        <!--*********************************************************-->
         <button mat-button  igxButton="outlined" igxRipple="white" matStepperPrevious id="previous">
           WSTECZ
         </button>
-        <button mat-button  igxButton="raised" igxRipple="white" matStepperNext class="rightBtn greyBtn">
+        <button mat-button  igxButton="raised" igxRipple="white" matStepperNext class="rightBtn greyBtn" [disabled]="!client.image64">
           DALEJ
         </button>
 
@@ -285,8 +314,8 @@
         </div>
         <div class="mainContainerTwo">
           <div class="snapshot" *ngIf="client.image">
-            <img [height]="225" 
-            [width]="550"  [src]="client.image.imageAsDataUrl"/>
+            <img [height]="250" 
+            [width]="250"  [src]="client.image64"/>
           </div>
         </div>
       </div>
@@ -296,8 +325,8 @@
         <button mat-button  igxButton="outlined" igxRipple="white" matStepperPrevious id="previous">
           WSTECZ
         </button>
-        <button mat-button  igxButton="raised" igxRipple="white" matStepperNext class="rightBtn greyBtn">
-          Rejestruj
+        <button mat-button  igxButton="raised" igxRipple="white" matStepperNext class="rightBtn greyBtn" (click)="addClient()">
+          Zarejestruj
         </button>
       </div>
     </mat-step>

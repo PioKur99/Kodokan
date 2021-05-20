@@ -10,6 +10,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatStepperModule } from '@angular/material/stepper';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WebcamModule } from 'ngx-webcam';
+import { ImageCropperModule } from 'ngx-image-cropper';
+
 import {
 	IgxInputGroupModule,
 	IgxIconModule,
@@ -24,9 +26,11 @@ import {
 @NgModule({
     declarations: [
         AppComponent,
-        RegisterComponent
+        RegisterComponent,
+
     ],
     imports: [
+        ImageCropperModule,
         WebcamModule,
         FormsModule,
         ReactiveFormsModule,

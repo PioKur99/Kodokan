@@ -5,16 +5,14 @@
 .mat-stepper-horizontal {
     background-color: transparent;
     padding: 2% 10% 24px 10%;
-  }
+}
   
 .mat-form-field {
   margin-top: 16px;
-  
 }
+
 .rightBtn{
   float: right;
-
-
 }
 .greyBtn{
   background-color: #ffffffa6;
@@ -23,6 +21,7 @@
 igx-navbar{
   font-family: Helvetica, sans-serif;
 }
+
 .centered{
   text-align: center;
   margin-top: 50px;
@@ -35,7 +34,6 @@ igx-checkbox{
   padding: 0% 30% 10px 30%;
 }
 
-
 ::ng-deep .mat-step-header  .mat-step-icon-selected {
   background-color: #DAA520;
   color: white;
@@ -44,9 +42,11 @@ igx-checkbox{
 ::ng-deep .mat-step-header .mat-step-label.mat-step-label-active{
   color: white;
 }
+
 ::ng-deep  .mat-step-header .mat-step-icon-state-edit{
   background-color: #DAA520;
 }
+
 #previous{
   float: left;
 }
@@ -54,13 +54,17 @@ igx-checkbox{
   justify-content: space-between;
   padding: 0% 30% 2% 30%;
 }
-::ng-deep .mat-horizontal-stepper-header-container{
-  margin-bottom: 2%;
+
+:host {
+  ::ng-deep .mat-horizontal-stepper-header-container{
+    margin-bottom: 2%;
+  }
 }
 
 igx-radio-group{
   float: right;
 }
+
 .yellowText{
   color: #DAA520;
 }
@@ -70,52 +74,85 @@ webcam, .snapshot{
   text-align: center;
   margin-bottom: 2%;
 }
-.actionBtn{
 
-}
 
-.photoBtn{
-  text-align: center;
-}
-img{
+
+.transform{
   transform: scaleX(-1);
 }
+
 .warnings{
   margin-top: 5%;
   text-align: center;
   color: grey;
 }
+
 .mainContainer{
   overflow: hidden;
   margin-bottom: 5%;
 }
+
 .mainContainerOne{
   padding-left: 7%;
   width: 700px; /* on Phone - CHANGE THIS PROPERTY!!!*/
   float:left; /* add this */
-
-
 }
-.mainContainerTwo{
 
+.mainContainerTwo{
   overflow: hidden;
   text-align: center;
-  padding: 3% 0 0 7%;
-
+  padding: 5% 0 0 7%;
 }
+
 .containerOne, .containerTwo, .containerThree {
   display: flex;
   flex-wrap: wrap;
   margin: 3% 0 3% 0 ;
-
 }
+
 .labels{
   min-width: 250px;
   margin: 0 4% 0 4%;
 }
+
 .savedImg{
   width: 200px;
   float:left;
+}
+
+#logo{
+  fill: black;
+}
+
+.photo-container{
+  display: flex;
+
+  padding: 0% 10% 2% 10%;
+}
+
+.photoBtn{
+  justify-content: center;
+  width: 40%;
+  padding-top: 5%;
 
 }
 
+.photoBtn button{
+  display: block;
+  margin-bottom: 15px;
+}
+
+.photoBtn .igx-input-group{
+  width: 80%;
+}
+
+::ng-deep .photo-container .igx-input-group__bundle{
+  box-shadow: none;
+  padding-bottom: 20px;
+}
+
+image-cropper{
+  color: red;
+  padding: 0;
+  max-width: 520px;
+}
