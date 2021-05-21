@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Client } from 'src/app/data/client';
+import { ClientService } from 'src/app/services/client.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-customer-data',
   templateUrl: './customer-data.component.html',
@@ -25,9 +27,14 @@ export class CustomerDataComponent implements OnInit {
   };
   
 
-  constructor() { }
+  constructor(private clientService: ClientService, private router: Router) { }
 
   ngOnInit(): void {
+    this.router.navigate(["/receptionist-panel/customer-data", {cardID: this.client.cardNumb}])
+  }
+
+  getClient() : void {
+    
   }
 
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Client } from 'src/app/data/client';
 
 @Component({
   selector: 'app-customer-edit-data',
@@ -9,8 +10,26 @@ export class CustomerEditDataComponent implements OnInit {
 
   //todo: wyświetlanie odpowiednich dialogów
 
-   dialogSelector: string = "";
-   whichDialog: boolean = true;
+   editWentGood: boolean = false;
+   @ViewChild("dialog1") dialogSuccess;
+   @ViewChild("dialog2") dialogFailure;
+
+   client: Client = {
+    name: "Czak",
+    surname: "Noris",
+    gender: "Siusiak",
+    PESEL: "8890991812",
+    streetNumb: "Wolf Street 23",
+    apartmentNumb: "18",
+    city: "Arizona",
+    postCode: "00-233",
+    voivodeship: "Ślunskie",
+    cardNumb: "333224411",
+    mail: "czak.noris@gmail.com",
+    dyscypline: "Boks",
+    phoneNumb: "66677788"
+
+  };
 
   constructor() { }
 
@@ -18,8 +37,12 @@ export class CustomerEditDataComponent implements OnInit {
   }
 
   manageDialogs() {
-    this.whichDialog ?  this.dialogSelector = "dialog1.open()" : this.dialogSelector = "dialog2.open()"
-    return this.dialogSelector;
+    if(this.editWentGood == true) {
+      this.dialogSuccess.open();
+    }
+    else {
+      this.dialogFailure.open();
+    }
   }
 
 }
