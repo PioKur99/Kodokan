@@ -1,48 +1,48 @@
 <section class = "Labels">
     <img class="profile-pic" src="../../assets/ruda.jpg">
     <div class="label-group-1">
-        <label igxLabel for="Name">Imię </label>
+        <label igxLabel for="Name">imię {{client.name}}</label>
         <br>
-        <label igxLabel for="Gender">Płeć </label>
-        <br>
-        <br>
-        <br>
-        <label igxLabel for="Street-Numb">Ulica i numer domu </label>
-        <br>
-        <label igxLabel for="City">Miasto </label>
-        <br>
-        <label igxLabel for="Voivodeship">Województwo </label>
+        <label igxLabel for="Gender">płeć {{client.gender}}</label>
         <br>
         <br>
         <br>
-        <label igxLabel for="Mail">E-mail </label>
+        <label igxLabel for="Street-Numb">ulica i numer domu {{client.streetNumb}}</label>
         <br>
-        <label igxLabel for="Phone-Numb">Telefon kontaktowy </label>
+        <label igxLabel for="City">miasto {{client.city}}</label>
+        <br>
+        <label igxLabel for="Voivodeship">województwo {{client.voivodeship}}</label>
+        <br>
+        <br>
+        <br>
+        <label igxLabel for="Mail">e-mail {{client.mail}}</label>
+        <br>
+        <label igxLabel for="Phone-Numb">numer telefonu {{client.phoneNumb}}</label>
     </div>
     <div class="label-group-2">
-        <label igxLabel for="Surname">Nazwisko </label>
+        <label igxLabel for="Surname">nazwisko {{client.surname}}</label>
         <br>
-        <label igxLabel for="Pesel">PESEL </label>
-        <br>
-        <br>
-        <br>
-        <label igxLabel for="Apartment-Numb">Numer lokalu </label>
-        <br>
-        <label igxLabel for="Post-Code">Kod pocztowy </label>
+        <label igxLabel for="Pesel">pesel {{client.PESEL}}</label>
         <br>
         <br>
         <br>
-        <label igxLabel for="Card-Numb">Numer karty członkowskiej </label>
+        <label igxLabel for="Apartment-Numb">numer lokalu {{client.apartmentNumb}}</label>
         <br>
-        <label igxLabel for="Dyscypline">Uprawiana dyscyplina </label>
+        <label igxLabel for="Post-Code">kod pocztowy {{client.postCode}}</label>
+        <br>
+        <br>
+        <br>
+        <label igxLabel for="Card-Numb">numer karty {{client.cardNumb}}</label>
+        <br>
+        <label igxLabel for="Dyscypline">dyscyplina {{client.dyscypline}}</label>
     </div>
 </section>
 
 <section class = "Buttons">
     <button igxButton="raised" igxRipple="white" routerLink = "/receptionist-panel/customer-edit-data">EDYTUJ DANE</button>
-    <button igxButton="raised" igxRipple="white">DODAJ KARNET</button>
-    <button igxButton="raised" igxRipple="white">RODZINA</button>
-    <button igxButton="raised" igxRipple="white">POKAŻ KARNETY</button>
-    <button igxButton="raised" igxRipple="white">POKAŻ WEJŚCIA</button>
-    <button igxButton="raised" igxRipple="white">WYŚLIJ MAILA</button>    
+    <button igxButton="raised" igxRipple="white"routerLink = "/receptionist-panel/customer-add-pass">DODAJ KARNET</button>
+    <button igxButton="raised" igxRipple="white" routerLink = "/receptionist-panel/customer-family">RODZINA</button>
+    <button igxButton="raised" igxRipple="white" routerLink = "/receptionist-panel/customer-show-passes">POKAŻ KARNETY</button>
+    <button igxButton="raised" igxRipple="white" routerLink = "/receptionist-panel/customer-show-entrances">POKAŻ WEJŚCIA</button>
+    <button igxButton="raised" igxRipple="white" routerLink = "/receptionist-panel/customer-send-mail">WYŚLIJ MAILA</button>    
 </section>

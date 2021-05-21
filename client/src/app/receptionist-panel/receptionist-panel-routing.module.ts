@@ -9,6 +9,10 @@ import { AddAClientComponent } from './add-a-client/add-a-client.component';
 import { EntryRegistrationComponent } from './entry-registration/entry-registration.component';
 import { CustomerDataComponent } from './customer-data/customer-data.component';
 import { CustomerEditDataComponent } from './customer-edit-data/customer-edit-data.component';
+import { CustomerFamilyComponent } from './customer-family/customer-family.component';
+import { CustomerAddPassComponent } from './customer-add-pass/customer-add-pass.component';
+import { CustomerShowEntrancesComponent } from './customer-show-entrances/customer-show-entrances.component';
+import { CustomerSendMailComponent } from './customer-send-mail/customer-send-mail.component';
 
 
 const routes: Routes = [
@@ -21,7 +25,13 @@ const routes: Routes = [
       { path: 'add-a-client', component: AddAClientComponent, outlet: 'primary' },
       { path: 'entry-registration', component: EntryRegistrationComponent, outlet: 'primary' },
       { path: 'customer-data', component: CustomerDataComponent, outlet: 'primary' },
-      { path: 'customer-edit-data', component: CustomerEditDataComponent, outlet: 'primary' }
+      { path: 'customer-edit-data', component: CustomerEditDataComponent, outlet: 'primary' },
+      { path: 'customer-family', component: CustomerFamilyComponent, outlet: 'primary' },
+      { path: 'customer-add-pass', component: CustomerAddPassComponent, outlet: 'primary' },
+      { path: 'customer-show-passes', component: CustomerAddPassComponent, outlet: 'primary' },
+      { path: 'customer-show-entrances', component: CustomerShowEntrancesComponent, outlet: 'primary' },
+      { path: 'customer-send-mail', component: CustomerSendMailComponent, outlet: 'primary' }
+      
     ]
   }];
 

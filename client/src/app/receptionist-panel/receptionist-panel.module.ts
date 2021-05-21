@@ -20,6 +20,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CustomerDataComponent } from './customer-data/customer-data.component';
 import { CustomerEditDataComponent } from './customer-edit-data/customer-edit-data.component';
 import { FormsModule } from '@angular/forms';
+import { CustomerFamilyComponent } from './customer-family/customer-family.component';
+import { CustomerAddPassComponent } from './customer-add-pass/customer-add-pass.component';
+import { CustomerShowPassesComponent } from './customer-show-passes/customer-show-passes.component';
+import { CustomerShowEntrancesComponent } from './customer-show-entrances/customer-show-entrances.component';
+import { CustomerSendMailComponent } from './customer-send-mail/customer-send-mail.component';
 @NgModule({
     declarations: [
         ReceptionistPanelComponent,
@@ -30,7 +35,12 @@ import { FormsModule } from '@angular/forms';
         AddAClientComponent,
         EntryRegistrationComponent,
         CustomerDataComponent,
-        CustomerEditDataComponent
+        CustomerEditDataComponent,
+        CustomerFamilyComponent,
+        CustomerAddPassComponent,
+        CustomerShowPassesComponent,
+        CustomerShowEntrancesComponent,
+        CustomerSendMailComponent
     ],
     imports: [
         CommonModule,
