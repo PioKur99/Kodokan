@@ -4,9 +4,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.kodokan.fcp.server.customer.dto.CardStateNeighboursDTO;
 import pl.kodokan.fcp.server.customer.dto.CustomerDTO;
+import pl.kodokan.fcp.server.customer.exception.CardIDTaken;
+import pl.kodokan.fcp.server.customer.exception.ClubCardAlreadyPresentException;
 import pl.kodokan.fcp.server.customer.exception.CustomerNotPresent;
 import pl.kodokan.fcp.server.customer.model.CardOperationType;
 import pl.kodokan.fcp.server.customer.model.CardState;
+import pl.kodokan.fcp.server.customer.model.ClubCard;
 import pl.kodokan.fcp.server.customer.model.Customer;
 import pl.kodokan.fcp.server.customer.repo.CustomerRepository;
 
@@ -51,5 +54,21 @@ public class CardStateService {
                 .map(customerMapper::toDTO)
                 .collect(Collectors.toList());
 
+    }
+
+    public Long addCard(Long customerID, Long cardID){
+        Customer customer = findById(customerID);
+        List<Customer> list = repo.findAllByClubCard_Id(cardID);
+        if(customer.getClubCard() != null){
+            throw new ClubCardAlreadyPresentException();
+        }
+        if(list.size() > 0){
+            throw new CardIDTaken();
+        }
+        ClubCard newCard = new ClubCard();
+        newCard.setId(cardID);
+        newCard.setState(CardState.NOT_PAID);
+        customer.setClubCard(newCard);
+        return cardID;
     }
 }

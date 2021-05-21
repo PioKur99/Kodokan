@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
-
+    List<Customer> findAllByClubCard_Id(Long cardID);
     List<Customer> findAllByClubCard_State(CardState state);
 }

@@ -13,6 +13,7 @@ import pl.kodokan.fcp.server.entrance.repo.PackageTypeRepository;
 
 import javax.transaction.Transactional;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -31,12 +32,7 @@ public class TicketsService {
     }
 
     public List<PackageDTO> getPartnerSystemPackages(){
-        List<PackageType> res = packageTypeRepository.findAllByWithPartnerSystem(true);
-        List<PackageDTO> dto = new ArrayList<>();
-        for(PackageType o : res){
-            dto.add(mapper.toDTO(o));
-        }
-        return dto;
+        return packageTypeRepository.findAllByWithPartnerSystem(true).stream().map(mapper::toDTO).collect(Collectors.toList());
     }
 
     public Long payForTicket(Long id){

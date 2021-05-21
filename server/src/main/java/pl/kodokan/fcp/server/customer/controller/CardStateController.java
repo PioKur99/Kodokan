@@ -42,6 +42,17 @@ public class CardStateController {
         return new ResponseEntity<>(service.getPossibleCardStateTransitions(id), HttpStatus.OK);
     }
 
+    @Operation(summary = "Add card to customer")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Card successfully added"),
+            @ApiResponse(code = 400, message = "Provided wrong data")
+    })
+    @ResponseBody
+    @PostMapping("/{id}/add-card/{card_id}")
+    ResponseEntity<Long> addCard(@PathVariable Long id, @PathVariable Long card_id) {
+        return new ResponseEntity<>(service.addCard(id, card_id), HttpStatus.OK);
+    }
+
     @Operation(summary = "Get customers with specified card state")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "All customers with specified card state"),
