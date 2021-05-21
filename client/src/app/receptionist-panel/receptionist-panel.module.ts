@@ -48,6 +48,7 @@ import { CustomerSendMailComponent } from './customer-send-mail/customer-send-ma
         IgxRippleModule,
         IgxButtonModule,
         IgxBottomNavModule,
+        FormsModule,
         IgxIconModule,
         IgxDialogModule
     ]

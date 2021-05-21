@@ -11,39 +11,39 @@
         </div>
     </div>
         <div class="label-group-1">
-        <input placeholder="IMIĘ" type="text" class = "input-box" />
+        <input placeholder="IMIĘ" type="text" class = "input-box" [(ngModel)] = "client.name">
         <br>
-        <input placeholder="PŁEĆ" type="text" class = "input-box"/>
-        <br>
-        <br>
-        <br>
-        <input placeholder="ULICA I NUMER DOMU" type="text" class = "input-box"/>
-        <br>
-        <input placeholder="MIASTO" type="text" class = "input-box"/>
-        <br>
-        <input placeholder="WOJEWÓDZTWO" type="text" class = "input-box"/>
+        <input placeholder="PŁEĆ" type="text" class = "input-box" [(ngModel)] = "client.gender">
         <br>
         <br>
         <br>
-        <input placeholder="E-MAIL" type="text" class = "input-box"/>
+        <input placeholder="ULICA I NUMER DOMU" type="text" class = "input-box" [(ngModel)] = "client.streetNumb">
         <br>
-        <input placeholder="TELEFON KONTAKTOWY" type="text" class = "input-box"/>
+        <input placeholder="MIASTO" type="text" class = "input-box"[(ngModel)] = "client.city">
+        <br>
+        <input placeholder="WOJEWÓDZTWO" type="text" class = "input-box" [(ngModel)] = "client.voivodeship">
+        <br>
+        <br>
+        <br>
+        <input placeholder="E-MAIL" type="text" class = "input-box"[(ngModel)] = "client.mail">
+        <br>
+        <input placeholder="TELEFON KONTAKTOWY" type="text" class = "input-box"[(ngModel)] = "client.phoneNumb">
     </div>
     <div class="label-group-2">
-        <input placeholder="NAZWISKO" type="text" class = "input-box"/>
+        <input placeholder="NAZWISKO" type="text" class = "input-box" [(ngModel)] = "client.surname">
         <br>
-        <input placeholder="PESEL" type="text" class = "input-box"/>
-        <br>
-        <br>
-        <br>
-        <input placeholder="NUMER LOKALU" type="text" class = "input-box"/>
-        <br>
-        <input placeholder="KOD POCZTOWY" type="text" class = "input-box"/>
+        <input placeholder="PESEL" type="text" class = "input-box" [(ngModel)] = "client.PESEL">
         <br>
         <br>
         <br>
+        <input placeholder="NUMER LOKALU" type="text" class = "input-box" [(ngModel)] = "client.apartmentNumb">
         <br>
-        <input placeholder="DYSCYPLINA" type="text" class = "input-box"/>
+        <input placeholder="KOD POCZTOWY" type="text" class = "input-box" [(ngModel)] = "client.postCode">
+        <br>
+        <br>
+        <br>
+        <br>
+        <input placeholder="DYSCYPLINA" type="text" class = "input-box" [(ngModel)] = "client.dyscypline">
     </div>
 </section>
 
