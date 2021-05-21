@@ -11,6 +11,7 @@ export class CustomerEditDataComponent implements OnInit {
   //todo: wyświetlanie odpowiednich dialogów
 
    editWentGood: boolean = false;
+   url: String = "assets/ruda.jpg"
    @ViewChild("dialog1") dialogSuccess;
    @ViewChild("dialog2") dialogFailure;
 
@@ -42,6 +43,16 @@ export class CustomerEditDataComponent implements OnInit {
     }
     else {
       this.dialogFailure.open();
+    }
+  }
+
+  selectFiles(event) {
+    if(event.target.files) {
+      var reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0])
+      reader.onload = (event:any) => {
+        this.url = event.target.result;
+      }
     }
   }
 

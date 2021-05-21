@@ -1,10 +1,13 @@
 <label igxLabel for="Name" class = "edit-label">Tryb edycji danych klienta</label>
 <section class = "Labels">
     <div>
-        <img class="profile-pic" src="../../assets/ruda.jpg">
+        <img class="profile-pic" [src]="url">
         <div class = "buttons-image">
             <button igxButton="raised" igxRipple="white" >ZRÓB ZDJĘCIE</button>
-            <button igxButton="raised" igxRipple="white" >WGRAJ Z DYSKU</button>
+            <label class="custom-file-upload">
+                <input type="file" (change) = "selectFiles($event)">
+                WGRAJ Z DYSKU
+            </label>
         </div>
     </div>
         <div class="label-group-1">
