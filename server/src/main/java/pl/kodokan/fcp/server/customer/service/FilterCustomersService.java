@@ -14,20 +14,32 @@ public class FilterCustomersService {
     CustomerRepository repo;
 
     public List<FilteredCustomersDTO> getFilteredList(FiltersDTO filters){
+        String firstNameStr = "";
+        if(filters.getFirstName() != null){
+            firstNameStr = filters.getFirstName();
+        }
+
+        String lastNameStr = "";
+        if(filters.getLastName() != null){
+            lastNameStr = filters.getLastName();
+        }
+
         String cardIDStr = "";
-        if(filters.getCardId() == null){
-            cardIDStr = "";
-        }else{
+        if(filters.getCardId() != null){
             cardIDStr = Long.toString(filters.getCardId());
         }
 
         String phoneStr = "";
-        if(filters.getPhoneNumber() == null){
-            phoneStr = "";
-        }else{
+        if(filters.getPhoneNumber() != null){
             phoneStr = Long.toString(filters.getPhoneNumber());
         }
-        List<FilteredCustomersDTO> obj = repo.getCustomers(filters.getFirstName(), filters.getLastName(), cardIDStr, phoneStr);
+
+        String cardStateStr = "";
+        if(filters.getCardState() != null){
+            cardStateStr = filters.getCardState();
+        }
+
+        List<FilteredCustomersDTO> obj = repo.getCustomers(firstNameStr, lastNameStr, cardIDStr, phoneStr, cardStateStr);
 
         return obj;
     }

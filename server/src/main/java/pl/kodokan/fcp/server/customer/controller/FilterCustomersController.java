@@ -9,9 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.kodokan.fcp.server.customer.dto.FilteredCustomersDTO;
 import pl.kodokan.fcp.server.customer.dto.FiltersDTO;
-import pl.kodokan.fcp.server.customer.model.Customer;
 import pl.kodokan.fcp.server.customer.service.FilterCustomersService;
-import pl.kodokan.fcp.server.user.model.UserData;
 
 import java.util.*;
 

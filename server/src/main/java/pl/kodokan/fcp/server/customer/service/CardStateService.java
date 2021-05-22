@@ -3,7 +3,6 @@ package pl.kodokan.fcp.server.customer.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.kodokan.fcp.server.customer.dto.CardStateNeighboursDTO;
-import pl.kodokan.fcp.server.customer.dto.CustomerDTO;
 import pl.kodokan.fcp.server.customer.exception.CardIDTaken;
 import pl.kodokan.fcp.server.customer.exception.ClubCardAlreadyPresentException;
 import pl.kodokan.fcp.server.customer.exception.CustomerNotPresent;
@@ -14,7 +13,6 @@ import pl.kodokan.fcp.server.customer.model.Customer;
 import pl.kodokan.fcp.server.customer.repo.CustomerRepository;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -46,14 +44,6 @@ public class CardStateService {
     public CardStateNeighboursDTO getPossibleCardStateTransitions(Long id) {
         Customer customer = this.findById(id);
         return cardStateMapper.toDTO(customer.getClubCard().getState());
-    }
-
-    public List<CustomerDTO> findCustomersByCardState(CardState cardState) {
-        return repo.findAllByClubCard_State(cardState)
-                .stream()
-                .map(customerMapper::toDTO)
-                .collect(Collectors.toList());
-
     }
 
     public Long addCard(Long customerID, Long cardID){
