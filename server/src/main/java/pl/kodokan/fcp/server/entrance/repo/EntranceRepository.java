@@ -6,4 +6,5 @@ import pl.kodokan.fcp.server.entrance.model.Entrance;
 
 @Repository
 public interface EntranceRepository extends JpaRepository<Entrance, Long> {
+
 }

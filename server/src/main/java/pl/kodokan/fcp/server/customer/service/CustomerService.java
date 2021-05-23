@@ -2,11 +2,10 @@ package pl.kodokan.fcp.server.customer.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.kodokan.fcp.server.customer.controller.CustomerDto;
-import pl.kodokan.fcp.server.customer.controller.CustomerMapper;
-import pl.kodokan.fcp.server.customer.entity.Customer;
+import pl.kodokan.fcp.server.customer.dto.CustomerDTO;
 import pl.kodokan.fcp.server.customer.exception.*;
-import pl.kodokan.fcp.server.customer.repository.CustomerRepository;
+import pl.kodokan.fcp.server.customer.model.Customer;
+import pl.kodokan.fcp.server.customer.repo.CustomerRepository;
 
 import javax.imageio.ImageIO;
 import javax.transaction.Transactional;
@@ -15,6 +14,8 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+
+import static pl.kodokan.fcp.server.user.model.Gender.MALE;
 
 @Service
 @AllArgsConstructor
@@ -32,23 +33,23 @@ public class CustomerService {
     }
 
     @Transactional
-    public Long createCustomer(CustomerDto dto) {
+    public Long createCustomer(CustomerDTO dto) {
 
         Customer customer = customerMapper.toEntity(dto);
 
-        if (!peselService.isCorrect(customer.getUserDetails().getIdentity_number()))
+        if (!peselService.isCorrect(customer.getUserData().getIdentityNumber()))
             throw new IncorrectPeselException();
-        if (peselService.isMale(customer.getUserDetails().getIdentity_number()) != customer.getUserDetails().isGender())
+        if (peselService.isMale(customer.getUserData().getIdentityNumber()) && customer.getUserData().getGender() == MALE)
             throw new IncorrectGenderException();
-        if (repo.findAllPesels().stream().anyMatch(n -> n.getValue().equals(customer.getUserDetails().getIdentity_number().getValue())))
+        if (repo.findAllPesels().stream().anyMatch(n -> n.equals(customer.getUserData().getIdentityNumber())))
             throw new RepeatedPeselException();
-        if (!emailService.isCorrect(customer.getUserDetails().getEmail()))
+        if (!emailService.isCorrect(customer.getUserData().getEmail()))
             throw new IncorrectEmailException();
-        if (repo.findAllEmails().stream().anyMatch(n -> n.getValue().equals((customer.getUserDetails().getEmail().getValue()))))
+        if (repo.findAllEmails().stream().anyMatch(n -> n.equals((customer.getUserData().getEmail()))))
             throw new RepeatedEmailException();
 
         try {
-            ByteArrayInputStream bis = new ByteArrayInputStream(customer.getUserDetails().getImage());
+            ByteArrayInputStream bis = new ByteArrayInputStream(customer.getUserData().getImage());
             BufferedImage originalImage = ImageIO.read(bis);
 
             int scaledWidth = (int) Math.round(originalImage.getWidth() * SCALE);
@@ -62,7 +63,7 @@ public class CustomerService {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ImageIO.write(scaledImage, "jpg", baos);
 
-            customer.getUserDetails().setImage(baos.toByteArray());
+            customer.getUserData().setImage(baos.toByteArray());
 
         } catch (IOException ex) {
             throw new ErrorReadingImageException();

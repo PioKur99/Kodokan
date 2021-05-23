@@ -1,12 +1,11 @@
 package pl.kodokan.fcp.server.entrance.service;
 
 import lombok.AllArgsConstructor;
-import org.apache.tomcat.jni.Local;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.kodokan.fcp.server.customer.model.Customer;
 import pl.kodokan.fcp.server.customer.repo.CustomerRepository;
 import pl.kodokan.fcp.server.entrance.controller.EntranceDto;
+import pl.kodokan.fcp.server.entrance.controller.EntranceFilter;
 import pl.kodokan.fcp.server.entrance.controller.EntranceMapperImpl;
 import pl.kodokan.fcp.server.entrance.exception.NoValidPackageException;
 import pl.kodokan.fcp.server.entrance.model.Entrance;
@@ -15,11 +14,8 @@ import pl.kodokan.fcp.server.entrance.model.PackageFreeze;
 import pl.kodokan.fcp.server.entrance.repo.EntranceRepository;
 
 import javax.transaction.Transactional;
-import javax.validation.constraints.Null;
 import java.time.Duration;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -33,7 +29,9 @@ public class EntranceService {
     private final EntranceMapperImpl entranceMapper;
     private final CustomerRepository customerRepository;
 
-    Entrance save(Entrance entrance) { return entranceRepository.save(entrance); }
+    Entrance save(Entrance entrance) {
+        return entranceRepository.save(entrance);
+    }
 
     public Long addEntrance(EntranceDto entranceDto) {
 
@@ -54,12 +52,11 @@ public class EntranceService {
         List<Package> customerPackages = customer.get().getPackages();
 
         List<Package> customerValidPackages = customerPackages.stream()
-                                .filter(n -> n.isPaid() == true || n.getPackageType().isPaymentMandatory() == false)
-                                .filter(n -> n.getEndDateTime().isAfter(now))
-        //Czy przekroczono limit wejsc? Z taska bedzie do wywolania request ktory zwroci ile bylo wejsc
-                                //.filter(n -> n.getPackageType().getEntranceLimit() > tegoCoMiZwrociCosTam)
-                                .collect(Collectors.toList());
-
+                .filter(n -> n.isPaid() == true || n.getPackageType().isPaymentMandatory() == false)
+                .filter(n -> n.getEndDateTime().isAfter(now))
+                //Czy przekroczono limit wejsc? Z taska bedzie do wywolania request ktory zwroci ile bylo wejsc
+                //.filter(n -> n.getPackageType().getEntranceLimit() > tegoCoMiZwrociCosTam)
+                .collect(Collectors.toList());
 
 
         if (customerValidPackages.isEmpty() == true) {
@@ -94,7 +91,7 @@ public class EntranceService {
                         .findFirst().get();
 
                 Duration dateDiffrance = Duration.between(now, packageFreeze.getEndDateTime());
-                toEntrance.setEndDateTime(toEntrance.getEndDateTime().minusDays(dateDiffrance.toDays() ));
+                toEntrance.setEndDateTime(toEntrance.getEndDateTime().minusDays(dateDiffrance.toDays()));
                 packageFreeze.setEndDateTime(now);
 
 
@@ -116,5 +113,18 @@ public class EntranceService {
 
         //Zarejestrowano wejscie, przypisania dzieja sie w maperze
         return save(entrance).getId();
+    }
+
+    public List<Entrance> getFilteredEntrances(EntranceFilter entranceFilter) {
+        List<Entrance> entrances = entranceRepository.findAll();
+        entrances.add(new Entrance());
+
+
+        if (!entranceFilter.getName().isEmpty())
+            entrances = entrances.stream()
+                    .filter(n -> n.getCustomer() != null)
+                    //.filter(n -> n.getCustomer().getUserData().getFirstName().equals(entranceFilter.getName()))
+                    .collect(Collectors.toList());
+        return entrances;
     }
 }

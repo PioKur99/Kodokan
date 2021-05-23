@@ -1,14 +1,12 @@
 package pl.kodokan.fcp.server.customer.service;
 
 import org.springframework.stereotype.Service;
-import pl.kodokan.fcp.server.customer.exception.IncorrectPeselException;
 
 import java.util.regex.Pattern;
 
 @Service
-public class PeselService implements PeselService {
+public class PeselService {
 
-    @Override
     public boolean isCorrect(String pesel){
         Pattern peselPattern = Pattern.compile("\\d{11}");     //PESEL number pattern - 11 digits
 
@@ -91,7 +89,6 @@ public class PeselService implements PeselService {
         return checkSum;
     }
 
-    @Override
     public boolean isMale(String pesel) {
         //todo: zakladam ze true to mezczyzna ale to nie musi tak byc, w razie czego do poprawki
         if(Character.getNumericValue(pesel.charAt(9)) % 2 == 0)

@@ -4,7 +4,11 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import pl.kodokan.fcp.server.customer.dto.CustomerDTO;
 import pl.kodokan.fcp.server.customer.service.CustomerService;
 
 @RestController
@@ -19,7 +23,7 @@ public class CustomerController {
             @ApiResponse(code = 400, message = "Customer can not be added.")
     })
     @PostMapping
-    ResponseEntity<Long> createCustomer(@RequestBody CustomerDto dto) {
+    ResponseEntity<Long> createCustomer(@RequestBody CustomerDTO dto) {
         Long result = customerService.createCustomer(dto);
         return ResponseEntity.ok(result);
     }
