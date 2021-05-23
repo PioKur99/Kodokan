@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import pl.kodokan.fcp.server.entrance.dto.AdviceDTO;
+import pl.kodokan.fcp.server.entrance.exception.InvalidPackageTypeId;
 import pl.kodokan.fcp.server.entrance.exception.PackageAlreadyPaidException;
 import pl.kodokan.fcp.server.entrance.exception.PackageNotPresent;
 
@@ -23,6 +24,14 @@ public class TicketsAdvice {
         AdviceDTO dto = new AdviceDTO();
         dto.setMessage("Package is already paid");
         dto.setLocalization(String.valueOf(PackageAlreadyPaidException.class));
+        return new ResponseEntity<>(dto, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(InvalidPackageTypeId.class)
+    public ResponseEntity<AdviceDTO> invalidPackageTypeId(InvalidPackageTypeId ex){
+        AdviceDTO dto = new AdviceDTO();
+        dto.setMessage("Provided invalid package type ID");
+        dto.setLocalization(String.valueOf(InvalidPackageTypeId.class));
         return new ResponseEntity<>(dto, HttpStatus.BAD_REQUEST);
     }
 }
