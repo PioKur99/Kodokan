@@ -6,10 +6,13 @@ import pl.kodokan.fcp.server.customer.exception.CustomerNotPresent;
 import pl.kodokan.fcp.server.customer.model.Customer;
 import pl.kodokan.fcp.server.customer.repo.CustomerRepository;
 import pl.kodokan.fcp.server.entrance.exception.InvalidPackageTypeId;
+import pl.kodokan.fcp.server.entrance.exception.TwoTimePackagesException;
 import pl.kodokan.fcp.server.entrance.model.Package;
 import pl.kodokan.fcp.server.entrance.model.PackageType;
 import pl.kodokan.fcp.server.entrance.repo.PackageRepository;
 import pl.kodokan.fcp.server.entrance.repo.PackageTypeRepository;
+
+import java.time.LocalDateTime;
 
 @Service
 public class PackageService {
@@ -36,9 +39,21 @@ public class PackageService {
         Customer customer = findCustomerById(customerID);
         PackageType packageType = findPackageById(packageTypeID);
         Package packageWithNoEndDate = packageRepository.findPackagesWithNoEndDate(customerID);
-//        if(packageWithNoEndDate != null){
-//            throw new
-//        }
-        return 0L;
+        if(packageWithNoEndDate != null && packageType.getEntranceLimit() > 1){
+            throw new TwoTimePackagesException();
+        }
+        /*
+        * TODO
+        *  If Package is intended for family, add this package to every family member
+        * */
+        Package newPackage = new Package();
+        newPackage.setCustomer(customer);
+        newPackage.setPackageType(packageType);
+        newPackage.setPaid(false);
+        newPackage.setEndDateTime(null);
+        newPackage.setPurchaseDateTime(LocalDateTime.now());
+
+        packageRepository.save(newPackage);
+        return newPackage.getId();
     }
 }

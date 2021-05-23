@@ -8,6 +8,7 @@ import pl.kodokan.fcp.server.entrance.dto.AdviceDTO;
 import pl.kodokan.fcp.server.entrance.exception.InvalidPackageTypeId;
 import pl.kodokan.fcp.server.entrance.exception.PackageAlreadyPaidException;
 import pl.kodokan.fcp.server.entrance.exception.PackageNotPresent;
+import pl.kodokan.fcp.server.entrance.exception.TwoTimePackagesException;
 
 @ControllerAdvice
 public class TicketsAdvice {
@@ -32,6 +33,14 @@ public class TicketsAdvice {
         AdviceDTO dto = new AdviceDTO();
         dto.setMessage("Provided invalid package type ID");
         dto.setLocalization(String.valueOf(InvalidPackageTypeId.class));
+        return new ResponseEntity<>(dto, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(TwoTimePackagesException.class)
+    public ResponseEntity<AdviceDTO> twoTimePackages(TwoTimePackagesException ex){
+        AdviceDTO dto = new AdviceDTO();
+        dto.setMessage("Cannot add another time package because this customer already has time package");
+        dto.setLocalization(String.valueOf(TwoTimePackagesException.class));
         return new ResponseEntity<>(dto, HttpStatus.BAD_REQUEST);
     }
 }
