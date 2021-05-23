@@ -52,14 +52,14 @@
 </div>
 
 <div igxOverlayOutlet>
-    <igx-dialog #dialog1 #dialog message="Udało się!" 
+    <igx-dialog #dialog1  message="Profil klienta został zaktualizowany." 
     leftButtonLabel="OK" (onLeftButtonSelect)="dialog1.close()"  
-    [closeOnOutsideSelect]="true">
+    [closeOnOutsideSelect]="true" title = "UDAŁO SIĘ!">
     </igx-dialog>
 </div>
 
 
-<igx-dialog #dialog2 #dialog message="Nie udało się" leftButtonLabel="OK" 
+<igx-dialog #dialog2 message="Operacja się nie powiodła." leftButtonLabel="OK" 
 (onLeftButtonSelect)="dialog2.close()"  
-[closeOnOutsideSelect]="true">
+[closeOnOutsideSelect]="true" title = "COŚ SIĘ NIE UDAŁO!">
 </igx-dialog>

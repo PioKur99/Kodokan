@@ -12,7 +12,7 @@ export class CustomerDataComponent implements OnInit {
   client: Client = {
     name: "Czak",
     surname: "Noris",
-    gender: "Siusiak",
+    gender: "Men",
     PESEL: "8890991812",
     streetNumb: "Wolf Street 23",
     apartmentNumb: "18",

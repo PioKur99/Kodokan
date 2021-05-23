@@ -10,7 +10,7 @@ export class CustomerEditDataComponent implements OnInit {
 
   //todo: wyświetlanie odpowiednich dialogów
 
-   editWentGood: boolean = false;
+   editWentGood: boolean = true;
    url: String = "assets/ruda.jpg"
    @ViewChild("dialog1") dialogSuccess;
    @ViewChild("dialog2") dialogFailure;
@@ -18,7 +18,7 @@ export class CustomerEditDataComponent implements OnInit {
    client: Client = {
     name: "Czak",
     surname: "Noris",
-    gender: "Siusiak",
+    gender: "Men",
     PESEL: "8890991812",
     streetNumb: "Wolf Street 23",
     apartmentNumb: "18",
