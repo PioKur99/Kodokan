@@ -4,14 +4,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.kodokan.fcp.server.customer.dto.FilteredCustomersDTO;
 import pl.kodokan.fcp.server.customer.dto.FiltersDTO;
+import pl.kodokan.fcp.server.customer.model.Customer;
 import pl.kodokan.fcp.server.customer.repo.CustomerRepository;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class FilterCustomersService {
     @Autowired
     CustomerRepository repo;
+
+    @Autowired
+    FilteredCustomerMapper mapper;
 
     public List<FilteredCustomersDTO> getFilteredList(FiltersDTO filters){
         String firstNameStr = "";
@@ -39,8 +44,6 @@ public class FilterCustomersService {
             cardStateStr = filters.getCardState();
         }
 
-        List<FilteredCustomersDTO> obj = repo.getCustomers(firstNameStr, lastNameStr, cardIDStr, phoneStr, cardStateStr);
-
-        return obj;
+        return repo.getCustomers(firstNameStr, lastNameStr, cardIDStr, phoneStr, cardStateStr).stream().map(mapper::toDTO).collect(Collectors.toList());
     }
 }
