@@ -2,13 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Location } from '@angular/common';
 import { RadioGroupAlignment } from "igniteui-angular";
-import {WebcamImage} from 'ngx-webcam';
+
+
 import {Subject, Observable} from 'rxjs';
 import { Client } from '../data/client';
 import { RegisterService } from '../services/register.service';
 import { Router } from '@angular/router';
+import { WebcamImage } from 'ngx-webcam';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
-  
+
 
 @Component({
   selector: 'app-register',

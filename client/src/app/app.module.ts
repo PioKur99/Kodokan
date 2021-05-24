@@ -21,7 +21,8 @@ import {
 	IgxCheckboxModule,
 	IgxRadioModule,
 	IgxButtonGroupModule,
-	IgxToastModule
+	IgxToastModule,
+    IgxTooltipModule
 } from 'igniteui-angular';
 @NgModule({
     declarations: [
@@ -42,6 +43,7 @@ import {
         AppRoutingModule,
         BrowserAnimationsModule,
         HttpClientModule,
+        IgxTooltipModule,
         IgxInputGroupModule,
         IgxIconModule,
         IgxNavbarModule,

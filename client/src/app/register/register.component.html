@@ -7,18 +7,23 @@
   <mat-horizontal-stepper linear #stepper>
     <mat-step [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup">
+
         <ng-template matStepLabel>Utwórz konto</ng-template>
         <!--************************************************************-->
 
+
+        
         <!--*****************************************************-->
         <div class="inputs">
-        
+
             <igx-input-group>
               <input  igxInput name="email" type="email" required="required" formControlName="firstCtrl" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" [(ngModel)]="client.email">
               <label igxLabel for="email">
                 E-mail
               </label>
-            </igx-input-group>
+            </igx-input-group>  
+
+
             <igx-input-group>
               <input (keypress)="numberOnly($event)" igxInput name="phone" type="tel" required="required" formControlName="secondCtrl" minlength="7" maxlength="16" [(ngModel)]="client.phoneNumber">
               <label igxLabel for="phone">
@@ -41,9 +46,6 @@
               </label>
             </igx-input-group>
 
-            <div class="warnings">
-              <p *ngIf="false" >Hasła muszą być takie same!</p>
-            </div>
 
         <div class="centered">
           <div>
@@ -66,7 +68,7 @@
         </div>
       </div>
         <div>
-          <button mat-button  igxButton="raised" igxRipple="white" matStepperNext class="rightBtn greyBtn" [disabled]="isDisabled" (click)="onClickNextBtn()">
+          <button mat-button  igxButton="raised" igxRipple="white" matStepperNext class="rightBtn greyBtn full-width" [disabled]="isDisabled" (click)="onClickNextBtn()">
             DALEJ 
           </button>
         </div>
@@ -74,7 +76,11 @@
     </mat-step>
     <mat-step [stepControl]="secondFormGroup" [optional]="isOptional">
       <form [formGroup]="secondFormGroup">
-        <ng-template matStepLabel>Wprowadź dane osobowe</ng-template>
+        <ng-template matStepLabel >Wprowadź dane osobowe</ng-template>
+
+        <div class="inputs">
+          <div>
+                    
         <form class="container">
 
           <span class="yellowText">Płeć:</span>
@@ -89,8 +95,6 @@
           </igx-radio-group>
 
         </form>
-        <div class="inputs">
-          <div>
             <igx-input-group>
               <input  igxInput name="name" type="text" required="required" formControlName="firstCtrl" [(ngModel)]="client.name" maxlength="25">
               <label igxLabel for="name">
@@ -156,52 +160,64 @@
       <form [formGroup]="thirdFormGroup">
         <ng-template matStepLabel>Dodaj swoje zdjęcie</ng-template>
         <!--****************CAMERA******************************************-->
-        <div class="photo-container"> 
-          <div class="photoBtn">
-            <igx-input-group>
-              <input igxInput type="file" multiple (change)="fileChangeEvent($event)" />
-            </igx-input-group>
-            <button    igxButton="raised" igxRipple="white" class="actionBtn greyBtn" (click)="triggerSnapshot();" [disabled]="client.image64">
-              Zrób zdjęcie
-            </button>
-            <button igxButton="raised" igxRipple="white" class="actionBtn greyBtn" (click)="reset();" *ngIf="client.image64" >
-              Spróbuj ponownie
-            </button> 
-          </div>
-          <!--*****************************************************-->
-          <div>
-            <webcam [height]="400" 
-                    [width]="1000" 
-                    [trigger]="triggerObservable"
-                    (imageCapture)="handleImage($event)" *ngIf="!client.image64">
-            </webcam>
-            <image-cropper *ngIf="displayCameraCropper"
-                          [imageBase64]="client.image.imageAsDataUrl"
-                          [maintainAspectRatio]="true"
-                          [aspectRatio]="3 / 4"
-                          [cropperMinWidth]="200"
 
-                          format="jpg"
-                          (imageCropped)="imageCropped($event)"
-                          (imageLoaded)="imageLoaded()"
-                          (cropperReady)="cropperReady()"
-                          (loadImageFailed)="loadImageFailed()"
-                          [resizeToWidth]="100"
-            ></image-cropper>
-            <image-cropper *ngIf="imageChangedEvent"
-                          [imageChangedEvent]="imageChangedEvent"
-                          [maintainAspectRatio]="true"
-                          [aspectRatio]="3 / 4"
-                          [cropperMinWidth]="200"
-                          format="jpg"
-                          (imageCropped)="imageCropped($event)"
-                          (imageLoaded)="imageLoaded()"
-                          (cropperReady)="cropperReady()"
-                          (loadImageFailed)="loadImageFailed()"
-                          [resizeToWidth]="256"
-            ></image-cropper>
-          </div>
-        </div>
+          <!--****************CAMERA******************************************-->
+          <section class="photo-container"> 
+            <div class="photoBtn" igxLayout igxLayoutDir="row">
+              <div igxFlex>
+                <button igxButton="raised" igxRipple="white"  onclick="document.getElementById('file').click();" >
+                  DODAJ ZDJĘCIE <br>Z DYSKU
+                </button> 
+                
+                  <input  type="file" style="display:none;" id="file" name="file" (change)="fileChangeEvent($event)"/>
+
+              </div>
+              <div igxFlex>
+                <button    igxButton="raised" igxRipple="white" class="actionBtn greyBtn" (click)="triggerSnapshot();" [disabled]="client.image64">
+                  Zrób zdjęcie
+                </button>
+              </div>
+
+              <button igxButton="outlined" igxRipple="white" (click)="reset();" *ngIf="client.image64">
+                Ponów próbę
+              </button> 
+
+
+            </div>
+            <!--*****************************************************-->
+            <div>
+              <webcam [height]="400" 
+                      [width]="1000" 
+                      [trigger]="triggerObservable"
+                      (imageCapture)="handleImage($event)" *ngIf="!client.image64">
+              </webcam>
+              <image-cropper *ngIf="displayCameraCropper"
+                            [imageBase64]="client.image.imageAsDataUrl"
+                            [maintainAspectRatio]="true"
+                            [aspectRatio]="3 / 4"
+                            [cropperMinWidth]="150"
+
+                            format="jpg"
+                            (imageCropped)="imageCropped($event)"
+                            (imageLoaded)="imageLoaded()"
+                            (cropperReady)="cropperReady()"
+                            (loadImageFailed)="loadImageFailed()"
+                            [resizeToWidth]="100"
+              ></image-cropper>
+              <image-cropper *ngIf="imageChangedEvent"
+                            [imageChangedEvent]="imageChangedEvent"
+                            [maintainAspectRatio]="true"
+                            [aspectRatio]="3 / 4"
+                            [cropperMinWidth]="150"
+                            format="jpg"
+                            (imageCropped)="imageCropped($event)"
+                            (imageLoaded)="imageLoaded()"
+                            (cropperReady)="cropperReady()"
+                            (loadImageFailed)="loadImageFailed()"
+                            [resizeToWidth]="256"
+              ></image-cropper>
+            </div>
+          </section>
 
         <!--*********************************************************-->
         <button mat-button  igxButton="outlined" igxRipple="white" matStepperPrevious id="previous">
@@ -314,7 +330,7 @@
         </div>
         <div class="mainContainerTwo">
           <div class="snapshot" *ngIf="client.image">
-            <img [height]="250" 
+            <img  
             [width]="250"  [src]="client.image64"/>
           </div>
         </div>
