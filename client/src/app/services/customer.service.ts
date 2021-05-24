@@ -12,6 +12,10 @@ export class CustomerService {
   constructor(private http: HttpClient) { }
 
   getCardState(id: number): Observable<CardState>{
-    return this.http.get<CardState>(config.address+'card-state/'+id)
+    return this.http.get<CardState>(config.address+'card-state/'+ id)
   }
+  //FIXME: put czy get?
+  // putChangeCardState(id:number, change: string): Observable<CardState>{
+  //   return this.http.put<CardState>(config.address+'customer/change-card-state/'+ )
+  // }
 }
