@@ -2,3 +2,20 @@
     max-width: 400px;
     display: flex;
 }
+
+.buttons {
+    height: 60%;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  
+    &__item {
+      //padding: 10% 5%;
+      border-radius: 4px;
+      //font-size: 20px;
+      background-color: #dbdbdb;
+      //color: #DAA520;
+      //border-spacing: 5%;
+    }
+  }

@@ -24,12 +24,12 @@ export class EntryRegistrationComponent implements OnInit {
   @ViewChild("alertnotok") alertnotok;
 
   constructor(private trainingService: TrainingService, private entranceService: EntranceService) { 
-    // this.trainingList = [{id: 1,name: "MMA"},
-    // {id: 2,name: "BOX"},
-    // {id: 3,name: "KOX"},
-    // {id: 4,name: "LOS"},
-    // {id: 5,name: "RNG"}
-    // ]
+    this.trainingList = [{shedule_id: 1,name: "MMA"},
+    {shedule_id: 2,name: "BOX"},
+    {shedule_id: 3,name: "KOX"},
+    {shedule_id: 4,name: "LOS"},
+    {shedule_id: 5,name: "RNG"},
+    ]
   }
 
   ngOnInit(): void {

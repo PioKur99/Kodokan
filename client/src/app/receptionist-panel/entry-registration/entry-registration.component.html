@@ -7,8 +7,8 @@
     </form>
 </article>
 
-<section class="buttons">
-    <div *ngFor="let training of trainingList">
+<section>
+    <div *ngFor="let training of trainingList" class="buttons">
         <!--FIXME: powinno być rozmieszczone odpowiednio-->
         <div>
             <button igxButton="raised" igxRipple="white" class="buttons__item" (click)="entryRegistration()">
@@ -20,7 +20,6 @@
                 leftButtonLabel="OK"
                 (onLeftButtonSelect)="alertok.close()">
             </igx-dialog>
-
             <igx-dialog #alertnotok>
                 <igx-dialog-title>
                     <div class="dialog-container">
