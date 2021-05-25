@@ -1,8 +1,8 @@
 export class Training {
-    id: Number
+    shedule_id: Number
     name: String
     constructor(){
-        this.id = new Number()
+        this.shedule_id = new Number()
         this.name = new String()
     }
 }

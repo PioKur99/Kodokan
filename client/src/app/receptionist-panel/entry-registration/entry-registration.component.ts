@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { EntranceToAdd } from 'src/app/data/entrance/entrance-to-add';
 import { Training } from 'src/app/data/training/training';
+import { EntranceService } from 'src/app/services/entrance.service';
+import { TrainingService } from 'src/app/services/training.service';
 
 @Component({
   selector: 'app-entry-registration',
@@ -10,16 +13,17 @@ import { Training } from 'src/app/data/training/training';
 export class EntryRegistrationComponent implements OnInit {
 
   trainingList: Training[]
+  entranceToAdd: EntranceToAdd
+  entranceId: number
   //__trainingList: Training[]
-  //TODO: dodać User do data
-  //user: User
-  userSub: Subscription
+
   trainingSub: Subscription
+
 
   @ViewChild("alertok") alertok;
   @ViewChild("alertnotok") alertnotok;
 
-  constructor() { 
+  constructor(private trainingService: TrainingService, private entranceService: EntranceService) { 
     // this.trainingList = [{id: 1,name: "MMA"},
     // {id: 2,name: "BOX"},
     // {id: 3,name: "KOX"},
@@ -29,18 +33,21 @@ export class EntryRegistrationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // TODO: user Service
-    // this.userSub =
-    //   this.userService.getAuthenticationEvent().subscribe(user => {
-    //       this.user = user;
-    //       if (this.user != null)
-    //         this.trainingSub = this.trainingService.getTrainingShedule(user.id).subscribe(trainings => this.trainingList = trainings);
-    //     }
-    //   );
+    this.trainingSub=
+      this.trainingService.getTrainingShedule().subscribe(
+        x => this.trainingList=x,
+        //TODO: zrobić coś z tym errorem
+        //error =>
+      )
   }
 
   entryRegistration(): void{
-    this.alertnotok.open()
-
+    this.entranceService.postEntrance(this.entranceToAdd).subscribe(
+      x=> {
+        this.entranceId=x 
+        this.alertok.open()
+      },
+      error => this.alertnotok.open()
+    )
   }
 }
