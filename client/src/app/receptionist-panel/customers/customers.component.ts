@@ -10,6 +10,7 @@ import { IgxDialogActionsDirective } from 'igniteui-angular/lib/dialog/dialog.di
 })
 export class CustomersComponent implements OnInit {
 
+  x[]:/*klasa z data */
   deleteId: DeleteCustomer = {
     id: null,
   }
@@ -34,6 +35,10 @@ export class CustomersComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.deleteCustomerService.getCustomer().subscribe(
+      data=> this.x[]=data,
+      error=>
+    )
   }
 
 }
