@@ -1,10 +1,11 @@
-package pl.kodokan.fcp.server.entrance.helper;
+package pl.kodokan.fcp.server.entrance.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import pl.kodokan.fcp.server.entrance.exception.EntranceNotFoundException;
+import pl.kodokan.fcp.server.entrance.exception.PackageNotFoundException;
 
 @RestControllerAdvice
 public class EntranceAdvice {

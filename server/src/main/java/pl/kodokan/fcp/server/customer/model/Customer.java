@@ -42,7 +42,7 @@ public class Customer extends BaseEntity {
 
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "customers", cascade = CascadeType.ALL)
     private List<Package> packages = new LinkedList<>();
 
     @Getter(AccessLevel.NONE)
@@ -51,7 +51,7 @@ public class Customer extends BaseEntity {
     private List<Entrance> entrances = new LinkedList<>();
 
     public void addPackage(Package pack) {
-        pack.setCustomer(this);
+        pack.addCustomer(this);
         packages.add(pack);
     }
 
@@ -59,7 +59,9 @@ public class Customer extends BaseEntity {
         // returns safe copy of list
         return Collections.unmodifiableList(packages);
     }
-
+    public void deletePackageById(Package aPackage){
+        this.packages.remove(aPackage);
+    }
     public void setNextCardState() {
         clubCard.setNextCardState();
     }

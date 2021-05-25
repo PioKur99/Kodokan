@@ -3,28 +3,22 @@ package pl.kodokan.fcp.server.entrance.controller;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.v3.oas.annotations.Operation;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import pl.kodokan.fcp.server.entrance.service.EntranceService;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/entrance")
+@AllArgsConstructor
 public class EntranceController {
 
-    EntranceService entranceService;
-
-    @Operation(summary = "Add new entrance")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Entrance added successfully"),
-            @ApiResponse(code = 400, message = "Entrance can not be added")
-    })
-    @PostMapping
-    ResponseEntity<Long> addEntrance(@RequestBody EntranceDto entranceDto) {
-        Long result = entranceService.addEntrance(entranceDto);
-        return ResponseEntity.ok(result);
-    }
+    private final EntranceService entranceService;
 
     @Operation(summary = "Find all entrances with provided customer_id and package_id")
     @ApiResponses(value = {
@@ -45,5 +39,5 @@ public class EntranceController {
     public ResponseEntity<Integer> countAll(@RequestParam Long customerId, @RequestParam Long packageId) {
         return ResponseEntity.ok(entranceService.countAll(customerId, packageId));
     }
-
 }
+
