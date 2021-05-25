@@ -11,7 +11,8 @@ import {
     IgxInputGroupModule,
     IgxToggleModule,
     IgxDropDownModule,
-    IgxCheckboxModule
+    IgxCheckboxModule,
+    IgxGridModule
 } from 'igniteui-angular';
 import { CustomersComponent } from './customers/customers.component';
 import { EntranceComponent } from './entrance/entrance.component';
@@ -21,8 +22,7 @@ import { AddAClientComponent } from './add-a-client/add-a-client.component';
 import { EntryRegistrationComponent } from './entry-registration/entry-registration.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http'
-
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
     declarations: [
         ReceptionistPanelComponent,
@@ -40,14 +40,13 @@ import { HttpClientModule } from '@angular/common/http'
         IgxButtonModule,
         IgxBottomNavModule,
         IgxIconModule,
-        //BrowserAnimationsModule,
         IgxDialogModule,
         FormsModule,
         IgxInputGroupModule,
-        //BrowserAnimationsModule,
         IgxToggleModule,
         IgxDropDownModule,
-        IgxCheckboxModule
+        IgxCheckboxModule,
+        IgxGridModule
     ]
 })
 export class ReceptionistPanelModule {

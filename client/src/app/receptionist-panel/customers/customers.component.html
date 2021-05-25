@@ -42,8 +42,10 @@
     <tr class="row row--first">
        <td class="column column--first">Imię i nazwisko</td> <td class="column column--second"></td> <td class="column column--third"></td>
     </tr>
-    <tr class="row">
-       <td class="column column--first">Oliwier Gębczyński</td> <td class="column column--second"><button class="button-table">Pokaż</button></td> <td class="column column--third"><button class="button-table">Usuń</button></td>
+    <tr class="row"> <!-- będzie trzeba podać listę za pomocą ngFor/ dodać interpolację w imię i nazwisko / dodać -->
+       <td class="column column--first">Oliwier Gębczyński</td> <td class="column column--second"><button class="button-table" routerLink="">Pokaż</button></td> <td class="column column--third"><button class="button-table" (click)="getId()">Usuń</button></td>
     </tr>
  </table>
+<!-- do dodania interpolacja z listy Nazwisko i imię -->
+ <igx-dialog #dialog message="Czy na pewno chcesz usunąć klienta ?" leftButtonLabel="Tak" (onLeftButtonSelect)="deleteCustomerFunc()" rightButtonLabel="Nie" (onRightButtonSelect)="dialog.close()" [closeOnOutsideSelect]="true"></igx-dialog>
 </div>

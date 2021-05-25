@@ -11,7 +11,7 @@ export class DeleteCustomerService {
   constructor(private http: HttpClient) {
   }
 
-  deleteCustomer(deleteCustomer: DeleteCustomer): Observable<any> {
+  deleteService(deleteCustomer: DeleteCustomer): Observable<any> {
     return this.http.post<DeleteCustomer>(address, deleteCustomer)
   }
 
