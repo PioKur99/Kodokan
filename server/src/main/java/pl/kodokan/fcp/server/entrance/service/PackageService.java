@@ -1,12 +1,10 @@
 package pl.kodokan.fcp.server.entrance.service;
 
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.kodokan.fcp.server.customer.model.Customer;
 import pl.kodokan.fcp.server.customer.repo.CustomerRepository;
-import pl.kodokan.fcp.server.customer.service.CustomerService;
 import pl.kodokan.fcp.server.entrance.dto.PackageRequest;
 import pl.kodokan.fcp.server.entrance.dto.PackageResponse;
 import pl.kodokan.fcp.server.entrance.exception.PackageCannotBeDeleteException;
@@ -14,7 +12,6 @@ import pl.kodokan.fcp.server.entrance.exception.PackageNotFoundException;
 import pl.kodokan.fcp.server.entrance.model.Package;
 import pl.kodokan.fcp.server.entrance.repo.PackageRepository;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
