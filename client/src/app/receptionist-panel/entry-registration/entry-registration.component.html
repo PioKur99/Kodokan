@@ -31,8 +31,9 @@
                 </igx-label>
                 <div igxDialogActions>
                     <button igxButton (click)="alertnotok.close()">ANULUJ</button>
-                    <button igxButton (click)="alertnotok.close()">JEDNORAZÓWKA</button>
-                    <button igxButton (click)="alertnotok.close()">MULTISPORT</button>
+                    <div *ngFor="let packageType of packageTypeList" class="buttons">
+                        <button igxButton (click)="alertnotok.close()">{{packageType.name}}</button>
+                    </div>
                     <button igxButton (click)="alertnotok.close()">OK SYSTEM</button>
                 </div>
             </igx-dialog>
