@@ -1,8 +1,8 @@
 export class Training {
-    shedule_id: Number
-    name: String
-    constructor(){
-        this.shedule_id = new Number()
-        this.name = new String()
-    }
+    shedule_id: number
+    name: string
+    // constructor(){
+    //     this.shedule_id = new Number()
+    //     this.name = new String()
+    // }
 }

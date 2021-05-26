@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { scheduled, Subscription } from 'rxjs';
 import { EntranceToAdd } from 'src/app/data/entrance/entrance-to-add';
 import { Package } from 'src/app/data/package/package';
 import { PackageType } from 'src/app/data/package/package-type';
@@ -19,7 +19,7 @@ export class EntryRegistrationComponent implements OnInit {
   packageTypeList: PackageType[]
   pass: Package
 
-  entranceToAdd: EntranceToAdd
+  entranceToAdd= new EntranceToAdd()
   entranceId: number
   packageId: number
 
@@ -59,7 +59,11 @@ export class EntryRegistrationComponent implements OnInit {
       )
   }
 
-  entryRegistration(): void{
+  entryRegistration(shedule_id: number): void{
+    this.entranceToAdd.training_id=shedule_id
+    //TODO: ustawić customer_id
+    //this.entranceToAdd.customer_id=;
+
     // this.entranceService.postEntrance(this.entranceToAdd).subscribe(
     //   x=> {
     //     this.entranceId=x 
@@ -81,7 +85,7 @@ export class EntryRegistrationComponent implements OnInit {
       )
     this.entranceSub=
       this.entranceService.postEntrance(this.entranceToAdd).subscribe(
-        //EntranceId
+        //zwraca EntranceId
       )
     this.alertnotok.close()
     this.alertok.open()

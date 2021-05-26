@@ -1,42 +1,39 @@
-<article class="card-number">
+<div class="card-number">
     <form>
         <igx-input-group>
-            <input igxInput name="fullName" type="text" />
-            <label igxLabel for="fullName">Wprowadź numer karty członkowskiej</label>
+            <input igxInput name="fullName" type="text" placeholder="Wprowadź numer karty członkowskiej"/>
         </igx-input-group>
     </form>
-</article>
+</div>
 
-<section>
-    <div *ngFor="let training of trainingList" class="buttons">
-        <!--FIXME: powinno być rozmieszczone odpowiednio-->
-        <div>
-            <button igxButton="raised" igxRipple="white" class="buttons__item" (click)="entryRegistration()">
-                {{training.name}}
-            </button>
-            <igx-dialog #alertok
-                title="Udało się zarejestrować wejście!"
-                message="Zarejestrowano wejście klienta!"
-                leftButtonLabel="OK"
-                (onLeftButtonSelect)="alertok.close()">
-            </igx-dialog>
-            <igx-dialog #alertnotok>
-                <igx-dialog-title>
-                    <div class="dialog-container">
-                        <div class="dialog-title">Nie udało się zarejestrować wejścia!</div>
-                    </div>
-                </igx-dialog-title>
-                <igx-label>
-                    Odpowiedni komunikat
-                </igx-label>
-                <div igxDialogActions>
-                    <button igxButton (click)="alertnotok.close()">ANULUJ</button>
-                    <div *ngFor="let packageType of packageTypeList" class="buttons">
-                        <button igxButton (click)="entryRegistration2()">{{packageType.name}}</button>
-                    </div>
-                    <button igxButton (click)="alertnotok.close()">OK SYSTEM</button>
+<div *ngFor="let training of trainingList" class="buttons">
+    <!--FIXME: powinno być rozmieszczone odpowiednio-->
+    <div>
+        <button igxButton="raised" igxRipple="white" class="buttons__item" (click)="entryRegistration(training.training_id)">
+            {{training.name}}
+        </button>
+        <igx-dialog #alertok
+            title="Udało się zarejestrować wejście!"
+            message="Zarejestrowano wejście klienta!"
+            leftButtonLabel="OK"
+            (onLeftButtonSelect)="alertok.close()">
+        </igx-dialog>
+        <igx-dialog #alertnotok>
+            <igx-dialog-title>
+                <div class="dialog-container">
+                    <div class="dialog-title">Nie udało się zarejestrować wejścia!</div>
                 </div>
-            </igx-dialog>
-        </div>
+            </igx-dialog-title>
+            <igx-label>
+                Odpowiedni komunikat
+            </igx-label>
+            <div igxDialogActions>
+                <button igxButton (click)="alertnotok.close()">ANULUJ</button>
+                <div *ngFor="let packageType of packageTypeList" class="buttons">
+                    <button igxButton (click)="entryRegistration2()">{{packageType.name}}</button>
+                </div>
+                <button igxButton (click)="alertnotok.close()">OK SYSTEM</button>
+            </div>
+        </igx-dialog>
     </div>
-</section>
+</div>
