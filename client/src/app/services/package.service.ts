@@ -19,4 +19,8 @@ export class PackageService {
   postAddPackage(pass: Package): Observable<number>{
     return this.http.post<number>(config.address+'add_package',pass)
   }
+
+  postPackagePaid(packageId: number): Observable<any>{
+    return this.http.post<any>(config.address+'package_paid', packageId)
+  }
 }

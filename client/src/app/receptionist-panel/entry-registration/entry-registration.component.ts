@@ -24,6 +24,7 @@ export class EntryRegistrationComponent implements OnInit {
   packageId: number
 
   trainingSub: Subscription
+  entranceSub: Subscription
   packageTypeSub: Subscription
   packageSub: Subscription
 
@@ -74,7 +75,15 @@ export class EntryRegistrationComponent implements OnInit {
       this.packageService.postAddPackage(this.pass).subscribe(
         x => this.packageId=x,
       )
-    //addPass
-    //PassPaid
+    this.packageSub=
+      this.packageService.postPackagePaid(this.packageId).subscribe(
+
+      )
+    this.entranceSub=
+      this.entranceService.postEntrance(this.entranceToAdd).subscribe(
+        //EntranceId
+      )
+    this.alertnotok.close()
+    this.alertok.open()
   }
 }
