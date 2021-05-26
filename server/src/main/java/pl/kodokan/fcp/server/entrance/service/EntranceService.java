@@ -8,7 +8,7 @@ import pl.kodokan.fcp.server.entrance.controller.EntranceDto;
 import pl.kodokan.fcp.server.entrance.controller.EntranceFilter;
 import pl.kodokan.fcp.server.entrance.controller.EntranceMapperImpl;
 import pl.kodokan.fcp.server.entrance.controller.EntranceWithDetails;
-import pl.kodokan.fcp.server.entrance.exception.NoEntranceWithGivenId;
+import pl.kodokan.fcp.server.entrance.exception.EntranceNotFoundException;
 import pl.kodokan.fcp.server.entrance.exception.NoValidPackageException;
 import pl.kodokan.fcp.server.entrance.model.Entrance;
 import pl.kodokan.fcp.server.entrance.model.Package;
@@ -37,6 +37,20 @@ public class EntranceService {
         return entranceRepository.save(entrance);
     }
 
+    public List<Long> findAll(Long customerId, Long packageId) {
+        final Optional<List<Long>> entrancesId = entranceRepository.findAllByCustomerIdAndPackgId(customerId, packageId);
+        if (!entrancesId.get().isEmpty()) {
+            return entrancesId.get();
+        } else {
+            throw new EntranceNotFoundException("Entrance with customerId " + customerId + " packageId " + packageId + " doesn't exist.");
+        }
+    }
+
+    public Integer countAll(Long customerId, Long packageId) {
+        return entranceRepository.countAllByCustomerIdAndPackgId(customerId, packageId)
+                .orElseThrow(() -> new EntranceNotFoundException("There is no entrances with customerId " + customerId + " packageId " + packageId + " in db."));
+    }
+
     public Long addEntrance(EntranceDto entranceDto) {
 
         LocalDateTime now = LocalDateTime.now();
@@ -46,7 +60,7 @@ public class EntranceService {
         Entrance entrance = entranceMapper.toEntity(entranceDto);
 
         Optional<Customer> customer = customerRepository.findById(entrance.getCustomer().getId());
-        if (customer.isPresent() == false) {
+        if (customer.isEmpty()) {
             throw new NullPointerException("No customer with given ID!");
         }
 
@@ -56,14 +70,13 @@ public class EntranceService {
         List<Package> customerPackages = customer.get().getPackages();
 
         List<Package> customerValidPackages = customerPackages.stream()
-                .filter(n -> n.isPaid() == true || n.getPackageType().isPaymentMandatory() == false)
+                .filter(n -> n.isPaid() || !n.getPackageType().isPaymentMandatory())
                 .filter(n -> n.getEndDateTime().isAfter(now))
-                //Czy przekroczono limit wejsc? Z taska bedzie do wywolania request ktory zwroci ile bylo wejsc
-                //.filter(n -> n.getPackageType().getEntranceLimit() > tegoCoMiZwrociCosTam)
+                .filter(n -> n.getPackageType().getEntranceLimit() > countAll(entranceDto.getCustomerId(), n.getId()))
                 .collect(Collectors.toList());
 
 
-        if (customerValidPackages.isEmpty() == true) {
+        if (customerValidPackages.isEmpty()) {
 
             //Czy jest karnet z pusta data?
             //jezeli karnet jest z pusta data to ustawiamy date koncowa na dzien odbicia + validityDays
@@ -131,23 +144,27 @@ public class EntranceService {
             toFilter = toFilter.stream()
                     .filter(n -> n.getCustomer().getUserData().getFirstName().contains(entranceFilter.getName()))
                     .collect(Collectors.toList());
-        if(!entranceFilter.getSurname().isEmpty())
+        if (!entranceFilter.getSurname().isEmpty())
             toFilter = toFilter.stream()
                     .filter(n -> n.getCustomer().getUserData().getLastName().contains(entranceFilter.getSurname()))
-                    .collect(Collectors.toList());;
-        if(!entranceFilter.getDate().isEmpty())
+                    .collect(Collectors.toList());
+        ;
+        if (!entranceFilter.getDate().isEmpty())
             toFilter = toFilter.stream()
                     .filter(n -> n.getDateTime().toString().equals(entranceFilter.getDate()))
-                    .collect(Collectors.toList());;
-        if(!entranceFilter.getPackageName().isEmpty())
+                    .collect(Collectors.toList());
+        ;
+        if (!entranceFilter.getPackageName().isEmpty())
             toFilter = toFilter.stream()
                     .filter(n -> n.getPackg().getPackageType().getName().contains(entranceFilter.getPackageName()))
-                    .collect(Collectors.toList());;
-        if(!entranceFilter.getTraining().isEmpty())
+                    .collect(Collectors.toList());
+        ;
+        if (!entranceFilter.getTraining().isEmpty())
             toFilter = toFilter.stream()
                     .filter(n -> n.getTraining().getTrainingName().getName().contains(entranceFilter.getTraining()))
-                    .collect(Collectors.toList());;
-        if(!entranceFilter.getCardId().isEmpty())
+                    .collect(Collectors.toList());
+        ;
+        if (!entranceFilter.getCardId().isEmpty())
             toFilter = toFilter.stream()
                     .filter(n -> n.getCustomer().getClubCard().getId().toString().equals(entranceFilter.getCardId()))
                     .collect(Collectors.toList());
@@ -169,40 +186,15 @@ public class EntranceService {
     }
 
     public Long deleteEntrance(Long toDelete) {
-        if(toDelete == null)
-            throw new NoEntranceWithGivenId();
+        if (toDelete == null)
+            throw new EntranceNotFoundException("ID cannot be null!");
 
         Optional<Entrance> entranceToDelete = entranceRepository.findById(toDelete);
-        if(entranceToDelete.isPresent())
+        if (entranceToDelete.isPresent())
             entranceRepository.deleteById(toDelete);
         else
-            throw new NoEntranceWithGivenId();
+            throw new EntranceNotFoundException("No entrance with given ID!");
 
         return toDelete;
-import org.springframework.transaction.annotation.Transactional;
-import pl.kodokan.fcp.server.entrance.exception.EntranceNotFoundException;
-import pl.kodokan.fcp.server.entrance.repo.EntranceRepository;
-
-import java.util.List;
-import java.util.Optional;
-
-@Service
-@Transactional(readOnly = true)
-@AllArgsConstructor
-public class EntranceService {
-    private EntranceRepository entranceRepository;
-    public List<Long> findAll(Long customerId, Long packageId) {
-        final Optional<List<Long>> entrancesId = entranceRepository.findAllByCustomerIdAndPackgId(customerId, packageId);
-        if(!entrancesId.get().isEmpty()){
-            return entrancesId.get();
-        }
-        else{
-            throw new EntranceNotFoundException("Entrance with customerId " + customerId + " packageId " + packageId + " doesn't exist.");
-        }
-    }
-
-    public Integer countAll(Long customerId, Long packageId) {
-        return entranceRepository.countAllByCustomerIdAndPackgId(customerId, packageId)
-                .orElseThrow(() -> new EntranceNotFoundException("There is no entrances with customerId " + customerId + " packageId " + packageId + " in db."));
     }
 }

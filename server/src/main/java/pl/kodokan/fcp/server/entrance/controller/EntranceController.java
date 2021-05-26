@@ -36,10 +36,8 @@ public class EntranceController {
     @GetMapping("/count")
     public ResponseEntity<Integer> countAll(@RequestParam Long customerId, @RequestParam Long packageId) {
         return ResponseEntity.ok(entranceService.countAll(customerId, packageId));
-public class EntranceController {
+    }
 
-    @Autowired
-    EntranceService entranceService;
 
     @Operation(summary = "Add new entrance")
     @ApiResponses(value = {
@@ -51,13 +49,25 @@ public class EntranceController {
         Long result = entranceService.addEntrance(entranceDto);
         return ResponseEntity.ok(result);
     }
+
+    @Operation(summary = "Get filtered list of entrances")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Entrances list returned successfully"),
+            @ApiResponse(code = 400, message = "Entrances list can not be returned")
+    })
     @PostMapping("/get")
     List<EntranceWithDetails> getFilteredEntrances(@RequestBody EntranceFilter entranceFilter) {
         return entranceService.getFilteredEntrances(entranceFilter);
     }
 
+    @Operation(summary = "Delete entrance with given ID")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Entrance deleted successfully"),
+            @ApiResponse(code = 400, message = "Entrance can not be deleted")
+    })
     @PostMapping("/delete")
     Long deleteEntrance(@RequestBody Long toDelete) {
         return entranceService.deleteEntrance(toDelete);
     }
 }
+
