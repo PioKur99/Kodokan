@@ -1,6 +1,7 @@
 package pl.kodokan.fcp.server.customer.service;
 
 import lombok.AllArgsConstructor;
+import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.stereotype.Service;
 import pl.kodokan.fcp.server.customer.dto.CustomerDTO;
 import pl.kodokan.fcp.server.customer.exception.*;
@@ -22,8 +23,7 @@ import static pl.kodokan.fcp.server.user.model.Gender.MALE;
 public class CustomerService {
 
     private final CustomerRepository repo;
-    private final PeselService peselService;
-    private final EmailService emailService;
+    private final PeselValidator peselValidator;
     private final CustomerMapper customerMapper;
 
     private static final double SCALE = 0.5;
@@ -36,14 +36,17 @@ public class CustomerService {
     public Long createCustomer(CustomerDTO dto) {
 
         Customer customer = customerMapper.toEntity(dto);
+        customer.setMainDiscipline(null);
+        customer.setFamily(null);
+        customer.setClubCard(null);
 
-        if (!peselService.isCorrect(customer.getUserData().getIdentityNumber()))
+        if (!peselValidator.isCorrect(customer.getUserData().getIdentityNumber()))
             throw new IncorrectPeselException();
-        if (peselService.isMale(customer.getUserData().getIdentityNumber()) && customer.getUserData().getGender() == MALE)
+        if (peselValidator.isMale(customer.getUserData().getIdentityNumber()) && customer.getUserData().getGender() == MALE)
             throw new IncorrectGenderException();
         if (repo.findAllPesels().stream().anyMatch(n -> n.equals(customer.getUserData().getIdentityNumber())))
             throw new RepeatedPeselException();
-        if (!emailService.isCorrect(customer.getUserData().getEmail()))
+        if(EmailValidator.getInstance().isValid(customer.getUserData().getEmail()))
             throw new IncorrectEmailException();
         if (repo.findAllEmails().stream().anyMatch(n -> n.equals((customer.getUserData().getEmail()))))
             throw new RepeatedEmailException();

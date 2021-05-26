@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import java.util.regex.Pattern;
 
 @Service
-public class PeselService {
+public class PeselValidator {
 
     public boolean isCorrect(String pesel){
         Pattern peselPattern = Pattern.compile("\\d{11}");     //PESEL number pattern - 11 digits

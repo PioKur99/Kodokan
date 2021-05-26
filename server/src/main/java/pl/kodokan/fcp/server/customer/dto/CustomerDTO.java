@@ -25,21 +25,4 @@ public class CustomerDTO {
     private String city;
     private String voivodeship;
     private String postalCode;
-
-    //card_id, discipline, family_id; ustawiamy na NULL
-    //card_state ustawiamy na 0
-
-    public Long getCard_id() {
-        return null;
-    }
-
-    public String getDiscipline() {
-        return null;
-    }
-
-    //TODO: public Family getFamily() {return null}; do wykorzystania jak już się połączy z resztą encji i będzie Family w projekcie
-
-    public Long getCard_state() {
-        return 0L;
-    }
 }
