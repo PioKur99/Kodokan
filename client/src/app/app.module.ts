@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { WebcamModule } from 'ngx-webcam';
 
 
 
@@ -16,6 +17,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     HammerModule,
+    WebcamModule,
     FormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,

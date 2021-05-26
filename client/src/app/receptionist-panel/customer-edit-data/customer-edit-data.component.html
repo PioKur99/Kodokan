@@ -1,9 +1,14 @@
 <label igxLabel for="Name" class = "edit-label">Tryb edycji danych klienta</label>
 <section class = "Labels">
     <div>
+        <div *ngIf="showWebcam">
+            <webcam (imageCapture)="handleImage($event)" [trigger]="triggerObservable"></webcam>
+            <button igxButton="raised" igxRipple="white" class="custom-file-upload" (click)="triggerSnapshot();">
+            <span class="iconify" data-icon="bi:camera-fill" data-inline="false"></span></button>
+        </div>
         <img class="profile-pic" [src]="url">
         <div class = "buttons-image">
-            <button igxButton="raised" igxRipple="white" >ZRÓB ZDJĘCIE</button>
+            <button igxButton="raised" igxRipple="white" (click) = "camera()">ZRÓB ZDJĘCIE</button>
             <label class="custom-file-upload">
                 <input type="file" (change) = "selectFiles($event)">
                 WGRAJ Z DYSKU

@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Client } from 'src/app/data/client';
-
+import { Router } from '@angular/router';
+import {Subject, Observable} from 'rxjs';
+import { WebcamImage } from 'ngx-webcam';
 @Component({
   selector: 'app-customer-edit-data',
   templateUrl: './customer-edit-data.component.html',
@@ -8,10 +10,12 @@ import { Client } from 'src/app/data/client';
 })
 export class CustomerEditDataComponent implements OnInit {
 
-  //todo: wyświetlanie odpowiednich dialogów
 
    editWentGood: boolean = true;
    url: String = "assets/ruda.jpg"
+   showWebcam: boolean = false;
+   public webImage: WebcamImage = null;
+   private trigger: Subject<void> = new Subject<void>();
    @ViewChild("dialog1") dialogSuccess;
    @ViewChild("dialog2") dialogFailure;
 
@@ -32,9 +36,19 @@ export class CustomerEditDataComponent implements OnInit {
 
   };
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+    this.router.navigate(["/receptionist-panel/customer-edit-data", {cardID: this.client.cardNumb}])
+  }
+
+  public get triggerObservable(): Observable<void> {
+    return this.trigger.asObservable();
+  }
+
+  public triggerSnapshot(): void {
+    this.trigger.next();
+    this.showWebcam = !this.showWebcam;
   }
 
   manageDialogs() {
@@ -54,6 +68,15 @@ export class CustomerEditDataComponent implements OnInit {
         this.url = event.target.result;
       }
     }
+  }
+
+  camera () {
+    this.showWebcam = !this.showWebcam;
+  }
+
+  public handleImage(webcamImage: WebcamImage): void {
+    this.webImage = webcamImage;
+    this.url = this.webImage.imageAsDataUrl;
   }
 
 }

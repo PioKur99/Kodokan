@@ -25,6 +25,7 @@ import { CustomerAddPassComponent } from './customer-add-pass/customer-add-pass.
 import { CustomerShowPassesComponent } from './customer-show-passes/customer-show-passes.component';
 import { CustomerShowEntrancesComponent } from './customer-show-entrances/customer-show-entrances.component';
 import { CustomerSendMailComponent } from './customer-send-mail/customer-send-mail.component';
+import { WebcamModule } from 'ngx-webcam';
 @NgModule({
     declarations: [
         ReceptionistPanelComponent,
@@ -47,6 +48,7 @@ import { CustomerSendMailComponent } from './customer-send-mail/customer-send-ma
         ReceptionistPanelRoutingModule,
         IgxRippleModule,
         IgxButtonModule,
+        WebcamModule,
         IgxBottomNavModule,
         FormsModule,
         IgxIconModule,
