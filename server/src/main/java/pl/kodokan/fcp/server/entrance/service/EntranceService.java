@@ -8,6 +8,7 @@ import pl.kodokan.fcp.server.entrance.controller.EntranceDto;
 import pl.kodokan.fcp.server.entrance.controller.EntranceFilter;
 import pl.kodokan.fcp.server.entrance.controller.EntranceMapperImpl;
 import pl.kodokan.fcp.server.entrance.controller.EntranceWithDetails;
+import pl.kodokan.fcp.server.entrance.exception.NoEntranceWithGivenId;
 import pl.kodokan.fcp.server.entrance.exception.NoValidPackageException;
 import pl.kodokan.fcp.server.entrance.model.Entrance;
 import pl.kodokan.fcp.server.entrance.model.Package;
@@ -165,5 +166,18 @@ public class EntranceService {
         }
 
         return toReturn;
+    }
+
+    public Long deleteEntrance(Long toDelete) {
+        if(toDelete == null)
+            throw new NoEntranceWithGivenId();
+
+        Optional<Entrance> entranceToDelete = entranceRepository.findById(toDelete);
+        if(entranceToDelete.isPresent())
+            entranceRepository.deleteById(toDelete);
+        else
+            throw new NoEntranceWithGivenId();
+
+        return toDelete;
     }
 }

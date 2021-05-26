@@ -35,4 +35,9 @@ public class EntranceController {
     List<EntranceWithDetails> getFilteredEntrances(@RequestBody EntranceFilter entranceFilter) {
         return entranceService.getFilteredEntrances(entranceFilter);
     }
+
+    @PostMapping("/delete")
+    Long deleteEntrance(@RequestBody Long toDelete) {
+        return entranceService.deleteEntrance(toDelete);
+    }
 }
