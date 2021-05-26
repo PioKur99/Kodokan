@@ -14,9 +14,6 @@ public class EntranceMapperImpl implements EntranceMapper {
     CustomerRepository customerRepository;
 
     @Autowired
-    PackageRepository packageRepository;
-
-    @Autowired
     TrainingScheduleRepository trainingScheduleRepository;
 
     @Override
