@@ -10,6 +10,7 @@ export const routes: Routes = [
   { path: 'error', component: UncaughtErrorComponent },
   { path: 'receptionist-panel', loadChildren: () => import('./receptionist-panel/receptionist-panel.module').then(m => m.ReceptionistPanelModule) },
   { path: 'customer-panel', loadChildren: () => import('./customer-panel/customer-panel.module').then(m => m.CustomerPanelModule) },
+  { path: 'member-card', loadChildren: () => import('./member-card/member-card.module').then(m => m.MemberCardModule) },
   { path: '**', component: PageNotFoundComponent } // must always be last
 ];
 
