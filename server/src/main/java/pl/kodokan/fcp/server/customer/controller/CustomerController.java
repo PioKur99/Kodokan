@@ -3,6 +3,7 @@ package pl.kodokan.fcp.server.customer.controller;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.v3.oas.annotations.Operation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +16,7 @@ import pl.kodokan.fcp.server.customer.service.CustomerService;
 @RequestMapping("/customers")
 public class CustomerController {
 
+    @Autowired
     CustomerService customerService;
 
     @Operation(summary = "Add new customer")

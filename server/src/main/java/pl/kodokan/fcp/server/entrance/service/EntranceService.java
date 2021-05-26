@@ -7,6 +7,7 @@ import pl.kodokan.fcp.server.customer.repo.CustomerRepository;
 import pl.kodokan.fcp.server.entrance.controller.EntranceDto;
 import pl.kodokan.fcp.server.entrance.controller.EntranceFilter;
 import pl.kodokan.fcp.server.entrance.controller.EntranceMapperImpl;
+import pl.kodokan.fcp.server.entrance.controller.EntranceWithDetails;
 import pl.kodokan.fcp.server.entrance.exception.NoValidPackageException;
 import pl.kodokan.fcp.server.entrance.model.Entrance;
 import pl.kodokan.fcp.server.entrance.model.Package;
@@ -16,6 +17,8 @@ import pl.kodokan.fcp.server.entrance.repo.EntranceRepository;
 import javax.transaction.Transactional;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -115,16 +118,52 @@ public class EntranceService {
         return save(entrance).getId();
     }
 
-    public List<Entrance> getFilteredEntrances(EntranceFilter entranceFilter) {
-        List<Entrance> entrances = entranceRepository.findAll();
-        entrances.add(new Entrance());
+    public List<EntranceWithDetails> getFilteredEntrances(EntranceFilter entranceFilter) {
+        List<Entrance> toFilter = entranceRepository.findAll();
 
+        if (toFilter.isEmpty()) {
+            return Collections.emptyList();
+        }
 
+        //TODO: Pewnie mozna jakos ladniej zrobic filtrowanie, jeszcze do przemyslenia
         if (!entranceFilter.getName().isEmpty())
-            entrances = entrances.stream()
-                    .filter(n -> n.getCustomer() != null)
-                    //.filter(n -> n.getCustomer().getUserData().getFirstName().equals(entranceFilter.getName()))
+            toFilter = toFilter.stream()
+                    .filter(n -> n.getCustomer().getUserData().getFirstName().contains(entranceFilter.getName()))
                     .collect(Collectors.toList());
-        return entrances;
+        if(!entranceFilter.getSurname().isEmpty())
+            toFilter = toFilter.stream()
+                    .filter(n -> n.getCustomer().getUserData().getLastName().contains(entranceFilter.getSurname()))
+                    .collect(Collectors.toList());;
+        if(!entranceFilter.getDate().isEmpty())
+            toFilter = toFilter.stream()
+                    .filter(n -> n.getDateTime().toString().equals(entranceFilter.getDate()))
+                    .collect(Collectors.toList());;
+        if(!entranceFilter.getPackageName().isEmpty())
+            toFilter = toFilter.stream()
+                    .filter(n -> n.getPackg().getPackageType().getName().contains(entranceFilter.getPackageName()))
+                    .collect(Collectors.toList());;
+        if(!entranceFilter.getTraining().isEmpty())
+            toFilter = toFilter.stream()
+                    .filter(n -> n.getTraining().getTrainingName().getName().contains(entranceFilter.getTraining()))
+                    .collect(Collectors.toList());;
+        if(!entranceFilter.getCardId().isEmpty())
+            toFilter = toFilter.stream()
+                    .filter(n -> n.getCustomer().getClubCard().getId().toString().equals(entranceFilter.getCardId()))
+                    .collect(Collectors.toList());
+
+        List<EntranceWithDetails> toReturn = new ArrayList<>();
+        for (Entrance entrance : toFilter) {
+            EntranceWithDetails entranceWithDetails = EntranceWithDetails.builder()
+                    .name(entrance.getCustomer().getUserData().getFirstName())
+                    .surname(entrance.getCustomer().getUserData().getLastName())
+                    .date(entrance.getDateTime().toLocalDate().toString())
+                    .hour(entrance.getDateTime().toLocalTime().toString())
+                    .packageName(entrance.getPackg().getPackageType().getName())
+                    .training(entrance.getTraining().getTrainingName().getName())
+                    .build();
+            toReturn.add(entranceWithDetails);
+        }
+
+        return toReturn;
     }
 }

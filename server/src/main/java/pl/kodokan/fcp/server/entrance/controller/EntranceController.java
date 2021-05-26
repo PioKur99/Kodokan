@@ -5,7 +5,10 @@ import io.swagger.annotations.ApiResponses;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import pl.kodokan.fcp.server.entrance.model.Entrance;
 import pl.kodokan.fcp.server.entrance.service.EntranceService;
 
@@ -29,7 +32,7 @@ public class EntranceController {
         return ResponseEntity.ok(result);
     }
     @PostMapping("/get")
-    List<Entrance> getFilteredEntrances(@RequestBody EntranceFilter entranceFilter) {
+    List<EntranceWithDetails> getFilteredEntrances(@RequestBody EntranceFilter entranceFilter) {
         return entranceService.getFilteredEntrances(entranceFilter);
     }
 }
