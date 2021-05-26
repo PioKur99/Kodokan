@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { DeleteCustomer } from '../../data/DeleteCustomer'
-import { DeleteCustomerService } from '../../service/delete-customer.service'
+import { DeleteCustomer, customerClass } from '../../data/Customer'
+import { CustomerService } from '../../service/customer.service'
 import { IgxDialogActionsDirective } from 'igniteui-angular/lib/dialog/dialog.directives'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customers',
@@ -10,17 +11,17 @@ import { IgxDialogActionsDirective } from 'igniteui-angular/lib/dialog/dialog.di
 })
 export class CustomersComponent implements OnInit {
 
-  x[]:/*klasa z data */
+  customerList[]: customerClass // błąd 
   deleteId: DeleteCustomer = {
     id: null,
   }
 
   @ViewChild("dialog") dialog; // do dialog.open()/dialog.close() 
+  @ViewChild("errorData") #errorData;
 
-  constructor(private deleteCustomerService: DeleteCustomerService) { }
-
+  constructor(private CustomerService: CustomerService, private router: Router) { }
   deleteCustomerFunc(): void {
-    this.deleteCustomerService.deleteService(this.deleteId).subscribe(
+    this.CustomerService.deleteService(this.deleteId).subscribe(
       x => {
         console.log("x");
       });
@@ -34,11 +35,19 @@ export class CustomersComponent implements OnInit {
     this.deleteId.id = cos;
   }
 
+  errorData(): void {
+    this.#errorData.open();
+  }
+
+  errorDataLink(): void {
+    this.router.navigate(["/receptionist-panel"])
+  }
+
   ngOnInit(): void {
-    this.deleteCustomerService.getCustomer().subscribe(
-      data=> this.x[]=data,
-      error=>
-    )
+    this.CustomerService.getCustomer().subscribe(
+      data => this.customerList[] = data, //błąd przez błąd z linii 14
+      error => this.errorData(),
+    );
   }
 
 }
