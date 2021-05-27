@@ -34,14 +34,13 @@ export class RegisterComponent implements OnInit {
   selected: String;
   displayCamera: Boolean;
   displayCameraCropper: Boolean;
-    //camera
-  //public webcamImage: WebcamImage = null;
+
   private trigger: Subject<void> = new Subject<void>();
 
   client: Client = {
     email: "",
     phoneNumber: "",
-    sex: "",
+    gender: "",
     name: "",
     surname: "",
     pesel: "",
@@ -181,7 +180,7 @@ export class RegisterComponent implements OnInit {
   //radio buttons
   onItemChange(event):void{
     console.log(" Value is : ", event.value );
-    this.client.sex = event.value;
+    this.client.gender = event.value;
  }
   //
   onClickNextBtn(): void{

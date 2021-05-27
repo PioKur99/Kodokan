@@ -3,7 +3,7 @@ import {WebcamImage} from 'ngx-webcam';
 export class Client {
     email: String;
     phoneNumber: String;
-    sex: String;
+    gender: String;
     name: String;
     surname: String;
     pesel: String;
