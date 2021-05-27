@@ -1,1 +1,10 @@
-<p>membership-cards works!</p>
+<div>
+    <input #search1 id="search1" placeholder="Szukaj wg imienia i nazwiska..." [(ngModel)]="searchNameAndSurname" (ngModelChange)="grid.findNext(searchNameAndSurname, caseSensitive, exactMatch)" />
+
+    <igx-combo #combo class="combo" [itemsMaxHeight]="250"
+        [data]="cardState" placeholder="Szukaj wg stanu karty" 
+        displayKey="name" valueKey="id"
+        [(ngModel)]="selectedCardState" searchPlaceholder="Search...">
+    </igx-combo>
+</div>
+
