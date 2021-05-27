@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { DeleteCustomer, customerClass } from '../../data/Customer'
+import { DeleteCustomer, customerClass, sendCustomer } from '../../data/Customer'
 import { CustomerService } from '../../service/customer.service'
 import { IgxDialogActionsDirective } from 'igniteui-angular/lib/dialog/dialog.directives'
 import { Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class CustomersComponent implements OnInit {
 
-  customerList[]: customerClass // błąd 
+  customerList: customerClass[] // błąd 
   deleteId: DeleteCustomer = {
     id: null,
   }
@@ -42,6 +42,16 @@ export class CustomersComponent implements OnInit {
   errorDataLink(): void {
     this.router.navigate(["/receptionist-panel"])
   }
+
+
+  send(): void {
+    sendCustomer: sendCustomer // chciałem zrobić jakąś funkcję do pobierania wartości, ale trzeba też coś dodać co będzie wypełniać odpowiednie miejsce w obiekcie który będzie wysyłany na serwer
+    this.CustomerService.sendCustomer().subscribe(
+      data => this.customerList[] = data,
+      error => this.errorData(),
+    );
+  }
+
 
   ngOnInit(): void {
     this.CustomerService.getCustomer().subscribe(
