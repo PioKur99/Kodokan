@@ -2,9 +2,15 @@
     <input #search1 id="search1" placeholder="Szukaj wg imienia i nazwiska..." [(ngModel)]="searchNameAndSurname" (ngModelChange)="grid.findNext(searchNameAndSurname, caseSensitive, exactMatch)" />
 
     <igx-combo #combo class="combo" [itemsMaxHeight]="250"
-        [data]="cardState" placeholder="Szukaj wg stanu karty" 
+        [data]="cardStates" placeholder="Szukaj wg stanu karty" 
         displayKey="name" valueKey="id"
-        [(ngModel)]="selectedCardState" searchPlaceholder="Search...">
+        [(ngModel)]="selectedCardState" searchPlaceholder="Szukaj...">
     </igx-combo>
 </div>
 
+<div *ngFor="let customer of customerAndCardStateList">
+    {{customer.customer.first_name}} {{customer.customer.last_name}}
+    {{customer.cardState.previous}}
+    {{customer.cardState.actual}}
+    {{customer.cardState.next}}
+</div>
