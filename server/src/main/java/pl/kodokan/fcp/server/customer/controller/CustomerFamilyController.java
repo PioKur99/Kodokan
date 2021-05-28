@@ -27,7 +27,9 @@ public class CustomerFamilyController {
     })
     @PostMapping("/add-customer")
     ResponseEntity<CustomerFamilyDTO> addCustomer(@RequestBody AddCustomerToFamilyDTO dto){
-        return new ResponseEntity<>(service.addCustomer(dto.getCustomerID(),dto.getCustomerFamilyID()), HttpStatus.OK);
+        return new ResponseEntity<>(service.addCustomer(dto.getCustomerID(),dto.getCustomerFamilyID(), dto.getRelation()), HttpStatus.OK);
     }
+
+
 }
 
