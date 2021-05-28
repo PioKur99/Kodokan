@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import * as config from '../../assets/config.json'
 import { CardState } from '../data/card/card-state';
+import { Customer } from '../data/customer/customer';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +19,11 @@ export class CustomerService {
   // putChangeCardState(id:number, change: string): Observable<CardState>{
   //   return this.http.put<CardState>(config.address+'customer/change-card-state/'+ )
   // }
+  
+  // TODO: get customers
+
+  getCustomers():Observable<Customer[]>{
+    return this.http.get<Customer[]>(config.address+'customers/')
+  }
 
 }
