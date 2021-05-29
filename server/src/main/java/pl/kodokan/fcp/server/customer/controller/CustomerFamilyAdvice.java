@@ -5,9 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import pl.kodokan.fcp.server.customer.dto.CardStateAdviceDTO;
-import pl.kodokan.fcp.server.customer.exception.CustomerAlreadyInFamilyException;
-import pl.kodokan.fcp.server.customer.exception.CustomerDoesntHaveFamilyException;
-import pl.kodokan.fcp.server.customer.exception.TheSameCustomerIDException;
+import pl.kodokan.fcp.server.customer.exception.*;
 
 @RestControllerAdvice
 public class CustomerFamilyAdvice {
@@ -32,6 +30,22 @@ public class CustomerFamilyAdvice {
         CardStateAdviceDTO dto = new CardStateAdviceDTO();
         dto.setErrorClass(String.valueOf(CustomerDoesntHaveFamilyException.class));
         dto.setErrorMsg("Customer doesn't have family");
+        return new ResponseEntity<>(dto, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(GenderDoesntMatchRelationException.class)
+    ResponseEntity<CardStateAdviceDTO> genderDoesntMatchRelation(GenderDoesntMatchRelationException ex){
+        CardStateAdviceDTO dto = new CardStateAdviceDTO();
+        dto.setErrorClass(String.valueOf(GenderDoesntMatchRelationException.class));
+        dto.setErrorMsg("Customer's gender doesn't fit with provided role in family");
+        return new ResponseEntity<>(dto, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(RoleInFamilyTaken.class)
+    ResponseEntity<CardStateAdviceDTO> roleInFamilyTaken(RoleInFamilyTaken ex){
+        CardStateAdviceDTO dto = new CardStateAdviceDTO();
+        dto.setErrorClass(String.valueOf(RoleInFamilyTaken.class));
+        dto.setErrorMsg("This family already has a member with provided role");
         return new ResponseEntity<>(dto, HttpStatus.BAD_REQUEST);
     }
 }
