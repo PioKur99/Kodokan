@@ -8,9 +8,25 @@
     </igx-combo>
 </div>
 
-<div *ngFor="let customer of customerAndCardStateList">
-    {{customer.customer.first_name}} {{customer.customer.last_name}}
-    {{customer.cardState.previous}}
-    {{customer.cardState.actual}}
-    {{customer.cardState.next}}
-</div>
+<table>
+    <tr *ngFor="let customer of customerAndCardStateList">
+        <th>
+            {{customer.customer.first_name}} {{customer.customer.last_name}}
+        </th>
+        <th>  
+            {{customer.cardState.actual}}
+        </th>
+        <th> 
+            <button igxButton="flat">
+                <div *ngIf="!customer.cardState.previous">-</div>
+                {{customer.cardState.previous}}
+            </button>
+        </th>
+        <th> 
+            <button igxButton="flat">
+                <div *ngIf="!customer.cardState.next">-</div>
+                {{customer.cardState.next}}
+            </button>
+        </th> 
+    </tr>
+</table>

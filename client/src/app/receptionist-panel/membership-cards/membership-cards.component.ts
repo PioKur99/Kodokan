@@ -58,7 +58,7 @@ export class MembershipCardsComponent implements OnInit {
       }
     )
 
-    let k = new CardState(1,2,3)
+    let k = new CardState(null,2,3)
     this.customerAndCardStateList.forEach(x => x.cardState=k)
       
 
