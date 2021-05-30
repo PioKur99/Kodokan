@@ -17,7 +17,6 @@ export class CustomersComponent implements OnInit {
   }
 
   @ViewChild("dialog") dialog; // do dialog.open()/dialog.close() 
-  @ViewChild("errorData") #errorData;
 
   constructor(private CustomerService: CustomerService, private router: Router) { }
   deleteCustomerFunc(): void {
@@ -35,8 +34,8 @@ export class CustomersComponent implements OnInit {
     this.deleteId.id = cos;
   }
 
-  errorData(): void {
-    this.#errorData.open();
+  errorData() {
+    this.dialog.open();
   }
 
   errorDataLink(): void {
@@ -44,18 +43,18 @@ export class CustomersComponent implements OnInit {
   }
 
 
-  send(): void {
-    sendCustomer: sendCustomer // chciałem zrobić jakąś funkcję do pobierania wartości, ale trzeba też coś dodać co będzie wypełniać odpowiednie miejsce w obiekcie który będzie wysyłany na serwer
-    this.CustomerService.sendCustomer().subscribe(
-      data => this.customerList[] = data,
-      error => this.errorData(),
-    );
-  }
+  //send(): void {
+  //sendCustomer: sendCustomer // chciałem zrobić jakąś funkcję do pobierania wartości, ale trzeba też coś dodać co będzie wypełniać odpowiednie miejsce w obiekcie który będzie wysyłany na serwer
+  //this.CustomerService.sendCustomer().subscribe(
+  //data => this.customerList = data,
+  //error => this.errorData(),
+  //);
+  //}
 
 
   ngOnInit(): void {
     this.CustomerService.getCustomer().subscribe(
-      data => this.customerList[] = data, //błąd przez błąd z linii 14
+      data => this.customerList = data,
       error => this.errorData(),
     );
   }

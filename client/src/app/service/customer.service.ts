@@ -16,8 +16,8 @@ export class CustomerService {
     return this.http.post<DeleteCustomer>(address, deleteCustomer)
   }
 
-  getCustomer(): Observable<customerClass> {
-    return this.http.get<customerClass>(address + 'customers')
+  getCustomer(): Observable<customerClass[]> {
+    return this.http.get<customerClass[]>(address + 'customers')
   }
 
   sendCustomer(sendCustomer: sendCustomer): Observable<any> {

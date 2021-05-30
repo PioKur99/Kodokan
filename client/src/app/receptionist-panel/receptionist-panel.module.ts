@@ -3,16 +3,16 @@ import { CommonModule } from '@angular/common';
 import { ReceptionistPanelRoutingModule } from './receptionist-panel-routing.module';
 import { ReceptionistPanelComponent } from './receptionist-panel.component';
 import {
-	IgxRippleModule,
-	IgxButtonModule,
-	IgxBottomNavModule,
-	IgxIconModule,
-	IgxDialogModule,
-	IgxInputGroupModule,
-	IgxToggleModule,
-	IgxDropDownModule,
-	IgxCheckboxModule,
-	IgxGridModule
+    IgxRippleModule,
+    IgxButtonModule,
+    IgxBottomNavModule,
+    IgxIconModule,
+    IgxDialogModule,
+    IgxInputGroupModule,
+    IgxToggleModule,
+    IgxDropDownModule,
+    IgxCheckboxModule,
+    IgxGridModule
 } from 'igniteui-angular';
 import { CustomersComponent } from './customers/customers.component';
 import { EntranceComponent } from './entrance/entrance.component';
@@ -47,7 +47,6 @@ import { HttpClientModule } from '@angular/common/http';
         IgxDropDownModule,
         IgxCheckboxModule,
         IgxGridModule,
-        BrowserAnimationsModule
     ]
 })
 export class ReceptionistPanelModule {
