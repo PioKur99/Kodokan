@@ -17,16 +17,34 @@
             {{customer.cardState.actual}}
         </th>
         <th> 
-            <button igxButton="flat">
+            <button igxButton="flat" (click)=switchCardStatePrep(customer,1)>
                 <div *ngIf="!customer.cardState.previous">-</div>
                 {{customer.cardState.previous}}
             </button>
         </th>
         <th> 
-            <button igxButton="flat">
+            <button igxButton="flat" (click)=switchCardStatePrep(customer,2)>
                 <div *ngIf="!customer.cardState.next">-</div>
                 {{customer.cardState.next}}
             </button>
         </th> 
     </tr>
 </table>
+
+
+<igx-dialog #cardNumberForm>
+    <igx-input-group>
+        <input #cardnumberInput igxInput id="cardNumber" 
+        type="number" placeholder="Wpisz numer karty członkowskiej"
+        [(ngModel)]="cardNumberToBeSet"/>
+    </igx-input-group>
+    <button igxButton (click)="cardNumberForm.close()">ANULUJ</button>
+    <button igxButton (click)="cardNumberForm.close()">ZATWIERDŹ GDY BŁĄD</button>
+    <button igxButton (click)="cardNumberFormFunc()">ZATWIERDŹ</button>
+</igx-dialog>
+
+<igx-dialog #errorForm>
+        <div>COŚ SIĘ NIE UDAŁO :(</div>
+        <div>Numer jest niepoprawny</div>
+    <button igxButton (click)="errorForm.close()">OK</button>
+</igx-dialog>

@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IgxGridComponent } from 'igniteui-angular';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Card } from 'src/app/data/card/card';
 import { CardState } from 'src/app/data/card/card-state';
+import { CardStates } from 'src/app/data/card/card-states.enum';
 import { Customer } from 'src/app/data/customer/customer';
 import { CustomerAndCardState } from 'src/app/data/customer/customer-and-card-state';
 import { CustomerService } from 'src/app/services/customer.service';
@@ -15,14 +16,17 @@ import { CustomerService } from 'src/app/services/customer.service';
 export class MembershipCardsComponent implements OnInit {
 
   public searchNameAndSurname: ''
+  public cardNumberToBeSet: string
   public caseSensitive = false;
   public exactMatch = false;
 
   cardStates: Card[];
-  public selectedCardState: string[]
+  public selectedCardState: number[]
   
   @ViewChild('grid',{static:true}) public grid: IgxGridComponent
-  
+  @ViewChild('cardNumberForm') cardNumberForm
+  @ViewChild('errorForm') errorForm
+
   public customerList: Customer[]
   public customerSub: Subscription
   public cardStateList: CardState[]
@@ -30,20 +34,18 @@ export class MembershipCardsComponent implements OnInit {
   
   public customerAndCardStateList: CustomerAndCardState[] = new Array<CustomerAndCardState>()
   
+  public customerObs: Observable<any>
+
   constructor(public customerService: CustomerService) { 
   }
 
   ngOnInit(): void {
     this.cardStates=[
-    {id: 1, name: 'Nieopłacona'},
-    {id: 2, name: 'Opłacona'},
-    {id: 3, name: 'Wydrukowana'},
-    {id: 4, name: 'Do odbioru'},
-    {id: 5, name: 'Odebrana'}]
-
-    this.customerList=[
-    {customer_id: 1, first_name: 'Ali', last_name: 'Muhammad'},
-    {customer_id: 2, first_name: 'Bali', last_name: 'Chill'}]
+    {id: CardStates.Nieoplacona, name: 'Nieopłacona'},
+    {id: CardStates.Oplacona, name: 'Opłacona'},
+    {id: CardStates.Wydrukowana, name: 'Wydrukowana'},
+    {id: CardStates.Do_odbioru, name: 'Do odbioru'},
+    {id: CardStates.Odebrana, name: 'Odebrana'}]
 
     //pobranie customerów
     this.customerSub = this.customerService.getCustomers().subscribe(
@@ -57,20 +59,65 @@ export class MembershipCardsComponent implements OnInit {
         this.customerAndCardStateList.push(new CustomerAndCardState(x,new CardState()))
       }
     )
-
-    let k = new CardState(null,2,3)
-    this.customerAndCardStateList.forEach(x => x.cardState=k)
-      
-
+    
+    //pobranie cardstate dla wszystkich customerów
     this.customerAndCardStateList.forEach(
       x => {
         this.cardStateSub = this.customerService.getCardState(x.customer.customer_id).subscribe(
           y=>{
             x.cardState=y
           }
-          //obsłużyć error
+          //TODO: obsłużyć error
         )
       }
     )
+  }
+
+  //sprawdzenie warunków i przygotowanie do zmiany stanu karty
+  switchCardStatePrep(customer: CustomerAndCardState,updown: number){
+    //console.log(customer.customer.customer_id,updown)
+    let param: string
+    switch(updown){
+      case 1:param="down" 
+        break
+      case 2:param="up"
+        break
+    }
+
+    this.customerObs = new Observable(x=>{x.next({customer,param})})
+    
+    if(customer.cardState.next==CardStates.Do_odbioru){
+      this.cardNumberForm.open()
+    }else{
+      this.switchCardState()
+    }
+  }
+
+  //zmiana stanu karty
+  switchCardState(){
+    this.customerObs.subscribe(x=>{
+      this.customerService.switchCardState(x.customer.customer_id,x.param).subscribe(
+        y=>{
+          x.customer.cardState=y
+          //console.log(y)
+        }
+        //TODO:obsłużyć error
+      )
+    })
+  }
+
+  //ustawienie numeru karty
+  cardNumberFormFunc(){
+    let y: number =+ this.cardNumberToBeSet
+    let customer: CustomerAndCardState
+    this.customerObs.subscribe(x=>{customer=x.customer})
+    this.customerService.postCardId(customer.customer.customer_id,y).subscribe(
+      x=>{
+        //console.log(x)
+      }
+      //TODO: obsłużyć error
+    )
+    this.switchCardState()
+    this.cardNumberForm.close()
   }
 }
