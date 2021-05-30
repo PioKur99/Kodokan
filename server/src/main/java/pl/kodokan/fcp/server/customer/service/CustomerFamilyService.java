@@ -88,4 +88,32 @@ public class CustomerFamilyService {
 
         return mapper.toDTO(c1,relation);
     }
+
+    public CustomerFamilyDTO deleteCustomerFromFamily(Long id){
+        Customer c = findById(id);
+
+        Long familyId = familyRepository.isCustomerInFamily(id);
+        if(familyId == null){
+            throw new CustomerDoesntHaveFamilyException();
+        }
+
+        Family family = familyRepository.findById(familyId).get();
+        if(family.getFather() == c){
+            family.setFather(null);
+        }else if(family.getMother() == c){
+            family.setMother(null);
+        }else if(c.getFamily() == family){
+            c.setFamily(null);
+            family.removeChild(c);
+        }
+
+        List<Package> packages = packageRepository.findFamilyPackages(id);
+        for(Package p : packages){
+            if(p.countEntrances() == 0){
+                p.setCustomer(null);
+            }
+        }
+
+        return mapper.toDTO(c, null);
+    }
 }
