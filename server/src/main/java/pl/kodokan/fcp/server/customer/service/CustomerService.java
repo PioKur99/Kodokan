@@ -19,6 +19,8 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.List;
+import java.util.Set;
 
 import static pl.kodokan.fcp.server.user.model.Gender.MALE;
 
@@ -42,20 +44,6 @@ public class CustomerService {
     public Long createCustomer(CustomerDTO dto) {
 
         Customer customer = customerMapper.toEntity(dto);
-        Address newAddress = customer.getUserData().getAddress();
-        newAddress.setUserData(customer.getUserData());
-        addressRepository.save(newAddress);
-        UserData userData = new UserData();
-        userData.setEmail(dto.getEmail());
-        userData.setPassword(dto.getPassword());
-        userData.setAddress(customer.getUserData().getAddress());
-        userRepository.save(userData);
-
-        customer.setMainDiscipline(null);
-        customer.setFamily(null);
-        customer.setClubCard(null);
-
-        customer.getUserData().getAddress().setUserData(customer.getUserData());
 
         if (!peselValidator.isCorrect(customer.getUserData().getIdentityNumber()))
             throw new IncorrectPeselException();
@@ -91,6 +79,19 @@ public class CustomerService {
         } catch (IOException ex) {
             throw new ErrorReadingImageException();
         }
+
+        UserData userData = customer.getUserData();
+        Address newAddress = customer.getUserData().getAddress();
+
+        userData.setAddress(null);
+        userRepository.save(userData);
+        newAddress.setUserData(userData);
+        addressRepository.save(newAddress);
+
+        customer.setMainDiscipline(null);
+        customer.setFamily(null);
+        customer.setClubCard(null);
+
         return save(customer).getId();
     }
 }
