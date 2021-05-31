@@ -8,9 +8,9 @@ import pl.kodokan.fcp.server.user.model.Gender;
 @Getter
 @Setter
 public class CustomerDTO {
-    private Long id;
-    private Long cardId;
-    private CardState cardState;
+//    private Long id;
+//    private Long cardId;
+//    private CardState cardState;
 
     private String email;
     private String password;
