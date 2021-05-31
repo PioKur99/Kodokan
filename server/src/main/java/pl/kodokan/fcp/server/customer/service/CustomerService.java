@@ -19,8 +19,6 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.List;
-import java.util.Set;
 
 import static pl.kodokan.fcp.server.user.model.Gender.MALE;
 
