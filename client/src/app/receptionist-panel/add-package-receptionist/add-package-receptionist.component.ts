@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Package } from 'src/app/data/package';
 
 @Component({
   selector: 'app-add-package-receptionist',
@@ -7,7 +8,40 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddPackageReceptionistComponent implements OnInit {
 
-  constructor() { }
+  package_1: Package =  {
+    title: 'KARNET',
+    subtitle: 'JEDNORAZOWY',
+    price: 20,
+    description: 'Karnet ważny w dniu zakupu, upoważnia do jednorazowego wejścia.'
+  }
+  package_2: Package =  {
+    title: 'KARNET MIESIĘCZNY ',
+    subtitle: '4 WEJŚCIA',
+    price: 70,
+    description: 'Karnet upoważnia do 4 wejść w ciągu jednego miesiąca od zakupu'
+  }
+  package_3: Package =  {
+    title: 'KARNET MIESIĘCZNY',
+    subtitle: '8 WEJŚĆ',
+    price: 120,
+    description: 'Odpowiedni opis karnetu.'
+  }
+  package_4: Package =  {
+    title: 'KARNET OPEN',
+    subtitle: 'TYGODNIOWY',
+    price: 50,
+    description: 'Odpowiedni opis karnetu.'
+  }
+  package_5: Package =  {
+    title: 'KARNET DZIECIĘCY',
+    subtitle: '...',
+    price: 100,
+    description: 'Odpowiedni opis karnetu.'
+  }
+  packages: Array<Package> = [this.package_1, this.package_2, this.package_3, this.package_4, this.package_5, this.package_2, this.package_3, this.package_4,];
+
+  constructor() { 
+  }
 
   ngOnInit(): void {
   }

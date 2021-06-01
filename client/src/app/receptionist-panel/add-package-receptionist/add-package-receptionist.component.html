@@ -1,1 +1,29 @@
-<p>add-package-receptionist works!</p>
+
+<div class="main">
+    <h1>DODAJ KARNET:</h1>
+    <div class=" card-wrapper" >
+        <igx-card *ngFor = "let package of packages">
+    
+            <igx-card-header>
+                <h3 igxCardHeaderTitle>{{ package.title }}  <br> {{ package.subtitle}}</h3>
+    
+            </igx-card-header>
+            <div class='price'>
+                <h2>{{ package.price }} zł</h2>
+            </div>
+    
+            <igx-card-content>
+                <p>{{ package.description }}</p>
+            </igx-card-content>
+    
+    
+                <button igxButton="raised" igxRipple="white">
+                   <span> DODAJ KARNET</span>
+                </button>
+    
+    
+        </igx-card>
+    </div>
+</div>
+
+

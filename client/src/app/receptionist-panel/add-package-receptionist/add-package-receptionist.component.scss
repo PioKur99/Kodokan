@@ -1,0 +1,72 @@
+.main{
+    font-family: Helvetica, sans-serif;
+    text-align: center;
+    padding-top: 20px;
+    
+}
+h1{
+    font-size: 1.2rem;
+    font-weight: 100;
+    letter-spacing: 2px;
+    line-height: 1rem;
+
+  }
+.card-wrapper {
+    padding: 1%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    flex-shrink: 3;
+    justify-content: center;
+
+}
+.price {
+    background-color: black;
+    color: white;
+    height: 90px;
+    padding-top: 5%;
+    margin: 0 7% 0 7%;
+    border-radius: 10px;
+}
+.price h2{
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+.igx-card{
+    margin: 2% 2% 0% 2%;
+    padding: 0 0.7% 0 0.7%;
+    min-width: 200px;
+    width: 19%;
+    display: inline-block;
+    border-radius: 10px;
+    position: relative;
+    height: 300px;
+}
+.igx-card-header{
+    padding: 10% 0 5% 0;
+}
+.igx-card-header h3{
+    font-size: 0.9rem;
+    line-height: 130%;
+    font-weight: 200;
+    letter-spacing: 1px;
+}
+.igx-card-content p {
+    line-height: 130%;
+}
+button{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 75%;
+    background-color: #3f3f3f;
+    color: #DAA520;
+    margin: 5% 0;
+    border-radius: 10px;
+}
+button span{
+    font-size: 0.9rem;
+    font-weight: 200;
+}
+
