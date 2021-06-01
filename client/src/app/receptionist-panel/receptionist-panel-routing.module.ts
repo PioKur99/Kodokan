@@ -7,6 +7,7 @@ import { MembershipCardsComponent } from './membership-cards/membership-cards.co
 import { PassesComponent } from './passes/passes.component';
 import { AddAClientComponent } from './add-a-client/add-a-client.component';
 import { EntryRegistrationComponent } from './entry-registration/entry-registration.component';
+import { AddPackageReceptionistComponent } from './add-package-receptionist/add-package-receptionist.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
       { path: 'membership-cards', component: MembershipCardsComponent, outlet: 'primary' },
       { path: 'passes', component: PassesComponent, outlet: 'primary' },
       { path: 'add-a-client', component: AddAClientComponent, outlet: 'primary' },
+      { path: 'add-package-receptionist', component: AddPackageReceptionistComponent, outlet: 'primary' },
       { path: 'entry-registration', component: EntryRegistrationComponent, outlet: 'primary' },
     ]
   }];
