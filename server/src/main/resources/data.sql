@@ -1,4 +1,4 @@
-insert into USER_DATA (id, email, first_name, gender, identity_number, image, last_name, password, phone) values (1, 'vsorrell0@samsung.com', 'Dorothea', 'MALE', 97070206932, null, 'Sorrell', 'Vassili', 888318906);
+insert into USER_DATA (id, email, first_name, gender, identity_number, image, last_name, password, phone) values (1, 'vsorrell0@samsung.com', 'Daniel', 'MALE', 97070206932, null, 'Kaleta', 'Vassili', 888318906);
 insert into USER_DATA (id, email, first_name, gender, identity_number, image, last_name, password, phone) values (2, 'fferrarese1@pinterest.com', 'Harald', 'MALE', 97070206993, null, 'Ferrarese', 'Fulton', 771680405);
 insert into USER_DATA (id, email, first_name, gender, identity_number, image, last_name, password, phone) values (3, 'kparlatt2@webs.com', 'Freddy', 'FEMALE', 97070205832, null, 'Parlatt', 'Kelila', 637354581);
 insert into USER_DATA (id, email, first_name, gender, identity_number, image, last_name, password, phone) values (4, 'lrelf3@blog.com', 'Therese', 'MALE', 97070205839, null, 'Relf', 'Leticia', 926026599);
@@ -331,5 +331,11 @@ insert into package(id, end_date_time, paid, purchase_date_time, customer_id, pa
 insert into package_freeze(id, end_date_time, start_date_time, package_id) values (1, '2021-06-10 22:23:56', '2021-06-01 22:23:56', 5);
 
 insert into employee(id, user_data_id) values (1, 10);
-insert into training_name(id, name) values (1, 'Testowy trening 1');
+insert into training_name(id, name) values (1, 'Testowy trening');
+insert into training_name(id, name) values (2, 'Super trening');
 insert into training_schedule(id, end_date_time, start_date_time, weekday, employee_id, training_name_id) values (1, '2021-07-01 22:23:56', '2021-05-02 22:23:56', 4, 1, 1);
+insert into training_schedule(id, end_date_time, start_date_time, weekday, employee_id, training_name_id) values (2, '2021-07-01 22:23:56', '2021-05-02 22:23:56', 3, 1, 2);
+
+insert into entrance(id, date_time, customer_id, packg_id, training_id) values (1, '2021-06-02 16:00:00', 1, 1, 1);
+insert into entrance(id, date_time, customer_id, packg_id, training_id) values (2, '2021-06-02 16:00:00', 2, 3, 2);
+insert into entrance(id, date_time, customer_id, packg_id, training_id) values (3, '2021-06-02 16:00:00', 3, 1, 2);

@@ -177,16 +177,16 @@ public class EntranceService {
         return toReturn;
     }
 
-    public Long deleteEntrance(Long toDelete) {
-        if (toDelete == null)
+    public Long deleteEntrance(Long entranceId) {
+        if (entranceId == null)
             throw new EntranceNotFoundException("ID cannot be null!");
 
-        Optional<Entrance> entranceToDelete = entranceRepository.findById(toDelete);
+        Optional<Entrance> entranceToDelete = entranceRepository.findById(entranceId);
         if (entranceToDelete.isPresent())
-            entranceRepository.deleteById(toDelete);
+            entranceRepository.deleteById(entranceId);
         else
             throw new EntranceNotFoundException("No entrance with given ID!");
 
-        return toDelete;
+        return entranceId;
     }
 }
