@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.stereotype.Service;
 import pl.kodokan.fcp.server.customer.dto.CustomerDTO;
+import pl.kodokan.fcp.server.customer.dto.CustomerToEditDTO;
 import pl.kodokan.fcp.server.customer.exception.*;
 import pl.kodokan.fcp.server.customer.model.Customer;
 import pl.kodokan.fcp.server.customer.repo.CustomerRepository;
@@ -20,6 +21,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
+import static pl.kodokan.fcp.server.user.model.Gender.FEMALE;
 import static pl.kodokan.fcp.server.user.model.Gender.MALE;
 
 @Service
@@ -31,6 +33,7 @@ public class CustomerService {
     private final AddressRepository addressRepository;
     private final PeselValidator peselValidator;
     private final CustomerMapper customerMapper;
+    private final CustomerToEditMapper customerToEditMapper;
 
     private static final double SCALE = 0.5;
 
@@ -91,5 +94,89 @@ public class CustomerService {
         customer.setClubCard(null);
 
         return save(customer).getId();
+    }
+
+    public Customer findById(Long id) {
+        return customerRepository.findById(id).orElseThrow(CustomerNotPresent::new);
+    }
+
+    @Transactional
+    public Long editCustomer(CustomerToEditDTO dto) {
+
+        Customer customer = customerToEditMapper.toEntity(dto);
+        Customer customerToUpdate = this.findById(customer.getId());
+
+        if (customer.getUserData().getEmail() != null) {
+            if (customerRepository.findAllEmails().stream().anyMatch(n -> n.equals((customer.getUserData().getEmail()))))
+                throw new RepeatedEmailException();
+            customerToUpdate.getUserData().setEmail(customer.getUserData().getEmail());
+        }
+
+        if (customer.getUserData().getFirstName() != null)
+            customerToUpdate.getUserData().setFirstName(customer.getUserData().getFirstName());
+
+        if (customer.getUserData().getLastName() != null)
+            customerToUpdate.getUserData().setLastName(customer.getUserData().getLastName());
+
+        if (customer.getUserData().getGender() != null)
+            customerToUpdate.getUserData().setGender(customer.getUserData().getGender());
+
+        if (customer.getMainDiscipline() != null)
+            customerToUpdate.setMainDiscipline(customer.getMainDiscipline());
+
+        if (customer.getUserData().getIdentityNumber() != null) {
+            if (!peselValidator.isCorrect(customer.getUserData().getIdentityNumber()))
+                throw new IncorrectPeselException();
+            if (peselValidator.isMale(customer.getUserData().getIdentityNumber()) && customer.getUserData().getGender() == FEMALE ||
+            !peselValidator.isMale(customer.getUserData().getIdentityNumber()) && customer.getUserData().getGender() == MALE)
+                throw new IncorrectGenderException();
+            if (customerRepository.findAllPesels().stream().anyMatch(n -> n.equals(customer.getUserData().getIdentityNumber())))
+                throw new RepeatedPeselException();
+
+            customerToUpdate.getUserData().setIdentityNumber(customer.getUserData().getIdentityNumber());
+        }
+
+        if (customer.getUserData().getPhone() != null)
+            customerToUpdate.getUserData().setPhone(customer.getUserData().getPhone());
+
+        if (customer.getUserData().getImage() != null) {
+            try {
+                ByteArrayInputStream bis = new ByteArrayInputStream(customer.getUserData().getImage());
+                BufferedImage originalImage = ImageIO.read(bis);
+
+                if (originalImage != null) {
+                    int scaledWidth = (int) Math.round(originalImage.getWidth() * SCALE);
+                    int scaledHeight = (int) Math.round(originalImage.getHeight() * SCALE);
+
+                    BufferedImage scaledImage = new BufferedImage(scaledWidth, scaledHeight, BufferedImage.TYPE_INT_RGB);
+                    Graphics2D graphics2D = scaledImage.createGraphics();
+                    graphics2D.drawImage(originalImage, 0, 0, scaledWidth, scaledHeight, null);
+                    graphics2D.dispose();
+
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    ImageIO.write(scaledImage, "jpg", baos);
+
+                    customerToUpdate.getUserData().setImage(baos.toByteArray());
+                } else {
+                    customer.getUserData().setImage(null);
+                }
+            } catch (IOException ex) {
+                throw new ErrorReadingImageException();
+            }
+        }
+
+        if (customer.getUserData().getAddress().getCity() != null)
+            customerToUpdate.getUserData().getAddress().setCity(customer.getUserData().getAddress().getCity());
+
+        if (customer.getUserData().getAddress().getVoivodeship() != null)
+            customerToUpdate.getUserData().getAddress().setVoivodeship(customer.getUserData().getAddress().getVoivodeship());
+
+        if (customer.getUserData().getAddress().getPostalCode() != null)
+            customerToUpdate.getUserData().getAddress().setPostalCode(customer.getUserData().getAddress().getPostalCode());
+
+        if (customer.getUserData().getAddress().getAddressLine() != null)
+            customerToUpdate.getUserData().getAddress().setAddressLine(customer.getUserData().getAddress().getAddressLine());
+
+        return save(customerToUpdate).getId();
     }
 }
