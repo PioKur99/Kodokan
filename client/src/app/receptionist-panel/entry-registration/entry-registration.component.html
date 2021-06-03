@@ -1,39 +1,39 @@
+<div class="container">
 <div class="card-number">
     <form>
         <igx-input-group>
-            <input igxInput name="fullName" type="text" placeholder="Wprowadź numer karty członkowskiej"/>
+            <input class="card-number__input" igxInput name="fullName" type="text" placeholder="Wprowadź numer karty członkowskiej"/>
         </igx-input-group>
     </form>
 </div>
 
 <div *ngFor="let training of trainingList" class="buttons">
     <!--FIXME: powinno być rozmieszczone odpowiednio-->
-    <div>
         <button igxButton="raised" igxRipple="white" class="buttons__item" (click)="entryRegistration(training.training_id)">
             {{training.name}}
         </button>
-        <igx-dialog #alertok
+</div>
+    <igx-dialog #alertok
             title="Udało się zarejestrować wejście!"
             message="Zarejestrowano wejście klienta!"
             leftButtonLabel="OK"
             (onLeftButtonSelect)="alertok.close()">
-        </igx-dialog>
-        <igx-dialog #alertnotok>
-            <igx-dialog-title>
+    </igx-dialog>
+    <igx-dialog #alertnotok class="alert-not-ok">
+        <igx-dialog-title>
                 <div class="dialog-container">
                     <div class="dialog-title">Nie udało się zarejestrować wejścia!</div>
                 </div>
-            </igx-dialog-title>
-            <igx-label>
+        </igx-dialog-title>
+        <p>
                 Odpowiedni komunikat
-            </igx-label>
-            <div igxDialogActions>
-                <button igxButton (click)="alertnotok.close()">ANULUJ</button>
-                <div *ngFor="let packageType of packageTypeList" class="buttons">
-                    <button igxButton (click)="entryRegistration2()">{{packageType.name}}</button>
+        </p>
+        <div igxDialogActions class="alert-not-ok__buttons">
+                <button igxButton (click)="alertnotok.close()" class="alert-not-ok__buttons--item">ANULUJ</button>
+                <div *ngFor="let packageType of packageTypeList" class="buttons alert-not-ok__buttons--item">
+                    <button igxButton (click)="entryRegistration2()" class="button">{{packageType.name}}</button>
                 </div>
-                <button igxButton (click)="alertnotok.close()">OK SYSTEM</button>
-            </div>
-        </igx-dialog>
-    </div>
+                <button igxButton (click)="alertnotok.close()" class="alert-not-ok__buttons--item">OK SYSTEM</button>
+        </div>
+    </igx-dialog>
 </div>
