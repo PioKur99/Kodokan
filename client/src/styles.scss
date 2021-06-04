@@ -23,10 +23,10 @@ $custom-palette: igx-palette(
 @include igx-theme($palette: $custom-palette, $schema: $dark-bootstrap-schema, $elevation: false, $roundness: 1);
 
 $colorful-card: igx-card-theme(
-    $background: #202020,
+    $background: #DAA520,
     $header-text-color: #FEFEFE,
     $subtitle-text-color: #DAA520,
-    $content-text-color: #FEFEFE,
+    $content-text-color: #3f3f3f,
 );
 
 @include igx-card($colorful-card);

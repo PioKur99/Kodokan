@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Package } from 'src/app/data/package';
 
 @Component({
@@ -40,10 +41,13 @@ export class AddPackageReceptionistComponent implements OnInit {
   }
   packages: Array<Package> = [this.package_1, this.package_2, this.package_3, this.package_4, this.package_5, this.package_2, this.package_3, this.package_4,];
 
-  constructor() { 
+  name_surname: String;
+
+  constructor(private route: ActivatedRoute) { 
   }
 
   ngOnInit(): void {
+    this.name_surname = this.route.snapshot.paramMap.get("name");
   }
-
+  
 }

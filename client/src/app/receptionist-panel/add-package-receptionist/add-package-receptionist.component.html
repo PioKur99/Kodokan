@@ -1,10 +1,10 @@
 
 <div class="main">
-    <h1>DODAJ KARNET:</h1>
-    <div class=" card-wrapper" >
-        <igx-card *ngFor = "let package of packages">
+    <h1>DODAJ KARNET: {{name_surname}}</h1>
+    <div class="card-wrapper" >
+        <igx-card class="card" *ngFor = "let package of packages">
     
-            <igx-card-header>
+            <igx-card-header class="header">
                 <h3 igxCardHeaderTitle>{{ package.title }}  <br> {{ package.subtitle}}</h3>
     
             </igx-card-header>
@@ -12,18 +12,74 @@
                 <h2>{{ package.price }} zł</h2>
             </div>
     
-            <igx-card-content>
+            <igx-card-content class="content">
                 <p>{{ package.description }}</p>
             </igx-card-content>
     
-    
-                <button igxButton="raised" igxRipple="white">
+                <button igxButton="raised" igxRipple="white" (click)="dialog.open()">
                    <span> DODAJ KARNET</span>
                 </button>
-    
-    
+
+         <!-- Dialog window. -->
+            <igx-dialog #dialog  [closeOnOutsideSelect]="true">
+                <div class="dialog-content card-wrapper">
+                    <main class="card one-card" >
+                    
+                        <header class="header">
+                            <h3>{{ package.title }}  <br> {{ package.subtitle}}</h3>
+                
+                        </header>
+                        <div class='price'>
+                            <h2>{{ package.price }} zł</h2>
+                        </div>
+                
+                        <div class="content">
+                            <p>{{ package.description }}</p>
+                        </div>
+                        <div igxDialogActions>
+                            <button  class="third-button" igxButton igxRipple="white">
+                                <span> DODAJ <br>
+                                     NIEOPŁACONY <br>
+                                      KARNET</span>
+                            </button>
+                            <button class="second-button grey-button" igxButton igxRipple="white" (click)="paydialog.open()">
+                                <span> OPŁAĆ</span>
+                            </button>
+                            <button class="first-button light-grey-button"  igxButton igxRipple="white" (click)="dialog.close()">
+                                <span> ANULUJ</span>
+                            </button>
+                        </div>
+
+                    </main>
+                </div>
+            </igx-dialog>
+        <!--*********************************************************************************-->    
         </igx-card>
     </div>
+   
 </div>
 
 
+<!-- Dialog window. -->
+<igx-dialog #paydialog  [closeOnOutsideSelect]="true">
+<div class="dialog-content dialog-content-pay card-wrapper">
+    <main class="card pay-card" >
+    
+        <header class="header header-pay">
+            ZAPŁAĆ ZA POMOCĄ:
+
+        </header>
+
+            <button  class="third-button" igxButton="raised" igxRipple="white" >
+                <span> GOTÓWKA</span>
+            </button>
+            <button  class="second-button" igxButton="raised" igxRipple="white">
+                <span> KARTA</span>
+            </button>
+            <button class="first-button" igxButton="raised" igxRipple="white">
+                <span> PRZELEW</span>
+            </button>
+    </main>
+</div>
+</igx-dialog>
+<!--*********************************************************************************-->    
