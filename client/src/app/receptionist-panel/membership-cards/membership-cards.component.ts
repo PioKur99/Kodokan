@@ -86,7 +86,7 @@ export class MembershipCardsComponent implements OnInit {
 
     this.customerObs = new Observable(x=>{x.next({customer,param})})
     
-    if(customer.cardState.next==CardStates.Do_odbioru){
+    if(param==="up"&&customer.cardState.next==CardStates.Do_odbioru){
       this.cardNumberForm.open()
     }else{
       this.switchCardState()
