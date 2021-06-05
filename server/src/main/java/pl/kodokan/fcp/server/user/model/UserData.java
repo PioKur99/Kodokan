@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import pl.kodokan.fcp.server.common.model.BaseEntity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.HashSet;
@@ -19,6 +20,7 @@ import java.util.Set;
 public class UserData extends BaseEntity implements UserDetails {
 
     @NotNull
+    @Email(message = "Email is incorrect!")
     private String email;
 
     @NotNull
@@ -34,7 +36,7 @@ public class UserData extends BaseEntity implements UserDetails {
     /**
      * PESEL
      */
-    @NaturalId
+    @NotNull
     private String identityNumber;
     
     @Enumerated(EnumType.STRING)
