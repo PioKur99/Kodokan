@@ -7,7 +7,10 @@ import org.springframework.stereotype.Service;
 import pl.kodokan.fcp.server.customer.model.Customer;
 import pl.kodokan.fcp.server.customer.repo.CustomerRepository;
 import pl.kodokan.fcp.server.entrance.controller.EntranceDto;
+import pl.kodokan.fcp.server.entrance.controller.EntranceFilter;
 import pl.kodokan.fcp.server.entrance.controller.EntranceMapperImpl;
+import pl.kodokan.fcp.server.entrance.controller.EntranceWithDetails;
+import pl.kodokan.fcp.server.entrance.exception.EntranceNotFoundException;
 import pl.kodokan.fcp.server.entrance.exception.NoValidPackageException;
 import pl.kodokan.fcp.server.entrance.model.Entrance;
 import pl.kodokan.fcp.server.entrance.model.Package;
@@ -16,9 +19,11 @@ import pl.kodokan.fcp.server.entrance.repo.EntranceRepository;
 
 import javax.transaction.Transactional;
 import javax.validation.constraints.Null;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -61,11 +66,6 @@ public class EntranceService {
         Optional<Customer> customer = customerRepository.findById(entrance.getCustomer().getId());
         if (customer.isEmpty()) {
             throw new NullPointerException("No customer with given ID!");
-    private EntranceRepository entranceRepository;
-    public List<Long> findAll(Long customerId, Long packageId) {
-        final Optional<List<Long>> entrancesId = entranceRepository.findAllByCustomerIdAndPackgId(customerId, packageId);
-        if(!entrancesId.get().isEmpty()){
-            return entrancesId.get();
         }
 
         //jednorazowka - mozesz miec kilka, to taki karnet, ktory ma limit wejsc = 1, ten ma priorytet
@@ -124,10 +124,6 @@ public class EntranceService {
                         break;
                     }
                 }*/
-        else{
-            throw new EntranceNotFoundException("Entrance with customerId " + customerId + " packageId " + packageId + " doesn't exist.");
-        }
-    }
 
             } else {
                 toEntrance = customerValidPackages.get(0);
@@ -138,9 +134,6 @@ public class EntranceService {
 
         //Zarejestrowano wejscie, przypisania dzieja sie w maperze
         return save(entrance).getId();
-    public Integer countAll(Long customerId, Long packageId) {
-        return entranceRepository.countAllByCustomerIdAndPackgId(customerId, packageId)
-                .orElseThrow(() -> new EntranceNotFoundException("There is no entrances with customerId " + customerId + " packageId " + packageId + " in db."));
     }
 
     public List<EntranceWithDetails> getFilteredEntrances(EntranceFilter entranceFilter) {

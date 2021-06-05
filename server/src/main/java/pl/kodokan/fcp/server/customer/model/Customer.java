@@ -4,15 +4,10 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import pl.kodokan.fcp.server.common.model.BaseEntity;
-<<<<<<<<< Temporary merge branch 1
-=========
-import pl.kodokan.fcp.server.customer.exception.MaximumCardState;
-import pl.kodokan.fcp.server.customer.exception.MinimumCardState;
->>>>>>>>> Temporary merge branch 2
+
 import pl.kodokan.fcp.server.entrance.model.Entrance;
 import pl.kodokan.fcp.server.entrance.model.Package;
 import pl.kodokan.fcp.server.user.model.UserData;
-
 import javax.persistence.*;
 import java.util.Collections;
 import java.util.LinkedList;
