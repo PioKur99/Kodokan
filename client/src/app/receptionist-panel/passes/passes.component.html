@@ -1,1 +1,28 @@
-<p>passes works!</p>
+<div *ngIf="packageDetails">
+    <div>
+        {{packageDetails.name}}
+    </div>
+    <div>cena {{packageDetails.prize}}</div>
+    <div *ngFor="let item of packageDetails.CustomerList">
+        posiadacz 
+        {{item.customer_id}}
+        <a href="receptionist-panel/customers/{{item.customer_id}}">
+            {{item.first_name}}
+            {{item.last_name}}
+        </a>
+    </div>
+    data ważności {{packageDetails.endDate.toLocaleDateString()}}
+    <div>  
+        status 
+        <div2 *ngIf=packageDetails.isPaid>
+            opłacony
+        </div2>
+        <div2 *ngIf=!packageDetails.isPaid>
+            nieopłacony
+        </div2>
+    </div>
+    data zakupu {{packageDetails.purchaseDate.toLocaleDateString()}}
+    wykorzystane wejścia{{packageDetails.entrance_used}}
+    pozostała ilość wejść {{packageDetails.entrance_unused}}
+    czas trwania {{packageDetails.duration}} dni
+</div>

@@ -28,7 +28,7 @@ export class PackageService {
       purchaseDate: new Date("12.11.2020"),
       entrance_used: 1,
       entrance_unused: 3,
-      duration: 13.73}
+      duration: 30}
     return new Observable(x => { x.next(package_details)})
   }
 }
