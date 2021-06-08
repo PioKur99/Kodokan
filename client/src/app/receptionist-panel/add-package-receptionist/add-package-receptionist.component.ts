@@ -42,12 +42,14 @@ export class AddPackageReceptionistComponent implements OnInit {
   packages: Array<Package> = [this.package_1, this.package_2, this.package_3, this.package_4, this.package_5, this.package_2, this.package_3, this.package_4,];
 
   name_surname: String;
+  id: String;
 
   constructor(private route: ActivatedRoute) { 
   }
 
   ngOnInit(): void {
     this.name_surname = this.route.snapshot.paramMap.get("name");
+    this.id = this.route.snapshot.paramMap.get("id");
   }
   
 }
