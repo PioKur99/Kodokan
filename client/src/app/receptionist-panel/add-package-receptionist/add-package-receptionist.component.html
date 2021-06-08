@@ -37,7 +37,7 @@
                             <p>{{ package.description }}</p>
                         </div>
                         <div igxDialogActions>
-                            <button  class="third-button" igxButton igxRipple="white">
+                            <button  class="third-button" igxButton igxRipple="white" (click)="createPackage(package.type_id)">
                                 <span> DODAJ <br>
                                      NIEOPŁACONY <br>
                                       KARNET</span>
@@ -53,33 +53,51 @@
                     </main>
                 </div>
             </igx-dialog>
+        <!--*********************************************************************************--> 
+        <!-- Dialog window. -->
+        <igx-dialog #paydialog  [closeOnOutsideSelect]="true">
+            <div class="dialog-content dialog-content-pay card-wrapper">
+                <main class="card pay-card" >
+                
+                    <header class="header header-pay">
+                        ZAPŁAĆ ZA POMOCĄ:
+            
+                    </header>
+            
+                        <button  class="third-button" igxButton="raised" igxRipple="white" (click)="payForPackage(package.type_id)" >
+                            <span> GOTÓWKA</span>
+                        </button>
+                        <button  class="second-button" igxButton="raised" igxRipple="white" (click)="payForPackage(package.type_id)">
+                            <span> KARTA</span>
+                        </button>
+                        <button class="first-button" igxButton="raised" igxRipple="white" (click)="payForPackage(package.type_id)">
+                            <span> PRZELEW</span>
+                        </button>
+                </main>
+            </div>
+        </igx-dialog>
         <!--*********************************************************************************-->    
         </igx-card>
     </div>
    
 </div>
 
-
-<!-- Dialog window. -->
-<igx-dialog #paydialog  [closeOnOutsideSelect]="true">
-<div class="dialog-content dialog-content-pay card-wrapper">
-    <main class="card pay-card" >
+<igx-dialog #errordialog  [closeOnOutsideSelect]="true">
+    <div class="dialog-content card-wrapper errordialog">
+        <main >
+        
+            <header class="header">
+                <h3>COŚ POSZŁO NIE TAK :(</h3>
     
-        <header class="header header-pay">
-            ZAPŁAĆ ZA POMOCĄ:
+            </header>
 
-        </header>
+            <div igxDialogActions>
 
-            <button  class="third-button" igxButton="raised" igxRipple="white" >
-                <span> GOTÓWKA</span>
-            </button>
-            <button  class="second-button" igxButton="raised" igxRipple="white">
-                <span> KARTA</span>
-            </button>
-            <button class="first-button" igxButton="raised" igxRipple="white">
-                <span> PRZELEW</span>
-            </button>
-    </main>
-</div>
+                <button class="first-button light-grey-button"  igxButton igxRipple="white" (click)="errordialog.close()">
+                    <span> OK</span>
+                </button>
+            </div>
+
+        </main>
+    </div>
 </igx-dialog>
-<!--*********************************************************************************-->    

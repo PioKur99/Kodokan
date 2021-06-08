@@ -3,4 +3,5 @@ export class Package {
     subtitle: String;
     price: Number;
     description: String;
+    type_id: String;
 }

@@ -18,6 +18,7 @@ import { PassesComponent } from './passes/passes.component';
 import { AddAClientComponent } from './add-a-client/add-a-client.component';
 import { EntryRegistrationComponent } from './entry-registration/entry-registration.component';
 import { AddPackageReceptionistComponent } from './add-package-receptionist/add-package-receptionist.component';
+
 @NgModule({
     declarations: [
         ReceptionistPanelComponent,
@@ -39,6 +40,7 @@ import { AddPackageReceptionistComponent } from './add-package-receptionist/add-
         IgxDialogModule,
         IgxCardModule,
         IgxButtonGroupModule,
+
     ]
 })
 export class ReceptionistPanelModule {
