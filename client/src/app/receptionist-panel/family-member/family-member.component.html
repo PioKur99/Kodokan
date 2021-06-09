@@ -1,1 +1,55 @@
-<p>family-member works!</p>
+<div class="main">
+    <h1>Dodaj członka rodziny klienta</h1>
+    <h1>{{name_surname}}</h1>
+    <igx-input-group >
+        <input igxInput name="name" type="text" required="required" [(ngModel)]="name_to_find" placeholder="Szukaj wg imienia i nazwiska..." (change)="findUsers()">
+    </igx-input-group>
+    <section >
+        <div class="line" *ngFor="let user of user_list"><p >{{user.name}}</p><button class="add-button" (click)="onAdd(user.customer_id)" igxButton="raised" igxRipple="white">
+            Dodaj
+            </button> 
+        </div>
+        <div class="line" ><p >Jan Kowalski</p><button class="add-button" igxButton="raised" igxRipple="white" (click)="dialog.open()">
+            Dodaj
+            </button>
+        </div>
+        <div class="line" ><p >Mariola Strzyna</p><button class="add-button" igxButton="raised" igxRipple="white" (click)="successDialog.open()">
+            Dodaj
+            </button>
+        </div>
+    </section>
+    <igx-dialog #dialog  [closeOnOutsideSelect]="true" class="dialog_window" rightButtonLabel="ANULUJ"
+    (onRightButtonSelect)="dialog.close()">
+        <div class="dialog-content">
+            
+                <header >
+                    <h6>Jaka relacja łączy klientów?</h6>
+                </header>
+        
+                    <button  class="dialog-buttons" igxButton="raised" igxRipple="white" (click)="onAddRelation('marriage')">
+                        <span> MAŁŻEŃSTWO</span>
+                    </button>
+                    <button  class="dialog-buttons" igxButton="raised" igxRipple="white" (click)="onAddRelation('parent')">
+                        <span> RODZIC</span>
+                    </button>
+                    <br>
+                    <button class="dialog-buttons" igxButton="raised" igxRipple="white" (click)="onAddRelation('siblings')">
+                        <span> RODZEŃSTWO</span>
+                    </button>
+                    <button class="dialog-buttons" igxButton="raised" igxRipple="white" (click)="onAddRelation('child')">
+                        <span> DZIECKO</span>
+                    </button>
+        </div>
+    </igx-dialog>
+</div>
+<!-- This is just an example showing how you might open the dialog. -->
+
+<igx-dialog #successDialog   rightButtonLabel="OK" (onRightButtonSelect)="successDialog.close()" [closeOnOutsideSelect]="true" 
+(onRightButtonSelect)="successDialog.close()">
+    <div class="dialog-content success">
+        <header >
+            <h6 class="yellow">UDAŁO SIĘ!</h6>
+            <h5>Operacja zakończyła się pomyślnie.</h5>
+        </header>
+    </div>
+</igx-dialog>
