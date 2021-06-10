@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { from, Observable } from 'rxjs';
-import { DeleteCustomer, customerClass, sendCustomer } from '../data/Customer'
+import { Customer } from '../data/Customer'
 import { HttpClient } from '@angular/common/http';
 import { address } from '../../assets/config.json'
 //import * as config from '../../assets/config.json'
@@ -12,15 +12,16 @@ export class CustomerService {
   constructor(private http: HttpClient) {
   }
 
-  deleteService(deleteCustomer: DeleteCustomer): Observable<any> {
-    return this.http.post<DeleteCustomer>(address, deleteCustomer)
+  deleteCustomer(customer_id: number): Observable<Customer> {
+    return this.http.post<Customer>(address, customer_id)
   }
 
-  getCustomer(): Observable<customerClass[]> {
-    return this.http.get<customerClass[]>(address + 'customers')
+  getCustomers(): Observable<Customer[]> {
+    //return this.http.get<Customer[]>(address + 'customers')
+    let customerList=[
+      {customer_id: 1, first_name: 'Ali', last_name: 'Muhammad'},
+      {customer_id: 2, first_name: 'Bali', last_name: 'Chill'}]
+    return new Observable(x => { x.next(customerList)})
   }
 
-  sendCustomer(sendCustomer: sendCustomer): Observable<any> {
-    return this.http.post<sendCustomer>(address, sendCustomer)
-  }
 }
