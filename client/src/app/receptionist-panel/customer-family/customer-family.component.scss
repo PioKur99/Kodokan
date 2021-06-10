@@ -11,7 +11,7 @@
     display: flex;
     justify-content: space-between;
     margin-top: 12%;
-    min-width: 30%;
+    min-width: 35%;
     border-radius: 0;
 
 }
@@ -33,6 +33,7 @@
 
 .listBtn {
     background-color: #f2f2f2;
+    max-width: 20px;
 }
 
 .listHeader {
@@ -52,4 +53,9 @@
     color: #3F3F3F;
     padding-top: 30px;
     padding-bottom: 30px;
+}
+
+.deleteBtn {
+    background-color: #FF0000;
+    margin-right: 15px;
 }

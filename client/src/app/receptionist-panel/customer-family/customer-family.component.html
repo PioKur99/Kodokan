@@ -1,14 +1,27 @@
 <label igxLabel for="Name" class = "edit-label">Rodzina klienta</label>
 
+
+
 <div class = "wrap">
     <igx-list class = "familyList">
         <igx-list-item isHeader="true" class = "listHeader">
             {{fullName}}
         </igx-list-item>
         <igx-list-item *ngFor="let member of familyArr" class = "listItem">
+            <div igxOverlayOutlet>
+                <igx-dialog #dialog1 
+                leftButtonLabel="TAK" (onLeftButtonSelect)="deleteFamilyMember(member)"
+                rightButtonLabel="ANULUJ" (onRightButtonSelect)="dialog1.close()"  
+                [closeOnOutsideSelect]="true" title = "CZY NA PEWNO CHCESZ USUNĄĆ WYBRANEGO CZŁONKA RODZINY?">
+                </igx-dialog>
+            </div>
             <h4 igxListLineTitle>{{ member.firstName + " " + member.lastName }}</h4>
             <p igxListLineSubTitle>{{ member.relationship }}</p>
-            <button igxButton="raised" igxRipple="white" class = "listBtn">
+            <button igxButton="raised" igxRipple="white" class = "deleteBtn" 
+            *ngIf = "showDeleteButton" (click) = dialog1.open()>
+                USUŃ
+            </button>
+            <button igxButton="raised" igxRipple="white" class = "listBtn" (click) = "toggleDeleteButton()">
                 <span class="iconify" data-icon="bx-bx-menu" data-inline="false"></span>
             </button>
         </igx-list-item>
@@ -21,3 +34,9 @@
         DODAJ CZŁONKA RODZINY
     </button>
 </div>
+
+
+<igx-dialog #dialog2 message="Operacja zakończyła się pomyślnie." leftButtonLabel="OK" 
+(onLeftButtonSelect)="dialog2.close()"  
+[closeOnOutsideSelect]="true" title = "UDAŁO SIĘ!">
+</igx-dialog>

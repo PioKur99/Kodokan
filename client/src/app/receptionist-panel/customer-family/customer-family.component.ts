@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Client } from 'src/app/data/client';
 import { Router } from '@angular/router';
 import { FamilyMember } from 'src/app/data/family-member';
@@ -28,15 +28,36 @@ export class CustomerFamilyComponent implements OnInit {
 
   familyArr: FamilyMember[] = [
     {"firstName": "Amanda", "lastName": "Noris", "identificationNumber": "2323232", "relationship": "Rodzic"},
-    {"firstName": "Nicole", "lastName": "Noris", "identificationNumber": "2355532", "relationship": "Małżeństwo"}
+    {"firstName": "Nicole", "lastName": "Noris", "identificationNumber": "2355532", "relationship": "Małżeństwo"},
+    {"firstName": "Sam", "lastName": "Noris", "identificationNumber": "2355532", "relationship": "Rodzeństwo"},
+    {"firstName": "Steve", "lastName": "Noris", "identificationNumber": "2355532", "relationship": "Rodzeństwo"}
   ];
 
+  showDeleteButton: Boolean = false;
+
   fullName: String = this.client.name + " " + this.client.surname;
+
+  @ViewChild("dialog1") dialogDelete;
+  @ViewChild("dialog2") dialogSuccess;
 
   constructor(private router: Router) { }
 
   ngOnInit(): void {
     this.router.navigate(["/receptionist-panel/customer-family", {cardID: this.client.cardNumb}])
   }
+
+  toggleDeleteButton(): void {
+    this.showDeleteButton = !this.showDeleteButton;
+  }
+
+
+  deleteFamilyMember(member: FamilyMember){
+    this.dialogDelete.close();
+    const index = this.familyArr.indexOf(member);
+    this.familyArr.splice(index, 1);
+    this.dialogSuccess.open();
+  }
+
+  
 
 }
