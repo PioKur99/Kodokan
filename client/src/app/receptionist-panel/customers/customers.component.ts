@@ -5,6 +5,7 @@ import { IgxDialogActionsDirective } from 'igniteui-angular/lib/dialog/dialog.di
 import { Router } from '@angular/router';
 import { filterStates } from 'src/app/data/filter/filter-states';
 import { IgxGridComponent } from 'igniteui-angular';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-customers',
@@ -13,18 +14,21 @@ import { IgxGridComponent } from 'igniteui-angular';
 })
 export class CustomersComponent implements OnInit {
 
-  customerList: Customer[] // błąd 
-  customer_id:number
+  customerList: Customer[]
   deletedCustomer: Customer
   searchBox: string
+
+  //zmienne do combo 
   public caseSensitive = false;
   public exactMatch = false;
-
   public filter_states: filterStates[];
   public selectedFilters: number[]
-
   @ViewChild('grid',{static:true}) public grid: IgxGridComponent
-  @ViewChild("dialog") dialog; // do dialog.open()/dialog.close() 
+  
+  @ViewChild("dialogDelete") dialogDelete; 
+  @ViewChild("errorGetCustomers") errorGetCustomers; 
+
+  public customerObs: Observable<any>
 
   constructor(private CustomerService: CustomerService, private router: Router) { 
     this.filter_states=[
@@ -37,32 +41,39 @@ export class CustomersComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    
+    this.getCustomers()
+  }
 
+  getCustomers(){
     this.CustomerService.getCustomers().subscribe(
       data => this.customerList = data,
-      error => this.errorData(),
+      error => this.openErrorGetCustomers(),
     );
   }
 
-  deleteCustomer(/*customer_id: number*/): void {
-    this.CustomerService.deleteCustomer(this.customer_id).subscribe(
-      x => {
-        this.deletedCustomer=x
-        console.log("x");
-      });
-
-    this.dialog.close();
+  deleteCustomerPrep(customer: Customer): void {
+      this.customerObs = new Observable(x=>{x.next(customer)})
+      this.dialogDelete.open()
   }
 
-  errorData() {
-    this.dialog.open();
+  deleteCustomer(): void {
+    this.customerObs.subscribe(x=>{
+      this.CustomerService.deleteCustomer(x.customer_id).subscribe(
+        y => {
+          this.deletedCustomer=x
+          console.log(y);
+        });
+    })
+    this.dialogDelete.close();
+    this.getCustomers();
+  }
+
+  openErrorGetCustomers() {
+    this.errorGetCustomers.open();
   }
 
   errorDataLink(): void {
     this.router.navigate(["/receptionist-panel"])
   }
-
-  
 
 }

@@ -13,11 +13,15 @@ export class CustomerService {
   }
 
   deleteCustomer(customer_id: number): Observable<Customer> {
-    return this.http.post<Customer>(address, customer_id)
+    //return this.http.post<Customer>(address, customer_id)
+    let Customer={customer_id: 1, first_name: 'Ali', last_name: 'Muhammad'}
+    return new Observable(x => { x.next(Customer)})
   }
 
   getCustomers(): Observable<Customer[]> {
-    //return this.http.get<Customer[]>(address + 'customers')
+    return this.http.get<Customer[]>(address + 'customers')
+    
+    //TEST
     let customerList=[
       {customer_id: 1, first_name: 'Ali', last_name: 'Muhammad'},
       {customer_id: 2, first_name: 'Bali', last_name: 'Chill'}]
