@@ -8,7 +8,8 @@ import {
 	IgxBottomNavModule,
 	IgxIconModule,
 	IgxDialogModule,
-	IgxInputGroupModule
+	IgxInputGroupModule,
+	IgxListModule
 } from 'igniteui-angular';
 import { CustomersComponent } from './customers/customers.component';
 import { EntranceComponent } from './entrance/entrance.component';
@@ -52,7 +53,8 @@ import { WebcamModule } from 'ngx-webcam';
         IgxBottomNavModule,
         FormsModule,
         IgxIconModule,
-        IgxDialogModule
+        IgxDialogModule,
+        IgxListModule
     ]
 })
 export class ReceptionistPanelModule {

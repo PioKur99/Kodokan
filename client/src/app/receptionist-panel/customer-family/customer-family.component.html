@@ -1,1 +1,16 @@
-<p>customer-family works!</p>
+<label igxLabel for="Name" class = "edit-label">Rodzina klienta</label>
+
+<div class = "wrap">
+    <igx-list class = "familyList">
+        <igx-list-item isHeader="true">
+            {{fullName}}
+        </igx-list-item>
+        <igx-list-item *ngFor="let member of familyArr" class = "listItem">
+            <h4 igxListLineTitle>{{ member.firstName + " " + member.lastName }}</h4>
+            <p igxListLineSubTitle>{{ member.relationship }}</p>
+            <button igxButton="raised" igxRipple="white" class = "listBtn">
+                <span class="iconify" data-icon="bx-bx-menu" data-inline="false"></span>
+            </button>
+        </igx-list-item>
+    </igx-list>
+</div>

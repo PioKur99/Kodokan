@@ -52,10 +52,13 @@ $my-dialog-theme: igx-dialog-theme(
 	$shadow: 3px 6px 7px rgba(0, 0, 0, 0.25)
 );
 
-
-
-
 @include igx-css-vars($my-dialog-theme);
+
+$my-list-theme: igx-list-theme(
+        $background: #F2F2F2
+    );
+
+    @include igx-list($my-list-theme);
 
 
 .igx-typography {

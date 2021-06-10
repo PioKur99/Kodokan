@@ -1,0 +1,36 @@
+.edit-label {
+    color: #BDBDBD;
+    font-family: 'Lato', sans-serif;
+    font-size: 48px;
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+}
+
+.familyList {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12%;
+    min-width: 400px;
+    border-radius: 0;
+
+}
+
+.wrap {
+    display: flex;
+    justify-content: center;
+}
+
+.iconify {
+    min-width: 25px;
+    min-height: 25px;
+    color: #DAA520;
+}
+
+.listItem {
+    margin-left: 10%;
+}
+
+.listBtn {
+    background-color: #f2f2f2;
+}
