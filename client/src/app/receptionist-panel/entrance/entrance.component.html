@@ -41,12 +41,28 @@
     
     <table>
         <tr class="row row--first">
-           <td class="column column--first">Imię</td> <td class="column column--second">Nazwisko</td> <td class="column column--third">Data</td><td class="column column--fourth">Godzina</td><td class="column column--fifth">Karnet</td><td class="column column--sixth">Zajęcia</td>
+           <td class="column column--first">Imię</td>
+           <td class="column column--second">Nazwisko</td>
+           <td class="column column--third">Data</td>
+           <td class="column column--fourth">Godzina</td>
+           <td class="column column--fifth">Karnet</td>
+           <td class="column column--sixth">Zajęcia</td>
         </tr>
-        <tr class="row"> <!-- będzie trzeba podać listę za pomocą ngFor/ dodać interpolację w imię i nazwisko / dodać -->
-            <td class="column column--first">Oliwier</td> <td class="column column--second">Gębczyński</td> <td class="column column--third">12.12.2021</td><td class="column column--fourth">00:00</td><td class="column column--fifth">Open</td><td class="column column--sixth">Boks</td><igx-switch></igx-switch>
+        <tr class="row" *ngFor="let item of entrancesList">
+            <td class="column column--first">{{item.name}}</td>
+            <td class="column column--second">{{item.surname}}</td>
+            <td class="column column--third">{{item.date.toLocaleDateString()}}</td>
+            <td class="column column--fourth">
+                {{item.date.getUTCHours()}}:{{item.date.getUTCMinutes()}}
+            </td>
+            <td class="column column--fifth">{{item.package}}</td>
+            <td class="column column--sixth">{{item.training}}</td>
+            <igx-checkbox></igx-checkbox>            
         </tr>
      </table>
-    <!-- do dodania interpolacja z listy Nazwisko i imię -->
-     <igx-dialog #dialog message="Czy na pewno chcesz usunąć wejście ?" leftButtonLabel="Tak" (onLeftButtonSelect)="dialog.close()" rightButtonLabel="Nie" (onRightButtonSelect)="dialog.close()" [closeOnOutsideSelect]="true"></igx-dialog>
-    </div>
+</div>
+
+<!-- do dodania interpolacja z listy Nazwisko i imię -->
+<igx-dialog #dialog message="Czy na pewno chcesz usunąć wejście ?" leftButtonLabel="Tak" (onLeftButtonSelect)="dialog.close()" rightButtonLabel="Nie" (onRightButtonSelect)="dialog.close()" [closeOnOutsideSelect]="true"></igx-dialog>
+
+<igx-dialog #errorGetEntrances message="Nie udało się wczytać listy wejść?" rightButtonLabel="Wróć" (onRightButtonSelect)="errorGetEntrances.close()" [closeOnOutsideSelect]="true"></igx-dialog>
