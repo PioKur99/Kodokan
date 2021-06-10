@@ -1,18 +1,20 @@
 <table *ngIf="packageDetails">
-    <tr class="row row--title">
-        {{packageDetails.name}}
+    <tr class="title">
+        <td colspan=2>{{packageDetails.name}}</td>
     </tr>
     <tr class="row">
         <td class="column column--first">cena</td> 
-        <td class="column column--second">{{packageDetails.prize}}</td>
+        <td class="column column--second">{{packageDetails.prize}} zł</td>
     </tr>
     <tr class="row">
         <td class="column column--first">posiadacz</td>
-        <td class="column column--second" *ngFor="let item of packageDetails.CustomerList">
-            <a class="href" href="receptionist-panel/customers/{{item.customer_id}}">
-                {{item.first_name}}
-                {{item.last_name}}
-            </a>
+        <td class="column column--second">
+            <div *ngFor="let item of packageDetails.CustomerList">
+                <a class="href" href="receptionist-panel/customers/{{item.customer_id}}">
+                    {{item.first_name}}
+                    {{item.last_name}}
+                </a>
+            </div>
         </td>
     </tr>
     <tr class="row">

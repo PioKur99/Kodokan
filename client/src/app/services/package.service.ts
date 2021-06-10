@@ -20,7 +20,7 @@ export class PackageService {
       {customer_id: 2,
         first_name: "Charlote",
         last_name: "Dwayne"}]
-    let package_details : PackageDetails = {name: "Karnet",
+    let package_details : PackageDetails = {name: "nazwa karnetu",
       prize: "30,43",
       CustomerList: customer_list,
       endDate: new Date("7.12.2020"),
