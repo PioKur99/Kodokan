@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Customer } from '../../data/Customer'
+import { Customer } from '../../data/customer/Customer'
 import { CustomerService } from '../../service/customer.service'
 import { IgxDialogActionsDirective } from 'igniteui-angular/lib/dialog/dialog.directives'
 import { Router } from '@angular/router';
+import { filterStates } from 'src/app/data/filter/filter-states';
 
 @Component({
   selector: 'app-customers',
@@ -14,10 +15,32 @@ export class CustomersComponent implements OnInit {
   customerList: Customer[] // błąd 
   customer_id:number
   deletedCustomer: Customer
+  searchBox: string
+
+  public filter_states: filterStates[];
+  public selectedFilters: number[]
 
   @ViewChild("dialog") dialog; // do dialog.open()/dialog.close() 
 
-  constructor(private CustomerService: CustomerService, private router: Router) { }
+  constructor(private CustomerService: CustomerService, private router: Router) { 
+    this.filter_states=[
+      {id: 1,name:"imię"},
+      {id: 2,name:"nazwisko"},
+      {id: 3,name:"dyscyplina"},
+      {id: 4,name:"numer telefonu"},
+      {id: 5,name:"numer karty"}
+    ]
+  }
+  
+  ngOnInit(): void {
+    
+
+    this.CustomerService.getCustomers().subscribe(
+      data => this.customerList = data,
+      error => this.errorData(),
+    );
+  }
+
   deleteCustomer(/*customer_id: number*/): void {
     this.CustomerService.deleteCustomer(this.customer_id).subscribe(
       x => {
@@ -36,11 +59,6 @@ export class CustomersComponent implements OnInit {
     this.router.navigate(["/receptionist-panel"])
   }
 
-  ngOnInit(): void {
-    this.CustomerService.getCustomers().subscribe(
-      data => this.customerList = data,
-      error => this.errorData(),
-    );
-  }
+  
 
 }

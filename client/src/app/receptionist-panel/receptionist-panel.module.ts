@@ -12,7 +12,8 @@ import {
     IgxToggleModule,
     IgxDropDownModule,
     IgxCheckboxModule,
-    IgxGridModule
+    IgxGridModule,
+    IgxComboModule
 } from 'igniteui-angular';
 import { CustomersComponent } from './customers/customers.component';
 import { EntranceComponent } from './entrance/entrance.component';
@@ -47,6 +48,7 @@ import { HttpClientModule } from '@angular/common/http';
         IgxDropDownModule,
         IgxCheckboxModule,
         IgxGridModule,
+        IgxComboModule,
     ]
 })
 export class ReceptionistPanelModule {

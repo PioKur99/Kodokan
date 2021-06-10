@@ -1,61 +1,72 @@
-<div class="container">
-<igx-input-group type="search" class="search">
-    <igx-prefix>
-        <igx-icon>search</igx-icon>
-    </igx-prefix><!--(keyup.enter)="send()"-->
-    <input #input1 igxInput placeholder="Search" class="input" id="input"/>
-</igx-input-group>
-<div class="drop-down">
-    <button class="drop-down__button" igxButton="raised" [igxToggleAction]="dropdown" [igxDropDownItemNavigation]="dropdown" >
-        Filtry
-    </button>
-    <igx-drop-down #dropdown class="drop-down__item">
-        <igx-drop-down-item>
-            <igx-checkbox>
-                imię
-            </igx-checkbox>
-        </igx-drop-down-item>
-        <igx-drop-down-item>
-            <igx-checkbox>
-                nazwisko
-            </igx-checkbox>
-        </igx-drop-down-item>
-        <igx-drop-down-item>
-            <igx-checkbox>
-                dyscyplina
-            </igx-checkbox>
-        </igx-drop-down-item>
-        <igx-drop-down-item>
-            <igx-checkbox>
-                numer telefonu
-            </igx-checkbox>
-        </igx-drop-down-item>
-        <igx-drop-down-item>
-            <igx-checkbox>
-                numer karty
-            </igx-checkbox>
-        </igx-drop-down-item>
-    </igx-drop-down>
-</div>
+<!--<div class="container">
+     <igx-input-group type="search" class="search">
+        <igx-prefix>
+            <igx-icon>search</igx-icon>
+        </igx-prefix>
+        <input #input1 igxInput placeholder="Search" class="input" id="input"/>
+    </igx-input-group> -->
+<div class="input-container">
+        <input #search1 class="input" id="search1" placeholder="search" [(ngModel)]="searchBox" (ngModelChange)="grid.findNext(searchBox, caseSensitive, exactMatch)" />
+        
+        <igx-combo #combo class="combo" [itemsMaxHeight]="250"
+            [data]="filter_states" placeholder="Szukaj wg stanu karty" 
+            displayKey="name" valueKey="id"
+            [(ngModel)]="selectedFilters" >
+        </igx-combo>
 
-<table>
-    <tr class="row row--first">
-       <td class="column column--first">Imię i nazwisko</td>
-       <td class="column column--second"></td>
-       <td class="column column--third"></td>
-    </tr>
-    <tr class="row" *ngFor="let item of customerList"> <!-- będzie trzeba podać listę za pomocą ngFor/ dodać interpolację w imię i nazwisko / dodać -->
-       <td class="column column--first">{{item.first_name}} {{item.last_name}}</td>
-       <td class="column column--second">
-           <button class="button-table" routerLink="">Pokaż</button>
-        </td>
-        <td class="column column--third">
-           <button class="button-table" (click)="getId()">Usuń</button>
-        </td>
-    </tr>
- </table>
-<!-- do dodania interpolacja z listy Nazwisko i imię -->
- <igx-dialog #dialog message="Czy na pewno chcesz usunąć klienta ?" leftButtonLabel="Tak" (onLeftButtonSelect)="deleteCustomer()" rightButtonLabel="Nie" (onRightButtonSelect)="dialog.close()" [closeOnOutsideSelect]="true"></igx-dialog>
- <!-- This is just an example showing how you might open the dialog. -->
- <igx-dialog #errorData message="Problem z pobraniem listy klientów" id="errorData" leftButtonLabel="Wróć" (onLeftButtonSelect)="errorDataLink()" routerLinkActive="router-link-active" [closeOnOutsideSelect]="true"></igx-dialog>
+    <!-- <div class="drop-down">
+        <button class="drop-down__button" igxButton="raised" [igxToggleAction]="dropdown" [igxDropDownItemNavigation]="dropdown" >
+            Filtry
+        </button>
+        <igx-drop-down #dropdown class="drop-down__item">
+            <igx-drop-down-item>
+                <igx-checkbox>
+                    imię
+                </igx-checkbox>
+            </igx-drop-down-item>
+            <igx-drop-down-item>
+                <igx-checkbox>
+                    nazwisko
+                </igx-checkbox>
+            </igx-drop-down-item>
+            <igx-drop-down-item>
+                <igx-checkbox>
+                    dyscyplina
+                </igx-checkbox>
+            </igx-drop-down-item>
+            <igx-drop-down-item>
+                <igx-checkbox>
+                    numer telefonu
+                </igx-checkbox>
+            </igx-drop-down-item>
+            <igx-drop-down-item>
+                <igx-checkbox>
+                    numer karty
+                </igx-checkbox>
+            </igx-drop-down-item>
+        </igx-drop-down>
+    </div> -->
 </div>
+    
+    <table>
+        <tr class="row row--first">
+        <td class="column column--first">Imię i nazwisko</td>
+        <td class="column column--second"></td>
+        <td class="column column--third"></td>
+        </tr>
+        <tr class="row" *ngFor="let item of customerList"> <!-- będzie trzeba podać listę za pomocą ngFor/ dodać interpolację w imię i nazwisko / dodać -->
+        <td class="column column--first">{{item.first_name}} {{item.last_name}}</td>
+        <td class="column column--second">
+            <button class="button-table" routerLink="">Pokaż</button>
+            </td>
+            <td class="column column--third">
+            <button class="button-table" (click)="getId()">Usuń</button>
+            </td>
+        </tr>
+    </table>
+    <!-- do dodania interpolacja z listy Nazwisko i imię -->
+    <igx-dialog #dialog message="Czy na pewno chcesz usunąć klienta ?" leftButtonLabel="Tak" (onLeftButtonSelect)="deleteCustomer()" rightButtonLabel="Nie" (onRightButtonSelect)="dialog.close()" [closeOnOutsideSelect]="true"></igx-dialog>
+    <!-- This is just an example showing how you might open the dialog. -->
+    <igx-dialog #errorData message="Problem z pobraniem listy klientów" id="errorData" leftButtonLabel="Wróć" (onLeftButtonSelect)="errorDataLink()" routerLinkActive="router-link-active" [closeOnOutsideSelect]="true"></igx-dialog>
+
+

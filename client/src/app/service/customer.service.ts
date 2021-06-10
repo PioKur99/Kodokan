@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { from, Observable } from 'rxjs';
-import { Customer } from '../data/Customer'
+import { Customer } from '../data/customer/Customer'
 import { HttpClient } from '@angular/common/http';
 import { address } from '../../assets/config.json'
 //import * as config from '../../assets/config.json'
