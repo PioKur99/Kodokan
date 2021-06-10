@@ -11,7 +11,7 @@
     display: flex;
     justify-content: space-between;
     margin-top: 12%;
-    min-width: 400px;
+    min-width: 30%;
     border-radius: 0;
 
 }
@@ -33,4 +33,23 @@
 
 .listBtn {
     background-color: #f2f2f2;
+}
+
+.listHeader {
+    color: #DAA520;
+    font-size: 15px;
+}
+
+.buttonWrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 15%;
+}
+
+.addMemberBtn {
+    border-radius: 4px;
+    background-color: #BDBDBD;
+    color: #3F3F3F;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }

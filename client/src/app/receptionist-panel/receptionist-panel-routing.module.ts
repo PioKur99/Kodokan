@@ -13,6 +13,7 @@ import { CustomerFamilyComponent } from './customer-family/customer-family.compo
 import { CustomerAddPassComponent } from './customer-add-pass/customer-add-pass.component';
 import { CustomerShowEntrancesComponent } from './customer-show-entrances/customer-show-entrances.component';
 import { CustomerSendMailComponent } from './customer-send-mail/customer-send-mail.component';
+import { CustomerAddFamilyMemberComponent } from './customer-add-family-member/customer-add-family-member.component';
 
 
 const routes: Routes = [
@@ -30,7 +31,8 @@ const routes: Routes = [
       { path: 'customer-add-pass', component: CustomerAddPassComponent, outlet: 'primary' },
       { path: 'customer-show-passes', component: CustomerAddPassComponent, outlet: 'primary' },
       { path: 'customer-show-entrances', component: CustomerShowEntrancesComponent, outlet: 'primary' },
-      { path: 'customer-send-mail', component: CustomerSendMailComponent, outlet: 'primary' }
+      { path: 'customer-send-mail', component: CustomerSendMailComponent, outlet: 'primary' },
+      { path: 'customer-add-family-member', component: CustomerAddFamilyMemberComponent, outlet: 'primary' }
       
     ]
   }];

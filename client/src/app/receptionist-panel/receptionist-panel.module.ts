@@ -27,6 +27,7 @@ import { CustomerShowPassesComponent } from './customer-show-passes/customer-sho
 import { CustomerShowEntrancesComponent } from './customer-show-entrances/customer-show-entrances.component';
 import { CustomerSendMailComponent } from './customer-send-mail/customer-send-mail.component';
 import { WebcamModule } from 'ngx-webcam';
+import { CustomerAddFamilyMemberComponent } from './customer-add-family-member/customer-add-family-member.component';
 @NgModule({
     declarations: [
         ReceptionistPanelComponent,
@@ -42,7 +43,8 @@ import { WebcamModule } from 'ngx-webcam';
         CustomerAddPassComponent,
         CustomerShowPassesComponent,
         CustomerShowEntrancesComponent,
-        CustomerSendMailComponent
+        CustomerSendMailComponent,
+        CustomerAddFamilyMemberComponent
     ],
     imports: [
         CommonModule,

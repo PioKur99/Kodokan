@@ -2,7 +2,7 @@
 
 <div class = "wrap">
     <igx-list class = "familyList">
-        <igx-list-item isHeader="true">
+        <igx-list-item isHeader="true" class = "listHeader">
             {{fullName}}
         </igx-list-item>
         <igx-list-item *ngFor="let member of familyArr" class = "listItem">
@@ -13,4 +13,11 @@
             </button>
         </igx-list-item>
     </igx-list>
+</div>
+
+<div class = "buttonWrap">
+    <button igxButton="raised" igxRipple="white" class = "addMemberBtn" 
+    routerLink = "/receptionist-panel/customer-add-family-member">
+        DODAJ CZŁONKA RODZINY
+    </button>
 </div>
