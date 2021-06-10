@@ -4,6 +4,7 @@ import { CustomerService } from '../../service/customer.service'
 import { IgxDialogActionsDirective } from 'igniteui-angular/lib/dialog/dialog.directives'
 import { Router } from '@angular/router';
 import { filterStates } from 'src/app/data/filter/filter-states';
+import { IgxGridComponent } from 'igniteui-angular';
 
 @Component({
   selector: 'app-customers',
@@ -16,10 +17,13 @@ export class CustomersComponent implements OnInit {
   customer_id:number
   deletedCustomer: Customer
   searchBox: string
+  public caseSensitive = false;
+  public exactMatch = false;
 
   public filter_states: filterStates[];
   public selectedFilters: number[]
 
+  @ViewChild('grid',{static:true}) public grid: IgxGridComponent
   @ViewChild("dialog") dialog; // do dialog.open()/dialog.close() 
 
   constructor(private CustomerService: CustomerService, private router: Router) { 
