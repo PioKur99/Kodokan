@@ -20,7 +20,9 @@ public class Package extends BaseEntity {
     @NotNull
     private LocalDateTime purchaseDateTime;
 
-    @NotNull
+    //TODO: Są karnety bez daty końcowe, działanie prokonsumenckie - takie karnety otrzymują endDateTime w
+    // chwili odbicia, o ile dobrze zrozumiałem Lukasza
+//    @NotNull
     private LocalDateTime endDateTime;
 
     @NotNull
