@@ -4,9 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import pl.kodokan.fcp.server.common.model.BaseEntity;
 
-import javax.persistence.Entity;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 @Getter @Setter
@@ -21,7 +19,7 @@ public class Address extends BaseEntity {
     private String voivodeship;
     private String postalCode;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @MapsId
     private UserData userData;
 }
