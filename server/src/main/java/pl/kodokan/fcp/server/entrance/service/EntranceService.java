@@ -18,6 +18,7 @@ import pl.kodokan.fcp.server.entrance.repo.EntranceRepository;
 import javax.transaction.Transactional;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -130,6 +131,8 @@ public class EntranceService {
         if (toFilter.isEmpty()) {
             return Collections.emptyList();
         }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime dateTime = LocalDateTime.parse(entranceFilter.getDate(), formatter);
 
         //TODO: Pewnie mozna jakos ladniej zrobic filtrowanie, jeszcze do przemyslenia
         if (!entranceFilter.getName().isEmpty())
@@ -143,7 +146,7 @@ public class EntranceService {
         ;
         if (!entranceFilter.getDate().isEmpty())
             toFilter = toFilter.stream()
-                    .filter(n -> n.getDateTime().toString().equals(entranceFilter.getDate()))
+                    .filter(n -> n.getDateTime().equals(dateTime))
                     .collect(Collectors.toList());
         ;
         if (!entranceFilter.getPackageName().isEmpty())
