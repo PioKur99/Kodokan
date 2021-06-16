@@ -24,7 +24,7 @@ public class PackageController {
             @ApiResponse(code = 400, message = "Details can not be returned")
     })
     @GetMapping("/get")
-    PackageDetails getPackage(@RequestBody Long packageId) {
+    PackageDetails getPackage(@RequestParam Long packageId) {
         return packageService.getPackage(packageId);
     }
 }

@@ -4,30 +4,38 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.tomcat.jni.Local;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @Builder
 public class PackageDetails {
     private String name;
     private BigDecimal price;
     private boolean isPaid;
-    private LocalDateTime endDate;
-    private LocalDateTime purchaseDate;
+    private String endDate;
+    private String purchaseDate;
     private Integer usedEntries;
     private Integer remainingEntries;
     private Long duration;
-    private List<SimpleCustomerDetails> owners;
+    private SimpleCustomerDetails owner;
 
-    private class SimpleCustomerDetails {
-        private String customerId;
-        private String firstName;
-        private String lastName;
+    public void setOwner(Long customerId, String firstName, String lastName) {
+        owner = new SimpleCustomerDetails(customerId, firstName, lastName);
+    }
+
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    private static class SimpleCustomerDetails {
+        private final Long customerId;
+        private final String firstName;
+        private final String lastName;
     }
 
 }
