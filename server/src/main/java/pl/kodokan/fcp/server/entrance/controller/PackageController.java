@@ -32,7 +32,7 @@ public class PackageController {
             @ApiParam(
                     value = "A JSON value representing a transaction. An example of the expected schema can be found down here. The fields marked with an * means that they are required.",
                     example = "{ * fullName = Jan Kowalski , * endDate = 2021-05-20, * packageName = karnet sportowy, isPaid = false, isActive = false"
-            ) PackageRequest packageRequest ){
+            ) PackageRequest packageRequest) {
         return ResponseEntity.ok(packageService.findAllWithParameters(packageRequest));
     }
 
@@ -42,10 +42,10 @@ public class PackageController {
             @ApiResponse(code = 400, message = "Cannot delete package")
     })
     @DeleteMapping
-    public ResponseEntity<Long> delete(@RequestParam Long packageId){
+    public ResponseEntity<Long> delete(@RequestParam Long packageId) {
         return ResponseEntity.ok(packageService.deleteById(packageId));
     }
-}
+
     @Operation(summary = "Get details about package with given ID")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Details returned successfully"),

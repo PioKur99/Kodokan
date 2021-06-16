@@ -23,10 +23,12 @@ public class PackageDetails {
     private Integer usedEntries;
     private Integer remainingEntries;
     private Long duration;
-    private SimpleCustomerDetails owner;
+    private List<SimpleCustomerDetails> owners;
 
-    public void setOwner(Long customerId, String firstName, String lastName) {
-        owner = new SimpleCustomerDetails(customerId, firstName, lastName);
+    public void addOwner(Long customerId, String firstName, String lastName) {
+        if(owners == null)
+            owners = new ArrayList<>();
+        owners.add(new SimpleCustomerDetails(customerId, firstName, lastName));
     }
 
     @Getter
