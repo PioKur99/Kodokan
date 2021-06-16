@@ -14,7 +14,8 @@ export class ClientService {
   getClientBaseUrl: string = "http://172.18.0.3:8081/customers/findById/"
 
   getClient(id: number) : Observable<Client>{
-    return this.http.get<Client>(this.getClientBaseUrl + id);
+    //return this.http.get<Client>(this.getClientBaseUrl + id);
+    return this.http.get<Client>("http://date.jsontest.com/");
   }
 
 }
