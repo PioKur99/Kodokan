@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Client } from 'src/app/data/client';
+import { Client, Gender } from 'src/app/data/client';
 import { Router } from '@angular/router';
 import {Subject, Observable} from 'rxjs';
 import { WebcamImage } from 'ngx-webcam';
@@ -19,8 +19,10 @@ export class CustomerEditDataComponent implements OnInit {
    @ViewChild("dialog1") dialogSuccess;
    @ViewChild("dialog2") dialogFailure;
 
-   client: Client = {
-    name: "Czak",
+   PESEL: string = "8890991812"
+  apartmentNumb: string = "18"
+  client: Client = {
+    /*name: "Czak",
     surname: "Noris",
     gender: "Men",
     PESEL: "8890991812",
@@ -32,14 +34,28 @@ export class CustomerEditDataComponent implements OnInit {
     cardNumb: "333224411",
     mail: "czak.noris@gmail.com",
     dyscypline: "Boks",
-    phoneNumb: "66677788"
+    phoneNumb: "66677788",*/
+
+    addressLine: "Wolf Street 23",
+    city: "Arizona",
+    email: "czak.noris@gmail.com",
+    firstName: "Czak",
+    gender: Gender.Male,
+    id: 0,
+    identityNumber: "333224411",
+    image: "",
+    lastName: "Noris",
+    mainDiscipline: "Boks",
+    phone: "66677788",
+    postalCode: "00-233",
+    voivodeship: "Ślunskie",
 
   };
 
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    this.router.navigate(["/receptionist-panel/customer-edit-data", {cardID: this.client.cardNumb}])
+    this.router.navigate(["/receptionist-panel/customer-edit-data", {cardID: this.client.identityNumber}])
   }
 
   public get triggerObservable(): Observable<void> {
