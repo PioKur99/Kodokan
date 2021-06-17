@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FamilyMemberService } from '../services/family-member.service';
+import { FamilyMemberService } from '../../services/family-member.service';
 
 @Component({
   selector: 'app-family-member',
