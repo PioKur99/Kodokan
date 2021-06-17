@@ -25,7 +25,7 @@
 
 
             <igx-input-group>
-              <input (keypress)="numberOnly($event)" igxInput name="phone" type="tel" required="required" formControlName="secondCtrl" minlength="7" maxlength="16" [(ngModel)]="client.phoneNumber">
+              <input (keypress)="numberOnly($event)" igxInput name="phone" type="tel" required="required" formControlName="secondCtrl" minlength="7" maxlength="16" [(ngModel)]="client.phone">
               <label igxLabel for="phone">
                  Telefon kontaktowy
               </label>
@@ -34,7 +34,7 @@
             </igx-suffix>
             </igx-input-group>
             <igx-input-group>
-              <input igxInput name="password" type="password" required="required" formControlName="thirdCtrl" [(ngModel)]="password" minlength="7" (keyup)="onPressPassword()">
+              <input igxInput name="password" type="password" required="required" formControlName="thirdCtrl" [(ngModel)]="client.password" minlength="7" (keyup)="onPressPassword()">
               <label igxLabel for="password">
                  Hasło
               </label>
@@ -68,7 +68,7 @@
         </div>
       </div>
         <div>
-          <button mat-button  igxButton="raised" igxRipple="white" matStepperNext class="rightBtn greyBtn full-width" [disabled]="isDisabled" (click)="onClickNextBtn()">
+          <button mat-button  igxButton="raised" igxRipple="white" matStepperNext class="rightBtn greyBtn full-width" [disabled]="isDisabled">
             DALEJ 
           </button>
         </div>
@@ -96,31 +96,31 @@
 
         </form>
             <igx-input-group>
-              <input  igxInput name="name" type="text" required="required" formControlName="firstCtrl" [(ngModel)]="client.name" maxlength="25">
-              <label igxLabel for="name">
+              <input  igxInput name="firstName" type="text" required="required" formControlName="firstCtrl" [(ngModel)]="client.firstName" maxlength="25">
+              <label igxLabel for="firstName">
                 Imię
               </label>
             </igx-input-group>
             <igx-input-group>
-              <input  igxInput name="surname" type="text" required="required" formControlName="secondCtrl" [(ngModel)]="client.surname" maxlength="25">
-              <label igxLabel for="surname">
+              <input  igxInput name="lastName" type="text" required="required" formControlName="secondCtrl" [(ngModel)]="client.lastName" maxlength="25">
+              <label igxLabel for="lastName">
                 Nazwisko
               </label>
             </igx-input-group>
             <igx-input-group>
-              <input  igxInput name="pesel" (keypress)="numberOnly($event)" type="text" required="required" formControlName="thirdCtrl" [(ngModel)]="client.pesel" maxlength="25">
-              <label igxLabel for="pesel">
+              <input  igxInput name="identityNumber" (keypress)="numberOnly($event)" type="text" required="required" formControlName="thirdCtrl" [(ngModel)]="client.identityNumber" maxlength="25">
+              <label igxLabel for="identityNumber">
                 PESEL
               </label>
             </igx-input-group>
             <igx-input-group>
-              <input  igxInput name="street" type="text" required="required" formControlName="fourthCtrl" [(ngModel)]="client.street" maxlength="25">
+              <input  igxInput name="street" type="text" required="required" formControlName="fourthCtrl" [(ngModel)]="streetName" maxlength="25">
               <label igxLabel for="street">
                 Ulica i numer domu
               </label>
             </igx-input-group>
             <igx-input-group>
-              <input  igxInput name="local" type="text" (keypress)="numberOnly($event)" formControlName="fifthCtrl" [(ngModel)]="client.localNumber" maxlength="5">
+              <input  igxInput name="local" type="text" (keypress)="numberOnly($event)" formControlName="fifthCtrl" [(ngModel)]="localNumber" maxlength="5">
               <label igxLabel for="local">
                 Numer lokalu
               </label>
@@ -132,14 +132,14 @@
               </label>
             </igx-input-group>
             <igx-input-group>
-              <input  igxInput name="postCode" (keypress)="numberOnly($event)" type="text" required="required" formControlName="seventhCtrl" [(ngModel)]="client.postCode" maxlength="10">
-              <label igxLabel for="postCode">
+              <input  igxInput name="postalCode" (keypress)="numberOnly($event)" type="text" required="required" formControlName="seventhCtrl" [(ngModel)]="client.postalCode" maxlength="10">
+              <label igxLabel for="postalCode">
                 Kod pocztowy
               </label>
             </igx-input-group>
             <igx-input-group>
-              <input  igxInput name="province" type="text" required="required" formControlName="eighthCtrl" [(ngModel)]="client.province" maxlength="15">
-              <label igxLabel for="province">
+              <input  igxInput name="voivodeship" type="text" required="required" formControlName="eighthCtrl" [(ngModel)]="client.voivodeship" maxlength="15">
+              <label igxLabel for="voivodeship">
                 Województwo
               </label>
             </igx-input-group>
@@ -173,12 +173,12 @@
 
               </div>
               <div igxFlex>
-                <button    igxButton="raised" igxRipple="white" class="actionBtn greyBtn" (click)="triggerSnapshot();" [disabled]="client.image64">
+                <button    igxButton="raised" igxRipple="white" class="actionBtn greyBtn" (click)="triggerSnapshot();" [disabled]="client.image">
                   Zrób zdjęcie
                 </button>
               </div>
 
-              <button igxButton="outlined" igxRipple="white" (click)="reset();" *ngIf="client.image64">
+              <button igxButton="outlined" igxRipple="white" (click)="reset();" *ngIf="client.image">
                 Ponów próbę
               </button> 
 
@@ -189,10 +189,10 @@
               <webcam [height]="400" 
                       [width]="1000" 
                       [trigger]="triggerObservable"
-                      (imageCapture)="handleImage($event)" *ngIf="!client.image64">
+                      (imageCapture)="handleImage($event)" *ngIf="!client.image">
               </webcam>
               <image-cropper *ngIf="displayCameraCropper"
-                            [imageBase64]="client.image.imageAsDataUrl"
+                            [imageBase64]="cameraImage.imageAsDataUrl"
                             [maintainAspectRatio]="true"
                             [aspectRatio]="3 / 4"
                             [cropperMinWidth]="150"
@@ -200,8 +200,6 @@
                             format="jpg"
                             (imageCropped)="imageCropped($event)"
                             (imageLoaded)="imageLoaded()"
-                            (cropperReady)="cropperReady()"
-                            (loadImageFailed)="loadImageFailed()"
                             [resizeToWidth]="100"
               ></image-cropper>
               <image-cropper *ngIf="imageChangedEvent"
@@ -223,7 +221,7 @@
         <button mat-button  igxButton="outlined" igxRipple="white" matStepperPrevious id="previous">
           WSTECZ
         </button>
-        <button mat-button  igxButton="raised" igxRipple="white" matStepperNext class="rightBtn greyBtn" [disabled]="!client.image64">
+        <button mat-button  igxButton="raised" igxRipple="white" matStepperNext class="rightBtn greyBtn" [disabled]="!client.image">
           DALEJ
         </button>
 
@@ -238,15 +236,15 @@
               <igx-input-group>
                 <input igxInput name="name" type="text"  disabled="disabled" >
                 <label igxLabel for="name">
-                  {{client.name}}
+                  {{client.firstName}}
                 </label>
               </igx-input-group>
             </div>
             <div class="labels">
               <igx-input-group>
-                <input igxInput name="surname" type="text"  disabled="disabled" >
-                <label igxLabel for="surname">
-                  {{client.surname}}
+                <input igxInput name="lastName" type="text"  disabled="disabled" >
+                <label igxLabel for="lastName">
+                  {{client.lastName}}
                 </label>
               </igx-input-group>
             </div>
@@ -260,9 +258,9 @@
             </div>
             <div class="labels">
               <igx-input-group>
-                <input igxInput name="pesel" type="text"  disabled="disabled" >
-                <label igxLabel for="pesel">
-                  {{client.pesel}}
+                <input igxInput name="identityNumber" type="text"  disabled="disabled" >
+                <label igxLabel for="identityNumber">
+                  {{client.identityNumber}}
                 </label>
               </igx-input-group>
             </div>
@@ -272,7 +270,7 @@
               <igx-input-group>
                 <input igxInput name="street" type="text"  disabled="disabled" >
                 <label igxLabel for="street">
-                  {{client.street}}
+                  {{streetName}}
                 </label>
               </igx-input-group>
             </div>
@@ -280,7 +278,7 @@
               <igx-input-group>
                 <input igxInput name="localNumber" type="text"  disabled="disabled" >
                 <label igxLabel for="localNumber">
-                  {{client.localNumber}}
+                  {{localNumber}}
                 </label>
               </igx-input-group>
             </div>
@@ -292,19 +290,19 @@
                 </label>
               </igx-input-group>
             </div>
-            <div class="labels" *ngIf="client.postCode">
+            <div class="labels" *ngIf="client.postalCode">
               <igx-input-group>
-                <input igxInput name="postCode" type="text"  disabled="disabled" >
-                <label igxLabel for="postCode">
-                  {{client.postCode}}
+                <input igxInput name="postalCode" type="text"  disabled="disabled" >
+                <label igxLabel for="postalCode">
+                  {{client.postalCode}}
                 </label>
               </igx-input-group>
             </div>
             <div class="labels">
               <igx-input-group>
-                <input igxInput name="province" type="text"  disabled="disabled" >
-                <label igxLabel for="province">
-                  {{client.province}}
+                <input igxInput name="voivodeship" type="text"  disabled="disabled" >
+                <label igxLabel for="voivodeship">
+                  {{client.voivodeship}}
                 </label>
               </igx-input-group>
             </div>
@@ -320,18 +318,18 @@
             </div>
             <div class="labels">
               <igx-input-group>
-                <input igxInput name="phoneNumber" type="text"  disabled="disabled" >
-                <label igxLabel for="phoneNumber">
-                  {{client.phoneNumber}}
+                <input igxInput name="phone" type="text"  disabled="disabled" >
+                <label igxLabel for="phone">
+                  {{client.phone}}
                 </label>
               </igx-input-group>
             </div>
           </div>
         </div>
         <div class="mainContainerTwo">
-          <div class="snapshot" *ngIf="client.image">
+          <div class="snapshot" *ngIf="cameraImage">
             <img  
-            [width]="250"  [src]="client.image64"/>
+            [width]="250"  [src]="client.image"/>
           </div>
         </div>
       </div>

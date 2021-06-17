@@ -25,7 +25,6 @@ export class RegisterComponent implements OnInit {
   thirdFormGroup: FormGroup;
   isOptional: Boolean;
   //inputs
-  password: String;
   repeatedPassword: String;
   isDisabled: Boolean;
   isChecked: Boolean;
@@ -34,25 +33,27 @@ export class RegisterComponent implements OnInit {
   selected: String;
   displayCamera: Boolean;
   displayCameraCropper: Boolean;
+  cameraImage: WebcamImage;
+  streetName: String;
+  localNumber: String;
 
   private trigger: Subject<void> = new Subject<void>();
 
   client: Client = {
-    email: "",
-    phoneNumber: "",
-    gender: "",
-    name: "",
-    surname: "",
-    pesel: "",
-    street: "",
-    localNumber: null,
+    addressLine: "",
     city: "",
-    postCode: "",
-    province: "",
-    image: null,
-    image64: ""
+    email: "",
+    firstName: "",
+    gender: "",
+    identityNumber: "",
+    image: "",
+    lastName: "",
+    password: "",
+    phone: "",
+    postalCode: "",
+    voivodeship: "",
   };
-
+  
   constructor(private _formBuilder: FormBuilder, private _location: Location, private registerService: RegisterService, private router: Router) {
     this.isOptional = false;
     this.isDisabled = true;
@@ -62,7 +63,9 @@ export class RegisterComponent implements OnInit {
     this.isDifferent = false;
     this.displayCamera = false;
     this.displayCameraCropper = false;
-
+    this.cameraImage = null;
+    this.streetName = "";
+    this.localNumber = "";
   }
 
   ngOnInit() {
@@ -91,36 +94,28 @@ export class RegisterComponent implements OnInit {
     imageChangedEvent: any = '';
     croppedImage: any = '';
     showCropper = false;
-
-
     
     fileChangeEvent(event: any): void {
-        console.log("EVENT");
-        console.log(event);
         this.imageChangedEvent = event;
         this.displayCamera = false;
         this.displayCameraCropper = false;
     }
     imageCropped(event: ImageCroppedEvent) {
-        console.log("CROPPED EVENT");
-        console.log(event);
-
         this.croppedImage = event.base64;
-        this.client.image64 = event.base64;
+        this.client.image = event.base64;
     }
     imageLoaded() {
       this.showCropper = true;
-      console.log('Image loaded');
-        // show cropper
     }
-    cropperReady() {
-        // cropper ready
-    }
-    loadImageFailed() {
-        // show message
-    }
+
 //***************************************************** */
   addClient():void{
+    if(this.localNumber != ""){
+      this.client.addressLine = this.streetName + "/" + this.localNumber;
+    }else{
+      this.client.addressLine = this.streetName;
+    }
+
     this.registerService.addClient(this.client).subscribe(
       x=>{
         this.router.navigate(["/register", {id:x}]);
@@ -148,7 +143,7 @@ export class RegisterComponent implements OnInit {
   }
   //disable or anable next button
   changeBtnState():void{
-    if(this.isChecked === true && this.password===this.repeatedPassword) this.isDisabled = false;
+    if(this.isChecked === true && this.client.password===this.repeatedPassword) this.isDisabled = false;
     else this.isDisabled = true;
   }
   //password control
@@ -157,14 +152,12 @@ export class RegisterComponent implements OnInit {
   }
   displayMessage(): void{
     this.isDifferent = true; 
-    console.log("hello")
-    console.log(this.isDifferent);
   }
   onSetTimout(): void{
     if(this.setTimoutId){
       clearTimeout(this.setTimoutId);
     }
-    if(this.password !== this.repeatedPassword){
+    if(this.client.password !== this.repeatedPassword){
       var self = this;
       this.setTimoutId = setTimeout(function(){ 
         self.isDifferent = true; 
@@ -179,22 +172,16 @@ export class RegisterComponent implements OnInit {
   }
   //radio buttons
   onItemChange(event):void{
-    console.log(" Value is : ", event.value );
     this.client.gender = event.value;
  }
-  //
-  onClickNextBtn(): void{
-    console.log("jaaaj");
-
-  }
 
   //camera
   //ZRÓB ZDJECIE
   triggerSnapshot(): void {
     this.imageChangedEvent = null;
     if(this.displayCamera===false){
+      this.cameraImage = null;
       this.client.image = null;
-      this.client.image64 = null;
       this.displayCameraCropper = true;
     }
     this.displayCamera = !this.displayCamera;
@@ -205,17 +192,14 @@ export class RegisterComponent implements OnInit {
     this.imageChangedEvent = null;
     this.displayCamera = false;
     this.displayCameraCropper = false;
+    this.cameraImage = null;
     this.client.image = null;
-    this.client.image64 = null;
   }
 
   handleImage(webcamImage: WebcamImage): void {
-   //console.info('Saved webcam image', webcamImage);
    this.displayCameraCropper = true;
-   this.client.image = webcamImage;
-   this.client.image64 = webcamImage.imageAsDataUrl;
-   console.log(this.client.image);
-  // this.image = webcamImage.imageAsDataUrl;
+   this.cameraImage = webcamImage;
+   this.client.image = webcamImage.imageAsDataUrl;
   }
    
   public get triggerObservable(): Observable<void> {
