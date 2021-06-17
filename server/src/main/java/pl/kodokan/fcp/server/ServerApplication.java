@@ -31,6 +31,7 @@ public class ServerApplication {
                 registry.addMapping("/**").allowedMethods("*");
             }
         };
+        //elo
     }
 
 }
