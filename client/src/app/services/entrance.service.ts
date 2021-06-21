@@ -12,24 +12,26 @@ export class EntranceService {
   constructor(private http: HttpClient) { }
 
   getEntrances(): Observable<Entrance[]>{
-    //return this.http.get<Entrance[]>(config.address + 'entrances')
-    let entrance=[{
-      name: "Marian",
-    surname: "Paździoch",
-    date: new Date(),
-    package: "Nazwa pakietu",
-    training: "nazwa treningu",
-    card_id: 1
-    },
-    {
-      name: "Kazimierz",
-    surname: "Boczek",
-    date: new Date(),
-    package: "Nazwa pakietu",
-    training: "nazwa treningu",
-    card_id: 2
-    }]
-    return new Observable(x=>{x.next(entrance)})
+    return this.http.get<Entrance[]>(config.address + 'entrances')
+    // let entrance=[{
+    //   entrance_id: 1,
+    //   name: "Marian",
+    //   surname: "Paździoch",
+    //   date: new Date(),
+    //   package: "Nazwa pakietu",
+    //   training: "nazwa treningu",
+    //   card_id: 1
+    // },
+    // {
+    //   entrance_id: 2,
+    //   name: "Kazimierz",
+    //   surname: "Boczek",
+    //   date: new Date(),
+    //   package: "Nazwa pakietu",
+    //   training: "nazwa treningu",
+    //   card_id: 2
+    // }]
+    // return new Observable(x=>{x.next(entrance)})
   }
 
   deleteEntrance(entrance_id: number): Observable<number>{

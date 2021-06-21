@@ -1,4 +1,5 @@
 export class Entrance {
+    entrance_id: number
     name: string
     surname: string
     date: Date

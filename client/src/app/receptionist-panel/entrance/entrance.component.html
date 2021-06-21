@@ -48,7 +48,7 @@
            <td class="column column--fifth">Karnet</td>
            <td class="column column--sixth">Zajęcia</td>
         </tr>
-        <tr class="row" *ngFor="let item of entrancesList">
+        <tr class="row" *ngFor="let item of entrancesList; let i=index">
             <td class="column column--first">{{item.name}}</td>
             <td class="column column--second">{{item.surname}}</td>
             <td class="column column--third">{{item.date.toLocaleDateString()}}</td>
@@ -57,12 +57,14 @@
             </td>
             <td class="column column--fifth">{{item.package}}</td>
             <td class="column column--sixth">{{item.training}}</td>
-            <igx-checkbox></igx-checkbox>            
+            <igx-checkbox  (change)="toggleSelection($event,i)" [checked]="checkboxes[i]"></igx-checkbox>            
         </tr>
      </table>
 </div>
 
 <!-- do dodania interpolacja z listy Nazwisko i imię -->
-<igx-dialog #dialog message="Czy na pewno chcesz usunąć wejście ?" leftButtonLabel="Tak" (onLeftButtonSelect)="dialog.close()" rightButtonLabel="Nie" (onRightButtonSelect)="dialog.close()" [closeOnOutsideSelect]="true"></igx-dialog>
+<igx-dialog #dialog message="Czy na pewno chcesz usunąć wejście?" leftButtonLabel="Tak" (onLeftButtonSelect)="deleteEntrances()" rightButtonLabel="Nie" (onRightButtonSelect)="dialog.close()" [closeOnOutsideSelect]="true"></igx-dialog>
 
 <igx-dialog #errorGetEntrances message="Nie udało się wczytać listy wejść?" rightButtonLabel="Wróć" (onRightButtonSelect)="errorGetEntrances.close()" [closeOnOutsideSelect]="true"></igx-dialog>
+
+<igx-dialog #errorDeleteEntrance message="Nie udało się usunąć wybranego wejścia" rightButtonLabel="Wróć" (onRightButtonSelect)="errorDeleteEntrance.close()" [closeOnOutsideSelect]="true"></igx-dialog>
