@@ -12,9 +12,14 @@ export class ClientService {
 
   constructor(private http: HttpClient) { }
   getClientBaseUrl: string = "http://172.18.0.3:8081/customers/findById/"
+  patchClientBaseUrl: string = "http://172.18.0.3:8081/customers/edit/"
 
   getClient(id: number) : Observable<Client>{
     return this.http.get<Client>(this.getClientBaseUrl + id);
+  }
+
+  editClient(toEdit:Client) : Observable<Client>{
+    return this.http.patch<Client>(this.patchClientBaseUrl + toEdit.id, toEdit);
   }
 
 }

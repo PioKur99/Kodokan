@@ -13,7 +13,7 @@ firstName: string;
 gender: Gender;
 id: number;
 identityNumber: string;
-image: string;
+image: String;
 lastName: string;
 mainDiscipline: string;
 phone: string;

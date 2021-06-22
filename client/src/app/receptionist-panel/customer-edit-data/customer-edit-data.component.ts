@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Client, Gender } from 'src/app/data/client';
-import { Router } from '@angular/router';
+import { ClientService } from 'src/app/services/client.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import {Subject, Observable} from 'rxjs';
 import { WebcamImage } from 'ngx-webcam';
 @Component({
@@ -19,23 +20,8 @@ export class CustomerEditDataComponent implements OnInit {
    @ViewChild("dialog1") dialogSuccess;
    @ViewChild("dialog2") dialogFailure;
 
-   PESEL: string = "8890991812"
-  apartmentNumb: string = "18"
   client: Client = {
-    /*name: "Czak",
-    surname: "Noris",
-    gender: "Men",
-    PESEL: "8890991812",
-    streetNumb: "Wolf Street 23",
-    apartmentNumb: "18",
-    city: "Arizona",
-    postCode: "00-233",
-    voivodeship: "Ślunskie",
-    cardNumb: "333224411",
-    mail: "czak.noris@gmail.com",
-    dyscypline: "Boks",
-    phoneNumb: "66677788",*/
-
+   
     addressLine: "Wolf Street 23",
     cardId: "123",
     city: "Arizona",
@@ -53,10 +39,25 @@ export class CustomerEditDataComponent implements OnInit {
 
   };
 
-  constructor(private router: Router) { }
+  constructor(private clientService: ClientService, private router: Router, private urlParam: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.router.navigate(["/receptionist-panel/customer-edit-data", {cardID: this.client.identityNumber}])
+    this.getClient(2) // <--- Na potrzeby testów
+    //this.getClient(this.urlParam.snapshot.paramMap.get('id')) <--- ID klienta z adresu URL
+    this.client.image = this.url
+    this.router.navigate(["/receptionist-panel/customer-edit-data", {card: this.client.identityNumber}])
+  }
+
+  getClient(id: number) : void {
+    this.clientService.getClient(id).toPromise().then(data => {this.client = data});
+  }
+
+  patchClient(toEdit: Client) {
+    this.clientService.editClient(toEdit).subscribe(
+      data => {
+        this.client = data
+      }
+    )
   }
 
   public get triggerObservable(): Observable<void> {
@@ -69,6 +70,8 @@ export class CustomerEditDataComponent implements OnInit {
   }
 
   manageDialogs() {
+    this.client.image = this.url
+    this.patchClient(this.client)
     if(this.editWentGood == true) {
       this.dialogSuccess.open();
     }
@@ -83,6 +86,7 @@ export class CustomerEditDataComponent implements OnInit {
       reader.readAsDataURL(event.target.files[0])
       reader.onload = (event:any) => {
         this.url = event.target.result;
+        this.client.image = this.url
       }
     }
   }
@@ -94,6 +98,7 @@ export class CustomerEditDataComponent implements OnInit {
   public handleImage(webcamImage: WebcamImage): void {
     this.webImage = webcamImage;
     this.url = this.webImage.imageAsDataUrl;
+    this.client.image = this.url
   }
 
 }
