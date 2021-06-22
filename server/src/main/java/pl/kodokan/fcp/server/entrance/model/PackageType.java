@@ -46,7 +46,6 @@ public class PackageType extends BaseEntity {
      */
     private boolean withPartnerSystem = false;
 
-
     /**
      * Roles which are allowed to add packages with this PackageType
      */
@@ -54,6 +53,11 @@ public class PackageType extends BaseEntity {
     @Getter(AccessLevel.NONE) // use custom safe getter
     @ManyToMany @JoinTable
     private Set<Role> roles = new HashSet<>();
+
+    @Getter(AccessLevel.NONE)
+    @Setter(AccessLevel.NONE)
+    @OneToMany(mappedBy = "packageType")
+    private List<Package> packages;
 
     /**
      * Add user role which is allowed to create new packages of this type
@@ -71,11 +75,6 @@ public class PackageType extends BaseEntity {
         // returns a safe copy of the set
         return Collections.unmodifiableSet(roles);
     }
-
-    @Getter(AccessLevel.NONE)
-    @Setter(AccessLevel.NONE)
-    @OneToMany(mappedBy = "packageType")
-    private List<Package> packages;
 
     @Override
     public int hashCode() {
