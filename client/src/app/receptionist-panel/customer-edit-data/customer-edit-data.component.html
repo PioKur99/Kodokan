@@ -52,7 +52,7 @@
 </section>
 
 <div class = "accept">
-    <button igxButton="raised" igxRipple="white" (click)="manageDialogs()">ZATWIERDŹ</button>
+    <button igxButton="raised" igxRipple="white" (click)="patchClient()">ZATWIERDŹ</button>
 </div>
 
 <div igxOverlayOutlet>
@@ -63,7 +63,7 @@
 </div>
 
 
-<igx-dialog #dialog2 message="Operacja się nie powiodła." leftButtonLabel="OK" 
+<igx-dialog #dialog2 message={{dialogMessage}} leftButtonLabel="OK" 
 (onLeftButtonSelect)="dialog2.close()"  
 [closeOnOutsideSelect]="true" title = "COŚ SIĘ NIE UDAŁO!">
 </igx-dialog>

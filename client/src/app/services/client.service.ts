@@ -19,7 +19,7 @@ export class ClientService {
   }
 
   editClient(toEdit:Client) : Observable<Client>{
-    return this.http.patch<Client>(this.patchClientBaseUrl + toEdit.id, toEdit);
+    return this.http.put<Client>(this.patchClientBaseUrl + toEdit.id, toEdit);
   }
 
 }

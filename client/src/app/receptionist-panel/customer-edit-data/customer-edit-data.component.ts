@@ -12,7 +12,7 @@ import { WebcamImage } from 'ngx-webcam';
 export class CustomerEditDataComponent implements OnInit {
 
 
-   editWentGood: boolean = true;
+   dialogMessage: String;
    url: String = "assets/ruda.jpg"
    showWebcam: boolean = false;
    public webImage: WebcamImage = null;
@@ -44,18 +44,23 @@ export class CustomerEditDataComponent implements OnInit {
   ngOnInit(): void {
     this.getClient(2) // <--- Na potrzeby testów
     //this.getClient(this.urlParam.snapshot.paramMap.get('id')) <--- ID klienta z adresu URL
-    this.client.image = this.url
     this.router.navigate(["/receptionist-panel/customer-edit-data", {card: this.client.identityNumber}])
   }
 
   getClient(id: number) : void {
-    this.clientService.getClient(id).toPromise().then(data => {this.client = data});
+    this.clientService.getClient(id).toPromise().then(data => {this.client = data
+      this.client.image = this.url /*<--- na potrzeby testów */});
   }
 
-  patchClient(toEdit: Client) {
-    this.clientService.editClient(toEdit).subscribe(
+  patchClient() {
+    this.clientService.editClient(this.client).subscribe(
       data => {
         this.client = data
+        this.dialogSuccess.open();
+      },
+      error => {
+        this.dialogMessage = error.error;
+        this.dialogFailure.open();
       }
     )
   }
@@ -67,17 +72,6 @@ export class CustomerEditDataComponent implements OnInit {
   public triggerSnapshot(): void {
     this.trigger.next();
     this.showWebcam = !this.showWebcam;
-  }
-
-  manageDialogs() {
-    this.client.image = this.url
-    this.patchClient(this.client)
-    if(this.editWentGood == true) {
-      this.dialogSuccess.open();
-    }
-    else {
-      this.dialogFailure.open();
-    }
   }
 
   selectFiles(event) {
