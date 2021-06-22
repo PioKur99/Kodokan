@@ -21,7 +21,7 @@ export class CustomerDataComponent implements OnInit {
     gender: Gender.Male,
     id: 0,
     identityNumber: "333224411",
-    image: "../../assets/ruda.jpg",
+    image: "assets/ruda.jpg",
     lastName: "Noris",
     mainDiscipline: "Boks",
     phone: "66677788",
@@ -40,7 +40,8 @@ export class CustomerDataComponent implements OnInit {
   }
 
   getClient(id: number) : void {
-    this.clientService.getClient(id).toPromise().then(data => {this.client = data});
+    this.clientService.getClient(id).toPromise().then(data => {this.client = data
+                  this.client.image = "assets/ruda.jpg"/*<---- na potrzeby testów */});
   }
 
 }
