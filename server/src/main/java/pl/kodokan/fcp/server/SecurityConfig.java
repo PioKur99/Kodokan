@@ -49,7 +49,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/authenticate").permitAll()
                 .antMatchers("/h2/**").permitAll()
-                .anyRequest().authenticated()
+//                .anyRequest().authenticated()                                   //odkomentować tę linię...                    !!!!!!!!!
+                .anyRequest().permitAll()                                         //i zakomentować tę żeby włączyć autentykację !!!!!!!!!
                 .and()
                 .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 .and().sessionManagement()
@@ -63,7 +64,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
-    //PASSWORD HASHING ON FRONTEND
 
     @Bean
     public PasswordEncoder passwordEncoder(){
