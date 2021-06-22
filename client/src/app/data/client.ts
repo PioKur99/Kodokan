@@ -6,6 +6,7 @@ export enum Gender {
 export class Client {
 
 addressLine: string;
+cardId: string;
 city: string;
 email: string;
 firstName: string;
@@ -18,4 +19,5 @@ mainDiscipline: string;
 phone: string;
 postalCode: string;
 voivodeship: string;
+
 }

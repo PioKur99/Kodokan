@@ -1,5 +1,5 @@
 <section class = "Labels">
-    <img class="profile-pic" src="../../assets/ruda.jpg">
+    <img class="profile-pic" [src]="client.image">
     <div class="label-group-1">
         <label igxLabel for="Name">imię {{client.firstName}}</label>
         <br>
@@ -22,17 +22,16 @@
     <div class="label-group-2">
         <label igxLabel for="Surname">nazwisko {{client.lastName}}</label>
         <br>
-        <label igxLabel for="Pesel">pesel {{PESEL}}</label>
+        <label igxLabel for="Pesel">pesel {{client.identityNumber}}</label>
         <br>
         <br>
         <br>
-        <label igxLabel for="Apartment-Numb">numer lokalu {{apartmentNumb}}</label>
         <br>
         <label igxLabel for="Post-Code">kod pocztowy {{client.postalCode}}</label>
         <br>
         <br>
         <br>
-        <label igxLabel for="Card-Numb">numer karty {{client.identityNumber}}</label>
+        <label igxLabel for="Card-Numb">numer karty {{client.cardId}}</label>
         <br>
         <label igxLabel for="Dyscypline">dyscyplina {{client.mainDiscipline}}</label>
     </div>

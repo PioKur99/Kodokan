@@ -37,6 +37,7 @@ export class CustomerEditDataComponent implements OnInit {
     phoneNumb: "66677788",*/
 
     addressLine: "Wolf Street 23",
+    cardId: "123",
     city: "Arizona",
     email: "czak.noris@gmail.com",
     firstName: "Czak",
