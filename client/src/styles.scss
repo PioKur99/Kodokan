@@ -43,6 +43,17 @@ $igx-foreground-color: igx-contrast-color($custom-palette, 'surface');
 		color: $igx-foreground-color;
 	}
 }
+$custom-input-group: igx-input-group-theme(
+  $filled-text-color: #DAA520,
+  $focused-text-color: #c79517,
+  $idle-text-color: #DAA520,
+  $idle-bottom-line-color: #DAA520,
+  $interim-bottom-line-color: #DAA520,
+  $hover-bottom-line-color: #DAA520,
+  $focused-secondary-color: #c79517,
+  $box-background: #3f3f3f
+);
+@include igx-css-vars($custom-input-group);
 
 .igx-typography {
 	h1, h2, h3, h4, h5, h6, p {

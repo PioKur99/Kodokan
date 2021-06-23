@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { ReceptionistPanelRoutingModule } from './receptionist-panel-routing.module';
 import { ReceptionistPanelComponent } from './receptionist-panel.component';
 import {
-    IgxRippleModule,
-    IgxButtonModule,
-    IgxBottomNavModule,
-    IgxIconModule,
-    IgxDialogModule
+	IgxRippleModule,
+	IgxButtonModule,
+	IgxBottomNavModule,
+	IgxIconModule,
+	IgxDialogModule,
+	IgxInputGroupModule
 } from 'igniteui-angular';
 import { CustomersComponent } from './customers/customers.component';
 import { EntranceComponent } from './entrance/entrance.component';
@@ -15,8 +16,9 @@ import { MembershipCardsComponent } from './membership-cards/membership-cards.co
 import { PassesComponent } from './passes/passes.component';
 import { AddAClientComponent } from './add-a-client/add-a-client.component';
 import { EntryRegistrationComponent } from './entry-registration/entry-registration.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { FormsModule } from '@angular/forms';
+import { WebcamModule } from 'ngx-webcam';
+import { ImageCropperModule } from 'ngx-image-cropper';
 @NgModule({
     declarations: [
         ReceptionistPanelComponent,
@@ -28,14 +30,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         EntryRegistrationComponent
     ],
     imports: [
+        ImageCropperModule,
+        WebcamModule,
         CommonModule,
         ReceptionistPanelRoutingModule,
         IgxRippleModule,
         IgxButtonModule,
         IgxBottomNavModule,
         IgxIconModule,
-        //BrowserAnimationsModule,
-        IgxDialogModule
+        IgxDialogModule,
+        FormsModule,
+        IgxInputGroupModule
     ]
 })
 export class ReceptionistPanelModule {
