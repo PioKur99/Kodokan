@@ -1,3 +1,48 @@
 img{
   background: white;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+.layout-box {
+  width: 100%;
+}
+.layout-box__el:first-of-type{
+  width: 20%;
+  text-align: center;
+}
+button{
+  width: 95%;
+  margin: 5% 0%;
+  background-color: rgb(189, 189, 189);
+  border-radius: 10px;
+}
+.layout-box__el {
+  margin: 0% 3%;
+  width: 25%;
+  display: inline-block;
+}
+.gap{
+  height: 50px;
+}
+label{
+  text-transform: uppercase;
+}
+
+.confirmBtn{
+  width: 270px;
+  background-color: #DAA520;
+  float: right;
+  margin: 4% 15%;
+}
+.photo-section{
+  text-align: center;
+  padding: 3%;
+}
+.photoBtn{
+  width: 50%;
+  margin: 3% 25%;
+}
+h5{
+  margin-bottom: 30px;
+  color: rgb(158, 158, 158);
 }

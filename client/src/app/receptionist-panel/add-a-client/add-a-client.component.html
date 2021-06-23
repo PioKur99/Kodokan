@@ -1,32 +1,154 @@
+<section *ngIf="makePhoto" class="photo-section">
+  <h5>
+    Zrób zdjęcie kamerką
+  </h5>
+  <webcam [height]="400" 
+          [width]="1000" 
+          [trigger]="triggerObservable"
+          (imageCapture)="handleImage($event)">
+  </webcam>
+  <button    igxButton="raised" igxRipple="white" (click)="triggerSnapshot();" class="photoBtn">
+    Zrób zdjęcie
+  </button>
+</section>
+  <!--*****************************************************-->
 <section *ngIf="!makePhoto"> 
-  <div class="photoBtn" igxLayout igxLayoutDir="row">
-    <div class="snapshot" *ngIf="client.image">
-      <img  
-      [width]="250"  [src]="client.image"/>
+  <form>
+    <div >
+      <div class="layout-box__el" >
+
+          <div  igxLayout igxLayoutDir="row">
+            <div class="snapshot" *ngIf="client.image">
+              <img  
+              [width]="250"  [src]="client.image"/>
+            </div>
+            <img src="../../assets/person.png" width="200" id="person-icon" *ngIf="!client.image">
+            <div igxFlex>
+              <button igxButton="raised" igxRipple="white"  onclick="document.getElementById('file').click();" >
+                WGRAJ Z DYSKU
+              </button> 
+                <input  type="file" style="display:none;" id="file" name="file" (change)="fileChangeEvent($event)"/>
+            </div>
+            <div igxFlex>
+              <button    igxButton="raised" igxRipple="white"(click)="makePhoto=!makePhoto">
+                Zrób zdjęcie
+              </button>
+            </div>
+          </div>
+
+
+      </div>
+      <div class="layout-box__el" >
+        <igx-input-group type="line">
+          <label igxLabel for="firstName">
+            Imię
+          </label>
+          <input igxInput name="firstName" type="text" [(ngModel)]="client.firstName" required="required">
+        </igx-input-group>
+        <igx-input-group type="line">
+          <label igxLabel for="gender">
+            Płeć
+          </label>
+          <input igxInput name="gender" type="text" [(ngModel)]="client.firstName" required="required">
+        </igx-input-group>
+        <br>
+        <igx-input-group type="line">
+          <label igxLabel for="street">
+            Ulica i numer domu
+          </label>
+          <input igxInput name="street" type="text" [(ngModel)]="client.firstName"  required="required">
+        </igx-input-group>
+        <igx-input-group type="line">
+          <label igxLabel for="city">
+            Miasto
+          </label>
+          <input igxInput name="city" type="text" [(ngModel)]="client.firstName" required="required">
+        </igx-input-group>
+        <igx-input-group type="line">
+          <label igxLabel for="voivodeship">
+            Województwo
+          </label>
+          <input igxInput name="voivodeship" type="text" [(ngModel)]="client.firstName" required="required">
+        </igx-input-group>
+        <br>
+        <igx-input-group type="line">
+          <label igxLabel for="email">
+            E-mail
+          </label>
+          <input igxInput name="email" type="text" [(ngModel)]="client.firstName" required="required">
+        </igx-input-group>
+        
+        <igx-input-group type="line">
+          <label igxLabel for="phoneNumber">
+            Telefon Kontaktowy
+          </label>
+          <input igxInput name="phoneNumber" type="text" [(ngModel)]="client.firstName" required="required">
+        </igx-input-group>
+        
+      </div>
+      <div class="layout-box__el" >
+        <igx-input-group type="line">
+          <label igxLabel for="lastName">
+            Nazwisko
+          </label>
+          <input igxInput name="lastName" type="text" [(ngModel)]="client.firstName" required="required">
+        </igx-input-group>
+        
+        <igx-input-group type="line">
+          <label igxLabel for="identityNumber">
+            PESEL
+          </label>
+          <input igxInput name="identityNumber" type="text" [(ngModel)]="client.firstName" required="required">
+        </igx-input-group>
+        <br>
+        <igx-input-group type="line">
+          <label igxLabel for="local">
+            Numer lokalu
+          </label>
+          <input igxInput name="local" type="text" [(ngModel)]="client.firstName">
+        </igx-input-group>
+        
+        <igx-input-group type="line">
+          <label igxLabel for="postalCode">
+            Kod pocztowy
+          </label>
+          <input igxInput name="postalCode" type="text" [(ngModel)]="client.firstName" required="required">
+        </igx-input-group>
+
+        <div class="gap"></div>
+        <br>
+        <igx-input-group type="line">
+          <label igxLabel for="inputId">
+            Nazwa użytkownika
+          </label>
+          <input igxInput name="inputId" type="text" [(ngModel)]="client.firstName" required="required">
+        </igx-input-group>
+        
+        <igx-input-group type="line">
+          <label igxLabel for="discipline">
+            Dyscyplina
+          </label>
+          <input igxInput name="discipline" type="text" [(ngModel)]="client.firstName" required="required">
+        </igx-input-group>
+        
+      </div>
     </div>
-    <img src="../../assets/person.png" width="250"id="person-icon" *ngIf="!client.image">
-    <div igxFlex>
-      <button igxButton="raised" igxRipple="white"  onclick="document.getElementById('file').click();" >
-        DODAJ ZDJĘCIE <br>Z DYSKU
-      </button> 
-        <input  type="file" style="display:none;" id="file" name="file" (change)="fileChangeEvent($event)"/>
-    </div>
-    <div igxFlex>
-      <button    igxButton="raised" igxRipple="white" class="actionBtn greyBtn" (click)="makePhoto=!makePhoto">
-        Zrób zdjęcie
-      </button>
-    </div>
-  </div>
-  <image-cropper *ngIf="displayCameraCropper"
-  [imageBase64]="client.image"
-  [maintainAspectRatio]="true"
-  [aspectRatio]="4 / 5"
-  [cropperMinWidth]="150"
-  style="opacity: 0;"
-  format="jpg"
-  (imageCropped)="imageCropped($event)"
-  (imageLoaded)="imageLoaded()"
-  [resizeToWidth]="100"
+  </form>
+  <button    igxButton="raised" igxRipple="white" class="confirmBtn" >
+    ZATWIERDŹ
+  </button>
+</section>
+
+<image-cropper *ngIf="displayCameraCropper"
+[imageBase64]="client.image"
+[maintainAspectRatio]="true"
+[aspectRatio]="4 / 5"
+[cropperMinWidth]="150"
+style="opacity: 0;"
+format="jpg"
+(imageCropped)="imageCropped($event)"
+(imageLoaded)="imageLoaded()"
+[resizeToWidth]="100"
 ></image-cropper>
 <image-cropper *ngIf="imageChangedEvent"
 [imageChangedEvent]="imageChangedEvent"
@@ -41,22 +163,3 @@ format="jpg"
 (loadImageFailed)="loadImageFailed()"
 [resizeToWidth]="256"
 ></image-cropper>
-</section>
-  <!--*****************************************************-->
-  <section *ngIf="makePhoto">
-    <webcam [height]="400" 
-            [width]="1000" 
-            [trigger]="triggerObservable"
-            (imageCapture)="handleImage($event)">
-    </webcam>
-    <button    igxButton="raised" igxRipple="white" class="actionBtn greyBtn" (click)="triggerSnapshot();" >
-      Zrób zdjęcie
-    </button>
-
-
-  </section>
-<form>
-
-
-
-</form>
