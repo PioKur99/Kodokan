@@ -2,13 +2,14 @@ package pl.kodokan.fcp.server.customer.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import pl.kodokan.fcp.server.customer.model.CardState;
 
 @Getter
 @Setter
-public class FiltersDTO {
+public class CustomerFilterDTO {
     private String firstName;
     private String lastName;
+    private Long phoneNumber;
+    private Long cardId;
     private String cardState;
-    private Long phone;
-    private Long cardID;
 }

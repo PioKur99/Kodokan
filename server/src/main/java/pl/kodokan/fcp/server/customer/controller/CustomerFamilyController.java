@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.kodokan.fcp.server.customer.dto.AddCustomerToFamilyDTO;
+import pl.kodokan.fcp.server.customer.dto.NewFamilyMemberDTO;
 import pl.kodokan.fcp.server.customer.dto.CustomerFamilyDTO;
 import pl.kodokan.fcp.server.customer.service.CustomerFamilyService;
 
@@ -24,7 +24,7 @@ public class CustomerFamilyController {
             @ApiResponse(code=400, message = "There was an error while adding customer to family")
     })
     @PostMapping("/add-customer-to-family")
-    ResponseEntity<CustomerFamilyDTO> addCustomer(@RequestBody AddCustomerToFamilyDTO dto){
+    ResponseEntity<CustomerFamilyDTO> addCustomer(@RequestBody NewFamilyMemberDTO dto){
         return new ResponseEntity<>(service.addCustomerToFamily(dto.getCustomerID(),dto.getCustomerFamilyID(), dto.getRelation()), HttpStatus.OK);
     }
 

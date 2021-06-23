@@ -42,8 +42,8 @@ public class CardStateAdvice {
         return new ResponseEntity<>(adviceDTO, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(CardIDTaken.class)
-    ResponseEntity<CardStateAdviceDTO> cardIDTaken(CardIDTaken ex) {
+    @ExceptionHandler(CardIDTakenException.class)
+    ResponseEntity<CardStateAdviceDTO> cardIDTaken(CardIDTakenException ex) {
         final CardStateAdviceDTO adviceDTO = new CardStateAdviceDTO();
         adviceDTO.setErrorMsg("This card ID is already taken");
         adviceDTO.setErrorClass(ex.getClass().getName());

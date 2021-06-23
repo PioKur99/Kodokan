@@ -4,14 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.kodokan.fcp.server.customer.dto.CustomerFamilyDTO;
 import pl.kodokan.fcp.server.customer.exception.*;
-import pl.kodokan.fcp.server.customer.model.Customer;
-import pl.kodokan.fcp.server.customer.model.Family;
-import pl.kodokan.fcp.server.customer.model.FamilyRelation;
+import pl.kodokan.fcp.server.customer.model.*;
 import pl.kodokan.fcp.server.customer.repo.CustomerRepository;
 import pl.kodokan.fcp.server.customer.repo.FamilyRepository;
 import pl.kodokan.fcp.server.entrance.model.Package;
-import pl.kodokan.fcp.server.entrance.repo.PackageRepository;
 import pl.kodokan.fcp.server.user.model.Gender;
+import pl.kodokan.fcp.server.entrance.repo.*;
 
 import javax.transaction.Transactional;
 import java.util.*;
@@ -38,47 +36,47 @@ public class CustomerFamilyService {
 
     public CustomerFamilyDTO addCustomerToFamily(Long customerID, Long customerFamilyID, FamilyRelation relation){
         if(customerID == customerFamilyID){
-            throw new TheSameCustomerIDException();
+            throw new ProvidedIDsAreTheSameException();
         }
 
-        Customer c1 = findById(customerID);
-        Customer c2 = findById(customerFamilyID);
+        Customer addedCustomer = findById(customerID);
+        Customer customerFamily = findById(customerFamilyID);
 
-        Long result = familyRepository.isCustomerInFamily(customerID);
+        Long result = familyRepository.findFamilyByMemberId(customerID);
         if(null != result){
             throw new CustomerAlreadyInFamilyException();
         }
 
-        Long familyId = familyRepository.isCustomerInFamily(customerFamilyID);
+        Long familyId = familyRepository.findFamilyByMemberId(customerFamilyID);
         if(null == familyId){
             throw new CustomerDoesntHaveFamilyException();
         }
 
-        if((relation == FamilyRelation.FATHER && c1.getUserData().getGender() != Gender.MALE) || (relation == FamilyRelation.MOTHER && c1.getUserData().getGender() != Gender.FEMALE)){
+        if((relation == FamilyRelation.FATHER && addedCustomer.getUserData().getGender() != Gender.MALE) || (relation == FamilyRelation.MOTHER && addedCustomer.getUserData().getGender() != Gender.FEMALE)){
             throw new GenderDoesntMatchRelationException();
         }
 
         Family family = familyRepository.findById(familyId).get();
 
         if((family.getFather() != null && relation == FamilyRelation.FATHER) || (family.getMother() != null && relation == FamilyRelation.MOTHER)){
-            throw new RoleInFamilyTaken();
+            throw new RoleInFamilyTakenException();
         }
 
         //Add customer to family
         if(relation == FamilyRelation.FATHER){
-            family.setFather(c1);
+            family.setFather(addedCustomer);
         }else if(relation == FamilyRelation.MOTHER){
-            family.setMother(c1);
+            family.setMother(addedCustomer);
         }else if(relation == FamilyRelation.CHILD){
-            c1.setFamily(family);
-            family.addChild(c1);
+            addedCustomer.setFamily(family);
+            family.addChild(addedCustomer);
         }
 
         //Add customer to all active family packages
         List<Package> familyPackages = packageRepository.findFamilyPackages(customerFamilyID);
         for(Package p : familyPackages){
             Package newPackage = new Package();
-            newPackage.setCustomer(c1);
+            newPackage.setCustomer(addedCustomer);
             newPackage.setPackageType(p.getPackageType());
             newPackage.setPaid(p.isPaid());
             newPackage.setEndDateTime(p.getEndDateTime());
@@ -86,25 +84,25 @@ public class CustomerFamilyService {
             packageRepository.save(newPackage);
         }
 
-        return mapper.toDTO(c1,relation);
+        return mapper.toDTO(addedCustomer,relation);
     }
 
     public CustomerFamilyDTO deleteCustomerFromFamily(Long id){
-        Customer c = findById(id);
+        Customer customer = findById(id);
 
-        Long familyId = familyRepository.isCustomerInFamily(id);
+        Long familyId = familyRepository.findFamilyByMemberId(id);
         if(familyId == null){
             throw new CustomerDoesntHaveFamilyException();
         }
 
         Family family = familyRepository.findById(familyId).get();
-        if(family.getFather() == c){
+        if(family.getFather() == customer){
             family.setFather(null);
-        }else if(family.getMother() == c){
+        }else if(family.getMother() == customer){
             family.setMother(null);
-        }else if(c.getFamily() == family){
-            c.setFamily(null);
-            family.removeChild(c);
+        }else if(customer.getFamily() == family){
+            customer.setFamily(null);
+            family.removeChild(customer);
         }
 
         List<Package> packages = packageRepository.findFamilyPackages(id);
@@ -114,6 +112,6 @@ public class CustomerFamilyService {
             }
         }
 
-        return mapper.toDTO(c, null);
+        return mapper.toDTO(customer, null);
     }
 }

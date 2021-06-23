@@ -2,9 +2,9 @@ package pl.kodokan.fcp.server.customer.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.kodokan.fcp.server.customer.dto.FilteredCustomersDTO;
+import pl.kodokan.fcp.server.customer.dto.CustomerFamilyDTO;
 import pl.kodokan.fcp.server.customer.dto.FiltersDTO;
-import pl.kodokan.fcp.server.customer.model.Customer;
+import pl.kodokan.fcp.server.customer.dto.NewFamilyMemberDTO;
 import pl.kodokan.fcp.server.customer.repo.CustomerRepository;
 
 import java.util.*;
@@ -18,32 +18,21 @@ public class FilterCustomersService {
     @Autowired
     FilteredCustomerMapper mapper;
 
-    public List<FilteredCustomersDTO> getFilteredList(FiltersDTO filters){
-        String firstNameStr = "";
-        if(filters.getFirstName() != null){
-            firstNameStr = filters.getFirstName();
-        }
+    public List<CustomerFamilyDTO> getCustomers(FiltersDTO filters){
 
-        String lastNameStr = "";
-        if(filters.getLastName() != null){
-            lastNameStr = filters.getLastName();
-        }
+        String firstNameStr = Optional.ofNullable(filters.getFirstName()).orElse("");
 
-        String cardIDStr = "";
-        if(filters.getCardId() != null){
-            cardIDStr = Long.toString(filters.getCardId());
-        }
+        String lastNameStr = Optional.ofNullable(filters.getLastName()).orElse("");
 
-        String phoneStr = "";
-        if(filters.getPhoneNumber() != null){
-            phoneStr = Long.toString(filters.getPhoneNumber());
-        }
+        String cardIDStr = Optional.ofNullable(Long.toString(filters.getCardID())).orElse("");
 
-        String cardStateStr = "";
-        if(filters.getCardState() != null){
-            cardStateStr = filters.getCardState();
-        }
+        String phoneStr = Optional.ofNullable(Long.toString(filters.getPhone())).orElse("");
 
-        return repo.getCustomers(firstNameStr, lastNameStr, cardIDStr, phoneStr, cardStateStr).stream().map(mapper::toDTO).collect(Collectors.toList());
+        String cardStateStr = Optional.ofNullable(filters.getCardState()).orElse("");
+
+        return repo.getCustomers(firstNameStr, lastNameStr, cardIDStr, phoneStr, cardStateStr)
+                .stream()
+                .map(mapper::toDTO)
+                .collect(Collectors.toList());
     }
 }

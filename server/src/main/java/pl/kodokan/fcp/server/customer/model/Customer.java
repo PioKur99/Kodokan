@@ -4,8 +4,6 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import pl.kodokan.fcp.server.common.model.BaseEntity;
-import pl.kodokan.fcp.server.customer.exception.MaximumCardState;
-import pl.kodokan.fcp.server.customer.exception.MinimumCardState;
 import pl.kodokan.fcp.server.entrance.model.Entrance;
 import pl.kodokan.fcp.server.entrance.model.Package;
 import pl.kodokan.fcp.server.user.model.UserData;
@@ -25,7 +23,7 @@ public class Customer extends BaseEntity {
             @AttributeOverride(name = "id", column = @Column(name = "card_id")),
             @AttributeOverride(name = "state", column = @Column(name = "card_state"))
     })
-    ClubCard clubCard;
+    private ClubCard clubCard;
 
     @Enumerated(EnumType.STRING)
     Discipline mainDiscipline;

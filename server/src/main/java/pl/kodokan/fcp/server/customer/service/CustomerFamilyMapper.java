@@ -3,8 +3,7 @@ package pl.kodokan.fcp.server.customer.service;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import pl.kodokan.fcp.server.customer.dto.CustomerFamilyDTO;
-import pl.kodokan.fcp.server.customer.model.Customer;
-import pl.kodokan.fcp.server.customer.model.FamilyRelation;
+import pl.kodokan.fcp.server.customer.model.*;
 
 @Mapper(componentModel = "spring")
 public interface CustomerFamilyMapper {

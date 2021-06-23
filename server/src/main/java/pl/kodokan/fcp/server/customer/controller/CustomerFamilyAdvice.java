@@ -17,10 +17,10 @@ public class CustomerFamilyAdvice {
         return new ResponseEntity<>(dto, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(TheSameCustomerIDException.class)
-    ResponseEntity<CardStateAdviceDTO> theSameCustomerID(TheSameCustomerIDException ex){
+    @ExceptionHandler(ProvidedIDsAreTheSameException.class)
+    ResponseEntity<CardStateAdviceDTO> theSameCustomerID(ProvidedIDsAreTheSameException ex){
         CardStateAdviceDTO dto = new CardStateAdviceDTO();
-        dto.setErrorClass(String.valueOf(TheSameCustomerIDException.class));
+        dto.setErrorClass(String.valueOf(ProvidedIDsAreTheSameException.class));
         dto.setErrorMsg("Provided two same IDs");
         return new ResponseEntity<>(dto, HttpStatus.BAD_REQUEST);
     }
@@ -41,10 +41,10 @@ public class CustomerFamilyAdvice {
         return new ResponseEntity<>(dto, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(RoleInFamilyTaken.class)
-    ResponseEntity<CardStateAdviceDTO> roleInFamilyTaken(RoleInFamilyTaken ex){
+    @ExceptionHandler(RoleInFamilyTakenException.class)
+    ResponseEntity<CardStateAdviceDTO> roleInFamilyTaken(RoleInFamilyTakenException ex){
         CardStateAdviceDTO dto = new CardStateAdviceDTO();
-        dto.setErrorClass(String.valueOf(RoleInFamilyTaken.class));
+        dto.setErrorClass(String.valueOf(RoleInFamilyTakenException.class));
         dto.setErrorMsg("This family already has a member with provided role");
         return new ResponseEntity<>(dto, HttpStatus.BAD_REQUEST);
     }
