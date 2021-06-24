@@ -37,7 +37,11 @@
         </tr>
         <tr class="row" *ngFor="let item of passesList; let i=index">
             <td class="column column--first">{{item.first_name}} {{item.last_name}}</td>
-            <td class="column column--second">{{item.package_name}}</td>
+            <td class="column column--second">
+                <a class="href" href="receptionist-panel/passes/{{item.package_id}}">
+                    {{item.package_name}}
+                </a>
+            </td>
             <td class="column column--third">
                 {{item.end_date.toLocaleDateString()}}
             </td>

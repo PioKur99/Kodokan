@@ -9,6 +9,7 @@ import { PassesService } from 'src/app/services/passes.service';
 })
 export class PassesComponent implements OnInit {
   
+  //TODO: zrobić wyszukiwanie karnetów
   passesList: Passes[]
   checkboxes: boolean[]
   deletedPasses: number
