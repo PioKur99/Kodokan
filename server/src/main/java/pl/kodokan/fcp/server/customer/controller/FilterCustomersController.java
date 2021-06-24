@@ -8,9 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.kodokan.fcp.server.customer.dto.CustomerFamilyDTO;
-import pl.kodokan.fcp.server.customer.dto.FilteredCustomerDTO;
 import pl.kodokan.fcp.server.customer.dto.CustomerFilterDTO;
-import pl.kodokan.fcp.server.customer.dto.FiltersDTO;
 import pl.kodokan.fcp.server.customer.service.FilterCustomersService;
 
 import java.util.*;
@@ -29,7 +27,7 @@ public class FilterCustomersController {
     })
     @ResponseBody
     @PostMapping()
-    ResponseEntity<List<CustomerFamilyDTO>> getListOfCustomers(@RequestBody FiltersDTO filters){
+    ResponseEntity<List<CustomerFamilyDTO>> getListOfCustomers(@RequestBody CustomerFilterDTO filters){
         return new ResponseEntity<>(service.getCustomers(filters), HttpStatus.OK);
     }
 

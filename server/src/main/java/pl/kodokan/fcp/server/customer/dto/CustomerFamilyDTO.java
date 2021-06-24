@@ -10,5 +10,4 @@ public class CustomerFamilyDTO {
     private String firstName;
     private String lastName;
     private Long customerID;
-    private FamilyRelation relation;
 }

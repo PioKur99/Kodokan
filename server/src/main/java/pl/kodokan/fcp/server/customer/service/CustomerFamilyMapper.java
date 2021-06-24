@@ -10,6 +10,5 @@ public interface CustomerFamilyMapper {
     @Mapping(source = "c.userData.firstName", target = "firstName")
     @Mapping(source = "c.userData.lastName", target = "lastName")
     @Mapping(source = "c.id", target = "customerID")
-    @Mapping(source = "relation", target = "relation")
     CustomerFamilyDTO toDTO(Customer c, FamilyRelation relation);
 }

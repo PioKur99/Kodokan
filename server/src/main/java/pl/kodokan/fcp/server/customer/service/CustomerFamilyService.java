@@ -96,11 +96,11 @@ public class CustomerFamilyService {
         }
 
         Family family = familyRepository.findById(familyId).get();
-        if(family.getFather() == customer){
+        if(family.isFather(customer)){
             family.setFather(null);
-        }else if(family.getMother() == customer){
+        }else if(family.isMother(customer)){
             family.setMother(null);
-        }else if(customer.getFamily() == family){
+        }else if(customer.isInFamily(family)){
             customer.setFamily(null);
             family.removeChild(customer);
         }

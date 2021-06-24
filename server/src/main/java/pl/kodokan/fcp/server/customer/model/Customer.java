@@ -65,4 +65,8 @@ public class Customer extends BaseEntity {
     public void setPrevCardState() {
         clubCard.setPrevCardState();
     }
+
+    public boolean isInFamily(Family f){
+        return f == family;
+    }
 }
