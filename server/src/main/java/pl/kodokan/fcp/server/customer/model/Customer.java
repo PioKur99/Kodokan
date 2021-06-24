@@ -4,6 +4,8 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import pl.kodokan.fcp.server.common.model.BaseEntity;
+import pl.kodokan.fcp.server.customer.exception.MaximumCardState;
+import pl.kodokan.fcp.server.customer.exception.MinimumCardState;
 
 import pl.kodokan.fcp.server.entrance.model.Entrance;
 import pl.kodokan.fcp.server.entrance.model.Package;
@@ -60,6 +62,7 @@ public class Customer extends BaseEntity {
     public void deletePackageById(Package aPackage){
         this.packages.remove(aPackage);
     }
+
     public void setNextCardState() {
         clubCard.setNextCardState();
     }

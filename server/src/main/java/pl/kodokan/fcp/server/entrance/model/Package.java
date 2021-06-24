@@ -67,6 +67,10 @@ public class Package extends BaseEntity {
         return entrances.size();
     }
 
+    public void pay(){
+        paid = true;
+    }
+
     public void addCustomer(Customer customer){
         customers.add(customer);
     }
