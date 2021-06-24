@@ -19,6 +19,7 @@ import { EntryRegistrationComponent } from './entry-registration/entry-registrat
 import { FormsModule } from '@angular/forms';
 import { WebcamModule } from 'ngx-webcam';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
     declarations: [
         ReceptionistPanelComponent,
@@ -40,7 +41,8 @@ import { ImageCropperModule } from 'ngx-image-cropper';
         IgxIconModule,
         IgxDialogModule,
         FormsModule,
-        IgxInputGroupModule
+        IgxInputGroupModule,
+ 
     ]
 })
 export class ReceptionistPanelModule {

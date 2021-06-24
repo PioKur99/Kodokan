@@ -43,46 +43,46 @@
           <label igxLabel for="firstName">
             Imię
           </label>
-          <input igxInput name="firstName" type="text" [(ngModel)]="client.firstName" required="required">
+          <input igxInput name="firstName" type="text" [(ngModel)]="client.firstName" required="required" (keyup)="checkValidity()">
         </igx-input-group>
         <igx-input-group type="line">
           <label igxLabel for="gender">
             Płeć
           </label>
-          <input igxInput name="gender" type="text" [(ngModel)]="client.firstName" required="required">
+          <input igxInput name="gender" type="text" [(ngModel)]="client.gender" required="required" (keyup)="checkValidity()">
         </igx-input-group>
         <br>
         <igx-input-group type="line">
           <label igxLabel for="street">
             Ulica i numer domu
           </label>
-          <input igxInput name="street" type="text" [(ngModel)]="client.firstName"  required="required">
+          <input igxInput name="street" type="text" [(ngModel)]="streetName"  required="required" (keyup)="checkValidity()">
         </igx-input-group>
         <igx-input-group type="line">
           <label igxLabel for="city">
             Miasto
           </label>
-          <input igxInput name="city" type="text" [(ngModel)]="client.firstName" required="required">
+          <input igxInput name="city" type="text" [(ngModel)]="client.city" required="required" (keyup)="checkValidity()">
         </igx-input-group>
         <igx-input-group type="line">
           <label igxLabel for="voivodeship">
             Województwo
           </label>
-          <input igxInput name="voivodeship" type="text" [(ngModel)]="client.firstName" required="required">
+          <input igxInput name="voivodeship" type="text" [(ngModel)]="client.voivodeship" required="required" (keyup)="checkValidity()">
         </igx-input-group>
         <br>
         <igx-input-group type="line">
           <label igxLabel for="email">
             E-mail
           </label>
-          <input igxInput name="email" type="text" [(ngModel)]="client.firstName" required="required">
+          <input igxInput name="email" type="text" [(ngModel)]="client.email" required="required" (keyup)="checkValidity()">
         </igx-input-group>
         
         <igx-input-group type="line">
           <label igxLabel for="phoneNumber">
             Telefon Kontaktowy
           </label>
-          <input igxInput name="phoneNumber" type="text" [(ngModel)]="client.firstName" required="required">
+          <input igxInput name="phoneNumber" type="text" [(ngModel)]="client.phone" required="required" (keyup)="checkValidity()">
         </igx-input-group>
         
       </div>
@@ -91,28 +91,28 @@
           <label igxLabel for="lastName">
             Nazwisko
           </label>
-          <input igxInput name="lastName" type="text" [(ngModel)]="client.firstName" required="required">
+          <input igxInput name="lastName" type="text" [(ngModel)]="client.lastName" required="required" (keyup)="checkValidity()">
         </igx-input-group>
         
         <igx-input-group type="line">
           <label igxLabel for="identityNumber">
             PESEL
           </label>
-          <input igxInput name="identityNumber" type="text" [(ngModel)]="client.firstName" required="required">
+          <input igxInput name="identityNumber" type="text" [(ngModel)]="client.identityNumber" required="required" (keyup)="checkValidity()">
         </igx-input-group>
         <br>
         <igx-input-group type="line">
           <label igxLabel for="local">
             Numer lokalu
           </label>
-          <input igxInput name="local" type="text" [(ngModel)]="client.firstName">
+          <input igxInput name="local" type="text" [(ngModel)]="localNumber">
         </igx-input-group>
         
         <igx-input-group type="line">
           <label igxLabel for="postalCode">
             Kod pocztowy
           </label>
-          <input igxInput name="postalCode" type="text" [(ngModel)]="client.firstName" required="required">
+          <input igxInput name="postalCode" type="text" [(ngModel)]="client.postalCode" required="required" (keyup)="checkValidity()">
         </igx-input-group>
 
         <div class="gap"></div>
@@ -121,22 +121,22 @@
           <label igxLabel for="inputId">
             Nazwa użytkownika
           </label>
-          <input igxInput name="inputId" type="text" [(ngModel)]="client.firstName" required="required">
+          <input igxInput name="inputId" type="text" required="required" (keyup)="checkValidity()">
         </igx-input-group>
         
         <igx-input-group type="line">
           <label igxLabel for="discipline">
             Dyscyplina
           </label>
-          <input igxInput name="discipline" type="text" [(ngModel)]="client.firstName" required="required">
+          <input igxInput name="discipline" type="text" [(ngModel)]="discipline" required="required"  (keyup)="checkValidity()">
         </igx-input-group>
         
       </div>
     </div>
+    <button #confirmBtn   igxButton="raised" igxRipple="white" class="confirmBtn" (click)="addClient()" [disabled] = "isDisabled">
+      ZATWIERDŹ
+    </button>
   </form>
-  <button    igxButton="raised" igxRipple="white" class="confirmBtn" >
-    ZATWIERDŹ
-  </button>
 </section>
 
 <image-cropper *ngIf="displayCameraCropper"
@@ -163,3 +163,43 @@ format="jpg"
 (loadImageFailed)="loadImageFailed()"
 [resizeToWidth]="256"
 ></image-cropper>
+
+<igx-dialog #errorDialog  [closeOnOutsideSelect]="true">
+  <div class="dialog-content card-wrapper errordialog">
+      <main >
+      
+          <header class="header">
+              <h3>COŚ POSZŁO NIE TAK :(</h3>
+  
+          </header>
+
+          <div igxDialogActions>
+
+              <button class="first-button light-grey-button"  igxButton igxRipple="white" (click)="closeWindow('error')">
+                  <span> OK</span>
+              </button>
+          </div>
+
+      </main>
+  </div>
+</igx-dialog>
+<igx-dialog #successDialog  [closeOnOutsideSelect]="true">
+  <div class="dialog-content card-wrapper successdialog">
+      <main >
+      
+          <header class="header">
+              <h2>UDAŁO SIĘ! :)</h2>
+              <h3>Profil klienta został dodany.</h3>
+  
+          </header>
+
+          <div igxDialogActions>
+
+              <button class="first-button light-grey-button"  igxButton igxRipple="white" (click)="closeWindow('success')">
+                  <span> OK</span>
+              </button>
+          </div>
+
+      </main>
+  </div>
+</igx-dialog>
