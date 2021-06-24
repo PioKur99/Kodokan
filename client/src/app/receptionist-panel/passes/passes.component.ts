@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Passes } from 'src/app/data/passes';
+import { PassesService } from 'src/app/services/passes.service';
 
 @Component({
   selector: 'app-passes',
@@ -6,10 +8,63 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./passes.component.scss']
 })
 export class PassesComponent implements OnInit {
+  
+  passesList: Passes[]
+  checkboxes: boolean[]
+  deletedPasses: number
 
-  constructor() { }
+  @ViewChild("dialog") dialog;
+  @ViewChild("errorGetPasses") errorGetPasses;
+  @ViewChild("errorDeletePasses") errorDeletePasses;
+
+  constructor(public passesService: PassesService) { }
 
   ngOnInit(): void {
+    this.getPasses()
+    this.checkboxes = new Array(this.passesList.length);
+    this.checkboxes.fill(false);
+  }
+  //zmienia zaznaczenia w tablicy checkboxes
+  toggleSelection(event, i) {
+    this.checkboxes[i] = event.checked;
+    console.log(this.checkboxes)
+  }
+
+  getPasses(){
+    this.passesService.getPasses().subscribe(
+      x=>{
+        this.passesList=x
+        console.log(x)
+      },
+      error=>{
+        this.openErrorGetPasses()
+      }
+    )
+  }
+
+  deletePasses(){
+    for(let i=0;i< this.checkboxes.length;++i){
+      if(this.checkboxes[i]){
+        this.passesService.deletePasses(this.passesList[i].package_id).subscribe(
+          x=>{
+            this.deletedPasses=x
+            console.log("usunięto " + x)
+          },
+          error=>{
+            this.openErrorDeletePasses()
+          }
+        )
+      }
+    }
+    this.dialog.close()
+  }
+
+  openErrorGetPasses(){
+    this.errorGetPasses.open()
+  }
+
+  openErrorDeletePasses(){
+    this.errorDeletePasses.open()
   }
 
 }
