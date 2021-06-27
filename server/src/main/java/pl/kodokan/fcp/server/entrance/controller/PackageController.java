@@ -5,8 +5,11 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
+import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.kodokan.fcp.server.entrance.dto.PackageDTO;
 import pl.kodokan.fcp.server.entrance.dto.PackageRequest;
 import pl.kodokan.fcp.server.entrance.dto.PackageResponse;
 import pl.kodokan.fcp.server.entrance.service.EntranceService;
@@ -54,6 +57,27 @@ public class PackageController {
     @GetMapping("/get")
     PackageDetails getPackage(@RequestParam Long packageId) {
         return packageService.getPackage(packageId);
+    }
+
+    @GetMapping("/packages-with-partner-system/{bool}")
+    @Operation(summary = "Get tickets with enabled partner system")
+    @ResponseBody
+    @ApiResponses(value={
+            @ApiResponse(code = 200, message = "Package types with enabled partner system")
+    })
+    ResponseEntity<List<PackageDTO>> getPartnerSystemPackages(@Param("bool") Boolean bool){
+        return new ResponseEntity<>(packageService.getPartnerSystemPackages(bool), HttpStatus.OK);
+    }
+
+    @PutMapping("/pay-for-package/{id}")
+    @Operation(summary = "Pay for package")
+    @ResponseBody
+    @ApiResponses(value = {
+            @ApiResponse(code=200,message = "Successfully paid for package"),
+            @ApiResponse(code=400,message = "Provided wrong ticket ID")
+    })
+    ResponseEntity<Long> payForTicket(@PathVariable Long id){
+        return new ResponseEntity<>(packageService.payForTicket(id),HttpStatus.OK);
     }
 }
 

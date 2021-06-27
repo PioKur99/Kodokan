@@ -19,6 +19,7 @@ public interface GetCustomerMapper {
     @Mapping(source = "userData.address.city", target = "city")
     @Mapping(source = "userData.address.voivodeship", target = "voivodeship")
     @Mapping(source = "userData.address.postalCode", target = "postalCode")
+    @Mapping(source = "clubCard.id", target = "cardId")
     GetCustomerDTO toDTO(Customer customer);
 
     @Mapping(target = "userData.email", source = "email")
@@ -32,5 +33,6 @@ public interface GetCustomerMapper {
     @Mapping(target = "userData.address.city", source = "city")
     @Mapping(target = "userData.address.voivodeship", source = "voivodeship")
     @Mapping(target = "userData.address.postalCode", source = "postalCode")
+    @Mapping(target = "clubCard.id", source = "cardId")
     Customer toEntity(GetCustomerDTO customerDTO);
 }

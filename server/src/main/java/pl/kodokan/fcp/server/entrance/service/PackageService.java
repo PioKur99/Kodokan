@@ -1,16 +1,21 @@
 package pl.kodokan.fcp.server.entrance.service;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.kodokan.fcp.server.customer.model.Customer;
 import pl.kodokan.fcp.server.customer.repo.CustomerRepository;
 import pl.kodokan.fcp.server.entrance.controller.PackageDetails;
+import pl.kodokan.fcp.server.entrance.dto.PackageDTO;
 import pl.kodokan.fcp.server.entrance.dto.PackageRequest;
 import pl.kodokan.fcp.server.entrance.dto.PackageResponse;
 import pl.kodokan.fcp.server.entrance.exception.NoValidPackageException;
 import pl.kodokan.fcp.server.entrance.exception.PackageCannotBeDeleteException;
 import pl.kodokan.fcp.server.entrance.exception.PackageNotFoundException;
+import pl.kodokan.fcp.server.entrance.exception.*;
+import pl.kodokan.fcp.server.entrance.repo.*;
+import pl.kodokan.fcp.server.entrance.mapper.PackageMapper;
 import pl.kodokan.fcp.server.entrance.model.Package;
 import pl.kodokan.fcp.server.entrance.model.PackageType;
 import pl.kodokan.fcp.server.entrance.repo.PackageRepository;
@@ -26,6 +31,11 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class PackageService {
 
+    @Autowired
+    PackageMapper mapper;
+
+    @Autowired
+    PackageTypeRepository packageTypeRepository;
     private final PackageRepository packageRepository;
     private final CustomerRepository customerRepository;
     private final EntranceService entranceService;
@@ -90,6 +100,23 @@ public class PackageService {
         }
     }
 
+    private Package findById(Long id){
+        return packageRepository.findById(id).orElseThrow(()->new PackageNotPresentException());
+    }
+
+    public List<PackageDTO> getPartnerSystemPackages(boolean bool){
+        return packageTypeRepository.findAllByWithPartnerSystem(bool).stream().map(mapper::toDTO).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public Long payForTicket(Long id){
+        Package p = findById(id);
+        if(p.isPaid()){
+            throw new PackageAlreadyPaidException();
+        }
+        p.pay();
+        return id;
+    }
 
     @Transactional
     public Long deleteById(Long packageId) {
