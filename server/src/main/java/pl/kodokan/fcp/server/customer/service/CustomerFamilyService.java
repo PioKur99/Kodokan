@@ -73,15 +73,9 @@ public class CustomerFamilyService {
         }
 
         //Add customer to all active family packages
-        List<Package> familyPackages = packageRepository.findFamilyPackages(customerFamilyID);
+        List<Package> familyPackages = packageRepository.findFamilyPackages(customerFamily);
         for(Package p : familyPackages){
-            Package newPackage = new Package();
-            newPackage.setCustomer(addedCustomer);
-            newPackage.setPackageType(p.getPackageType());
-            newPackage.setPaid(p.isPaid());
-            newPackage.setEndDateTime(p.getEndDateTime());
-            newPackage.setPurchaseDateTime(p.getPurchaseDateTime());
-            packageRepository.save(newPackage);
+            p.addCustomer(addedCustomer);
         }
 
         return mapper.toDTO(addedCustomer,relation);
@@ -105,10 +99,10 @@ public class CustomerFamilyService {
             family.removeChild(customer);
         }
 
-        List<Package> packages = packageRepository.findFamilyPackages(id);
+        List<Package> packages = packageRepository.findFamilyPackages(customer);
         for(Package p : packages){
             if(p.countEntrances() == 0){
-                p.setCustomer(null);
+                p.deleteCustomer(customer);
             }
         }
 
