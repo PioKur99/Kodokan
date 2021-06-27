@@ -3,10 +3,13 @@ package pl.kodokan.fcp.server.customer.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.kodokan.fcp.server.customer.dto.CardStateNeighboursDTO;
-import pl.kodokan.fcp.server.customer.exception.*;
 import pl.kodokan.fcp.server.customer.exception.CustomerNotPresent;
-import pl.kodokan.fcp.server.customer.model.*;
+import pl.kodokan.fcp.server.customer.model.CardOperationType;
+import pl.kodokan.fcp.server.customer.model.CardState;
+import pl.kodokan.fcp.server.customer.model.ClubCard;
+import pl.kodokan.fcp.server.customer.model.Customer;
 import pl.kodokan.fcp.server.customer.repo.CustomerRepository;
+import pl.kodokan.fcp.server.customer.exception.*;
 
 
 @Service
