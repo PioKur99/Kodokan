@@ -1,0 +1,41 @@
+@import '~igniteui-angular/lib/core/styles/themes/index';
+
+.text {
+    position: absolute;
+    width: 771px;
+    height: 290px;
+    left: 330px;
+    right: 620px;
+    top: 200px;
+    bottom: 282px;
+
+    font-family: Lato;
+    font-style: normal;
+    font-weight: regular;
+    font-size: 36px;
+    line-height: 36px;
+
+    /* or 100% */
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.0535em;
+
+    color: #DAA520;
+}
+
+.Button{
+    position: absolute;
+    left: 600px;
+    right: 620px;
+    top: 500px;
+    bottom: 282px;
+    width: 175px;
+    height: 46px;
+
+    /* Gray 4 */
+    background-color: #BDBDBD;
+    border-radius: 4px;
+}
+
+

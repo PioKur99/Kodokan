@@ -1,0 +1,20 @@
+<div class="layout-box" igxLayout igxLayoutDir="column" igxLayoutItemAlign="center" >
+    <br><br><br>
+    <div igxFlex>
+        <p class="text" >Aby wygenerować kartę...</p>
+    </div>
+    <div igxFlex>
+        <p class="text1"> Wybierz swoją dyscyplinę, która pojawi się na Twojej karcie członkowskiej: </p>
+    </div>
+    <div igxFlex>
+        <igx-checkbox *ngFor="let discipline of disciplines" [checked]="discipline.done">
+            {{discipline.description}}
+        </igx-checkbox>
+    </div>
+    <br>
+    <div igxFlex>
+        <button class="Button" igxButton="raised" igxRipple="white" routerLink = "/member-card/prepared-card">
+            Wyślij
+        </button>
+    </div>
+</div>

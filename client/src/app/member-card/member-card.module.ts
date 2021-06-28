@@ -6,12 +6,20 @@ import {
 	IgxIconModule,
 	IgxNavbarModule,
 	IgxRippleModule,
-	IgxButtonModule
+	IgxButtonModule,
+	IgxCheckboxModule
 } from 'igniteui-angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MessageComponent } from './message/message.component';
+import { ChooseDisciplineComponent } from './choose-discipline/choose-discipline.component';
+import { PreparedCardComponent } from './prepared-card/prepared-card.component';
+import { FormsModule } from '@angular/forms';
 @NgModule({
     declarations: [
-        MemberCardComponent
+        MemberCardComponent,
+        MessageComponent,
+        ChooseDisciplineComponent,
+        PreparedCardComponent
     ],
     imports: [
         CommonModule,
@@ -19,7 +27,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         IgxIconModule,
         IgxNavbarModule,
         IgxRippleModule,
-        IgxButtonModule
+        IgxButtonModule,
+        FormsModule,
+        IgxCheckboxModule
     ]
 })
 export class MemberCardModule {

@@ -1,0 +1,95 @@
+@import '~igniteui-angular/lib/core/styles/themes/index';
+
+.text {
+    position: absolute;
+    max-width: 592px;
+    max-height: 117px;
+    left: 273px;
+    top: 167px;
+
+    font-family: Lato;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 40px;
+    line-height: 55px;
+
+
+    /* or 100% */
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.0535em;
+
+    color: #BDBDBD;
+}
+
+.Button{
+    position: absolute;
+    left: 1078px;
+    right: 187px;
+    top: 865px;
+    bottom: 113px;
+   
+    max-width: 175px;
+    max-height: 46px;
+
+    /* Gray 4 */
+    background-color: #BDBDBD;
+    border-radius: 4px;
+}
+.text1{
+    position: absolute;
+    max-width: 956px;
+    max-height: 77px;
+    left: 284px;
+    top: 308px;
+    overflow: auto;
+
+    font-family: Lato;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 28px;
+    line-height: 34px;
+    display: flex;
+    align-items: center;
+    background-color: #DAA520;
+    color: #3F3F3F;
+}
+
+:host {
+    display: flex;
+    flex-flow: column nowrap;
+    padding: 16px;
+    font-size: 28px;
+    line-height: 34px;
+}
+
+
+.igx-checkbox {
+    max-width: 300px;
+    max-height: 77px;
+    margin-top: 24px;
+    position: relative;
+    height: 24px;
+    left: 314px;
+    right: 0px;
+    top: calc(60% - 24px/2);
+    top:250px;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: 28px;
+    font-size: 28px;
+    line-height: 34px;
+
+    /* identical to box height, or 100% */
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.0093em;
+
+    color: #DAA520;
+}
+.layout-box {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+}
