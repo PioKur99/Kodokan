@@ -73,7 +73,7 @@ public class CustomerFamilyService {
         }
 
         //Add customer to all active family packages
-        List<Package> familyPackages = packageRepository.findFamilyPackages(customerFamily);
+        List<Package> familyPackages = packageRepository.findFamilyPackages(customerFamilyID);
         for(Package p : familyPackages){
             p.addCustomer(addedCustomer);
         }
@@ -99,7 +99,7 @@ public class CustomerFamilyService {
             family.removeChild(customer);
         }
 
-        List<Package> packages = packageRepository.findFamilyPackages(customer);
+        List<Package> packages = packageRepository.findFamilyPackages(id);
         for(Package p : packages){
             if(p.countEntrances() == 0){
                 p.deleteCustomer(customer);

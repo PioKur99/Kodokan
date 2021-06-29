@@ -75,14 +75,14 @@ public class Package extends BaseEntity {
         customers.add(customer);
     }
 
-    public boolean hasCustomer(Customer customer){
-        return customers.contains(customer);
-    }
-
     public List<Customer> getCustomers() {
         // returns safe copy of freezes
         return Collections.unmodifiableList(customers);
     }
+     public boolean getCustomerss(){
+        return true;
+     }
+
     public void deleteCustomer(Customer customer){
         customers.remove(customer);
     }
