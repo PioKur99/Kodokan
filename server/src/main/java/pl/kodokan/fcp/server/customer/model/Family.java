@@ -67,4 +67,8 @@ public class Family extends BaseEntity {
     public boolean isMother(Customer c){
         return c == mother;
     }
+
+    public boolean hasAnyParents(){
+        return father != null || mother != null;
+    }
 }

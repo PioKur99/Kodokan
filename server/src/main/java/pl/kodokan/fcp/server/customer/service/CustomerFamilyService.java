@@ -7,6 +7,7 @@ import pl.kodokan.fcp.server.customer.exception.*;
 import pl.kodokan.fcp.server.customer.model.*;
 import pl.kodokan.fcp.server.customer.repo.CustomerRepository;
 import pl.kodokan.fcp.server.customer.repo.FamilyRepository;
+import pl.kodokan.fcp.server.entrance.model.Entrance;
 import pl.kodokan.fcp.server.entrance.model.Package;
 import pl.kodokan.fcp.server.user.model.Gender;
 import pl.kodokan.fcp.server.entrance.repo.*;
@@ -32,6 +33,10 @@ public class CustomerFamilyService {
     Customer findById(Long id){
         Customer c = customerRepository.findById(id).orElseThrow(()-> new CustomerNotPresent());
         return c;
+    }
+
+    boolean familyHaveMembers(Family family){
+        return (family.hasAnyParents() || customerRepository.getChildrenFromFamily(family).size() > 0);
     }
 
     public CustomerFamilyDTO addCustomerToFamily(Long customerID, Long customerFamilyID, FamilyRelation relation){
@@ -78,7 +83,7 @@ public class CustomerFamilyService {
             p.addCustomer(addedCustomer);
         }
 
-        return mapper.toDTO(addedCustomer,relation);
+        return mapper.toDTO(addedCustomer);
     }
 
     public CustomerFamilyDTO deleteCustomerFromFamily(Long id){
@@ -101,11 +106,27 @@ public class CustomerFamilyService {
 
         List<Package> packages = packageRepository.findFamilyPackages(id);
         for(Package p : packages){
-            if(p.countEntrances() == 0){
+            if(!familyHaveMembers(family) && p.getEntrances().size() == 0){
+                packageRepository.delete(p);
+            }
+
+            boolean hasEntrance = false;
+            for(Entrance e : p.getEntrances()){
+                if(e.hasCustomer(customer)){
+                    hasEntrance = true;
+                    break;
+                }
+            }
+            if(!hasEntrance){
                 p.deleteCustomer(customer);
             }
         }
 
-        return mapper.toDTO(customer, null);
+        //Delete family if it's empty
+        if(!familyHaveMembers(family)){
+            familyRepository.delete(family);
+        }
+
+        return mapper.toDTO(customer);
     }
 }

@@ -38,4 +38,8 @@ public class Entrance extends BaseEntity {
         this.training = training;
     }
 
+    public boolean hasCustomer(Customer c){
+        return c == customer;
+    }
+
 }

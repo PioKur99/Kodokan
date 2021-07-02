@@ -6,7 +6,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import pl.kodokan.fcp.server.customer.model.Family;
 
-import java.util.Optional;
+import java.util.*;
 
 @Repository
 public interface FamilyRepository extends JpaRepository<Family, Long> {

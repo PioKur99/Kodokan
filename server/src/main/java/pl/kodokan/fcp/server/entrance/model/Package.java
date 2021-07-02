@@ -67,6 +67,10 @@ public class Package extends BaseEntity {
         return entrances.size();
     }
 
+    public List<Entrance> getEntrances(){
+        return Collections.unmodifiableList(entrances);
+    }
+
     public void pay(){
         paid = true;
     }

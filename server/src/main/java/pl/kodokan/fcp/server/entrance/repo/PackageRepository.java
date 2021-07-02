@@ -10,6 +10,6 @@ import java.util.*;
 
 @Repository
 public interface PackageRepository extends JpaRepository<Package, Long> {
-    @Query("SELECT p FROM Package p JOIN p.customers c WHERE c.id = :id")
+    @Query("SELECT p FROM Package p JOIN p.customers c WHERE c.id = :id AND (p.endDateTime > CURRENT_TIMESTAMP OR p.endDateTime = null)")
     List<Package> findFamilyPackages(@Param("id") Long id);
 }
