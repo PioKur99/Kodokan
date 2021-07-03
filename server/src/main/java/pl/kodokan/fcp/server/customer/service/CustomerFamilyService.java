@@ -129,6 +129,12 @@ public class CustomerFamilyService {
             newMember = findById(customer2ID);
             oldMember = findById(customer1ID);
             family = familyRepository.findById(family1ID.get()).get();
+            //Reverse relation if sequence of customers is reversed
+            if(relation == FamilyRelation.CHILD){
+                relation = FamilyRelation.PARENT;
+            }else if(relation == FamilyRelation.PARENT){
+                relation = FamilyRelation.CHILD;
+            }
         }else if(!family1ID.isPresent() && family2ID.isPresent()){
             newMember = findById(customer1ID);
             oldMember = findById(customer2ID);
