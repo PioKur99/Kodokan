@@ -71,4 +71,12 @@ public class Family extends BaseEntity {
     public boolean hasAnyParents(){
         return father != null || mother != null;
     }
+
+    public boolean hasFather(){
+        return father != null;
+    }
+
+    public boolean hasMother(){
+        return mother != null;
+    }
 }

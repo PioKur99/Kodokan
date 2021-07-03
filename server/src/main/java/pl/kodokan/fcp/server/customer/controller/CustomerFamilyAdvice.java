@@ -13,7 +13,7 @@ public class CustomerFamilyAdvice {
     ResponseEntity<CardStateAdviceDTO> customerAlreadyInFamily(CustomerAlreadyInFamilyException ex){
         CardStateAdviceDTO dto = new CardStateAdviceDTO();
         dto.setErrorClass(String.valueOf(CustomerAlreadyInFamilyException.class));
-        dto.setErrorMsg("This customer is already in some other family");
+        dto.setErrorMsg("This customer already has a family");
         return new ResponseEntity<>(dto, HttpStatus.BAD_REQUEST);
     }
 
@@ -46,6 +46,38 @@ public class CustomerFamilyAdvice {
         CardStateAdviceDTO dto = new CardStateAdviceDTO();
         dto.setErrorClass(String.valueOf(RoleInFamilyTakenException.class));
         dto.setErrorMsg("This family already has a member with provided role");
+        return new ResponseEntity<>(dto, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(HomoAlertException.class)
+    ResponseEntity<CardStateAdviceDTO> homoAlert(HomoAlertException ex){
+        CardStateAdviceDTO dto = new CardStateAdviceDTO();
+        dto.setErrorClass(String.valueOf(HomoAlertException.class));
+        dto.setErrorMsg("Marriage can only be between a man and a woman");
+        return new ResponseEntity<>(dto, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(CannotAddGrandParentsException.class)
+    ResponseEntity<CardStateAdviceDTO> cannotAddGrandparents(CannotAddGrandParentsException ex){
+        CardStateAdviceDTO dto = new CardStateAdviceDTO();
+        dto.setErrorClass(String.valueOf(CannotAddGrandParentsException.class));
+        dto.setErrorMsg("Cannot add grandparents to family");
+        return new ResponseEntity<>(dto, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(SiblingsException.class)
+    ResponseEntity<CardStateAdviceDTO> siblingsEx(SiblingsException ex){
+        CardStateAdviceDTO dto = new CardStateAdviceDTO();
+        dto.setErrorClass(String.valueOf(SiblingsException.class));
+        dto.setErrorMsg("Cannot add siblings of family's parent. If you want to create family with these two customers, please delete customers from theirs families, create a new one and add them as children");
+        return new ResponseEntity<>(dto, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(CannotAddGrandkidsException.class)
+    ResponseEntity<CardStateAdviceDTO> cannotAddGrandkids(CannotAddGrandkidsException ex){
+        CardStateAdviceDTO dto = new CardStateAdviceDTO();
+        dto.setErrorClass(String.valueOf(CannotAddGrandkidsException.class));
+        dto.setErrorMsg("Cannot add grandchildren to family");
         return new ResponseEntity<>(dto, HttpStatus.BAD_REQUEST);
     }
 }

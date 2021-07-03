@@ -9,6 +9,7 @@ import pl.kodokan.fcp.server.customer.exception.MinimumCardState;
 
 import pl.kodokan.fcp.server.entrance.model.Entrance;
 import pl.kodokan.fcp.server.entrance.model.Package;
+import pl.kodokan.fcp.server.user.model.Gender;
 import pl.kodokan.fcp.server.user.model.UserData;
 
 import javax.persistence.*;
@@ -74,5 +75,9 @@ public class Customer extends BaseEntity {
 
     public boolean isInFamily(Family f){
         return f == family;
+    }
+
+    public Gender getGender(){
+        return userData.getGender();
     }
 }

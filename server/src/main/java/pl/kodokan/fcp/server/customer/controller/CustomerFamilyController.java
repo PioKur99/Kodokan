@@ -24,7 +24,7 @@ public class CustomerFamilyController {
     })
     @PostMapping("/add-customer-to-family")
     ResponseEntity<CustomerFamilyDTO> addCustomer(@RequestBody NewFamilyMemberDTO dto){
-        return new ResponseEntity<>(service.addCustomerToFamily(dto.getCustomerID(),dto.getCustomerFamilyID(), dto.getRelation()), HttpStatus.OK);
+        return new ResponseEntity<>(service.addCustomerToFamily(dto.getAddWho(),dto.getToWhom(), dto.getRelation()), HttpStatus.OK);
     }
 
     @Operation(summary = "Remove customer from family")

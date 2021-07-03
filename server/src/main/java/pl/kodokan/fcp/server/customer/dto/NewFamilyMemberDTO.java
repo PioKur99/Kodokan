@@ -7,7 +7,7 @@ import pl.kodokan.fcp.server.customer.model.*;
 @Getter
 @Setter
 public class NewFamilyMemberDTO {
-    private Long customerID;
-    private Long customerFamilyID;
+    private Long addWho;
+    private Long toWhom;
     private FamilyRelation relation;
 }
