@@ -20,7 +20,9 @@ public class Package extends BaseEntity {
     @NotNull
     private LocalDateTime purchaseDateTime;
 
-    @NotNull
+    //TODO: Są karnety bez daty końcowe, działanie prokonsumenckie - takie karnety otrzymują endDateTime w
+    // chwili odbicia, o ile dobrze zrozumiałem Lukasza
+//    @NotNull
     private LocalDateTime endDateTime;
 
     @NotNull
@@ -29,8 +31,14 @@ public class Package extends BaseEntity {
     /**
      * Customer this package belongs to
      */
-    @ManyToOne
-    private Customer customer;
+    @Getter(AccessLevel.NONE)
+    @Setter(AccessLevel.NONE)
+    @ManyToMany
+    @JoinTable(
+            name = "packages_customers",
+            joinColumns = @JoinColumn(name = "package_id"),
+            inverseJoinColumns = @JoinColumn(name = "customer_id"))
+    private List<Customer> customers = new LinkedList<>();
 
     @ManyToOne
     private PackageType packageType;
@@ -58,4 +66,21 @@ public class Package extends BaseEntity {
     public int countEntrances() {
         return entrances.size();
     }
+
+    public void pay(){
+        paid = true;
+    }
+
+    public void addCustomer(Customer customer){
+        customers.add(customer);
+    }
+
+    public List<Customer> getCustomers() {
+        // returns safe copy of freezes
+        return Collections.unmodifiableList(customers);
+    }
+    public void deleteCustomer(Customer customer){
+        customers.remove(customer);
+    }
+
 }
