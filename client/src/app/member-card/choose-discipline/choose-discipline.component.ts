@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Discipline } from 'src/app/data/discipline';
+import { DisciplineService } from 'src/app/services/discipline.service';
 
 @Component({
   selector: 'app-choose-discipline',
@@ -7,13 +10,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChooseDisciplineComponent implements OnInit {
 
-  constructor() { }
+  public url = 'http://172.18.0.3:8081/discipline';
+  public disciplines = [];
+
+ constructor(private http: HttpClient) {
+    this.http.get(this.url).toPromise().then(data => {
+      console.log(data);
+
+      for(let key in data)
+      if(data.hasOwnProperty(key))
+        this.disciplines.push(data[key]);
+
+    });    
+   }
+
+
 
   ngOnInit(): void {
   }
-  public disciplines = [
-    {done: true, description: 'Research' },
-    { done: true, description: 'Implement' },
-    { done: false, description: 'Test' }
-  ];
+ // public disciplines = [
+ //   {done: false, description: 'Research' },
+ //   { done: false, description: 'Implement' },
+ //   { done: false, description: 'Test' }
+ // ];
 }
