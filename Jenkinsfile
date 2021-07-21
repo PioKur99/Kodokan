@@ -7,7 +7,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh 'docker build -t springtest:latest .'
+                sh 'docker build -t kodokan-springboot:latest .'
             }
         }
         stage('Test') {
@@ -18,8 +18,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                sh 'docker stop spring-test'
-                sh 'docker run --name spring-test --detach --rm -p 8081:8081 springtest'
+                sh 'docker ps | grep kodokan-backend && docker stop kodokan-backend'
+                sh 'docker run --name kodokan-backend --detach --rm -p 8081:8081 kodokan-springboot'
                 sh 'docker ps'
             }
         }
