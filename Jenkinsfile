@@ -21,7 +21,6 @@ pipeline {
                     sh 'docker container stop ${docker ps -q -f name=kodokan-backend}'
                     sh 'docker run --name kodokan-backend --detach --rm -p 8081:8081 kodokan-springboot'
                     sh 'docker ps'
-                }
             }
         }
     }
