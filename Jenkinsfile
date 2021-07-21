@@ -18,7 +18,8 @@ pipeline {
         stage('Deploy') {
             steps {
                     echo 'Deploying....'
-                    sh 'docker container stop ${docker ps -q -f name=kodokan-backend}'
+                    sh 'docker ps -q -f name=kodokan-backend'
+                    sh 'docker container stop kodokan-backend || true'
                     sh 'docker run --name kodokan-backend --detach --rm -p 8081:8081 kodokan-springboot'
                     sh 'docker ps'
             }
