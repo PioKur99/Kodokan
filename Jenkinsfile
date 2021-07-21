@@ -20,6 +20,7 @@ pipeline {
                 script {
                     echo 'Deploying....'
                     def backendRunningCount = sh(script: "docker ps -q -f name=kodokan-backend | grep -c kodokan-backend", returnStdout: true) == 0
+                    echo 'defined ${backendRunningCount}'
                     if( !backendRunningCount ){
                         sh 'docker stop kodokan-backend'
                     }
