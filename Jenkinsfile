@@ -17,10 +17,14 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying....'
-                sh 'docker ps | grep kodokan-backend && docker stop kodokan-backend'
-                sh 'docker run --name kodokan-backend --detach --rm -p 8081:8081 kodokan-springboot'
-                sh 'docker ps'
+                script {
+                    echo 'Deploying....'
+                    if( 'docker ps | grep kodokan-backend' ){
+                        sh 'docker stop kodokan-backend'
+                    }
+                    sh 'docker run --name kodokan-backend --detach --rm -p 8081:8081 kodokan-springboot'
+                    sh 'docker ps'
+                }
             }
         }
     }
