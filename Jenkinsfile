@@ -19,7 +19,8 @@ pipeline {
             steps {
                 script {
                     echo 'Deploying....'
-                    if( sh 'docker ps -q -f name=kodokan-backend | grep -c kodokan-backend' != 0){
+                    def backendRunningCount = sh(script: "docker ps -q -f name=kodokan-backend | grep -c kodokan-backend", returnStdout: true) as Integer
+                    if( backendRunningCount != 0){
                         sh 'docker stop kodokan-backend'
                     }
                     sh 'docker run --name kodokan-backend --detach --rm -p 8081:8081 kodokan-springboot'
