@@ -7,7 +7,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh 'docker build -t kodokan-springboot:latest .'
+                sh 'docker build -t kodokan-springboot:latest -f server/Dockerfile .'
             }
         }
         stage('Test') {
