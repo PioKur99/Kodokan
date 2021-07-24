@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+    options {
+        timestamps()
+    }
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building..'
+                sh 'docker build -t kodokan-angular:latest .'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                    echo 'Deploying....'
+                    sh 'docker ps -q -f name=kodokan-frontend'
+                    sh 'docker container stop kodokan-frontend || true'
+                    sh 'docker run --name kodokan-frontend --detach --rm -p 4200:80 kodokan-angular'
+                    sh 'docker ps'
+            }
+        }
+    }
+}
