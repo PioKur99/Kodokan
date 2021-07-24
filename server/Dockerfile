@@ -1,10 +1,10 @@
 FROM openjdk:11-jdk as build
 WORKDIR /workspace/app
 
-COPY mvnw .
-COPY .mvn .mvn
-COPY pom.xml .
-COPY src src
+COPY server/mvnw .
+COPY server/.mvn .mvn
+COPY server/pom.xml .
+COPY server/src src
 RUN chmod +x mvnw
 RUN ./mvnw clean install -DskipTests
 RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
