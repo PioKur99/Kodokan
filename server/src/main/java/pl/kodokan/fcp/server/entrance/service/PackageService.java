@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.kodokan.fcp.server.customer.exception.CustomerNotPresent;
 import pl.kodokan.fcp.server.customer.model.Customer;
+import pl.kodokan.fcp.server.customer.model.Family;
 import pl.kodokan.fcp.server.customer.repo.CustomerRepository;
 import pl.kodokan.fcp.server.entrance.controller.PackageDetails;
 import pl.kodokan.fcp.server.entrance.dto.PackageDTO;
@@ -195,16 +196,16 @@ public class PackageService {
         if(packageWithNoEndDate != null && packageType.getEntranceLimit() > 1){
             throw new TwoTimePackagesException();
         }
-        /*
-         * TODO
-         *  If Package is intended for family, add this package to every family member
-         * */
+
         Package newPackage = new Package();
-        newPackage.setCustomer(customer);
+        newPackage.addCustomer(customer);
         newPackage.setPackageType(packageType);
         newPackage.setPaid(false);
         newPackage.setEndDateTime(null);
         newPackage.setPurchaseDateTime(LocalDateTime.now());
+
+        Family customersFamily;
+
 
         packageRepository.save(newPackage);
         return newPackage.getId();

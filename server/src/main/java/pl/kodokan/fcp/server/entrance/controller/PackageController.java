@@ -13,7 +13,6 @@ import pl.kodokan.fcp.server.entrance.dto.CreatePackageInputDataDTO;
 import pl.kodokan.fcp.server.entrance.dto.PackageDTO;
 import pl.kodokan.fcp.server.entrance.dto.PackageRequest;
 import pl.kodokan.fcp.server.entrance.dto.PackageResponse;
-import pl.kodokan.fcp.server.entrance.service.EntranceService;
 import pl.kodokan.fcp.server.entrance.service.PackageService;
 
 import java.util.List;
