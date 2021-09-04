@@ -13,8 +13,9 @@ import java.util.List;
 
 @Entity
 @Table(uniqueConstraints = {
+        // FIXME
         // an employee may have at most one training of the same type in one day
-        @UniqueConstraint(columnNames = {"training_name_id", "weekday", "employee_id"})
+//        @UniqueConstraint(columnNames = {"training_name_id", "weekday", "employee_id"})
 })
 @Getter @Setter
 public class TrainingSchedule extends BaseEntity {
