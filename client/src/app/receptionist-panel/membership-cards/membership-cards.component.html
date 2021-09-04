@@ -11,12 +11,12 @@
 <table>
     <tr *ngFor="let customer of customerAndCardStateList">
         <th class="name">
-            {{customer.customer.first_name}} {{customer.customer.last_name}}
+            {{customer.customer.firstName}} {{customer.customer.lastName}}
         </th>
         <th class="state">  
             {{customer.cardState.actual}}
         </th>
-        <th class="buttons buttons-first"> 
+        <th class="buttons"> 
             <button igxButton="flat" (click)=switchCardStatePrep(customer,1)>
                 <div *ngIf="!customer.cardState.previous">-</div>
                 {{customer.cardState.previous}}

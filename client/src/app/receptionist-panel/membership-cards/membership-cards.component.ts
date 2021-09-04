@@ -6,6 +6,7 @@ import { CardState } from 'src/app/data/card/card-state';
 import { CardStates } from 'src/app/data/card/card-states.enum';
 import { Customer } from 'src/app/data/customer/customer';
 import { CustomerAndCardState } from 'src/app/data/customer/customer-and-card-state';
+import { CustomerFilter } from 'src/app/data/customer/customer-filter';
 import { CustomerService } from 'src/app/services/customer.service';
 
 @Component({
@@ -19,6 +20,7 @@ export class MembershipCardsComponent implements OnInit {
   public cardNumberToBeSet: string
   public caseSensitive = false;
   public exactMatch = false;
+  public customerFilter: CustomerFilter
 
   cardStates: Card[];
   public selectedCardState: number[]
@@ -49,23 +51,30 @@ export class MembershipCardsComponent implements OnInit {
 
     //pobranie customerów
     this.customerSub = this.customerService.getCustomers().subscribe(
-      x => this.customerList=x
+      x => {
+        this.customerList=x
+        console.log("pobrano customerów")
+        console.log(this.customerList[0].customerID)
+        //przepisanie customerów
+        this.customerList.forEach(
+          y =>{
+            this.customerAndCardStateList.push(new CustomerAndCardState(y,new CardState()))
+          }
+        )
+        console.log("przepisano customerów")
+        console.log(this.customerAndCardStateList[0].customer.customerID)
+      },
       //TODO: obsłużyć error
+      err=>{},
     )
 
-    //przepisanie customerów
-    this.customerList.forEach(
-      x =>{
-        this.customerAndCardStateList.push(new CustomerAndCardState(x,new CardState()))
-      }
-    )
-    
     //pobranie cardstate dla wszystkich customerów
     this.customerAndCardStateList.forEach(
       x => {
-        this.cardStateSub = this.customerService.getCardState(x.customer.customer_id).subscribe(
+        this.cardStateSub = this.customerService.getCardState(x.customer.customerID).subscribe(
           y=>{
             x.cardState=y
+            console.log("pobrano cardstates")
           }
           //TODO: obsłużyć error
         )
@@ -111,7 +120,7 @@ export class MembershipCardsComponent implements OnInit {
     let y: number =+ this.cardNumberToBeSet
     let customer: CustomerAndCardState
     this.customerObs.subscribe(x=>{customer=x.customer})
-    this.customerService.postCardId(customer.customer.customer_id,y).subscribe(
+    this.customerService.postCardId(customer.customer.customerID,y).subscribe(
       x=>{
         //console.log(x)
       }

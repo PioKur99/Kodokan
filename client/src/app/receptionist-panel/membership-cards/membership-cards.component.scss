@@ -41,25 +41,18 @@ tr {
 .name {
   width: 30%;
   text-align: start;
-}
-
-.name,
-.state {
   border-bottom: 1px solid #DAA520;
 }
 
 .state {
   width: 20%;
   margin-right: 15%;
+  border-bottom: 1px solid #DAA520;
 }
 
-.buttons {
-  width: 15%;
-  background-color: #DAA520;
-  color: rgba(255, 255, 255, 0.100);
+.buttons{
+  border: 2px solid black;
   border-radius: 10px;
-
-  &-first {
-    margin-right: 5%;
-  }
+  width: 15%;
+  border-color: #DAA520;
 }

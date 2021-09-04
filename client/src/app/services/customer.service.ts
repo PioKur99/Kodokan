@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AnyARecord } from 'node:dns';
 import { Observable } from 'rxjs';
 import * as config from '../../assets/config.json'
 import { CardState } from '../data/card/card-state';
@@ -19,10 +20,10 @@ export class CustomerService {
   }
 
   getCustomers():Observable<Customer[]>{
-    //return this.http.get<Customer[]>(config.address+'customers/')
+    //return this.http.post<Customer[]>(config.address+'customers',{})
     let customerList=[
-      {customer_id: 1, first_name: 'Ali', last_name: 'Muhammad'},
-      {customer_id: 2, first_name: 'Bali', last_name: 'Chill'}]
+      {customerID: 1, firstName: 'Ali', lastName: 'Muhammad'},
+      {customerID: 2, firstName: 'Bali', lastName: 'Chill'}]
     return new Observable(x => { x.next(customerList)})
   }
 
