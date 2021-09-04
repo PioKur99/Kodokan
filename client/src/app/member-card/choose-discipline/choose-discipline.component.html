@@ -7,14 +7,18 @@
         <p class="text1"> Wybierz swoją dyscyplinę, która pojawi się na Twojej karcie członkowskiej: </p>
     </div>
     <div igxFlex>
-        <igx-checkbox *ngFor="let discipline of disciplines" [checked]="discipline.done">
+        <igx-radio *ngFor="let discipline of disciplines" [value]="discipline" [(ngModel)]="selected">
             {{discipline}}
-        </igx-checkbox>
+        </igx-radio>
     </div>
     <br>
     <div igxFlex>
-        <button class="Button" igxButton="raised" igxRipple="white" routerLink = "/member-card/prepared-card">
+        <button class="Button" igxButton="raised" igxRipple="white" (click)="sendDiscipline()" >
             Wyślij
         </button>
     </div>
+    <igx-dialog #dialog2 message={{dialogMessage}} leftButtonLabel="OK" 
+    (onLeftButtonSelect)="dialog2.close()"
+    [closeOnOutsideSelect]="true" title = "COŚ SIĘ NIE UDAŁO!">
+    </igx-dialog>
 </div>

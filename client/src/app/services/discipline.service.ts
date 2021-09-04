@@ -12,5 +12,8 @@ export class DisciplineService {
   getDisciplines() : Observable<any>{
     return this.http.get<any>("http://172.18.0.3:8081/discipline")
   }
+  sendDiscipline(discipline_) : Observable<any>{
+    return this.http.patch<any>("http://172.18.0.3:8081/discipline", {discipline: discipline_,id:2})
+  }
  
 }

@@ -7,7 +7,9 @@ import {
 	IgxNavbarModule,
 	IgxRippleModule,
 	IgxButtonModule,
-	IgxCheckboxModule
+	IgxCheckboxModule,
+	IgxRadioModule,
+	IgxDialogModule
 } from 'igniteui-angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MessageComponent } from './message/message.component';
@@ -29,7 +31,9 @@ import { FormsModule } from '@angular/forms';
         IgxRippleModule,
         IgxButtonModule,
         FormsModule,
-        IgxCheckboxModule
+        IgxCheckboxModule,
+        IgxRadioModule,
+        IgxDialogModule
     ]
 })
 export class MemberCardModule {
