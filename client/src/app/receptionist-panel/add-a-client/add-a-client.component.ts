@@ -133,7 +133,7 @@ imageLoaded() {
   }
 
   addDiscipline(id):void{
-    this.addAClientService.addDiscipline(id, this.discipline).subscribe(
+    this.addAClientService.addDiscipline(this.discipline, id).subscribe(
       x=>{
         this.successDialog.open();
       },

@@ -15,6 +15,6 @@ export class AddAClientService {
   }
 
   addDiscipline(id: String, discipline: String) : Observable<any>{
-    return this.http.post<any>("http://172.18.0.3:8081/disciplines", {customer_id: id, discipline: discipline}); 
+    return this.http.patch<any>("http://172.18.0.3:8081/disciplines", {discipline: discipline, id: id}); 
   }
 }
