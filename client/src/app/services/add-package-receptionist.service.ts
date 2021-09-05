@@ -17,9 +17,9 @@ export class AddPackageReceptionistService {
     return this.http.post(config.address+"package/create", {customer_id: id, type_id: type_id});
   }
   payForPackage(package_id: String) : Observable<any> {
-    return this.http.post(config.address+"package/pay", package_id);
+    return this.http.put(config.address+"package/pay-for-package", package_id);
  }
  getPackages() : Observable<any> {
-  return this.http.get(config.address+"packages");
+  return this.http.get(config.address+"package");
 }
 }
