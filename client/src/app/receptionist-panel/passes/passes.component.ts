@@ -21,17 +21,6 @@ export class PassesComponent implements OnInit {
   constructor(public passesService: PassesService) { }
 
   ngOnInit(): void {
-    this.getPasses()
-    this.checkboxes = new Array(this.passesList.length);
-    this.checkboxes.fill(false);
-  }
-  //zmienia zaznaczenia w tablicy checkboxes
-  toggleSelection(event, i) {
-    this.checkboxes[i] = event.checked;
-    console.log(this.checkboxes)
-  }
-
-  getPasses(){
     this.passesService.getPasses().subscribe(
       x=>{
         this.passesList=x
@@ -39,19 +28,33 @@ export class PassesComponent implements OnInit {
       },
       error=>{
         this.openErrorGetPasses()
+      },
+      () =>{
+        this.passesList.forEach(i => {
+          i.end_date= new Date(i.endDate)
+        });
+        this.checkboxes = new Array(this.passesList.length);
+        this.checkboxes.fill(false);
       }
     )
+  }
+
+  //zmienia zaznaczenia w tablicy checkboxes
+  toggleSelection(event, i) {
+    this.checkboxes[i] = event.checked;
+    console.log(this.checkboxes)
   }
 
   deletePasses(){
     for(let i=0;i< this.checkboxes.length;++i){
       if(this.checkboxes[i]){
-        this.passesService.deletePasses(this.passesList[i].package_id).subscribe(
+        this.passesService.deletePasses(this.passesList[i].packageId).subscribe(
           x=>{
             this.deletedPasses=x
             console.log("usunięto " + x)
           },
-          error=>{
+          err=>{
+            console.log(err.message)
             this.openErrorDeletePasses()
           }
         )

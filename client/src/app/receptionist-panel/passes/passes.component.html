@@ -36,14 +36,18 @@
            <td class="column column--third">Okres Ważności</td>
         </tr>
         <tr class="row" *ngFor="let item of passesList; let i=index">
-            <td class="column column--first">{{item.first_name}} {{item.last_name}}</td>
+            <td class="column column--first">
+                {{item.clientsFullName}}<!--{{item.first_name}} {{item.last_name}}-->
+            </td>
+            <!--FIXME: tu miała być nazwa karnetu, poprawić na backendzie-->
             <td class="column column--second">
-                <a class="href" href="receptionist-panel/passes/{{item.package_id}}">
-                    {{item.package_name}}
+                <a class="href" href="receptionist-panel/passes/{{item.packageId}}">
+                    {{item.packageId}}<!-- {{item.package_name}} -->
                 </a>
             </td>
             <td class="column column--third">
-                {{item.end_date.toLocaleDateString()}}
+                {{item.end_date.toLocaleString()}}
+                <!-- .toLocaleDateString()}} -->
             </td>
             <igx-checkbox  (change)="toggleSelection($event,i)" [checked]="checkboxes[i]"></igx-checkbox>            
         </tr>
