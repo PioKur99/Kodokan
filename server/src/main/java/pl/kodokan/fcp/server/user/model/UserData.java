@@ -47,7 +47,7 @@ public class UserData extends BaseEntity implements UserDetails {
 
     @Setter(AccessLevel.NONE) // don't use setter but control adding / removing singe role
     @Getter(AccessLevel.NONE) // use custom safe getter
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable
     private Set<Role> roles = new HashSet<>();
 
