@@ -11,7 +11,6 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WebcamModule } from 'ngx-webcam';
 import { ImageCropperModule } from 'ngx-image-cropper';
-
 import {
 	IgxInputGroupModule,
 	IgxIconModule,

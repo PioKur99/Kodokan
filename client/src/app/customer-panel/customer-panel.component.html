@@ -1,0 +1,75 @@
+<div class = "content-wrap" igxLayout>
+<header class = "topBar">
+    <button class = "menuButton" igxButton = "icon" (click) = "drawer.toggle()">
+        <igx-icon>menu</igx-icon>
+    </button>
+    <span padding-top = "20px">Witaj!</span>
+    <img src="assets/logoKlubSportowyKodokanTransparent.png" alt="logoKlubu" class = "logo">
+</header>
+
+<igx-nav-drawer #drawer position="left" [pin]="false" [pinThreshold]="0">
+    <ng-template igxDrawer>
+        <img src="assets/logoKlubSportowyKodokanTransparent.png" alt="User Pic">
+        <div class = "name">
+            <span>Imię i nazwisko</span>
+        </div>
+        <span igxDrawerItem class = "item" routerLink = "my-data">
+            <span class="iconify" data-icon="ph-pencil-line-bold" data-inline="false"></span>
+            Moje dane
+        </span>
+        <span igxDrawerItem class = "item" routerLink = "my-trainings">
+            <span class="iconify" data-icon="uil-dumbbell" data-inline="false"></span>
+            Moje treningi
+        </span>
+        <span igxDrawerItem class = "item" routerLink = "my-family">
+            <span class="iconify" data-icon="carbon-pedestrian-family" data-inline="false"></span>
+            Moja rodzina
+        </span>
+        <span igxDrawerItem class = "item" routerLink = "new-membership">
+            <span class="iconify" data-icon="bx-bxs-add-to-queue" data-inline="false"></span>
+            Dodaj nowy karnet
+        </span>
+        <span igxDrawerItem class = "item" routerLink = "my-memberships">
+            <span class="iconify" data-icon="fe-smile-heart" data-inline="false"></span>
+            Moje karnety
+        </span>
+        <div class = "backBtn">
+            <button igxButton="raised" igxRipple="white" routerLink = "">
+                Wróć
+            </button>
+        </div>
+    </ng-template>
+</igx-nav-drawer>
+</div>
+
+<div class = "btn-wrapper">
+    <button igxButton="flat" igxRipple="white" routerLink = "main-page" class = "btn-main-page" >
+        STRONA GŁÓWNA
+    </button>
+    <div id="outer-circle">
+            <button igxButton="flat" igxRipple="white" class = "btn-plus" (click) = "showDiv()">
+                +
+            </button>
+      </div> 
+  
+    <div class = "add-memb" *ngIf = "divVisible" [@flyInOut]>
+        <div class = "center">
+            <button igxButton = "raised"class = "add-memb-new" routerLink = "new-membership">
+                DODAJ NOWY KARNET
+            </button>
+        </div>
+        <button igxButton="raised" igxRipple="white" class = "add-memb-back" (click) = "hideDiv()">
+            <span class="iconify" data-icon="akar-icons:arrow-right" data-inline="false"></span>
+        </button>
+    
+        <div  class = "runner" >
+            <ng-lottie [options] = 'optionsRunner'></ng-lottie>
+        </div>
+    </div>
+</div>
+
+<router-outlet></router-outlet>
+
+    
+
+
