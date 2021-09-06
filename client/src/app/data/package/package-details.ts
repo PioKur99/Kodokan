@@ -2,12 +2,15 @@ import { Customer } from "../customer/customer"
 
 export class PackageDetails {
     name: String
-    prize: String
-    CustomerList: Customer[]
-    endDate: Date
-    isPaid: boolean
-    purchaseDate: Date
-    entrance_used: number
-    entrance_unused: number
+    price: String
+    endDate: string
+    purchaseDate: string
+    usedEntries: number
+    remainingEntries: number
     duration: number
+    owners: Customer[]
+    paid: boolean
+
+    end_date: Date
+    purchase_date: Date
 }

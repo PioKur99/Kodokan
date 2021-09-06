@@ -16,6 +16,7 @@ import { PassesComponent } from './passes/passes.component';
 import { AddAClientComponent } from './add-a-client/add-a-client.component';
 import { EntryRegistrationComponent } from './entry-registration/entry-registration.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PassDetailsComponent } from './pass-details/pass-details.component';
 
 @NgModule({
     declarations: [
@@ -25,7 +26,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         MembershipCardsComponent,
         PassesComponent,
         AddAClientComponent,
-        EntryRegistrationComponent
+        EntryRegistrationComponent,
+        PassDetailsComponent
     ],
     imports: [
         CommonModule,

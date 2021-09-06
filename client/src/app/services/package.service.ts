@@ -13,22 +13,26 @@ export class PackageService {
   constructor(private http: HttpClient) { }
 
   getPackageDetails(package_id: number): Observable<PackageDetails>{
-    //return this.http.get<PackageDetails>(config.address+'package_details/'+package_id)
-    let customer_list: Customer[] = [{customer_id: 1,
-      first_name: "Alex",
-      last_name: "Bord"},
-      {customer_id: 2,
-        first_name: "Charlote",
-        last_name: "Dwayne"}]
-    let package_details : PackageDetails = {name: "nazwa karnetu",
-      prize: "30,43",
-      CustomerList: customer_list,
-      endDate: new Date("7.12.2020"),
-      isPaid: true,
-      purchaseDate: new Date("12.11.2020"),
-      entrance_used: 1,
-      entrance_unused: 3,
-      duration: 30}
-    return new Observable(x => { x.next(package_details)})
+    return this.http.get<PackageDetails>(config.address+'package/get?packageId='+ package_id)
+    //TEST
+    // let customer_list: Customer[] = [{customerId: 1,
+    //   firstName: "Alex",
+    //   lastName: "Bord"},
+    //   {customerId: 2,
+    //     firstName: "Charlote",
+    //     lastName: "Dwayne"}]
+    // let package_details : PackageDetails = {
+    //   name: "nazwa karnetu",
+    //   price: "30,43",
+    //   owners: customer_list,
+    //   endDate: "dsad",
+    //   end_date: new Date("2021-11-02"),
+    //   paid: true,
+    //   purchaseDate:"sadf",
+    //   purchase_date: new Date("2019-07-03"),
+    //   usedEntries: 1,
+    //   remainingEntries: 3,
+    //   duration: 30}
+    // return new Observable(x => { x.next(package_details)})
   }
 }
