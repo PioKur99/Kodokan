@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PackageService } from 'src/app/services/package.service';
 import { PackageDetails} from '../../data/package/package-details'
@@ -15,6 +15,8 @@ export class PassDetailsComponent implements OnInit {
   packageId: number
   packageDetails: PackageDetails
 
+  @ViewChild("errorGetPassDetails") errorGetPassDetails;
+
   constructor(private route: ActivatedRoute,private packageService: PackageService) { }
 
   ngOnInit(): void {
@@ -26,7 +28,9 @@ export class PassDetailsComponent implements OnInit {
         this.packageDetails=x
         console.log(x)
       },
-      err=>{},
+      err=>{
+        this.openErrorGetPassDetails()
+      },
       ()=> {
         this.packageDetails.purchase_date = new Date(this.packageDetails.purchaseDate)
         this.packageDetails.end_date = new Date(this.packageDetails.endDate)
@@ -36,6 +40,10 @@ export class PassDetailsComponent implements OnInit {
 
   showEntrances(){
     window.location.href="receptionist-panel/entrance/"+ this.packageId.toString()
+  }
+
+  openErrorGetPassDetails(){
+    this.errorGetPassDetails.open()
   }
 
 }

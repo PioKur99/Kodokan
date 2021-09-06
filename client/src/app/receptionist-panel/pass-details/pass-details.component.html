@@ -1,53 +1,57 @@
-<table *ngIf="packageDetails">
-    <tr class="title">
-        <td colspan=2>{{packageDetails.name}}</td>
-    </tr>
-    <tr class="row">
-        <td class="column column--first">cena</td> 
-        <td class="column column--second">{{packageDetails.price}} zł</td>
-    </tr>
-    <tr class="row">
-        <td class="column column--first">posiadacz</td>
-        <td class="column column--second">
-            <div *ngFor="let item of packageDetails.owners">
-                <a class="href" href="receptionist-panel/customers/{{item.customerId}}">
-                    {{item.firstName}}
-                    {{item.lastName}}
-                </a>
-            </div>
-        </td>
-    </tr>
-    <tr class="row">
-        <td class="column column--first">data ważności</td>
-        <td class="column column--second">{{packageDetails.end_date.toLocaleDateString()}}</td>
-    </tr>
-    <tr class="row">
-        <td class="column column--first">status</td>
-        <td class="column column--second">
-            <div2 *ngIf=packageDetails.isPaid>
-                opłacony
-            </div2>
-            <div2 *ngIf=!packageDetails.isPaid>
-                nieopłacony
-            </div2>
-        </td>
-    </tr>
-    <tr class="row">
-        <td class="column column--first">data zakupu</td>
-        <td class="column column--second">{{packageDetails.purchase_date.toLocaleDateString()}}</td>
-    </tr>
-    <tr class="row">
-        <td class="column column--first">wykorzystane wejścia</td>
-        <td class="column column--second">{{packageDetails.usedEntries}}</td>
-    </tr>
-    <tr class="row">
-        <td class="column column--first">pozostała ilość wejść</td>
-        <td class="column column--second">{{packageDetails.remainingEntries}}</td>
-    </tr>
-    <tr class="row">
-        <td class="column column--first">czas trwania </td>
-        <td class="column column--second">{{packageDetails.duration}} dni</td>
-    </tr>
-</table>
+<div *ngIf="packageDetails">
+    <table>
+        <tr class="title">
+            <td colspan=2>{{packageDetails.name}}</td>
+        </tr>
+        <tr class="row">
+            <td class="column column--first">cena</td> 
+            <td class="column column--second">{{packageDetails.price}} zł</td>
+        </tr>
+        <tr class="row">
+            <td class="column column--first">posiadacz</td>
+            <td class="column column--second">
+                <div *ngFor="let item of packageDetails.owners">
+                    <a class="href" href="receptionist-panel/customers/{{item.customerId}}">
+                        {{item.firstName}}
+                        {{item.lastName}}
+                    </a>
+                </div>
+            </td>
+        </tr>
+        <tr class="row">
+            <td class="column column--first">data ważności</td>
+            <td class="column column--second">{{packageDetails.end_date.toLocaleDateString()}}</td>
+        </tr>
+        <tr class="row">
+            <td class="column column--first">status</td>
+            <td class="column column--second">
+                <div2 *ngIf=packageDetails.isPaid>
+                    opłacony
+                </div2>
+                <div2 *ngIf=!packageDetails.isPaid>
+                    nieopłacony
+                </div2>
+            </td>
+        </tr>
+        <tr class="row">
+            <td class="column column--first">data zakupu</td>
+            <td class="column column--second">{{packageDetails.purchase_date.toLocaleDateString()}}</td>
+        </tr>
+        <tr class="row">
+            <td class="column column--first">wykorzystane wejścia</td>
+            <td class="column column--second">{{packageDetails.usedEntries}}</td>
+        </tr>
+        <tr class="row">
+            <td class="column column--first">pozostała ilość wejść</td>
+            <td class="column column--second">{{packageDetails.remainingEntries}}</td>
+        </tr>
+        <tr class="row">
+            <td class="column column--first">czas trwania </td>
+            <td class="column column--second">{{packageDetails.duration}} dni</td>
+        </tr>
+    </table>
 
-<button (click)="showEntrances()">pokaż wejścia</button>
+    <button (click)="showEntrances()">pokaż wejścia</button>
+</div>
+
+<igx-dialog #errorGetPassDetails message="Nie udało się wczytać szczegółów karnetu" rightButtonLabel="Wróć" (onRightButtonSelect)="errorGetPassDetails.close()" [closeOnOutsideSelect]="true"></igx-dialog>
