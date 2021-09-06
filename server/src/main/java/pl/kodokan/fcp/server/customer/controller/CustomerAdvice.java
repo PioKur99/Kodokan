@@ -8,7 +8,6 @@ import pl.kodokan.fcp.server.customer.exception.*;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
-import java.io.IOException;
 import java.util.Set;
 
 @RestControllerAdvice
@@ -37,6 +36,10 @@ public class CustomerAdvice {
     @ExceptionHandler(CustomerNotPresent.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     String customerNotFoundException(IncorrectEmailException ex) {return "Customer not found!";}
+
+    @ExceptionHandler(CannotDeleteCustomerException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    String cannotDeleteCustomerException(CannotDeleteCustomerException ex) {return "Cannot delete customer with active package!";}
 
     //TODO: jezeli w oficjalnych wersjach nie będzie adnotacji notNull to łapanie tego wyjątku okazać się może zbędne
     @ExceptionHandler(ConstraintViolationException.class)

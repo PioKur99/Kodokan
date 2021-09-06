@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+    options {
+        timestamps()
+    }
+    stages {
+        stage('Remove and run new database container') {
+            steps {
+                    echo 'Deploying...'
+                    sh 'docker ps -q -f name=kodokan-database'
+                    sh 'docker container stop kodokan-database || true'
+                    sh 'docker run --name kodokan-database --detach --rm -p 5432:5432 --volume postgres-volume:/var/lib/postgresql/data -e POSTGRES_PASSWORD=kodokan postgres:12'
+                    sh 'docker ps'
+            }
+        }
+    }
+}

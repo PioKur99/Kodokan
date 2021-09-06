@@ -6,11 +6,12 @@ import lombok.Setter;
 import pl.kodokan.fcp.server.common.model.BaseEntity;
 import pl.kodokan.fcp.server.customer.exception.MaximumCardState;
 import pl.kodokan.fcp.server.customer.exception.MinimumCardState;
+
 import pl.kodokan.fcp.server.entrance.model.Entrance;
 import pl.kodokan.fcp.server.entrance.model.Package;
 import pl.kodokan.fcp.server.user.model.UserData;
-
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -42,7 +43,7 @@ public class Customer extends BaseEntity {
 
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "customers", cascade = CascadeType.ALL)
     private List<Package> packages = new LinkedList<>();
 
     @Getter(AccessLevel.NONE)
@@ -50,14 +51,20 @@ public class Customer extends BaseEntity {
     @OneToMany(mappedBy = "customer")
     private List<Entrance> entrances = new LinkedList<>();
 
+    @Temporal(TemporalType.DATE)
+    private Date joinDate;
+
     public void addPackage(Package pack) {
-        pack.setCustomer(this);
+        pack.addCustomer(this);
         packages.add(pack);
     }
 
     public List<Package> getPackages() {
         // returns safe copy of list
         return Collections.unmodifiableList(packages);
+    }
+    public void deletePackageById(Package aPackage){
+        this.packages.remove(aPackage);
     }
 
     public void setNextCardState() {

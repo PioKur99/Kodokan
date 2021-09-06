@@ -1,1 +1,43 @@
-<p>entry-registration works!</p>
+<div class="container">
+    <div class="card-number">
+        <form>
+            <igx-input-group>
+                <input class="card-number__input" igxInput name="fullName" type="text" placeholder="Wprowadź numer karty członkowskiej"/>
+            </igx-input-group>
+        </form>
+    </div>
+
+    <div *ngFor="let training of trainingList" class="buttons">
+        <!--FIXME: powinno być rozmieszczone odpowiednio-->
+        <button igxButton="raised" igxRipple="white" class="buttons__item" (click)="entryRegistration(training.trainingId)">
+            {{training.name}}
+        </button>
+    </div>
+</div>
+
+<igx-dialog #alertok
+    title="Udało się zarejestrować wejście!"
+    message="Zarejestrowano wejście klienta!"
+    leftButtonLabel="OK"
+    (onLeftButtonSelect)="alertok.close()">
+</igx-dialog>
+
+<igx-dialog #alertnotok class="alert-not-ok">
+    <igx-dialog-title>
+        <div class="dialog-container">
+            <div class="dialog-title">Nie udało się zarejestrować wejścia!</div>
+        </div>
+    </igx-dialog-title>
+
+    <p>
+        Odpowiedni komunikat
+    </p>
+
+    <div igxDialogActions class="alert-not-ok__buttons">
+        <button igxButton (click)="alertnotok.close()" class="alert-not-ok__buttons--item">ANULUJ</button>
+        <div *ngFor="let packageType of packageTypeList">
+            <button igxButton (click)="entryRegistration2()" class="alert-not-ok__buttons--item">{{packageType.name}}</button>
+        </div>
+        <button igxButton (click)="alertnotok.close()" class="alert-not-ok__buttons--item">OK SYSTEM</button>
+    </div>
+</igx-dialog>

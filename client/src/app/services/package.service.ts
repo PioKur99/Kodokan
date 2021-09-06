@@ -4,6 +4,9 @@ import { Observable } from 'rxjs';
 import * as config from '../../assets/config.json'
 import { Customer } from '../data/customer/customer';
 import { PackageDetails } from '../data/package/package-details';
+import { PackageType } from '../data/package/package-type';
+import { Package } from '../data/package/package';
+
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +37,17 @@ export class PackageService {
     //   remainingEntries: 3,
     //   duration: 30}
     // return new Observable(x => { x.next(package_details)})
+  }
+
+  getPackageType(): Observable<PackageType[]>{
+    return this.http.get<PackageType[]>(config.address+'package_type')
+  }
+
+  postAddPackage(pass: Package): Observable<number>{
+    return this.http.post<number>(config.address+'add_package',pass)
+  }
+
+  postPackagePaid(packageId: number): Observable<any>{
+    return this.http.post<any>(config.address+'package_paid', packageId)
   }
 }

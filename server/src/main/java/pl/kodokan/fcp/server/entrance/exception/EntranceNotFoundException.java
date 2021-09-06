@@ -5,3 +5,4 @@ public class EntranceNotFoundException extends RuntimeException {
         super(e);
     }
 }
+
