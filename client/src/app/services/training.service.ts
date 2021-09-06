@@ -12,6 +12,6 @@ export class TrainingService {
   constructor(private http: HttpClient) { }
 
   getTrainingShedule(): Observable<Training[]>{
-    return this.http.get<Training[]>(config.address+'trainings')
+    return this.http.get<Training[]>(config.address+'trainings/nearest')
   }
 }

@@ -56,11 +56,13 @@ export class EntryRegistrationComponent implements OnInit {
     this.packageTypeSub=
       this.packageService.getPackageType().subscribe(
         x => this.packageTypeList=x,
+        //TODO: zrobić coś z tym errorem
+        //error =>
       )
   }
 
   entryRegistration(shedule_id: number): void{
-    this.entranceToAdd.training_id=shedule_id
+    this.entranceToAdd.trainingId=shedule_id
     //TODO: ustawić customer_id
     //this.entranceToAdd.customer_id=;
 

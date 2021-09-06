@@ -15,6 +15,7 @@ export class EntranceService {
   }
 
   postEntrance(newEntrance: EntranceToAdd): Observable<number>{
-    return this.http.post<number>(this.actionUrl+'newEntrance',newEntrance)
+    
+    return this.http.post<number>(this.actionUrl+'entrance/add',newEntrance)
   }
 }
