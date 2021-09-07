@@ -5,19 +5,20 @@ export enum Gender {
 
 export class Client {
 
-addressLine: string;
-cardId: string;
-city: string;
-email: string;
-firstName: string;
+addressLine: String;
+cardId: String;
+city: String;
+email: String;
+firstName: String;
+password: String;
 gender: Gender;
 id: number;
-identityNumber: string;
+identityNumber: String;
 image: String;
-lastName: string;
-mainDiscipline: string;
-phone: string;
-postalCode: string;
-voivodeship: string;
+lastName: String;
+mainDiscipline: String;
+phone: String;
+postalCode: String;
+voivodeship: String;
 
 }

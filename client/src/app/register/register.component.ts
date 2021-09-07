@@ -5,7 +5,7 @@ import { RadioGroupAlignment } from "igniteui-angular";
 
 
 import {Subject, Observable} from 'rxjs';
-import { Client } from '../data/client';
+import { Client, Gender } from '../data/client';
 import { RegisterService } from '../services/register.service';
 import { Router } from '@angular/router';
 import { WebcamImage } from 'ngx-webcam';
@@ -40,11 +40,14 @@ export class RegisterComponent implements OnInit {
   private trigger: Subject<void> = new Subject<void>();
 
   client: Client = {
+    cardId: "",
     addressLine: "",
+    id: null,
+    mainDiscipline: "",
     city: "",
     email: "",
     firstName: "",
-    gender: "",
+    gender: Gender.Male,
     identityNumber: "",
     image: "",
     lastName: "",

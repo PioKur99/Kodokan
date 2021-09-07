@@ -27,7 +27,7 @@ export class CustomerDataComponent implements OnInit {
     phone: "66677788",
     postalCode: "00-233",
     voivodeship: "Ślunskie",
-
+    password: "abc"
   };
   
 
