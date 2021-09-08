@@ -15,6 +15,11 @@ import java.util.Set;
 @Entity
 @Getter @Setter @NoArgsConstructor
 public class Family extends BaseEntity {
+    
+    @Getter @Setter
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "family_generator")
+    @SequenceGenerator(name="family_generator", sequenceName = "family_seq", allocationSize=50)
+    private Long id;
 
     @NotNull
     private String name;
