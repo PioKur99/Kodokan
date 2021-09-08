@@ -13,6 +13,11 @@ import java.util.List;
 @Entity
 @Getter @Setter
 public class TrainingName extends BaseEntity {
+    
+    @Getter @Setter
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "trainingname_generator")
+    @SequenceGenerator(name="trainingname_generator", sequenceName = "trainingname_seq", allocationSize=50)
+    private Long id;
 
     @NaturalId
     private String name;
