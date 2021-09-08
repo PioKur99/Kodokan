@@ -23,7 +23,7 @@ public class PackageType extends BaseEntity {
     
     @Getter @Setter
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "packagetype_generator")
-    @SequenceGenerator(name="packagetype_generator", sequenceName = "packagetype_seq", allocationSize=50)
+    @SequenceGenerator(name="packagetype_generator", sequenceName = "packagetype_seq", allocationSize=1)
     private Long id;
 
     @NaturalId // not-null and unique out of the box
