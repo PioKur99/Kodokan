@@ -17,7 +17,7 @@ public class TimeSheet extends BaseEntity {
     
     @Getter @Setter
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "timesheet_generator")
-    @SequenceGenerator(name="timesheet_generator", sequenceName = "timesheet_seq", allocationSize=50)
+    @SequenceGenerator(name="timesheet_generator", sequenceName = "timesheet_seq", allocationSize=1)
     private Long id;
 
     @NotNull
