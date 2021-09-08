@@ -12,7 +12,8 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public abstract class BaseEntity {
 
-    @Getter @Setter
+    //po co ten klucz główny? xd
+    /*@Getter @Setter
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+    private Long id;*/
 }
