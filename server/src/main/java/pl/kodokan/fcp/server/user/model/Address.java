@@ -9,6 +9,11 @@ import javax.persistence.*;
 @Entity
 @Getter @Setter
 public class Address extends BaseEntity {
+    
+    @Getter @Setter
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "address_generator")
+    @SequenceGenerator(name="address_generator", sequenceName = "address_seq", allocationSize=50)
+    private Long id;
 
     /**
      * Street name + building number
