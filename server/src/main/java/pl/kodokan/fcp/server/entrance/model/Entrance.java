@@ -16,6 +16,11 @@ import java.time.LocalDateTime;
 @Entity
 @Getter @Setter @NoArgsConstructor
 public class Entrance extends BaseEntity {
+    
+    @Getter @Setter
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "entrance_generator")
+    @SequenceGenerator(name="entrance_generator", sequenceName = "entrance_seq", allocationSize=50)
+    private Long id;
 
     @NotNull
     @ManyToOne
