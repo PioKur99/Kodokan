@@ -27,6 +27,11 @@ public class Customer extends BaseEntity {
             @AttributeOverride(name = "state", column = @Column(name = "card_state"))
     })
     ClubCard clubCard;
+    
+    @Getter @Setter
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_generator")
+    @SequenceGenerator(name="customer_generator", sequenceName = "customer_seq", allocationSize=50)
+    private Long id;
 
     @Enumerated(EnumType.STRING)
     Discipline mainDiscipline;
