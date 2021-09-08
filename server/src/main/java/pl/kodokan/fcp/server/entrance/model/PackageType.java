@@ -18,6 +18,11 @@ import java.util.*;
 @Entity
 @Getter @Setter
 public class PackageType extends BaseEntity {
+    
+    @Getter @Setter
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "packagetype_generator")
+    @SequenceGenerator(name="packagetype_generator", sequenceName = "packagetype_seq", allocationSize=50)
+    private Long id;
 
     @NaturalId // not-null and unique out of the box
     private String name;
