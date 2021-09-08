@@ -18,7 +18,7 @@ public class Role extends BaseEntity implements GrantedAuthority {
     
     @Getter @Setter
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "role_generator")
-    @SequenceGenerator(name="role_generator", sequenceName = "role_seq", allocationSize=50)
+    @SequenceGenerator(name="role_generator", sequenceName = "role_seq", allocationSize=1)
     private Long id;
 
     @NaturalId // unique and not-null out of the box
