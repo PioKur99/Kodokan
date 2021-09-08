@@ -17,7 +17,7 @@ public class PackageFreeze extends BaseEntity {
     
     @Getter @Setter
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "packagefreeze_generator")
-    @SequenceGenerator(name="packagefreeze_generator", sequenceName = "packagefreeze_seq", allocationSize=50)
+    @SequenceGenerator(name="packagefreeze_generator", sequenceName = "packagefreeze_seq", allocationSize=1)
     private Long id;
 
     @NotNull
