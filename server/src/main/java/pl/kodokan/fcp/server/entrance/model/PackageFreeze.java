@@ -12,6 +12,11 @@ import java.time.LocalDateTime;
 @Entity
 @Getter @Setter @NoArgsConstructor
 public class PackageFreeze extends BaseEntity {
+    
+    @Getter @Setter
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "packagefreeze_generator")
+    @SequenceGenerator(name="packagefreeze_generator", sequenceName = "packagefreeze_seq", allocationSize=50)
+    private Long id;
 
     @NotNull
     private LocalDateTime startDateTime;
