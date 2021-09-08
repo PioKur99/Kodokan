@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.List;
 
+import javax.persistence.*;
+
 @Entity
 @Getter @Setter
 public class TrainingName extends BaseEntity {
