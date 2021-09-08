@@ -12,7 +12,7 @@ public class Address extends BaseEntity {
     
     @Getter @Setter
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "address_generator")
-    @SequenceGenerator(name="address_generator", sequenceName = "address_seq", allocationSize=50)
+    @SequenceGenerator(name="address_generator", sequenceName = "address_seq", allocationSize=1)
     private Long id;
 
     /**
