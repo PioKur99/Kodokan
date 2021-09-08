@@ -20,7 +20,7 @@ public class UserData extends BaseEntity implements UserDetails {
     
     @Getter @Setter
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_generator")
-    @SequenceGenerator(name="user_generator", sequenceName = "user_seq")
+    @SequenceGenerator(name="user_generator", sequenceName = "public.user_seq")
     private Long id;
 
     @NotNull
