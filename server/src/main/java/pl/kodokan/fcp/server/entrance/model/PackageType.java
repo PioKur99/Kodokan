@@ -15,6 +15,8 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.*;
 
+import javax.persistence.*;
+
 @Entity
 @Getter @Setter
 public class PackageType extends BaseEntity {
