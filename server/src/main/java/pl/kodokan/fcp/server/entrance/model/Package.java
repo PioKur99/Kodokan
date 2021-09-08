@@ -16,12 +16,18 @@ import java.util.List;
 @Entity
 @Getter @Setter
 public class Package extends BaseEntity {
+    
+    @Getter @Setter
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "package_generator")
+    @SequenceGenerator(name="package_generator", sequenceName = "package_seq", allocationSize=50)
+    private Long id;
 
     @NotNull
     private LocalDateTime purchaseDateTime;
 
     //TODO: Są karnety bez daty końcowe, działanie prokonsumenckie - takie karnety otrzymują endDateTime w
     // chwili odbicia, o ile dobrze zrozumiałem Lukasza
+    //świetnie mnie zrozumiałeś - Lukasz
 //    @NotNull
     private LocalDateTime endDateTime;
 
