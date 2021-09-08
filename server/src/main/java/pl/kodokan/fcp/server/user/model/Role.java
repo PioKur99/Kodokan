@@ -10,6 +10,8 @@ import pl.kodokan.fcp.server.common.model.BaseEntity;
 import javax.persistence.Entity;
 import java.util.Objects;
 
+import javax.persistence.*;
+
 @Entity
 @Getter @Setter @NoArgsConstructor
 public class Role extends BaseEntity implements GrantedAuthority {
