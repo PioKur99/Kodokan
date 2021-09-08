@@ -19,7 +19,7 @@ public class Package extends BaseEntity {
     
     @Getter @Setter
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "package_generator")
-    @SequenceGenerator(name="package_generator", sequenceName = "package_seq", allocationSize=50)
+    @SequenceGenerator(name="package_generator", sequenceName = "package_seq", allocationSize=1)
     private Long id;
 
     @NotNull
