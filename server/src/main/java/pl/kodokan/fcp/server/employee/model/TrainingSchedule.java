@@ -22,7 +22,7 @@ public class TrainingSchedule extends BaseEntity {
     
     @Getter @Setter
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "trainingschedule_generator")
-    @SequenceGenerator(name="trainingschedule_generator", sequenceName = "trainingschedule_seq", allocationSize=50)
+    @SequenceGenerator(name="trainingschedule_generator", sequenceName = "trainingschedule_seq", allocationSize=1)
     private Long id;
 
     @NotNull
