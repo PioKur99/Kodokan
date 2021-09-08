@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
+import javax.persistence.*;
+
 @Entity
 @Getter @Setter @NoArgsConstructor
 public class Entrance extends BaseEntity {
