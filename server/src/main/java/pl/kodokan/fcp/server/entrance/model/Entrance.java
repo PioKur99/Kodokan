@@ -21,7 +21,7 @@ public class Entrance extends BaseEntity {
     
     @Getter @Setter
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "entrance_generator")
-    @SequenceGenerator(name="entrance_generator", sequenceName = "entrance_seq", allocationSize=50)
+    @SequenceGenerator(name="entrance_generator", sequenceName = "entrance_seq", allocationSize=1)
     private Long id;
 
     @NotNull
