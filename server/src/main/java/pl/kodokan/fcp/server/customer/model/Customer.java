@@ -30,7 +30,7 @@ public class Customer extends BaseEntity {
     
     @Getter @Setter
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_generator")
-    @SequenceGenerator(name="customer_generator", sequenceName = "customer_seq", allocationSize=50)
+    @SequenceGenerator(name="customer_generator", sequenceName = "customer_seq", allocationSize=1)
     private Long id;
 
     @Enumerated(EnumType.STRING)
