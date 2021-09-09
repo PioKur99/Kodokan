@@ -11,7 +11,7 @@ export class AddAClientService {
   constructor(private http: HttpClient) { }
 
   addClient(client: Client) : Observable<any>{
-    return this.http.post<Client>("http://172.18.0.3:8081/customers/create", client);
+    return this.http.post<Client>("http://172.18.0.3:8081/customers/create/2", client);
   }
 
   addDiscipline(id: String, discipline: String) : Observable<any>{

@@ -124,6 +124,7 @@ imageLoaded() {
 
     this.addAClientService.addClient(this.client).subscribe(
       x=>{
+
         this.addDiscipline(x);
       },
       error => {
