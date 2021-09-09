@@ -14,5 +14,5 @@ public interface PackageRepository extends JpaRepository<Package, Long> {
     List<Package> findFamilyPackages(@Param("id") Long id);
 
     @Query("SELECT p FROM Package p WHERE p.customers.id=:customerID AND p.endDateTime = null AND p.packageType.entranceLimit > 1")
-    Package findPackagesWithNoEndDate(@Param("customerID") Long customerID);
+    List<Package> findPackagesWithNoEndDate(@Param("customerID") Long customerID);
 }
