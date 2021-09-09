@@ -73,6 +73,10 @@ public class Package extends BaseEntity {
         return entrances.size();
     }
 
+    public List<Entrance> getEntrances(){
+        return Collections.unmodifiableList(entrances);
+    }
+
     public void pay(){
         paid = true;
     }
@@ -85,6 +89,10 @@ public class Package extends BaseEntity {
         // returns safe copy of freezes
         return Collections.unmodifiableList(customers);
     }
+     public boolean getCustomerss(){
+        return true;
+     }
+
     public void deleteCustomer(Customer customer){
         customers.remove(customer);
     }
