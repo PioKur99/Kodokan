@@ -60,5 +60,6 @@ public class FilterCustomersService {
         String cardStateStr = Optional.ofNullable(filters.getCardState()).orElse("");
 
         return repo.getCustomers(firstNameStr, lastNameStr, cardIDStr, phoneStr, cardStateStr).stream().map(mapper::toDTO).collect(Collectors.toList());
-    }
+    	}
+	}
 }
