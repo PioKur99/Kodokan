@@ -17,6 +17,11 @@ import java.util.Set;
 @Entity
 @Getter @Setter
 public class UserData extends BaseEntity implements UserDetails {
+    
+    @Getter @Setter
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_generator")
+    @SequenceGenerator(name="user_generator", sequenceName = "user_seq", allocationSize=1)
+    private Long id;
 
     @NotNull
     @Email(message = "Email is incorrect!")

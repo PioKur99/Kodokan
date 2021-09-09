@@ -29,7 +29,7 @@ public class PackageController {
             @ApiResponse(code = 200, message = "Successfully returned list of packages"),
             @ApiResponse(code = 400, message = "Cannot return list of packages")
     })
-    @GetMapping
+    @PostMapping
     public ResponseEntity<List<PackageResponse>> findAllWithParameters(
             @RequestBody
             @ApiParam(

@@ -322,14 +322,21 @@ insert into package_type (id, entrance_limit, for_family, name, payment_mandator
 insert into package_type (id, entrance_limit, for_family, name, payment_mandatory, price, validity_days, with_partner_system) values (19, 4, true, 'KARNET19', false, 4, 34, false);
 insert into package_type (id, entrance_limit, for_family, name, payment_mandatory, price, validity_days, with_partner_system) values (20, 1, false, 'Jednorazowka', true, 11, 99, false);
 
-insert into package(id, end_date_time, paid, purchase_date_time, customer_id, package_type_id) values (1, '2021-06-02 22:23:56', true, '2021-07-02 22:23:56', 1, 1);
-insert into package(id, end_date_time, paid, purchase_date_time, customer_id, package_type_id) values (2, '2021-05-02 22:23:56', true, '2021-06-01 22:23:56', 2, 2);
-insert into package(id, end_date_time, paid, purchase_date_time, customer_id, package_type_id) values (3, null, true, '2021-06-01 22:23:56', 3, 3);
-insert into package(id, end_date_time, paid, purchase_date_time, customer_id, package_type_id) values (4, '2099-05-02 22:23:56', true, '2021-06-01 22:23:56', 4, 20);
+insert into package(id, end_date_time, paid, purchase_date_time, package_type_id) values (1, '2021-06-02 22:23:56', true, '2021-07-02 22:23:56', 1);
+insert into package(id, end_date_time, paid, purchase_date_time, package_type_id) values (2, '2021-05-02 22:23:56', true, '2021-06-01 22:23:56', 2);
+insert into package(id, end_date_time, paid, purchase_date_time, package_type_id) values (3, null, true, '2021-06-01 22:23:56', 3);
+insert into package(id, end_date_time, paid, purchase_date_time, package_type_id) values (4, '2099-05-02 22:23:56', true, '2021-06-01 22:23:56', 20);
 --freeze
-insert into package(id, end_date_time, paid, purchase_date_time, customer_id, package_type_id) values (5, '2021-07-02 22:23:56', true, '2021-05-01 22:23:56', 5, 5);
+insert into package(id, end_date_time, paid, purchase_date_time, package_type_id) values (5, '2021-07-02 22:23:56', true, '2021-05-01 22:23:56', 5);
 insert into package_freeze(id, end_date_time, start_date_time, package_id) values (1, '2021-06-10 22:23:56', '2021-06-01 22:23:56', 5);
-insert into package(id, end_date_time, paid, purchase_date_time, customer_id, package_type_id) values (6, '2099-05-02 22:23:56', true, '2021-06-01 22:23:56', 6, 2);
+insert into package(id, end_date_time, paid, purchase_date_time, package_type_id) values (6, '2099-05-02 22:23:56', true, '2021-06-01 22:23:56', 2);
+
+insert into packages_customers(package_id, customer_id) values(1,1);
+insert into packages_customers(package_id, customer_id) values(2,2);
+insert into packages_customers(package_id, customer_id) values(3,3);
+insert into packages_customers(package_id, customer_id) values(4,4);
+insert into packages_customers(package_id, customer_id) values(5,5);
+insert into packages_customers(package_id, customer_id) values(6,6);
 
 insert into employee(id, user_data_id) values (1, 10);
 insert into training_name(id, name) values (1, 'Testowy trening');
