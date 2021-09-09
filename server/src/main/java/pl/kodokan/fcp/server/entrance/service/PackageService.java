@@ -192,7 +192,7 @@ public class PackageService {
     public Long createPackage(Long customerID, Long packageTypeID){
         Customer customer = findCustomerById(customerID);
         PackageType packageType = findPackageById(packageTypeID);
-        Package packageWithNoEndDate = packageRepository.findPackagesWithNoEndDate(customerID);
+        List<Package> packageWithNoEndDate = packageRepository.findPackagesWithNoEndDate(customerID);
         if(packageWithNoEndDate != null && packageType.getEntranceLimit() > 1){
             throw new TwoTimePackagesException();
         }
