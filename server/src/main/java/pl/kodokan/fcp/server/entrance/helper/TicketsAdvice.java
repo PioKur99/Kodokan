@@ -16,7 +16,7 @@ public class TicketsAdvice {
     public ResponseEntity<AdviceDTO> packageNotPresent(PackageNotPresentException ex){
         AdviceDTO dto = new AdviceDTO();
         dto.setMessage("Package with this ID doesn't exists in database");
-        dto.setLocalization(String.valueOf(PackageNotPresent.class));
+        dto.setLocalization(String.valueOf(PackageNotPresentException.class));
         return new ResponseEntity<>(dto, HttpStatus.BAD_REQUEST);
     }
 
