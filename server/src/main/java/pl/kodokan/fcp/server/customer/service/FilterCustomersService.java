@@ -20,28 +20,6 @@ public class FilterCustomersService {
     @Autowired
     FilteredCustomerMapper mapper;
 
-    public List<FilteredCustomersDTO> getFilteredList(FiltersDTO filters){
-        String firstNameStr = Optional.ofNullable(filters.getFirstName()).orElse("");
-        String lastNameStr = Optional.ofNullable(filters.getLastName()).orElse("");
-        String cardStateStr = Optional.ofNullable(filters.getCardState()).orElse("");
-
-        String cardIDStr = "";
-        if(filters.getCardID() != null){
-            cardIDStr = Long.toString(filters.getCardID());
-        }
-
-        String phoneStr = "";
-        if(filters.getPhone() != null){
-            phoneStr = Long.toString(filters.getPhone());
-        }
-        
-        return repo.getCustomers(firstNameStr, lastNameStr, cardIDStr, phoneStr, cardStateStr)
-                .stream()
-                .map(mapper::toDTO)
-                .collect(Collectors.toList());
-
-    }
-
     public List<CustomerFamilyDTO> getCustomers(CustomerFilterDTO filters){
 
         String firstNameStr = Optional.ofNullable(filters.getFirstName()).orElse("");
