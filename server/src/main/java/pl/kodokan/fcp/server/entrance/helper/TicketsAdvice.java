@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import pl.kodokan.fcp.server.entrance.dto.AdviceDTO;
 import pl.kodokan.fcp.server.entrance.exception.InvalidPackageTypeId;
 import pl.kodokan.fcp.server.entrance.exception.PackageAlreadyPaidException;
-import pl.kodokan.fcp.server.entrance.exception.PackageNotPresent;
+import pl.kodokan.fcp.server.entrance.exception.PackageNotPresentException;
 import pl.kodokan.fcp.server.entrance.exception.TwoTimePackagesException;
 
 @ControllerAdvice
 public class TicketsAdvice {
-    @ExceptionHandler(PackageNotPresent.class)
+    @ExceptionHandler(PackageNotPresentException.class)
     public ResponseEntity<AdviceDTO> packageNotPresent(PackageNotPresent ex){
         AdviceDTO dto = new AdviceDTO();
         dto.setMessage("Package with this ID doesn't exists in database");
