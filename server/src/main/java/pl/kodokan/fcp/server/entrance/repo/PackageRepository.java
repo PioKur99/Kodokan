@@ -6,6 +6,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import pl.kodokan.fcp.server.entrance.model.Package;
 
+
+
 @Repository
 public interface PackageRepository extends JpaRepository<Package, Long> {
     @Query("SELECT p FROM Package p JOIN p.customers c WHERE c.id = :id AND (p.endDateTime > CURRENT_TIMESTAMP OR p.endDateTime = null)")
