@@ -39,6 +39,7 @@ export class CustomerFamilyComponent implements OnInit {
 
   @ViewChild("dialog1") dialogDelete;
   @ViewChild("dialog2") dialogSuccess;
+  @ViewChild("dialog3") dialogFail;
 
   constructor(private router: Router, private familyService: FamilyService) { }
 
@@ -59,7 +60,10 @@ export class CustomerFamilyComponent implements OnInit {
     this.dialogDelete.close();
     const index = this.familyArr.indexOf(member);
     this.familyArr.splice(index, 1);
-    this.familyService.deleteFamilyMember(member.identificationNumber).subscribe(this.dialogSuccess.open())
+    this.familyService.deleteFamilyMember(member.identificationNumber).subscribe(
+      data =>{this.dialogSuccess.open()},
+      error => {this.dialogFail.open()}
+    )
   }
 
 }
