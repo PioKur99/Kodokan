@@ -3,12 +3,12 @@ package pl.kodokan.fcp.server.user.model;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.NaturalId;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import pl.kodokan.fcp.server.common.model.BaseEntity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.HashSet;
@@ -17,8 +17,14 @@ import java.util.Set;
 @Entity
 @Getter @Setter
 public class UserData extends BaseEntity implements UserDetails {
+    
+    @Getter @Setter
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_generator")
+    @SequenceGenerator(name="user_generator", sequenceName = "user_seq", allocationSize=1)
+    private Long id;
 
     @NotNull
+    @Email(message = "Email is incorrect!")
     private String email;
 
     @NotNull
@@ -34,19 +40,19 @@ public class UserData extends BaseEntity implements UserDetails {
     /**
      * PESEL
      */
-    @NaturalId
+    @NotNull
     private String identityNumber;
     
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userData")
     @PrimaryKeyJoinColumn
     private Address address;
 
     @Setter(AccessLevel.NONE) // don't use setter but control adding / removing singe role
     @Getter(AccessLevel.NONE) // use custom safe getter
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable
     private Set<Role> roles = new HashSet<>();
 

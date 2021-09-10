@@ -9,7 +9,11 @@ import {
     IgxIconModule,
     IgxDialogModule,
     IgxGridModule,
-    IgxComboModule
+    IgxComboModule,
+    IgxDropDownModule,
+    IgxCheckboxModule,
+    IgxInputGroupModule,
+    IgxToggleModule
 } from 'igniteui-angular';
 import { CustomersComponent } from './customers/customers.component';
 import { EntranceComponent } from './entrance/entrance.component';
@@ -18,6 +22,16 @@ import { PassesComponent } from './passes/passes.component';
 import { AddAClientComponent } from './add-a-client/add-a-client.component';
 import { EntryRegistrationComponent } from './entry-registration/entry-registration.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PassDetailsComponent } from './pass-details/pass-details.component';
+import { CustomerDataComponent } from './customer-data/customer-data.component';
+import { CustomerEditDataComponent } from './customer-edit-data/customer-edit-data.component';
+import { FormsModule } from '@angular/forms';
+import { CustomerFamilyComponent } from './customer-family/customer-family.component';
+import { CustomerAddPassComponent } from './customer-add-pass/customer-add-pass.component';
+import { CustomerShowPassesComponent } from './customer-show-passes/customer-show-passes.component';
+import { CustomerShowEntrancesComponent } from './customer-show-entrances/customer-show-entrances.component';
+import { CustomerSendMailComponent } from './customer-send-mail/customer-send-mail.component';
+import { WebcamModule } from 'ngx-webcam';
 
 @NgModule({
     declarations: [
@@ -27,19 +41,34 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         MembershipCardsComponent,
         PassesComponent,
         AddAClientComponent,
-        EntryRegistrationComponent
+        EntryRegistrationComponent,
+        PassDetailsComponent,
+
+        CustomerDataComponent,
+        CustomerEditDataComponent,
+        CustomerFamilyComponent,
+        CustomerAddPassComponent,
+        CustomerShowPassesComponent,
+        CustomerShowEntrancesComponent,
+        CustomerSendMailComponent
     ],
     imports: [
         CommonModule,
         ReceptionistPanelRoutingModule,
         IgxRippleModule,
         IgxButtonModule,
+        WebcamModule,
         IgxBottomNavModule,
+        FormsModule,
         IgxIconModule,
         //BrowserAnimationsModule,
         IgxDialogModule,
         IgxGridModule,
-        IgxComboModule
+        IgxComboModule,
+        IgxDropDownModule,
+        IgxCheckboxModule,
+        IgxInputGroupModule,
+        IgxToggleModule
     ]
 })
 export class ReceptionistPanelModule {

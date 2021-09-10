@@ -15,9 +15,16 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.*;
 
+import javax.persistence.*;
+
 @Entity
 @Getter @Setter
 public class PackageType extends BaseEntity {
+    
+    @Getter @Setter
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "packagetype_generator")
+    @SequenceGenerator(name="packagetype_generator", sequenceName = "packagetype_seq", allocationSize=1)
+    private Long id;
 
     @NaturalId // not-null and unique out of the box
     private String name;
@@ -46,7 +53,6 @@ public class PackageType extends BaseEntity {
      */
     private boolean withPartnerSystem = false;
 
-
     /**
      * Roles which are allowed to add packages with this PackageType
      */
@@ -54,6 +60,11 @@ public class PackageType extends BaseEntity {
     @Getter(AccessLevel.NONE) // use custom safe getter
     @ManyToMany @JoinTable
     private Set<Role> roles = new HashSet<>();
+
+    @Getter(AccessLevel.NONE)
+    @Setter(AccessLevel.NONE)
+    @OneToMany(mappedBy = "packageType")
+    private List<Package> packages;
 
     /**
      * Add user role which is allowed to create new packages of this type
@@ -71,11 +82,6 @@ public class PackageType extends BaseEntity {
         // returns a safe copy of the set
         return Collections.unmodifiableSet(roles);
     }
-
-    @Getter(AccessLevel.NONE)
-    @Setter(AccessLevel.NONE)
-    @OneToMany(mappedBy = "packageType")
-    private List<Package> packages;
 
     @Override
     public int hashCode() {

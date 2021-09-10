@@ -14,7 +14,7 @@ import javax.persistence.Enumerated;
 @Getter @Setter
 public class ClubCard {
 
-    @NaturalId
+    @NaturalId(mutable = true)
     private Long id;
 
     @Enumerated(EnumType.STRING)

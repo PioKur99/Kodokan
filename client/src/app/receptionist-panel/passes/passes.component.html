@@ -1,1 +1,62 @@
-<p>passes works!</p>
+<div class="container">
+    <igx-input-group type="search" class="search">
+        <igx-prefix>
+            <igx-icon>search</igx-icon>
+        </igx-prefix><!--(keyup.enter)="send()"-->
+        <input #input1 igxInput placeholder="Search" class="input" id="input"/>
+    </igx-input-group>
+    <div class="drop-down">
+        <button class="drop-down__button" igxButton="raised" [igxToggleAction]="dropdown" [igxDropDownItemNavigation]="dropdown" >
+            Filtry
+        </button>
+        <igx-drop-down #dropdown class="drop-down__item">
+            <igx-drop-down-item>
+                <igx-checkbox>
+                    imię i nazwisko
+                </igx-checkbox>
+            </igx-drop-down-item>
+            <igx-drop-down-item>
+                <igx-checkbox>
+                    okres ważności
+                </igx-checkbox>
+            </igx-drop-down-item>
+            <igx-drop-down-item>
+                <igx-checkbox>
+                    rodzaj karnetu
+                </igx-checkbox>
+            </igx-drop-down-item>
+        </igx-drop-down>
+    </div>
+    <button class="button" (click)="dialog.open()">Usuń</button>
+    
+    <table>
+        <tr class="row row--first">
+           <td class="column column--first">Klient</td>
+           <td class="column column--second">Karnet</td>
+           <td class="column column--third">Okres Ważności</td>
+        </tr>
+        <tr class="row" *ngFor="let item of passesList; let i=index">
+            <td class="column column--first">
+                {{item.clientsFullName}}<!--{{item.first_name}} {{item.last_name}}-->
+            </td>
+            <!--FIXME: tu miała być nazwa karnetu, poprawić na backendzie-->
+            <td class="column column--second">
+                <a class="href" href="receptionist-panel/passes/{{item.packageId}}">
+                    {{item.packageId}}<!-- {{item.package_name}} -->
+                </a>
+            </td>
+            <td class="column column--third">
+                {{item.end_date.toLocaleString()}}
+                <!-- .toLocaleDateString()}} -->
+            </td>
+            <igx-checkbox  (change)="toggleSelection($event,i)" [checked]="checkboxes[i]"></igx-checkbox>            
+        </tr>
+     </table>
+</div>
+
+<!-- do dodania interpolacja z listy Nazwisko i imię -->
+<igx-dialog #dialog message="Czy na pewno chcesz usunąć karnet?" leftButtonLabel="Tak" (onLeftButtonSelect)="deletePasses()" rightButtonLabel="Nie" (onRightButtonSelect)="dialog.close()" [closeOnOutsideSelect]="true"></igx-dialog>
+
+<igx-dialog #errorGetPasses message="Nie udało się wczytać listy karnetów?" rightButtonLabel="Wróć" (onRightButtonSelect)="errorGetPasses.close()" [closeOnOutsideSelect]="true"></igx-dialog>
+
+<igx-dialog #errorDeletePasses message="Nie udało się usunąć wybranego karnetu" rightButtonLabel="Wróć" (onRightButtonSelect)="errorDeletePasses.close()" [closeOnOutsideSelect]="true"></igx-dialog>

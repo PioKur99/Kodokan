@@ -1,0 +1,47 @@
+<section class = "Labels">
+    <img class="profile-pic" [src]="client.image">
+    <div class="label-group-1">
+        <label igxLabel for="Name">imię {{client.firstName}}</label>
+        <br>
+        <label igxLabel for="Gender">płeć {{client.gender}}</label>
+        <br>
+        <br>
+        <br>
+        <label igxLabel for="Street-Numb">ulica i numer domu {{client.addressLine}}</label>
+        <br>
+        <label igxLabel for="City">miasto {{client.city}}</label>
+        <br>
+        <label igxLabel for="Voivodeship">województwo {{client.voivodeship}}</label>
+        <br>
+        <br>
+        <br>
+        <label igxLabel for="Mail">e-mail {{client.email}}</label>
+        <br>
+        <label igxLabel for="Phone-Numb">numer telefonu {{client.phone}}</label>
+    </div>
+    <div class="label-group-2">
+        <label igxLabel for="Surname">nazwisko {{client.lastName}}</label>
+        <br>
+        <label igxLabel for="Pesel">pesel {{client.identityNumber}}</label>
+        <br>
+        <br>
+        <br>
+        <br>
+        <label igxLabel for="Post-Code">kod pocztowy {{client.postalCode}}</label>
+        <br>
+        <br>
+        <br>
+        <label igxLabel for="Card-Numb">numer karty {{client.cardId}}</label>
+        <br>
+        <label igxLabel for="Dyscypline">dyscyplina {{client.mainDiscipline}}</label>
+    </div>
+</section>
+
+<section class = "Buttons">
+    <button igxButton="raised" igxRipple="white" routerLink = "/receptionist-panel/customer-edit-data">EDYTUJ DANE</button>
+    <button igxButton="raised" igxRipple="white"routerLink = "/receptionist-panel/customer-add-pass">DODAJ KARNET</button>
+    <button igxButton="raised" igxRipple="white" routerLink = "/receptionist-panel/customer-family">RODZINA</button>
+    <button igxButton="raised" igxRipple="white" routerLink = "/receptionist-panel/customer-show-passes">POKAŻ KARNETY</button>
+    <button igxButton="raised" igxRipple="white" routerLink = "/receptionist-panel/customer-show-entrances">POKAŻ WEJŚCIA</button>
+    <button igxButton="raised" igxRipple="white" routerLink = "/receptionist-panel/customer-send-mail">WYŚLIJ MAILA</button>    
+</section>
