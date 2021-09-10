@@ -346,4 +346,29 @@
     </mat-step>
   </mat-horizontal-stepper>
 
+  <!-- This is just an example showing how you might open the dialog. -->
+  <button (click)="errorDialog.open()">
+    open dialog
+  </button>
+
+  <igx-dialog #errorDialog  [closeOnOutsideSelect]="true">
+    <div class="dialog-content card-wrapper errordialog">
+        <main >
+        
+            <header class="header">
+                <h3>COŚ POSZŁO NIE TAK :(</h3>
+    
+            </header>
+  
+            <div igxDialogActions>
+  
+                <button class="first-button light-grey-button"  igxButton igxRipple="white" (click)="errorDialog.close()">
+                    <span> OK</span>
+                </button>
+            </div>
+  
+        </main>
+    </div>
+  </igx-dialog>
+
 
