@@ -1,9 +1,10 @@
-export class CardState {
-    previous: number
-    actual: number
-    next: number
 
-    constructor(previous?: number, actual?: number, next?: number){
+export class CardState {
+    previous: string
+    actual: string
+    next: string
+
+    constructor(previous?: string, actual?: string, next?: string){
         if(!previous && !actual && !next){
            
         }else{

@@ -2,7 +2,8 @@
     <input #search1 class="input" id="search1" placeholder="Szukaj wg imienia i nazwiska..." [(ngModel)]="searchNameAndSurname" (ngModelChange)="grid.findNext(searchNameAndSurname, caseSensitive, exactMatch)" />
 
     <igx-combo #combo class="combo" [itemsMaxHeight]="250"
-        [data]="cardStates" placeholder="Szukaj wg stanu karty" 
+        [data]="cardStates" 
+        placeholder="Szukaj wg stanu karty" 
         displayKey="name" valueKey="id"
         [(ngModel)]="selectedCardState" searchPlaceholder="Szukaj...">
     </igx-combo>
@@ -14,18 +15,18 @@
             {{customer.customer.firstName}} {{customer.customer.lastName}}
         </th>
         <th class="state">  
-            {{customer.cardState.actual}}
+            {{map.map.get(customer.cardState.actual)}}
         </th>
         <th class="buttons"> 
             <button igxButton="flat" (click)=switchCardStatePrep(customer,1)>
                 <div *ngIf="!customer.cardState.previous">-</div>
-                {{customer.cardState.previous}}
+                {{map.map.get(customer.cardState.previous)}}
             </button>
         </th>
         <th class="buttons"> 
             <button igxButton="flat" (click)=switchCardStatePrep(customer,2)>
                 <div *ngIf="!customer.cardState.next">-</div>
-                {{customer.cardState.next}}
+                {{map.map.get(customer.cardState.next)}}
             </button>
         </th> 
     </tr>
@@ -41,6 +42,26 @@
     <button igxButton (click)="cardNumberForm.close()">ANULUJ</button>
     <button igxButton (click)="cardNumberForm.close()">ZATWIERDŹ GDY BŁĄD</button>
     <button igxButton (click)="cardNumberFormFunc()">ZATWIERDŹ</button>
+</igx-dialog>
+
+<igx-dialog #errorGetCustomers>
+    <div>Nie udało się pobrać listy klientów :(</div>
+    <button igxButton (click)="errorGetCustomers.close()"> OK </button>
+</igx-dialog>
+
+<igx-dialog #errorGetCardState>
+    <div>Nie udało się pobrać stanu karty :(</div>
+    <button igxButton (click)="errorGetCardState.close()"> OK </button>
+</igx-dialog>
+
+<igx-dialog #errorChangeCardState>
+    <div>Nie udało się zmienić stanu karty :(</div>
+    <button igxButton (click)="errorChangeCardState.close()"> OK </button>
+</igx-dialog>
+
+<igx-dialog #errorAddCard>
+    <div>Ten klient ma już kartę klubową :(</div>
+    <button igxButton (click)="errorAddCard.close()"> OK </button>
 </igx-dialog>
 
 <igx-dialog #errorForm>

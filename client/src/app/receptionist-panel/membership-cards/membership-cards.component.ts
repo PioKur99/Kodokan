@@ -4,6 +4,7 @@ import { Observable, Subscription } from 'rxjs';
 import { Card } from 'src/app/data/card/card';
 import { CardState } from 'src/app/data/card/card-state';
 import { CardStates } from 'src/app/data/card/card-states.enum';
+import { MapState } from 'src/app/data/card/map-state';
 import { Customer } from 'src/app/data/customer/customer';
 import { CustomerAndCardState } from 'src/app/data/customer/customer-and-card-state';
 import { CustomerFilter } from 'src/app/data/customer/customer-filter';
@@ -23,10 +24,15 @@ export class MembershipCardsComponent implements OnInit {
   public customerFilter: CustomerFilter
 
   cardStates: Card[];
+  map = new MapState()
   public selectedCardState: number[]
   
   @ViewChild('grid',{static:true}) public grid: IgxGridComponent
   @ViewChild('cardNumberForm') cardNumberForm
+  @ViewChild('errorGetCustomers') errorGetCustomers
+  @ViewChild('errorGetCardState') errorGetCardState
+  @ViewChild('errorChangeCardState') errorChangeCardState
+  @ViewChild('errorAddCard') errorAddCard
   @ViewChild('errorForm') errorForm
 
   public customerList: Customer[]
@@ -47,14 +53,20 @@ export class MembershipCardsComponent implements OnInit {
     {id: CardStates.Oplacona, name: 'Opłacona'},
     {id: CardStates.Wydrukowana, name: 'Wydrukowana'},
     {id: CardStates.Do_odbioru, name: 'Do odbioru'},
-    {id: CardStates.Odebrana, name: 'Odebrana'}]
+    {id: CardStates.Odebrana, name: 'Odebrana'}]    
 
-    //pobranie customerów
+    this.getCustomers()
+    this.getCardsState()
+  }
+
+  //pobranie customerów
+  getCustomers(){
     this.customerSub = this.customerService.getCustomers().subscribe(
       x => {
         this.customerList=x
         console.log("pobrano customerów")
         console.log(this.customerList[0].customerID)
+
         //przepisanie customerów
         this.customerList.forEach(
           y =>{
@@ -64,27 +76,33 @@ export class MembershipCardsComponent implements OnInit {
         console.log("przepisano customerów")
         console.log(this.customerAndCardStateList[0].customer.customerID)
       },
-      //TODO: obsłużyć error
-      err=>{},
+      err=>{
+        this.errorGetCustomers.open()
+      }
     )
+  }
 
-    //pobranie cardstate dla wszystkich customerów
+  //pobranie cardstate dla wszystkich customerów
+  getCardsState(){
     this.customerAndCardStateList.forEach(
       x => {
         this.cardStateSub = this.customerService.getCardState(x.customer.customerID).subscribe(
           y=>{
             x.cardState=y
             console.log("pobrano cardstates")
+            console.log(y,x.cardState)
+          },
+          err=>{
+            this.errorGetCardState.open()
           }
-          //TODO: obsłużyć error
         )
+        console.log(x,"consolelog x")
       }
     )
   }
 
   //sprawdzenie warunków i przygotowanie do zmiany stanu karty
   switchCardStatePrep(customer: CustomerAndCardState,updown: number){
-    //console.log(customer.customer.customer_id,updown)
     let param: string
     switch(updown){
       case 1:param="down" 
@@ -94,8 +112,7 @@ export class MembershipCardsComponent implements OnInit {
     }
 
     this.customerObs = new Observable(x=>{x.next({customer,param})})
-    
-    if(param==="up"&&customer.cardState.next==CardStates.Do_odbioru){
+    if(param==="up"&&customer.cardState.next==="READY"){
       this.cardNumberForm.open()
     }else{
       this.switchCardState()
@@ -105,12 +122,24 @@ export class MembershipCardsComponent implements OnInit {
   //zmiana stanu karty
   switchCardState(){
     this.customerObs.subscribe(x=>{
-      this.customerService.switchCardState(x.customer.customer_id,x.param).subscribe(
+      this.customerService.switchCardState(x.customer.customer.customerID,x.param).subscribe(
         y=>{
           x.customer.cardState=y
-          //console.log(y)
+          console.log(y)
+        },
+        err=>{
+          this.errorChangeCardState.open()
+        },
+        ()=>{
+          this.customerService.getCardState(x.customer.customer.customerID).subscribe(
+            z=>{
+              x.customer.cardState=z
+            },
+            error=>{
+              this.errorGetCardState.open()
+            }
+          )
         }
-        //TODO:obsłużyć error
       )
     })
   }
@@ -122,9 +151,11 @@ export class MembershipCardsComponent implements OnInit {
     this.customerObs.subscribe(x=>{customer=x.customer})
     this.customerService.postCardId(customer.customer.customerID,y).subscribe(
       x=>{
-        //console.log(x)
+        console.log(x)
+      },
+      err=>{
+        this.errorAddCard.open()
       }
-      //TODO: obsłużyć error
     )
     this.switchCardState()
     this.cardNumberForm.close()
