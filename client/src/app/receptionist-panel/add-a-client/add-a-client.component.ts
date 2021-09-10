@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Location } from '@angular/common';
 import { RadioGroupAlignment } from "igniteui-angular";
-
+import { Gender } from '../../data/client';
 
 import {Subject, Observable} from 'rxjs';
 import { Client } from '../../data/client';
@@ -36,17 +36,21 @@ export class AddAClientComponent implements OnInit {
   streetName: String;
   localNumber: String;
   discipline: String;
+  discipline_table: String [];
 
   private trigger: Subject<void> = new Subject<void>();
   
   client: Client = {
+    cardId: "",
     addressLine: "",
+    id: null,
+    mainDiscipline: "",
     city: "",
     email: "",
     firstName: "",
-    gender: "",
+    gender: Gender.Male,
     identityNumber: "",
-    image: null,
+    image: "",
     lastName: "",
     password: "",
     phone: "",
@@ -70,9 +74,12 @@ export class AddAClientComponent implements OnInit {
     this.streetName = "";
     this.localNumber = "";
     this.makePhoto = false;
+    this.discipline_table = [];
+
   }
 
   ngOnInit(): void {
+    this.getDisciplines();
   }
 
 //**************IMAGE CROPPER*************************************************** */
@@ -114,6 +121,7 @@ imageLoaded() {
   public get triggerObservable(): Observable<void> {
    return this.trigger.asObservable();
   }
+
   addClient():void{
     this.client.password = this.makePassword(10);
     if(this.localNumber != ""){
@@ -143,6 +151,19 @@ imageLoaded() {
       }
     );
   }
+  getDisciplines():void{
+    this.addAClientService.getDisciplines().subscribe(
+      x=>{
+        console.log("YAAY you have got it!")
+        console.log(x);
+        this.discipline_table = x;
+      },
+      error => {
+        this.errorDialog.open();
+      }
+    );
+  }
+
   closeWindow(type: String): void{
    
     if(type==='error'){
@@ -153,7 +174,6 @@ imageLoaded() {
     }
     this.router.navigate(["receptionist-panel"]);
   }
-
 
   makePassword(length): String {
     var result           = '';
@@ -167,13 +187,10 @@ imageLoaded() {
   }
 
   checkValidity(): void{
-    console.log("this.isDisabled:");
-      console.log(this.isDisabled);
     if(this.streetName !== "" 
         && this.client.city!==  ""
         && this.client.email!==  ""
         && this.client.firstName!==  ""
-        && this.client.gender!==  ""
         && this.client.identityNumber!==  ""
         && this.client.image!==  null
         && this.client.lastName!==  ""
@@ -181,11 +198,11 @@ imageLoaded() {
         && this.client.postalCode!==  ""
         && this.client.voivodeship!==  ""
         && this.discipline !== ""){
-      console.log("this.isDisabled:");
-      console.log(this.isDisabled);
+
       this.isDisabled = false;
     }
     else  this.isDisabled = true;
   }
-
 }
+
+

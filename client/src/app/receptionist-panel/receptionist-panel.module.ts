@@ -8,7 +8,10 @@ import {
 	IgxBottomNavModule,
 	IgxIconModule,
 	IgxDialogModule,
-	IgxInputGroupModule
+	IgxInputGroupModule,
+	IgxRadioModule,
+	IgxToggleModule,
+	IgxDropDownModule
 } from 'igniteui-angular';
 import { CustomersComponent } from './customers/customers.component';
 import { EntranceComponent } from './entrance/entrance.component';
@@ -42,7 +45,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         IgxDialogModule,
         FormsModule,
         IgxInputGroupModule,
- 
+        IgxRadioModule,
+
+        IgxToggleModule,
+        IgxDropDownModule
     ]
 })
 export class ReceptionistPanelModule {

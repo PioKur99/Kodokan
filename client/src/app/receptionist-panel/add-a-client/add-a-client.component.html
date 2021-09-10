@@ -46,11 +46,12 @@
           <input igxInput name="firstName" type="text" [(ngModel)]="client.firstName" required="required" (keyup)="checkValidity()">
         </igx-input-group>
         <igx-input-group type="line">
-          <label igxLabel for="gender">
-            Płeć
+          <label igxLabel for="lastName">
+            Nazwisko
           </label>
-          <input igxInput name="gender" type="text" [(ngModel)]="client.gender" required="required" (keyup)="checkValidity()">
+          <input igxInput name="lastName" type="text" [(ngModel)]="client.lastName" required="required" (keyup)="checkValidity()">
         </igx-input-group>
+        
         <br>
         <igx-input-group type="line">
           <label igxLabel for="street">
@@ -87,19 +88,26 @@
         
       </div>
       <div class="layout-box__el" >
-        <igx-input-group type="line">
-          <label igxLabel for="lastName">
-            Nazwisko
-          </label>
-          <input igxInput name="lastName" type="text" [(ngModel)]="client.lastName" required="required" (keyup)="checkValidity()">
-        </igx-input-group>
-        
-        <igx-input-group type="line">
+        <igx-input-group >
           <label igxLabel for="identityNumber">
             PESEL
           </label>
           <input igxInput name="identityNumber" type="text" [(ngModel)]="client.identityNumber" required="required" (keyup)="checkValidity()">
         </igx-input-group>
+        
+        <form class="container" id="gender-container">
+          <span class="yellowText">PŁEĆ:</span>
+          <igx-radio-group [alignment]="alignment" style="float: right;">
+            <igx-radio   name="foo" value="FEMALE" (change)="onItemChange($event)">
+              KOBIETA
+            </igx-radio>
+            <igx-radio    name="foo" value="MALE" (change)="onItemChange($event)">
+              MĘŻCZYZNA
+            </igx-radio>
+          </igx-radio-group>
+
+        </form>
+
         <br>
         <igx-input-group type="line">
           <label igxLabel for="local">
@@ -117,19 +125,20 @@
 
         <div class="gap"></div>
         <br>
-        <igx-input-group type="line">
-          <label igxLabel for="inputId">
-            Nazwa użytkownika
-          </label>
-          <input igxInput name="inputId" type="text" required="required" (keyup)="checkValidity()">
-        </igx-input-group>
-        
-        <igx-input-group type="line">
+
+        <form id="discipline_form">
+          <label for="cars">DYSCYPLINA:</label>
+          <select  name="cars" id="cars" (change)="onDisciplineChange($event)">
+            <option *ngFor="let discipline of discipline_table" value="{{discipline}}">{{discipline}}</option>
+          </select>
+        </form>
+        <div id="empty-div"></div>
+        <!-- <igx-input-group type="line">
           <label igxLabel for="discipline">
             Dyscyplina
           </label>
           <input igxInput name="discipline" type="text" [(ngModel)]="discipline" required="required"  (keyup)="checkValidity()">
-        </igx-input-group>
+        </igx-input-group> -->
         
       </div>
     </div>
