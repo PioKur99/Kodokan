@@ -54,7 +54,7 @@ export class EntryRegistrationComponent implements OnInit {
         //error =>
       )
     this.packageTypeSub=
-      this.packageService.getPackageType().subscribe(
+      this.packageService.getPackageType(false).subscribe(
         x => this.packageTypeList=x,
         //TODO: zrobić coś z tym errorem
         //error =>

@@ -39,8 +39,8 @@ export class PackageService {
     // return new Observable(x => { x.next(package_details)})
   }
 
-  getPackageType(): Observable<PackageType[]>{
-    return this.http.get<PackageType[]>(config.address+'package_type')
+  getPackageType(bool): Observable<PackageType[]>{
+    return this.http.get<PackageType[]>(config.address+'package/packages-with-partner-system/{bool}?bool='+bool)
   }
 
   postAddPackage(pass: Package): Observable<number>{
