@@ -1,4 +1,4 @@
-enum Relationship {
+export enum Relationship {
     rodzic = "Rodzic",
     dziecko = "Dziecko",
     rodzenstwo = "Rodzeństwo",
@@ -9,5 +9,5 @@ export class FamilyMember {
     firstName: String;
     lastName: String;
     identificationNumber: String;
-    relationship: String;
+    relationship: Relationship;
 }

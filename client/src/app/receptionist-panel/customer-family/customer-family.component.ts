@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Client } from 'src/app/data/client';
 import { Router } from '@angular/router';
-import { FamilyMember } from 'src/app/data/family-member';
+import { FamilyMember, Relationship } from 'src/app/data/family-member';
 
 @Component({
   selector: 'app-customer-family',
@@ -27,10 +27,10 @@ export class CustomerFamilyComponent implements OnInit {
   };
 
   familyArr: FamilyMember[] = [
-    {"firstName": "Amanda", "lastName": "Noris", "identificationNumber": "2323232", "relationship": "Rodzic"},
-    {"firstName": "Nicole", "lastName": "Noris", "identificationNumber": "2355532", "relationship": "Małżeństwo"},
-    {"firstName": "Sam", "lastName": "Noris", "identificationNumber": "2355532", "relationship": "Rodzeństwo"},
-    {"firstName": "Steve", "lastName": "Noris", "identificationNumber": "2355532", "relationship": "Rodzeństwo"}
+    {"firstName": "Amanda", "lastName": "Noris", "identificationNumber": "2323232", "relationship": "Relationship.rodzic"},
+    {"firstName": "Nicole", "lastName": "Noris", "identificationNumber": "2355532", "relationship": "Relationship.malzenstwo"},
+    {"firstName": "Sam", "lastName": "Noris", "identificationNumber": "2355532", "relationship": "Relationship.rodzenstwo"},
+    {"firstName": "Steve", "lastName": "Noris", "identificationNumber": "2355532", "relationship": "Relationship.rodzenstwo"}
   ];
 
   showDeleteButton: Boolean = false;
