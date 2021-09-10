@@ -26,12 +26,11 @@ export class CustomerFamilyComponent implements OnInit {
     phoneNumb: "66677788"
   };
 
-  familyArr: FamilyMember[] = [
-    {"firstName": "Amanda", "lastName": "Noris", "identificationNumber": "2323232", "relationship": "Relationship.rodzic"},
-    {"firstName": "Nicole", "lastName": "Noris", "identificationNumber": "2355532", "relationship": "Relationship.malzenstwo"},
-    {"firstName": "Sam", "lastName": "Noris", "identificationNumber": "2355532", "relationship": "Relationship.rodzenstwo"},
-    {"firstName": "Steve", "lastName": "Noris", "identificationNumber": "2355532", "relationship": "Relationship.rodzenstwo"}
-  ];
+  testRodzic: FamilyMember = {firstName: "Amanda", lastName: "Noris", identificationNumber: "2323232",relationship: Relationship.rodzic}
+  testMalzenstwo: FamilyMember = {firstName: "Nicole", lastName: "Noris", identificationNumber: "2323233",relationship: Relationship.malzenstwo}
+  testRodzenstwo1: FamilyMember = {firstName: "Sam", lastName: "Noris", identificationNumber: "2323234",relationship: Relationship.rodzenstwo}
+  testRodzenstwo2: FamilyMember = {firstName: "Steve", lastName: "Noris", identificationNumber: "2323235",relationship: Relationship.rodzenstwo}
+  familyArr: FamilyMember[] = [this.testRodzic, this.testMalzenstwo, this.testRodzenstwo1, this.testRodzenstwo2];
 
   showDeleteButton: Boolean = false;
 
