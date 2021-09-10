@@ -31,6 +31,6 @@ export class PassesService {
   }
 
   deletePasses(package_id: number): Observable<number>{
-    return this.http.delete<number>(config.address + 'package/' + package_id)
+    return this.http.delete<number>(config.address + 'package?packageId=' + package_id)
   }
 }
