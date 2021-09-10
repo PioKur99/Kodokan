@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Client } from 'src/app/data/client';
 import { Router } from '@angular/router';
 import { FamilyMember, Relationship } from 'src/app/data/family-member';
+import { FamilyService } from 'src/app/services/family.service';
 
 @Component({
   selector: 'app-customer-family',
@@ -39,24 +40,26 @@ export class CustomerFamilyComponent implements OnInit {
   @ViewChild("dialog1") dialogDelete;
   @ViewChild("dialog2") dialogSuccess;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private familyService: FamilyService) { }
 
   ngOnInit(): void {
     this.router.navigate(["/receptionist-panel/customer-family", {cardID: this.client.cardNumb}])
+    this.getFamily()
   }
 
   toggleDeleteButton(): void {
     this.showDeleteButton = !this.showDeleteButton;
   }
 
+  getFamily() : void {
+    this.familyService.getFamilyMembers(this.client.cardNumb).subscribe((data: FamilyMember[]) => this.familyArr = data)
+  }
 
   deleteFamilyMember(member: FamilyMember){
     this.dialogDelete.close();
     const index = this.familyArr.indexOf(member);
     this.familyArr.splice(index, 1);
-    this.dialogSuccess.open();
+    this.familyService.deleteFamilyMember(member.identificationNumber).subscribe(this.dialogSuccess.open())
   }
-
-  
 
 }
