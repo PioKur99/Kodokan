@@ -12,4 +12,7 @@ import java.util.*;
 public interface PackageRepository extends JpaRepository<Package, Long> {
     @Query("SELECT p FROM Package p JOIN p.customers c WHERE c.id = :id AND (p.endDateTime > CURRENT_TIMESTAMP OR p.endDateTime = null)")
     List<Package> findFamilyPackages(@Param("id") Long id);
+
+    @Query("SELECT p FROM Package p JOIN p.customers c JOIN p.packageType pT WHERE c.id = :customerID AND p.endDateTime = null AND pT.entranceLimit > 1")
+    List<Package> findPackagesWithNoEndDate(@Param("customerID") Long customerID);
 }

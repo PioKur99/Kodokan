@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.kodokan.fcp.server.customer.exception.CustomerNotPresent;
 import pl.kodokan.fcp.server.customer.model.Customer;
+import pl.kodokan.fcp.server.customer.model.Family;
 import pl.kodokan.fcp.server.customer.repo.CustomerRepository;
 import pl.kodokan.fcp.server.entrance.controller.PackageDetails;
 import pl.kodokan.fcp.server.entrance.dto.PackageDTO;
@@ -39,6 +41,16 @@ public class PackageService {
     private final PackageRepository packageRepository;
     private final CustomerRepository customerRepository;
     private final EntranceService entranceService;
+
+    public Customer findCustomerById(Long id){
+        Customer customer = customerRepository.findById(id).orElseThrow(()->new CustomerNotPresent());
+        return customer;
+    }
+
+    public PackageType findPackageById(Long id){
+        PackageType packageType = packageTypeRepository.findById(id).orElseThrow(()->new InvalidPackageTypeId());
+        return packageType;
+    }
 
     private List<Package> filterByEndDate(List<Package> packageList, LocalDateTime endDate) {
         return packageList
@@ -175,5 +187,27 @@ public class PackageService {
         packageDetails.setRemainingEntries(packageType.getEntranceLimit() - usedEntries);
 
         return packageDetails;
+    }
+
+    public Long createPackage(Long customerID, Long packageTypeID){
+        Customer customer = findCustomerById(customerID);
+        PackageType packageType = findPackageById(packageTypeID);
+        List<Package> packageWithNoEndDate = packageRepository.findPackagesWithNoEndDate(customerID);
+        if(packageWithNoEndDate != null && !packageWithNoEndDate.isEmpty() && packageType.getEntranceLimit() > 1){
+            throw new TwoTimePackagesException();
+        }
+
+        Package newPackage = new Package();
+        newPackage.addCustomer(customer);
+        newPackage.setPackageType(packageType);
+        newPackage.setPaid(false);
+        newPackage.setEndDateTime(null);
+        newPackage.setPurchaseDateTime(LocalDateTime.now());
+
+        Family customersFamily;
+
+
+        packageRepository.save(newPackage);
+        return newPackage.getId();
     }
 }
