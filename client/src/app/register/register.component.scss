@@ -1,8 +1,41 @@
+.errordialog{
+  height: 150px;
+  text-align: center;
+}
+
+.errordialog .header{
+  padding: 10% 0 5% 0;
+}
+
+.errordialog .header h3{
+  font-size: 1.3rem;
+  line-height: 130%;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
 
 igx-navbar{
   font-family: Helvetica, sans-serif;
 }
 
+.card-wrapper button{
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 75%;
+  background-color: #6d6d6d;
+  color: #DAA520;
+  margin: 5% 0;
+  border-radius: 10px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card-wrapper button:hover {
+  background-color: #636363;
+  box-shadow: 0px 15px 20px rgba(185, 185, 185, 0.4);
+  color: rgb(236, 235, 235);
+}
 //stepper
 .mat-stepper-vertical{
   padding: 0 100px 24px 100px;
