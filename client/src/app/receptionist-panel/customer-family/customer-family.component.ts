@@ -27,11 +27,11 @@ export class CustomerFamilyComponent implements OnInit {
     phoneNumb: "66677788"
   };
 
-  testRodzic: FamilyMember = {firstName: "Amanda", lastName: "Noris", identificationNumber: "2323232",relationship: Relationship.rodzic}
-  testMalzenstwo: FamilyMember = {firstName: "Nicole", lastName: "Noris", identificationNumber: "2323233",relationship: Relationship.malzenstwo}
-  testRodzenstwo1: FamilyMember = {firstName: "Sam", lastName: "Noris", identificationNumber: "2323234",relationship: Relationship.rodzenstwo}
-  testRodzenstwo2: FamilyMember = {firstName: "Steve", lastName: "Noris", identificationNumber: "2323235",relationship: Relationship.rodzenstwo}
-  familyArr: FamilyMember[] = [this.testRodzic, this.testMalzenstwo, this.testRodzenstwo1, this.testRodzenstwo2];
+  testRodzic: FamilyMember = {firstName: "Amanda", lastName: "Noris", customerId: "2323232",relationship: Relationship.rodzic}
+  testMalzenstwo: FamilyMember = {firstName: "Nicole", lastName: "Noris", customerId: "2323233",relationship: Relationship.malzenstwo}
+  testRodzenstwo: FamilyMember = {firstName: "Sam", lastName: "Noris", customerId: "2323234",relationship: Relationship.rodzenstwo}
+  testDziecko: FamilyMember = {firstName: "Steve", lastName: "Noris", customerId: "2323235",relationship: Relationship.dziecko}
+  familyArr: FamilyMember[] = [this.testRodzic, this.testMalzenstwo, this.testRodzenstwo, this.testDziecko];
 
   showDeleteButton: Boolean = false;
 
@@ -59,10 +59,9 @@ export class CustomerFamilyComponent implements OnInit {
   deleteFamilyMember(member: FamilyMember){
     this.dialogDelete.close();
     const index = this.familyArr.indexOf(member);
-    this.familyArr.splice(index, 1);
-    this.familyService.deleteFamilyMember(member.identificationNumber).subscribe(
-      data =>{this.dialogSuccess.open()},
-      error => {this.dialogFail.open()}
+    this.familyService.deleteFamilyMember(member.customerId).subscribe(
+      data =>{this.dialogSuccess.open(); this.familyArr.splice(index, 1);},
+      error => {this.dialogDelete.close(); this.dialogFail.open();}
     )
   }
 

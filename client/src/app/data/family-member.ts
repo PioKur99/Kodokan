@@ -8,6 +8,6 @@ export enum Relationship {
 export class FamilyMember {
     firstName: String;
     lastName: String;
-    identificationNumber: String;
+    customerId: String;
     relationship: Relationship;
 }

@@ -12,7 +12,7 @@ export class FamilyService {
   baseUrl: String = "http://172.18.0.3:8081/"
 
   getFamilyMembers(id: String):Observable<FamilyMember[]> {
-    let url = this.baseUrl + `customer/${id}/family`
+    let url = this.baseUrl + `customer/${id}/familyWithNames`
     return this.http.get<FamilyMember[]>(url)
   }
 
