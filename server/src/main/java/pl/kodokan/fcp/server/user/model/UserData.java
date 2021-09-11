@@ -17,6 +17,11 @@ import java.util.Set;
 @Entity
 @Getter @Setter
 public class UserData extends BaseEntity implements UserDetails {
+    
+    @Getter @Setter
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_generator")
+    @SequenceGenerator(name="user_generator", sequenceName = "user_seq", allocationSize=1)
+    private Long id;
 
     @NotNull
     @Email(message = "Email is incorrect!")
@@ -47,7 +52,7 @@ public class UserData extends BaseEntity implements UserDetails {
 
     @Setter(AccessLevel.NONE) // don't use setter but control adding / removing singe role
     @Getter(AccessLevel.NONE) // use custom safe getter
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable
     private Set<Role> roles = new HashSet<>();
 

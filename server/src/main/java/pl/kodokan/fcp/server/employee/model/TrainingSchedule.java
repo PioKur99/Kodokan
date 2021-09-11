@@ -13,11 +13,17 @@ import java.util.List;
 
 @Entity
 @Table(uniqueConstraints = {
+        // FIXME
         // an employee may have at most one training of the same type in one day
-        @UniqueConstraint(columnNames = {"training_name_id", "weekday", "employee_id"})
+//        @UniqueConstraint(columnNames = {"training_name_id", "weekday", "employee_id"})
 })
 @Getter @Setter
 public class TrainingSchedule extends BaseEntity {
+    
+    @Getter @Setter
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "trainingschedule_generator")
+    @SequenceGenerator(name="trainingschedule_generator", sequenceName = "trainingschedule_seq", allocationSize=1)
+    private Long id;
 
     @NotNull
     @ManyToOne

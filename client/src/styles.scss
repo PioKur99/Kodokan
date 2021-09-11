@@ -4,44 +4,65 @@
 
 
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
 @import '~igniteui-angular/lib/core/styles/themes/index';
 
+
 @include igx-core();
-$custom-palette: igx-palette(
-	$primary: #DAA520,
-	$secondary: #ff00ea,
-	$surface: #3f3f3f,
-	$error: #FF0000,
-	$success: #28a745,
-	$warn: #ffc107,
-	$info: #17a2b8,
-	$grays: #ffffff);
+$custom-palette: igx-palette($primary: #DAA520,
+  $secondary: #ff00ea,
+  $surface: #3f3f3f,
+  $error: #FF0000,
+  $success: #28a745,
+  $warn: #ffc107,
+  $info: #17a2b8,
+  $grays: #ffffff);
 @include igx-theme($palette: $custom-palette, $schema: $dark-bootstrap-schema, $elevation: false, $roundness: 1);
 
-$colorful-card: igx-card-theme(
-    $background: #202020,
-    $header-text-color: #FEFEFE,
-    $subtitle-text-color: #DAA520,
-    $content-text-color: #FEFEFE,
+$colorful-card: igx-card-theme($background: #202020,
+  $header-text-color: #FEFEFE,
+  $subtitle-text-color: #DAA520,
+  $content-text-color: #FEFEFE,
 );
 
 @include igx-card($colorful-card);
+
+$custom-input-group: igx-input-group-theme(
+  $filled-text-color: #DAA520,
+  $focused-text-color: #DAA520,
+  $idle-text-color: #DAA520,
+  $idle-bottom-line-color: #DAA520,
+  $interim-bottom-line-color: #DAA520,
+  $hover-bottom-line-color: #DAA520,
+  $focused-secondary-color: #DAA520,
+
+);
+@include igx-css-vars($custom-input-group);
+
+$custom-navbar-theme: igx-navbar-theme(
+    $text-color: #3f3f3f,
+    $background: #DAA520,
+    $idle-icon-color: #4d4d4d,
+    $hover-icon-color: #b48a1e,
+);
+@include igx-css-vars($custom-navbar-theme);
 
 
 @include igx-typography($font-family: "Lato", $type-scale: $default-type-scale);
 $igx-background-color: igx-color($custom-palette, 'surface');
 $igx-foreground-color: igx-contrast-color($custom-palette, 'surface');
-:root {
-	@include igx-palette-vars($custom-palette);
 
-	body {
-		background: $igx-background-color;
-		color: $igx-foreground-color;
-	}
+:root {
+  @include igx-palette-vars($custom-palette);
+
+  body {
+    background: $igx-background-color;
+    color: $igx-foreground-color;
+  }
 }
 
 $my-dialog-theme: igx-dialog-theme(
@@ -62,11 +83,26 @@ $my-list-theme: igx-list-theme(
 
 
 .igx-typography {
-	h1, h2, h3, h4, h5, h6, p {
-		margin: 0;
-	}
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    margin: 0;
+  }
 }
 
-.outer-wrapper > *:not(router-outlet) {
+.outer-wrapper>*:not(router-outlet) {
   width: 100%;
 }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+
+
+$my-input-group-theme: igx-input-group-theme($search-border-radius: 0, );
+
+@include igx-input-group($my-input-group-theme);

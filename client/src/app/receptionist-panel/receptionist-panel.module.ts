@@ -10,6 +10,17 @@ import {
 	IgxDialogModule,
 	IgxInputGroupModule,
 	IgxListModule
+    IgxRippleModule,
+    IgxButtonModule,
+    IgxBottomNavModule,
+    IgxIconModule,
+    IgxDialogModule,
+    IgxGridModule,
+    IgxComboModule,
+    IgxDropDownModule,
+    IgxCheckboxModule,
+    IgxInputGroupModule,
+    IgxToggleModule
 } from 'igniteui-angular';
 import { CustomersComponent } from './customers/customers.component';
 import { EntranceComponent } from './entrance/entrance.component';
@@ -18,6 +29,7 @@ import { PassesComponent } from './passes/passes.component';
 import { AddAClientComponent } from './add-a-client/add-a-client.component';
 import { EntryRegistrationComponent } from './entry-registration/entry-registration.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PassDetailsComponent } from './pass-details/pass-details.component';
 import { CustomerDataComponent } from './customer-data/customer-data.component';
 import { CustomerEditDataComponent } from './customer-edit-data/customer-edit-data.component';
 import { FormsModule } from '@angular/forms';
@@ -37,6 +49,8 @@ import { CustomerAddFamilyMemberComponent } from './customer-add-family-member/c
         PassesComponent,
         AddAClientComponent,
         EntryRegistrationComponent,
+        PassDetailsComponent,
+
         CustomerDataComponent,
         CustomerEditDataComponent,
         CustomerFamilyComponent,
@@ -57,6 +71,14 @@ import { CustomerAddFamilyMemberComponent } from './customer-add-family-member/c
         IgxIconModule,
         IgxDialogModule,
         IgxListModule
+        //BrowserAnimationsModule,
+        IgxDialogModule,
+        IgxGridModule,
+        IgxComboModule,
+        IgxDropDownModule,
+        IgxCheckboxModule,
+        IgxInputGroupModule,
+        IgxToggleModule
     ]
 })
 export class ReceptionistPanelModule {

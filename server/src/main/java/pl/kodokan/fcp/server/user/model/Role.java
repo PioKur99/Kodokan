@@ -10,9 +10,16 @@ import pl.kodokan.fcp.server.common.model.BaseEntity;
 import javax.persistence.Entity;
 import java.util.Objects;
 
+import javax.persistence.*;
+
 @Entity
 @Getter @Setter @NoArgsConstructor
 public class Role extends BaseEntity implements GrantedAuthority {
+    
+    @Getter @Setter
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "role_generator")
+    @SequenceGenerator(name="role_generator", sequenceName = "role_seq", allocationSize=1)
+    private Long id;
 
     @NaturalId // unique and not-null out of the box
     private String name;
