@@ -3,12 +3,17 @@ import { CommonModule } from '@angular/common';
 import { ReceptionistPanelRoutingModule } from './receptionist-panel-routing.module';
 import { ReceptionistPanelComponent } from './receptionist-panel.component';
 import {
-	IgxRippleModule,
-	IgxButtonModule,
-	IgxBottomNavModule,
-	IgxIconModule,
-	IgxDialogModule,
-	IgxInputGroupModule
+    IgxRippleModule,
+    IgxButtonModule,
+    IgxBottomNavModule,
+    IgxIconModule,
+    IgxDialogModule,
+    IgxGridModule,
+    IgxComboModule,
+    IgxDropDownModule,
+    IgxCheckboxModule,
+    IgxInputGroupModule,
+    IgxToggleModule
 } from 'igniteui-angular';
 import { CustomersComponent } from './customers/customers.component';
 import { EntranceComponent } from './entrance/entrance.component';
@@ -17,6 +22,7 @@ import { PassesComponent } from './passes/passes.component';
 import { AddAClientComponent } from './add-a-client/add-a-client.component';
 import { EntryRegistrationComponent } from './entry-registration/entry-registration.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PassDetailsComponent } from './pass-details/pass-details.component';
 import { CustomerDataComponent } from './customer-data/customer-data.component';
 import { CustomerEditDataComponent } from './customer-edit-data/customer-edit-data.component';
 import { FormsModule } from '@angular/forms';
@@ -26,6 +32,7 @@ import { CustomerShowPassesComponent } from './customer-show-passes/customer-sho
 import { CustomerShowEntrancesComponent } from './customer-show-entrances/customer-show-entrances.component';
 import { CustomerSendMailComponent } from './customer-send-mail/customer-send-mail.component';
 import { WebcamModule } from 'ngx-webcam';
+
 @NgModule({
     declarations: [
         ReceptionistPanelComponent,
@@ -35,6 +42,8 @@ import { WebcamModule } from 'ngx-webcam';
         PassesComponent,
         AddAClientComponent,
         EntryRegistrationComponent,
+        PassDetailsComponent,
+
         CustomerDataComponent,
         CustomerEditDataComponent,
         CustomerFamilyComponent,
@@ -52,7 +61,14 @@ import { WebcamModule } from 'ngx-webcam';
         IgxBottomNavModule,
         FormsModule,
         IgxIconModule,
-        IgxDialogModule
+        //BrowserAnimationsModule,
+        IgxDialogModule,
+        IgxGridModule,
+        IgxComboModule,
+        IgxDropDownModule,
+        IgxCheckboxModule,
+        IgxInputGroupModule,
+        IgxToggleModule
     ]
 })
 export class ReceptionistPanelModule {

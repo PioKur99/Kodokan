@@ -9,7 +9,9 @@ import pl.kodokan.fcp.server.customer.exception.MinimumCardState;
 
 import pl.kodokan.fcp.server.entrance.model.Entrance;
 import pl.kodokan.fcp.server.entrance.model.Package;
+import pl.kodokan.fcp.server.user.model.Gender;
 import pl.kodokan.fcp.server.user.model.UserData;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Collections;
@@ -27,6 +29,11 @@ public class Customer extends BaseEntity {
             @AttributeOverride(name = "state", column = @Column(name = "card_state"))
     })
     ClubCard clubCard;
+    
+    @Getter @Setter
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_generator")
+    @SequenceGenerator(name="customer_generator", sequenceName = "customer_seq", allocationSize=1)
+    private Long id;
 
     @Enumerated(EnumType.STRING)
     Discipline mainDiscipline;
@@ -73,5 +80,13 @@ public class Customer extends BaseEntity {
 
     public void setPrevCardState() {
         clubCard.setPrevCardState();
+    }
+
+    public boolean isInFamily(Family f){
+        return f == family;
+    }
+
+    public Gender getGender(){
+        return userData.getGender();
     }
 }

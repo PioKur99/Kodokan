@@ -15,6 +15,11 @@ import java.util.Set;
 @Entity
 @Getter @Setter @NoArgsConstructor
 public class Family extends BaseEntity {
+    
+    @Getter @Setter
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "family_generator")
+    @SequenceGenerator(name="family_generator", sequenceName = "family_seq", allocationSize=1)
+    private Long id;
 
     @NotNull
     private String name;
@@ -60,5 +65,23 @@ public class Family extends BaseEntity {
         }
     }
 
+    public boolean isFather(Customer c){
+        return c == father;
+    }
 
+    public boolean isMother(Customer c){
+        return c == mother;
+    }
+
+    public boolean hasAnyParents(){
+        return father != null || mother != null;
+    }
+
+    public boolean hasFather(){
+        return father != null;
+    }
+
+    public boolean hasMother(){
+        return mother != null;
+    }
 }

@@ -9,10 +9,10 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.kodokan.fcp.server.entrance.dto.CreatePackageInputDataDTO;
 import pl.kodokan.fcp.server.entrance.dto.PackageDTO;
 import pl.kodokan.fcp.server.entrance.dto.PackageRequest;
 import pl.kodokan.fcp.server.entrance.dto.PackageResponse;
-import pl.kodokan.fcp.server.entrance.service.EntranceService;
 import pl.kodokan.fcp.server.entrance.service.PackageService;
 
 import java.util.List;
@@ -78,6 +78,16 @@ public class PackageController {
     })
     ResponseEntity<Long> payForTicket(@PathVariable Long id){
         return new ResponseEntity<>(packageService.payForTicket(id),HttpStatus.OK);
+    }
+
+    @PostMapping("/add-new-package")
+    @Operation(summary = "Add new package to customer")
+    @ApiResponses(value={
+            @ApiResponse(code=200, message = "Successfully added new package"),
+            @ApiResponse(code=400, message = "Something is wrong with input data")
+    })
+    ResponseEntity<Long> createPackage(@RequestBody CreatePackageInputDataDTO dto){
+        return new ResponseEntity<>(packageService.createPackage(dto.getCustomerID(),dto.getPackageTypeID()), HttpStatus.OK);
     }
 }
 

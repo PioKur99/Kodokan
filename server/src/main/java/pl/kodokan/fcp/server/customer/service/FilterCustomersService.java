@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import pl.kodokan.fcp.server.customer.dto.FilteredCustomersDTO;
 import pl.kodokan.fcp.server.customer.dto.FiltersDTO;
 import pl.kodokan.fcp.server.customer.model.Customer;
+import pl.kodokan.fcp.server.customer.dto.CustomerFamilyDTO;
+import pl.kodokan.fcp.server.customer.dto.CustomerFilterDTO;
 import pl.kodokan.fcp.server.customer.repo.CustomerRepository;
 
 import java.util.*;
@@ -18,32 +20,25 @@ public class FilterCustomersService {
     @Autowired
     FilteredCustomerMapper mapper;
 
-    public List<FilteredCustomersDTO> getFilteredList(FiltersDTO filters){
-        String firstNameStr = "";
-        if(filters.getFirstName() != null){
-            firstNameStr = filters.getFirstName();
-        }
+    public List<CustomerFamilyDTO> getCustomers(CustomerFilterDTO filters){
 
-        String lastNameStr = "";
-        if(filters.getLastName() != null){
-            lastNameStr = filters.getLastName();
-        }
+        String firstNameStr = Optional.ofNullable(filters.getFirstName()).orElse("");
+
+        String lastNameStr = Optional.ofNullable(filters.getLastName()).orElse("");
 
         String cardIDStr = "";
-        if(filters.getCardId() != null){
-            cardIDStr = Long.toString(filters.getCardId());
+        if(filters.getCardID() != null){
+            cardIDStr = Long.toString(filters.getCardID());
         }
 
         String phoneStr = "";
-        if(filters.getPhoneNumber() != null){
-            phoneStr = Long.toString(filters.getPhoneNumber());
-        }
+        if(filters.getPhone() != null){
+            phoneStr = Long.toString(filters.getPhone());
+		}
+        
+        String cardStateStr = Optional.ofNullable(filters.getCardState()).orElse("");
 
-        String cardStateStr = "";
-        if(filters.getCardState() != null){
-            cardStateStr = filters.getCardState();
-        }
-
+    	
         return repo.getCustomers(firstNameStr, lastNameStr, cardIDStr, phoneStr, cardStateStr).stream().map(mapper::toDTO).collect(Collectors.toList());
-    }
+	}
 }
