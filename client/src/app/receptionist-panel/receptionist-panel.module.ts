@@ -7,19 +7,13 @@ import {
 	IgxButtonModule,
 	IgxBottomNavModule,
 	IgxIconModule,
-	IgxDialogModule,
 	IgxInputGroupModule,
-	IgxListModule
-    IgxRippleModule,
-    IgxButtonModule,
-    IgxBottomNavModule,
-    IgxIconModule,
+	IgxListModule,
     IgxDialogModule,
     IgxGridModule,
     IgxComboModule,
     IgxDropDownModule,
     IgxCheckboxModule,
-    IgxInputGroupModule,
     IgxToggleModule
 } from 'igniteui-angular';
 import { CustomersComponent } from './customers/customers.component';
@@ -50,7 +44,6 @@ import { CustomerAddFamilyMemberComponent } from './customer-add-family-member/c
         AddAClientComponent,
         EntryRegistrationComponent,
         PassDetailsComponent,
-
         CustomerDataComponent,
         CustomerEditDataComponent,
         CustomerFamilyComponent,
@@ -70,7 +63,7 @@ import { CustomerAddFamilyMemberComponent } from './customer-add-family-member/c
         FormsModule,
         IgxIconModule,
         IgxDialogModule,
-        IgxListModule
+        IgxListModule,
         //BrowserAnimationsModule,
         IgxDialogModule,
         IgxGridModule,
