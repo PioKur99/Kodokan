@@ -3,48 +3,24 @@
         <igx-prefix>
             <igx-icon>search</igx-icon>
         </igx-prefix>
-        <input #input1 igxInput placeholder="Search" class="input" id="input"/>
+
+        <input #input1 igxInput
+            placeholder="Szukaj" 
+            class="input" 
+            id="input1"
+            [(ngModel)]="searchBox"
+            (keydown.enter)="searchCustomers($event)"
+        />
     </igx-input-group>
 
     <div class="drop-down">
         <igx-combo #combo class="combo" [itemsMaxHeight]="250"
             [data]="filter_states" placeholder="Filtry" searchPlaceholder=""
             displayKey="name" valueKey="id"
+            (onSelectionChange)="singleSelection($event)"
             [(ngModel)]="selectedFilters" >
         </igx-combo>
-        <!-- <button class="drop-down__button" igxButton="raised" [igxToggleAction]="dropdown" [igxDropDownItemNavigation]="dropdown" >
-            Filtry
-        </button> 
-
-        
-
-        <igx-drop-down #dropdown class="drop-down__item">
-            <igx-drop-down-item>
-                <igx-checkbox>
-                    imię
-                </igx-checkbox>
-            </igx-drop-down-item>
-            <igx-drop-down-item>
-                <igx-checkbox>
-                    nazwisko
-                </igx-checkbox>
-            </igx-drop-down-item>
-            <igx-drop-down-item>
-                <igx-checkbox>
-                    dyscyplina
-                </igx-checkbox>
-            </igx-drop-down-item>
-            <igx-drop-down-item>
-                <igx-checkbox>
-                    numer telefonu
-                </igx-checkbox>
-            </igx-drop-down-item>
-            <igx-drop-down-item>
-                <igx-checkbox>
-                    numer karty
-                </igx-checkbox>
-            </igx-drop-down-item>
-        </igx-drop-down> -->
+               
     </div>
 </div>
     
@@ -56,19 +32,47 @@
     </tr>
     <tr class="row" *ngFor="let item of customerList"> <!-- będzie trzeba podać listę za pomocą ngFor/ dodać interpolację w imię i nazwisko / dodać -->
         <td class="column column--first">
-            {{item.first_name}} {{item.last_name}}
+            {{item.firstName}} {{item.lastName}}
         </td>
         <td class="column column--second"><!--FIXME: link do strony ze szczegółami customera-->
-            <button class="button-table" routerLink="../customer/{{item.customer_id}}">Pokaż</button>
+            <button class="button-table" routerLink="../customer/{{item.customerID}}">Pokaż</button>
         </td>
         <td class="column column--third">
             <button class="button-table" (click)="deleteCustomerPrep(item)">Usuń</button>
         </td>
     </tr>
 </table>
+
 <!-- do dodania interpolacja z listy Nazwisko i imię -->
-<igx-dialog #dialogDelete message="Czy na pewno chcesz usunąć klienta ?" leftButtonLabel="Tak" (onLeftButtonSelect)="deleteCustomer()" rightButtonLabel="Nie" (onRightButtonSelect)="dialogDelete.close()" [closeOnOutsideSelect]="true"></igx-dialog>
-<!-- This is just an example showing how you might open the dialog. -->
-<igx-dialog #errorGetCustomers message="Problem z pobraniem listy klientów" id="errorGetCustomers" leftButtonLabel="Wróć" (onLeftButtonSelect)="errorDataLink()" routerLinkActive="router-link-active" [closeOnOutsideSelect]="true"></igx-dialog>
+<igx-dialog #dialogDelete message="Czy na pewno chcesz usunąć klienta ?" 
+    leftButtonLabel="Tak" 
+    (onLeftButtonSelect)="deleteCustomer()" 
+    rightButtonLabel="Nie" 
+    (onRightButtonSelect)="dialogDelete.close()" 
+    [closeOnOutsideSelect]="true">
+</igx-dialog>
+
+
+<igx-dialog #errorGetCustomers message="Problem z pobraniem listy klientów" 
+    id="errorGetCustomers" 
+    leftButtonLabel="Wróć" 
+    (onLeftButtonSelect)="errorGetCustomers.close()">
+</igx-dialog>
+<!-- "errorDataLink()" 
+    routerLinkActive="router-link-active" 
+    [closeOnOutsideSelect]="true" -->
+
+<igx-dialog #errorDeleteCustomer message="Nie można usunąć tego klienta" 
+    id="errorDeleteCustomer" 
+    rightButtonLabel="Wróć" 
+    (onRightButtonSelect)="errorDeleteCustomer.close()" 
+    [closeOnOutsideSelect]="true">
+</igx-dialog>
+
+<igx-dialog #errorFilter message="Nie wybrano filtra" 
+    id="errorFilter" 
+    leftButtonLabel="Wróć" 
+    (onLeftButtonSelect)="errorFilter.close()">
+</igx-dialog>
 
 
