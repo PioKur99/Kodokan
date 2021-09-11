@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Client } from 'src/app/data/client';
+import { Client, Gender } from 'src/app/data/client';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,25 +10,26 @@ import { Router } from '@angular/router';
 export class CustomerAddFamilyMemberComponent implements OnInit {
 
   client: Client = {
-    name: "Czak",
-    surname: "Noris",
-    gender: "Men",
-    PESEL: "8890991812",
-    streetNumb: "Wolf Street 23",
-    apartmentNumb: "18",
+    id: 1,
+    image: "",
+    firstName: "Czak",
+    lastName: "Noris",
+    gender: Gender.Male,
+    identityNumber: "8890991812",
+    addressLine: "Wolf Street 23",
     city: "Arizona",
-    postCode: "00-233",
+    postalCode: "00-233",
     voivodeship: "Ślunskie",
-    cardNumb: "333224411",
-    mail: "czak.noris@gmail.com",
-    dyscypline: "Boks",
-    phoneNumb: "66677788"
+    cardId: "333224411",
+    email: "czak.noris@gmail.com",
+    mainDiscipline: "Boks",
+    phone: "66677788"
   };
 
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    this.router.navigate(["/receptionist-panel/customer-add-family-member", {cardID: this.client.cardNumb}])
+    this.router.navigate(["/receptionist-panel/customer-add-family-member", {cardID: this.client.cardId}])
   }
 
 }

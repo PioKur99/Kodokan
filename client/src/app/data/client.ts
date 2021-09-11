@@ -19,5 +19,4 @@ mainDiscipline: string;
 phone: string;
 postalCode: string;
 voivodeship: string;
-
 }
