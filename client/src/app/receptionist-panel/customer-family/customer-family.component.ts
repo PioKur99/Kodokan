@@ -14,6 +14,7 @@ export class CustomerFamilyComponent implements OnInit {
   //Do testowania
   client: Client = {
     id: 1,
+    password: "",
     image: "",
     firstName: "Czak",
     lastName: "Noris",

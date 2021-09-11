@@ -11,6 +11,7 @@ export class CustomerAddFamilyMemberComponent implements OnInit {
 
   client: Client = {
     id: 1,
+    password: "",
     image: "",
     firstName: "Czak",
     lastName: "Noris",
