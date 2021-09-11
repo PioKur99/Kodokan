@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Client } from 'src/app/data/client';
-import { Router } from '@angular/router';
+import { Client, Gender } from 'src/app/data/client';
+import { ClientService } from 'src/app/services/client.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import {Subject, Observable} from 'rxjs';
 import { WebcamImage } from 'ngx-webcam';
 @Component({
@@ -11,7 +12,7 @@ import { WebcamImage } from 'ngx-webcam';
 export class CustomerEditDataComponent implements OnInit {
 
 
-   editWentGood: boolean = true;
+   dialogMessage: String;
    url: String = "assets/ruda.jpg"
    showWebcam: boolean = false;
    public webImage: WebcamImage = null;
@@ -19,27 +20,49 @@ export class CustomerEditDataComponent implements OnInit {
    @ViewChild("dialog1") dialogSuccess;
    @ViewChild("dialog2") dialogFailure;
 
-   client: Client = {
-    name: "Czak",
-    surname: "Noris",
-    gender: "Men",
-    PESEL: "8890991812",
-    streetNumb: "Wolf Street 23",
-    apartmentNumb: "18",
+  client: Client = {
+   
+    addressLine: "Wolf Street 23",
+    cardId: "123",
     city: "Arizona",
-    postCode: "00-233",
+    email: "czak.noris@gmail.com",
+    firstName: "Czak",
+    gender: Gender.Male,
+    id: 0,
+    identityNumber: "333224411",
+    image: "",
+    lastName: "Noris",
+    mainDiscipline: "Boks",
+    phone: "66677788",
+    postalCode: "00-233",
     voivodeship: "Ślunskie",
-    cardNumb: "333224411",
-    mail: "czak.noris@gmail.com",
-    dyscypline: "Boks",
-    phoneNumb: "66677788"
 
   };
 
-  constructor(private router: Router) { }
+  constructor(private clientService: ClientService, private router: Router, private urlParam: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.router.navigate(["/receptionist-panel/customer-edit-data", {cardID: this.client.cardNumb}])
+    this.getClient(2) // <--- Na potrzeby testów
+    //this.getClient(this.urlParam.snapshot.paramMap.get('id')) <--- ID klienta z adresu URL
+    this.router.navigate(["/receptionist-panel/customer-edit-data", {card: this.client.identityNumber}])
+  }
+
+  getClient(id: number) : void {
+    this.clientService.getClient(id).toPromise().then(data => {this.client = data
+      this.client.image = this.url /*<--- na potrzeby testów */});
+  }
+
+  patchClient() {
+    this.clientService.editClient(this.client).subscribe(
+      data => {
+        this.client = data
+        this.dialogSuccess.open();
+      },
+      error => {
+        this.dialogMessage = error.error;
+        this.dialogFailure.open();
+      }
+    )
   }
 
   public get triggerObservable(): Observable<void> {
@@ -51,21 +74,13 @@ export class CustomerEditDataComponent implements OnInit {
     this.showWebcam = !this.showWebcam;
   }
 
-  manageDialogs() {
-    if(this.editWentGood == true) {
-      this.dialogSuccess.open();
-    }
-    else {
-      this.dialogFailure.open();
-    }
-  }
-
   selectFiles(event) {
     if(event.target.files) {
       var reader = new FileReader();
       reader.readAsDataURL(event.target.files[0])
       reader.onload = (event:any) => {
         this.url = event.target.result;
+        this.client.image = this.url
       }
     }
   }
@@ -77,6 +92,7 @@ export class CustomerEditDataComponent implements OnInit {
   public handleImage(webcamImage: WebcamImage): void {
     this.webImage = webcamImage;
     this.url = this.webImage.imageAsDataUrl;
+    this.client.image = this.url
   }
 
 }
