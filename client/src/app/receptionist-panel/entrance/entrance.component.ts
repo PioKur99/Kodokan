@@ -21,6 +21,10 @@ export class EntranceComponent implements OnInit {
   constructor(public entranceService: EntranceService) { }
 
   ngOnInit(): void {
+    this.getEntrances()
+  }
+  //pobieranie listy wejść
+  getEntrances(){
     this.entranceService.getEntrances().subscribe(
       x=>{
         this.entrancesList=x
@@ -35,12 +39,14 @@ export class EntranceComponent implements OnInit {
       }
     )
   }
-  //zmienia zaznaczenia w tablicy checkboxes
+
+  //zmienianie zaznaczenia w tablicy checkboxes
   toggleSelection(event, i) {
     this.checkboxes[i] = event.checked;
     console.log(this.checkboxes)
   }
 
+  //usuwanie zaznaczonych wejść
   deleteEntrances(){
     for(let i=0;i< this.checkboxes.length;++i){
       if(this.checkboxes[i]){
@@ -51,6 +57,10 @@ export class EntranceComponent implements OnInit {
           },
           error=>{
             this.openErrorDeleteEntrance()
+          },
+          //aktualizacja listy wejść
+          ()=>{
+            this.getEntrances()
           }
         )
       }
@@ -66,5 +76,4 @@ export class EntranceComponent implements OnInit {
     this.errorDeleteEntrance.open()
   }
 
-  
 }
