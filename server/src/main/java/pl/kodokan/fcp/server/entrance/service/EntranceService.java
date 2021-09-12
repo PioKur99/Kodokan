@@ -22,9 +22,11 @@ import javax.validation.constraints.Null;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -152,7 +154,7 @@ public class EntranceService {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             LocalDateTime dateTime = LocalDateTime.parse(entranceFilter.getDate(), formatter);
             toFilter = toFilter.stream()
-                    .filter(n -> DateTimeComparator.getDateOnlyInstance().compare(n.getDateTime().toLocalDate(), dateTime.toLocalDate()) == 0)
+                    .filter(n -> DateTimeComparator.getDateOnlyInstance().compare(Date.from(n.getDateTime().atZone(ZoneId.systemDefault()).toInstant()), Date.from(dateTime.atZone(ZoneId.systemDefault()).toInstant())) == 0)
                     .collect(Collectors.toList());
         }
             
