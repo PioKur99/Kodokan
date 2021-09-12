@@ -11,15 +11,16 @@ export class AddPackageReceptionistService {
    }
 
    findCustomerById(id: String) : Observable<any> {
-      return this.http.get(config.address+"customer"+id);
+      return this.http.get(config.address+"customers/findById/" +id);
    }
    createPackage(id: String, type_id: String ) : Observable<any> {
-    return this.http.post(config.address+"package/create", {customer_id: id, type_id: type_id});
+    return this.http.post(config.address+"package/add-new-package", {customer_id: id, type_id: type_id});
   }
+
   payForPackage(package_id: String) : Observable<any> {
     return this.http.put(config.address+"package/pay-for-package", package_id);
- }
- getPackages() : Observable<any> {
-  return this.http.get(config.address+"package");
-}
+  }
+  getPackages() : Observable<any> {
+    return this.http.get(config.address+"package");
+  }
 }

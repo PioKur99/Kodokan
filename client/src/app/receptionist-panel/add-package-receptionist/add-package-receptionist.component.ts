@@ -15,7 +15,7 @@ export class AddPackageReceptionistComponent implements OnInit {
     subtitle: 'JEDNORAZOWY',
     price: 20,
     description: 'Karnet ważny w dniu zakupu, upoważnia do jednorazowego wejścia.',
-    type_id: ''
+    type_id: '1'
 
   }
   package_2: Package =  {
@@ -23,36 +23,37 @@ export class AddPackageReceptionistComponent implements OnInit {
     subtitle: '4 WEJŚCIA',
     price: 70,
     description: 'Karnet upoważnia do 4 wejść w ciągu jednego miesiąca od zakupu',
-    type_id: ''
+    type_id: '2'
   }
   package_3: Package =  {
     title: 'KARNET MIESIĘCZNY',
     subtitle: '8 WEJŚĆ',
     price: 120,
     description: 'Odpowiedni opis karnetu.',
-    type_id: ''
+    type_id: '3'
   }
   package_4: Package =  {
     title: 'KARNET OPEN',
     subtitle: 'TYGODNIOWY',
     price: 50,
     description: 'Odpowiedni opis karnetu.',
-    type_id: ''
+    type_id: '4'
   }
   package_5: Package =  {
     title: 'KARNET DZIECIĘCY',
     subtitle: '...',
     price: 100,
     description: 'Odpowiedni opis karnetu.',
-    type_id: ''
+    type_id: '5'
   }
-  //packages: Array<Package> = [this.package_1, this.package_2, this.package_3, this.package_4, this.package_5, this.package_2, this.package_3, this.package_4,];
-
+  
   @ViewChild ("errordialog") errordialog;
   @ViewChild ("paydialog") paydialog;
   @ViewChild ("dialog") dialog;
 
-  packages: Array<Package>;
+  packages: Array<Package> = [this.package_1, this.package_2, this.package_3, this.package_4, this.package_5, this.package_2, this.package_3, this.package_4,];
+
+  //packages: Array<Package>;
 
   package_id: String;
   name_surname: String;
@@ -61,7 +62,7 @@ export class AddPackageReceptionistComponent implements OnInit {
   findNameById():void{
     this.addPackageService.findCustomerById(this.client_id).subscribe(
       resp => {
-        this.name_surname = resp.firstName+resp.lastName;
+        this.name_surname = resp.firstName+ " " + resp.lastName;
       },
       err => {
       }
@@ -108,12 +109,15 @@ export class AddPackageReceptionistComponent implements OnInit {
 
   }
   constructor(private route: ActivatedRoute, private addPackageService: AddPackageReceptionistService, private router: Router) { 
+  
   }
 
   ngOnInit(): void {
-    this.client_id = this.route.snapshot.paramMap.get("id");
+    //this.client_id = this.route.snapshot.paramMap.get("id");
+    this.client_id = "100";
+    debugger;
     this.findNameById();
-    this.getPackages();
+    //this.getPackages();
   }
 
   
