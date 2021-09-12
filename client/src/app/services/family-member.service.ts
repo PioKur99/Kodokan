@@ -12,7 +12,7 @@ export class FamilyMemberService {
   constructor(private http: HttpClient) {}
 
   findCustomerById(id: String) : Observable<any> {
-    return this.http.get(config.address+"customers/findById"+id);
+    return this.http.get(config.address+"customers/findById/"+id);
   }
 
   findUsers(name: String) : Observable<any> {

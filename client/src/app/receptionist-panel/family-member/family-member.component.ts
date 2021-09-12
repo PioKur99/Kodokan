@@ -21,7 +21,7 @@ export class FamilyMemberComponent implements OnInit {
   findNameById():void{
     this.familyMemberService.findCustomerById(this.client_id).subscribe(
       resp => {
-        this.name_surname = resp.firstName+resp.lastName;
+        this.name_surname = resp.firstName+" " +resp.lastName;
       },
       err => {
       }
@@ -52,7 +52,8 @@ export class FamilyMemberComponent implements OnInit {
   constructor(private route:ActivatedRoute, private familyMemberService: FamilyMemberService, private router: Router) { }
 
   ngOnInit(): void {
-    this.client_id = this.route.snapshot.paramMap.get("id");
+   // this.client_id = this.route.snapshot.paramMap.get("id");
+   this.client_id = "100";
     this.findNameById();
   }
 
