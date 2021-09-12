@@ -9,9 +9,16 @@ import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
+import javax.persistence.*;
+
 @Entity
 @Getter @Setter @NoArgsConstructor
 public class PackageFreeze extends BaseEntity {
+    
+    @Getter @Setter
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "packagefreeze_generator")
+    @SequenceGenerator(name="packagefreeze_generator", sequenceName = "packagefreeze_seq", allocationSize=1)
+    private Long id;
 
     @NotNull
     private LocalDateTime startDateTime;

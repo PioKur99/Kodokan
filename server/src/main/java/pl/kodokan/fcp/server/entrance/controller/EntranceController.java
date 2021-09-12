@@ -4,9 +4,14 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import pl.kodokan.fcp.server.entrance.service.EntranceService;
 
 import java.util.List;
@@ -47,9 +52,7 @@ public class EntranceController {
     @PostMapping("/add")
     ResponseEntity<Long> addEntrance(@RequestBody EntranceDto entranceDto) {
         Long result = entranceService.addEntrance(entranceDto);
-        return ResponseEntity.ok(result);
-    }
-
+        return ResponseEntity.ok(result);}
     @Operation(summary = "Get filtered list of entrances")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Entrances list returned successfully"),
@@ -65,9 +68,9 @@ public class EntranceController {
             @ApiResponse(code = 200, message = "Entrance deleted successfully"),
             @ApiResponse(code = 400, message = "Entrance can not be deleted")
     })
-    @PostMapping("/delete")
-    Long deleteEntrance(@RequestBody Long toDelete) {
-        return entranceService.deleteEntrance(toDelete);
+    @DeleteMapping("/delete")
+    ResponseEntity<Long> deleteEntrance(@RequestBody Long entranceId) {
+        Long result = entranceService.deleteEntrance(entranceId);
+        return ResponseEntity.ok(result);
     }
 }
-

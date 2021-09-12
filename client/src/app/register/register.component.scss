@@ -1,0 +1,303 @@
+.errordialog{
+  height: 150px;
+  text-align: center;
+}
+
+.errordialog .header{
+  padding: 10% 0 5% 0;
+}
+
+.errordialog .header h3{
+  font-size: 1.3rem;
+  line-height: 130%;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+igx-navbar{
+  font-family: Helvetica, sans-serif;
+}
+
+.card-wrapper button{
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 75%;
+  background-color: #6d6d6d;
+  color: #DAA520;
+  margin: 5% 0;
+  border-radius: 10px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card-wrapper button:hover {
+  background-color: #636363;
+  box-shadow: 0px 15px 20px rgba(185, 185, 185, 0.4);
+  color: rgb(236, 235, 235);
+}
+//stepper
+.mat-stepper-vertical{
+  padding: 0 100px 24px 100px;
+}
+
+.mat-stepper-horizontal {
+    background-color: transparent;
+    padding: 2% 10% 24px 10%;
+}
+
+.mat-form-field {
+  margin-top: 16px;
+}
+
+
+:host {
+  ::ng-deep .mat-horizontal-stepper-header-container{
+    margin-bottom: 2%;
+  }
+  ::ng-deep .mat-step-header .mat-step-label.mat-step-label-active{
+    color: white;
+  }
+  ::ng-deep  .mat-step-header .mat-step-icon-state-edit{
+    background-color: #DAA520;
+  }
+  ::ng-deep .mat-step-header  .mat-step-icon-selected {
+    background-color: #DAA520;
+    color: white;
+  }
+}
+
+//first step
+.inputs{
+  padding: 0% 30% 10px 30%;
+}
+
+.rightBtn{
+  float: right;
+}
+
+
+.greyBtn{
+  background-color: #ffffffa6;
+}
+
+
+.centered{
+  text-align: center;
+  margin-top: 50px;
+}
+igx-checkbox{
+  margin-top: 10px;
+}
+
+#previous{
+  float: left;
+}
+.container{
+  display: flex;
+  justify-content: space-between;
+ 
+}
+
+
+igx-radio-groupp{
+  float: right;
+}
+
+.yellowText{
+  color: #DAA520;
+}
+
+
+
+.transform{
+  transform: scaleX(-1);
+}
+
+
+.mainContainer{
+  overflow: hidden;
+  margin-bottom: 5%;
+}
+
+.mainContainerOne{
+  padding-left: 7%;
+  width: 700px; /* on Phone - CHANGE THIS PROPERTY!!!*/
+  float:left; /* add this */
+}
+
+.mainContainerTwo{
+  overflow: hidden;
+  text-align: center;
+  padding: 3% 0 0 0%;
+  width: 450px;
+}
+
+.containerOne, .containerTwo, .containerThree {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 3% 0 3% 0 ;
+}
+
+.labels{
+  min-width: 250px;
+  margin: 0 4% 0 4%;
+}
+
+.savedImg{
+  width: 200px;
+  float:left;
+}
+
+.photo-container{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0% 10% 2% 10%;
+}
+
+.photoBtn{
+  justify-content: center;
+  width: 40%;
+  padding-top: 5%;
+
+}
+
+.photoBtn button{
+  display: block;
+  margin-bottom: 15px;
+}
+
+.photoBtn .igx-input-group{
+  width: 80%;
+}
+
+::ng-deep .photo-container .igx-input-group__bundle{
+  box-shadow: none;
+  padding-bottom: 20px;
+}
+
+image-cropper{
+  padding: 0;
+  max-width: 520px;
+ 
+}
+.snapshot{
+  display: block;
+  text-align: center;
+  margin-bottom: 2%;
+  width: 250;
+}
+
+webcam{
+  display: block;
+  text-align: center;
+  margin-bottom: 2%;
+  width: 520px;
+
+}
+@media only screen and (max-width: 1500px) {
+  .photoBtn {
+    width: 100%;
+    padding: 2% 3% 5% 3%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  .photoBtn button{
+    display: inline-block
+  }
+  .photoBtn igx-input-group{
+    display: inline-block
+  }
+  webcam, image-cropper{
+    margin-left: 25%;
+  }
+}
+@media only screen and (max-width: 1200px) {
+  webcam, image-cropper{
+    margin-left: 20%;
+    width: 450px;
+  }
+}
+
+@media only screen and (max-width: 920px) {
+  webcam{
+    width: 400px;
+  }
+  .mat-stepper-horizontal {
+    padding: 2% 2% 24px 2%;
+  }
+  .mainContainerOne{
+    padding-left: 2%;
+  }
+  .mainContainerTwo{
+    padding-left: 30%;
+  }
+
+}
+
+@media only screen and (max-width: 750px) {
+
+  webcam, image-cropper{
+    width: 350px;
+  }
+  .mainContainerOne{
+    width: 100%; /* on Phone - CHANGE THIS PROPERTY!!!*/
+    padding-left: 25%;
+  }
+  .mainContainerTwo{
+    padding-left: 28%;
+    width:auto;
+  }
+
+}
+@media only screen and (max-width: 600px) {
+
+  webcam, image-cropper{
+    width: 350px;
+    margin-left: 5%;
+  }
+  .inputs{
+    padding: 0% 1% 10px 1%;
+  }
+  .mat-stepper-horizontal {
+    padding: 2% 3% 24px 4%;
+  }
+
+  :host{
+    ::ng-deep .mat-step-text-label{
+      display: none;
+    }
+  }
+  .full-width{
+    width: 100%;
+  }
+  .mainContainerOne{
+    width: 100%; /* on Phone - CHANGE THIS PROPERTY!!!*/
+    padding-left: 10%;
+  }
+  .mainContainerTwo{
+    padding-left: 14%;
+  }
+
+}
+@media only screen and (max-width: 450px) {
+  .photoBtn button{
+    width: 200px;
+  }
+  webcam, image-cropper{
+    width: 250px;
+    margin-left: 0%;
+  }
+  .mainContainerOne{
+    width: 100%; 
+    padding-left: 5%;
+  }
+  .mainContainerTwo{
+    padding-left: 9%;
+  }
+  .photo-container{
+    padding: 3%;
+  }
+
+}

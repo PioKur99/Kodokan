@@ -14,6 +14,11 @@ import java.util.*;
 @Entity
 @Getter @Setter
 public class Employee extends BaseEntity {
+    
+    @Getter @Setter
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employee_generator")
+    @SequenceGenerator(name="employee_generator", sequenceName = "employee_seq", allocationSize=1)
+    private Long id;
 
     @OneToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn
