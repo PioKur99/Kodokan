@@ -10,9 +10,16 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.List;
 
+import javax.persistence.*;
+
 @Entity
 @Getter @Setter
 public class TrainingName extends BaseEntity {
+    
+    @Getter @Setter
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "trainingname_generator")
+    @SequenceGenerator(name="trainingname_generator", sequenceName = "trainingname_seq", allocationSize=1)
+    private Long id;
 
     @NaturalId
     private String name;
