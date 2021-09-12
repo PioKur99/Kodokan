@@ -3,17 +3,18 @@ import { CommonModule } from '@angular/common';
 import { ReceptionistPanelRoutingModule } from './receptionist-panel-routing.module';
 import { ReceptionistPanelComponent } from './receptionist-panel.component';
 import {
-    IgxRippleModule,
-    IgxButtonModule,
-    IgxBottomNavModule,
-    IgxIconModule,
+	IgxRippleModule,
+	IgxButtonModule,
+	IgxBottomNavModule,
+	IgxIconModule,
+	IgxInputGroupModule,
+	IgxListModule,
     IgxDialogModule,
-    IgxInputGroupModule,
-    IgxToggleModule,
+    IgxGridModule,
+    IgxComboModule,
     IgxDropDownModule,
     IgxCheckboxModule,
-    IgxGridModule,
-    IgxComboModule
+    IgxToggleModule
 } from 'igniteui-angular';
 import { CustomersComponent } from './customers/customers.component';
 import { EntranceComponent } from './entrance/entrance.component';
@@ -21,9 +22,18 @@ import { MembershipCardsComponent } from './membership-cards/membership-cards.co
 import { PassesComponent } from './passes/passes.component';
 import { AddAClientComponent } from './add-a-client/add-a-client.component';
 import { EntryRegistrationComponent } from './entry-registration/entry-registration.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PassDetailsComponent } from './pass-details/pass-details.component';
+import { CustomerDataComponent } from './customer-data/customer-data.component';
+import { CustomerEditDataComponent } from './customer-edit-data/customer-edit-data.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { CustomerFamilyComponent } from './customer-family/customer-family.component';
+import { CustomerAddPassComponent } from './customer-add-pass/customer-add-pass.component';
+import { CustomerShowPassesComponent } from './customer-show-passes/customer-show-passes.component';
+import { CustomerShowEntrancesComponent } from './customer-show-entrances/customer-show-entrances.component';
+import { CustomerSendMailComponent } from './customer-send-mail/customer-send-mail.component';
+import { WebcamModule } from 'ngx-webcam';
+import { CustomerAddFamilyMemberComponent } from './customer-add-family-member/customer-add-family-member.component';
+
 @NgModule({
     declarations: [
         ReceptionistPanelComponent,
@@ -32,23 +42,35 @@ import { HttpClientModule } from '@angular/common/http';
         MembershipCardsComponent,
         PassesComponent,
         AddAClientComponent,
-        EntryRegistrationComponent
+        EntryRegistrationComponent,
+        PassDetailsComponent,
+        CustomerDataComponent,
+        CustomerEditDataComponent,
+        CustomerFamilyComponent,
+        CustomerAddPassComponent,
+        CustomerShowPassesComponent,
+        CustomerShowEntrancesComponent,
+        CustomerSendMailComponent,
+        CustomerAddFamilyMemberComponent
     ],
     imports: [
         CommonModule,
         ReceptionistPanelRoutingModule,
         IgxRippleModule,
         IgxButtonModule,
+        WebcamModule,
         IgxBottomNavModule,
+        FormsModule,
         IgxIconModule,
         IgxDialogModule,
-        FormsModule,
-        IgxInputGroupModule,
-        IgxToggleModule,
-        IgxDropDownModule,
-        IgxCheckboxModule,
+        IgxListModule,
+        IgxDialogModule,
         IgxGridModule,
         IgxComboModule,
+        IgxDropDownModule,
+        IgxCheckboxModule,
+        IgxInputGroupModule,
+        IgxToggleModule
     ]
 })
 export class ReceptionistPanelModule {
