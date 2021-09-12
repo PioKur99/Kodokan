@@ -101,8 +101,8 @@ public class PackageService {
                 packageList = filterByPackageName(packageList, packageRequest.getPackageName().get());
             if (packageRequest.getEndDate().isPresent() && packageRequest.getEndDate() != null)
                 packageList = filterByEndDate(packageList, packageRequest.getEndDate().get());
-            if (packageRequest.getIsActive().isPresent() && packageRequest.getIsActive() != null)
-                packageList = filterByIsActive(packageList, packageRequest.getIsActive().get());
+            //if (packageRequest.getIsActive().isPresent() && packageRequest.getIsActive() != null)
+            //    packageList = filterByIsActive(packageList, packageRequest.getIsActive().get());
             if (packageList.size() != 0)
                 return new PackageResponse().toDto(packageList);
             else
