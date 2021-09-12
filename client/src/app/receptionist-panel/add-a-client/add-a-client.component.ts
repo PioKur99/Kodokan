@@ -18,6 +18,8 @@ import { AddAClientService } from 'src/app/services/add-a-client.service';
 })
 export class AddAClientComponent implements OnInit {
 
+  selectedDiscipline: string;
+
   public alignment = RadioGroupAlignment.vertical;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
@@ -75,11 +77,13 @@ export class AddAClientComponent implements OnInit {
     this.localNumber = "";
     this.makePhoto = false;
     this.discipline_table = [];
+    this.selectedDiscipline="";
 
   }
 
   ngOnInit(): void {
     this.getDisciplines();
+    console.log(this.selectedDiscipline);
   }
 
 //**************IMAGE CROPPER*************************************************** */
@@ -142,7 +146,7 @@ imageLoaded() {
   }
 
   addDiscipline(id):void{
-    this.addAClientService.addDiscipline(this.discipline, id).subscribe(
+    this.addAClientService.addDiscipline(id, this.client.mainDiscipline).subscribe(
       x=>{
         this.successDialog.open();
       },
@@ -154,8 +158,6 @@ imageLoaded() {
   getDisciplines():void{
     this.addAClientService.getDisciplines().subscribe(
       x=>{
-        console.log("YAAY you have got it!")
-        console.log(x);
         this.discipline_table = x;
       },
       error => {
@@ -197,12 +199,22 @@ imageLoaded() {
         && this.client.phone!==  ""
         && this.client.postalCode!==  ""
         && this.client.voivodeship!==  ""
-        && this.discipline !== ""){
+        && this.client.mainDiscipline !== ""){
 
       this.isDisabled = false;
     }
     else  this.isDisabled = true;
   }
+
+  onItemChange(event):void{
+    this.client.gender = event.value;
+  }
+
+  onDisciplineChange():void{
+    console.log(this.client.mainDiscipline);
+  }
 }
+
+
 
 
