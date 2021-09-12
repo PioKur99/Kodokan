@@ -29,6 +29,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.joda.time.DateTimeComparator;
+
 @Service
 @Transactional
 @AllArgsConstructor
@@ -150,7 +152,7 @@ public class EntranceService {
         ;
         if (!entranceFilter.getDate().isEmpty())
             toFilter = toFilter.stream()
-                    .filter(n -> n.getDateTime().equals(dateTime))
+                    .filter(n -> DateTimeComparator.getDateOnlyInstance().compare(n.getDateTime(), dateTime))
                     .collect(Collectors.toList());
         ;
         if (!entranceFilter.getPackageName().isEmpty())
