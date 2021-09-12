@@ -95,13 +95,13 @@ public class PackageService {
     public List<PackageResponse> findAllWithParameters(PackageRequest packageRequest) {
         List<Package> packageList = packageRepository.findAll();
         if (packageList != null) {
-            if (packageRequest.getFullName().isPresent())
+            if (packageRequest.getFullName().isPresent() && !packageRequest.getFullName().isEmpty())
                 packageList = filterByFullName(packageList, packageRequest.getFullName().get());
-            if (packageRequest.getPackageName().isPresent())
+            if (packageRequest.getPackageName().isPresent() && !packageRequest.getPackageName().isEmpty())
                 packageList = filterByPackageName(packageList, packageRequest.getPackageName().get());
-            if (packageRequest.getEndDate().isPresent())
+            if (packageRequest.getEndDate().isPresent() && packageRequest.getEndDate() != null)
                 packageList = filterByEndDate(packageList, packageRequest.getEndDate().get());
-            if (packageRequest.getIsActive().isPresent())
+            if (packageRequest.getIsActive().isPresent() && packageRequest.getIsActive() != null)
                 packageList = filterByIsActive(packageList, packageRequest.getIsActive().get());
             if (packageList.size() != 0)
                 return new PackageResponse().toDto(packageList);
