@@ -152,7 +152,7 @@ public class EntranceService {
         ;
         if (!entranceFilter.getDate().isEmpty())
             toFilter = toFilter.stream()
-                    .filter(n -> DateTimeComparator.getDateOnlyInstance().compare(n.getDateTime(), dateTime))
+                    .filter(n -> DateTimeComparator.getDateOnlyInstance().compare(n.getDateTime(), dateTime) == 0)
                     .collect(Collectors.toList());
         ;
         if (!entranceFilter.getPackageName().isEmpty())
