@@ -137,8 +137,6 @@ public class EntranceService {
         if (toFilter.isEmpty()) {
             return Collections.emptyList();
         }
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime dateTime = LocalDateTime.parse(entranceFilter.getDate(), formatter);
 
         //TODO: Pewnie mozna jakos ladniej zrobic filtrowanie, jeszcze do przemyslenia
         if (!entranceFilter.getName().isEmpty())
@@ -150,10 +148,14 @@ public class EntranceService {
                     .filter(n -> n.getCustomer().getUserData().getLastName().contains(entranceFilter.getSurname()))
                     .collect(Collectors.toList());
         ;
-        if (!entranceFilter.getDate().isEmpty())
+        if (!entranceFilter.getDate().isEmpty()){
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime dateTime = LocalDateTime.parse(entranceFilter.getDate(), formatter);
             toFilter = toFilter.stream()
                     .filter(n -> DateTimeComparator.getDateOnlyInstance().compare(n.getDateTime(), dateTime) == 0)
                     .collect(Collectors.toList());
+        }
+            
         ;
         if (!entranceFilter.getPackageName().isEmpty())
             toFilter = toFilter.stream()
