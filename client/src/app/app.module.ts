@@ -21,14 +21,14 @@ import {
 	IgxRadioModule,
 	IgxButtonGroupModule,
 	IgxToastModule,
-    IgxTooltipModule
+	IgxTooltipModule,
+	IgxDialogModule
 } from 'igniteui-angular';
 
 @NgModule({
     declarations: [
         AppComponent,
         RegisterComponent,
-
     ],
     imports: [
         ImageCropperModule,
@@ -52,7 +52,8 @@ import {
         IgxCheckboxModule,
         IgxRadioModule,
         IgxButtonGroupModule,
-        IgxToastModule
+        IgxToastModule,
+        IgxDialogModule
     ],
     providers: [],
     bootstrap: [AppComponent]

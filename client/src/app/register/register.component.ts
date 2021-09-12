@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Location } from '@angular/common';
 import { RadioGroupAlignment } from "igniteui-angular";
@@ -56,6 +56,8 @@ export class RegisterComponent implements OnInit {
     postalCode: "",
     voivodeship: "",
   };
+
+  @ViewChild ("errorDialog") errorDialog;
   
   constructor(private _formBuilder: FormBuilder, private _location: Location, private registerService: RegisterService, private router: Router) {
     this.isOptional = false;
@@ -124,8 +126,7 @@ export class RegisterComponent implements OnInit {
         this.router.navigate(["/register", {id:x}]);
       },
       error => {
-        this.router.navigate(["/"]);
-        console.log(error);
+        this.errorDialog.open();
       }
     );
   }
