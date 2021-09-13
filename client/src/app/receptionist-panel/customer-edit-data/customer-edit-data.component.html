@@ -1,0 +1,69 @@
+<label igxLabel for="Name" class = "edit-label">Tryb edycji danych klienta</label>
+<section class = "Labels">
+    <div>
+        <div *ngIf="showWebcam">
+            <webcam (imageCapture)="handleImage($event)" [trigger]="triggerObservable"></webcam>
+            <button igxButton="raised" igxRipple="white" class="custom-file-upload" (click)="triggerSnapshot();">
+            <span class="iconify" data-icon="bi:camera-fill" data-inline="false"></span></button>
+        </div>
+        <img class="profile-pic" [src]="client.image">
+        <div class = "buttons-image">
+            <button igxButton="raised" igxRipple="white" (click) = "camera()">ZRÓB ZDJĘCIE</button>
+            <label class="custom-file-upload">
+                <input type="file" (change) = "selectFiles($event)">
+                WGRAJ Z DYSKU
+            </label>
+        </div>
+    </div>
+        <div class="label-group-1">
+        <input placeholder="IMIĘ" type="text" class = "input-box" [(ngModel)] = "client.firstName">
+        <br>
+        <input placeholder="PŁEĆ" type="text" class = "input-box" [(ngModel)] = "client.gender">
+        <br>
+        <br>
+        <br>
+        <input placeholder="ULICA I NUMER DOMU" type="text" class = "input-box" [(ngModel)] = "client.addressLine">
+        <br>
+        <input placeholder="MIASTO" type="text" class = "input-box"[(ngModel)] = "client.city">
+        <br>
+        <input placeholder="WOJEWÓDZTWO" type="text" class = "input-box" [(ngModel)] = "client.voivodeship">
+        <br>
+        <br>
+        <br>
+        <input placeholder="E-MAIL" type="text" class = "input-box"[(ngModel)] = "client.email">
+        <br>
+        <input placeholder="TELEFON KONTAKTOWY" type="text" class = "input-box"[(ngModel)] = "client.phone">
+    </div>
+    <div class="label-group-2">
+        <input placeholder="NAZWISKO" type="text" class = "input-box" [(ngModel)] = "client.lastName">
+        <br>
+        <input placeholder="PESEL" type="text" class = "input-box" [(ngModel)] = "client.identityNumber">
+        <br>
+        <br>
+        <br>
+        <br>
+        <input placeholder="KOD POCZTOWY" type="text" class = "input-box" [(ngModel)] = "client.postalCode">
+        <br>
+        <br>
+        <br>
+        <br>
+        <input placeholder="DYSCYPLINA" type="text" class = "input-box" [(ngModel)] = "client.mainDiscipline">
+    </div>
+</section>
+
+<div class = "accept">
+    <button igxButton="raised" igxRipple="white" (click)="patchClient()">ZATWIERDŹ</button>
+</div>
+
+<div igxOverlayOutlet>
+    <igx-dialog #dialog1  message="Profil klienta został zaktualizowany." 
+    leftButtonLabel="OK" (onLeftButtonSelect)="dialog1.close()"  
+    [closeOnOutsideSelect]="true" title = "UDAŁO SIĘ!">
+    </igx-dialog>
+</div>
+
+
+<igx-dialog #dialog2 message={{dialogMessage}} leftButtonLabel="OK" 
+(onLeftButtonSelect)="dialog2.close()"  
+[closeOnOutsideSelect]="true" title = "COŚ SIĘ NIE UDAŁO!">
+</igx-dialog>

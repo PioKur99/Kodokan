@@ -1,0 +1,95 @@
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+igx-input-group {
+  width: 80%;
+  color: #DAA520;
+}
+.input{
+  color: #DAA520;
+}
+
+.drop-down {
+  width: 15%;
+  display: flex;
+  justify-content: center;
+
+  &__button,
+  &__item {
+    background-color: #0000001a;
+    color: #DAA520;
+    border-radius: 0;
+    border-bottom: solid 1px #DAA520;
+    border-top: none;
+  }
+
+  &__button {
+    width: 100%;
+  }
+}
+
+table {
+  margin-top: 5%;
+  width: 100%;
+}
+
+.row {
+  width: 100%;
+  height: 60px;
+  background-color: #828282;
+  display: flex;
+  align-items: center;
+
+  &--first {
+    background-color: #00000052;
+  }
+}
+
+.column {
+  width: 30%;
+  text-align: center;
+}
+
+.button-table {
+  width: 50%;
+  background-color: transparent;
+  border: none;
+  font-size: 15px;
+  outline: none;
+  padding: 1%;
+
+  &:focus {
+    background-color: #DAA520;
+    padding: 10px;
+  }
+}
+
+
+leftbuttonlabel {
+  background-color: #DAA520;
+}
+
+rightbuttonlabel {
+  background-color: aqua;
+}
+
+.button {
+  margin-top: 2%;
+  margin-left: 91.2%;
+  padding: 1% 3%;
+}
+
+.href{
+  color:#e0e0e0;
+  text-decoration:none;
+}
+
+.href:hover{
+  text-decoration:underline;
+}
+

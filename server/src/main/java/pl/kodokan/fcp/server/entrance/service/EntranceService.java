@@ -22,11 +22,16 @@ import javax.validation.constraints.Null;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import org.joda.time.DateTimeComparator;
 
 @Service
 @Transactional
@@ -75,7 +80,7 @@ public class EntranceService {
 
         List<Package> customerValidPackages = customerPackages.stream()
                 .filter(n -> n.isPaid() || !n.getPackageType().isPaymentMandatory())
-                .filter(n -> n.getEndDateTime().isAfter(now))
+                .filter(n -> n.getEndDateTime() != null && n.getEndDateTime().isAfter(now))
                 .filter(n -> n.getPackageType().getEntranceLimit() > countAll(entranceDto.getCustomerId(), n.getId()))
                 .collect(Collectors.toList());
 
@@ -107,23 +112,15 @@ public class EntranceService {
                 //Jezeli karnet jest zawieszony to odwieszamy ew. zmieniajac odpowiednie daty
                 //Zakladam, ze moze byc tylko jedno zawieszenie z czasem przed now
                 //roznice miedzy data koncowa zawieszenia a aktualną odejmuje od daty waznosci karnetu
-                PackageFreeze packageFreeze = toEntrance.getFreezes().stream()
+                Optional<PackageFreeze> packageFreeze = toEntrance.getFreezes().stream()
                         .filter(n -> n.getEndDateTime().isAfter(now))
-                        .findFirst().get();
+                        .findFirst();
 
-                Duration dateDiffrance = Duration.between(now, packageFreeze.getEndDateTime());
-                toEntrance.setEndDateTime(toEntrance.getEndDateTime().minusDays(dateDiffrance.toDays()));
-                packageFreeze.setEndDateTime(now);
-
-
-                //TODO: Alternatywnie, gdyby powyzsze nie dzialalo zgodnie z oczekiwaniami
-                /*List<PackageFreeze> freezes = entrance.getPackg().getFreezes();
-                for (PackageFreeze freeze : freezes) {
-                    if (now.isBefore(freeze.getEndDateTime())) {
-                        freeze.setEndDateTime(now);
-                        break;
-                    }
-                }*/
+                if (packageFreeze.isPresent()) {
+                    Duration dateDiffrance = Duration.between(now, packageFreeze.get().getEndDateTime());
+                    toEntrance.setEndDateTime(toEntrance.getEndDateTime().minusDays(dateDiffrance.toDays()));
+                    packageFreeze.get().setEndDateTime(now);
+                }
 
             } else {
                 toEntrance = customerValidPackages.get(0);
@@ -153,10 +150,14 @@ public class EntranceService {
                     .filter(n -> n.getCustomer().getUserData().getLastName().contains(entranceFilter.getSurname()))
                     .collect(Collectors.toList());
         ;
-        if (!entranceFilter.getDate().isEmpty())
+        if (!entranceFilter.getDate().isEmpty()){
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime dateTime = LocalDateTime.parse(entranceFilter.getDate(), formatter);
             toFilter = toFilter.stream()
-                    .filter(n -> n.getDateTime().toString().equals(entranceFilter.getDate()))
+                    .filter(n -> DateTimeComparator.getDateOnlyInstance().compare(Date.from(n.getDateTime().atZone(ZoneId.systemDefault()).toInstant()), Date.from(dateTime.atZone(ZoneId.systemDefault()).toInstant())) == 0)
                     .collect(Collectors.toList());
+        }
+            
         ;
         if (!entranceFilter.getPackageName().isEmpty())
             toFilter = toFilter.stream()
@@ -189,16 +190,16 @@ public class EntranceService {
         return toReturn;
     }
 
-    public Long deleteEntrance(Long toDelete) {
-        if (toDelete == null)
+    public Long deleteEntrance(Long entranceId) {
+        if (entranceId == null)
             throw new EntranceNotFoundException("ID cannot be null!");
 
-        Optional<Entrance> entranceToDelete = entranceRepository.findById(toDelete);
+        Optional<Entrance> entranceToDelete = entranceRepository.findById(entranceId);
         if (entranceToDelete.isPresent())
-            entranceRepository.deleteById(toDelete);
+            entranceRepository.deleteById(entranceId);
         else
             throw new EntranceNotFoundException("No entrance with given ID!");
 
-        return toDelete;
+        return entranceId;
     }
 }

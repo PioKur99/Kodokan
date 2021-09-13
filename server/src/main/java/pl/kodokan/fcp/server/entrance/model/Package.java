@@ -16,11 +16,19 @@ import java.util.List;
 @Entity
 @Getter @Setter
 public class Package extends BaseEntity {
+    
+    @Getter @Setter
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "package_generator")
+    @SequenceGenerator(name="package_generator", sequenceName = "package_seq", allocationSize=1)
+    private Long id;
 
     @NotNull
     private LocalDateTime purchaseDateTime;
 
-    @NotNull
+    //TODO: Są karnety bez daty końcowe, działanie prokonsumenckie - takie karnety otrzymują endDateTime w
+    // chwili odbicia, o ile dobrze zrozumiałem Lukasza
+    //świetnie mnie zrozumiałeś - Lukasz
+//    @NotNull
     private LocalDateTime endDateTime;
 
     @NotNull
@@ -65,6 +73,14 @@ public class Package extends BaseEntity {
         return entrances.size();
     }
 
+    public List<Entrance> getEntrances(){
+        return Collections.unmodifiableList(entrances);
+    }
+
+    public void pay(){
+        paid = true;
+    }
+
     public void addCustomer(Customer customer){
         customers.add(customer);
     }
@@ -73,6 +89,10 @@ public class Package extends BaseEntity {
         // returns safe copy of freezes
         return Collections.unmodifiableList(customers);
     }
+     public boolean getCustomerss(){
+        return true;
+     }
+
     public void deleteCustomer(Customer customer){
         customers.remove(customer);
     }

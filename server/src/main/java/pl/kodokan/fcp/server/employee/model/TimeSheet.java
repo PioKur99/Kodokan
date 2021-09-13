@@ -9,9 +9,16 @@ import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
+import javax.persistence.*;
+
 @Entity
 @Getter @Setter @NoArgsConstructor
 public class TimeSheet extends BaseEntity {
+    
+    @Getter @Setter
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "timesheet_generator")
+    @SequenceGenerator(name="timesheet_generator", sequenceName = "timesheet_seq", allocationSize=1)
+    private Long id;
 
     @NotNull
     private LocalDateTime startDateTime;

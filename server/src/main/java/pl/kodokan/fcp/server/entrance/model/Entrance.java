@@ -13,9 +13,16 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
+import javax.persistence.*;
+
 @Entity
 @Getter @Setter @NoArgsConstructor
 public class Entrance extends BaseEntity {
+    
+    @Getter @Setter
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "entrance_generator")
+    @SequenceGenerator(name="entrance_generator", sequenceName = "entrance_seq", allocationSize=1)
+    private Long id;
 
     @NotNull
     @ManyToOne
@@ -36,6 +43,10 @@ public class Entrance extends BaseEntity {
         this.customer = customer;
         this.packg = packg;
         this.training = training;
+    }
+
+    public boolean hasCustomer(Customer c){
+        return c == customer;
     }
 
 }
