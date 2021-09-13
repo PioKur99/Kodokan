@@ -53,9 +53,9 @@ public class CustomerFamilyService {
                 throw new SiblingsException();
             }
         }else if(relation == FamilyRelation.CHILD){
-            if(!family.isFather(c2) && !family.isMother(c2)){
-                throw new CannotAddGrandkidsException();
-            }
+            // if(!family.isFather(c2) && !family.isMother(c2)){
+            //     throw new CannotAddGrandkidsException();
+            // }
         }
     }
 
@@ -145,7 +145,9 @@ public class CustomerFamilyService {
             oldMember = findById(customer2ID);
             family = new Family(oldMember.getUserData().getLastName());
         }else{
-            throw new CustomerAlreadyInFamilyException();
+            //throw new CustomerAlreadyInFamilyException();
+            newMember = findById(customer1ID);
+            oldMember = findById(customer2ID);
         }
 
         validateRelation(newMember,oldMember,relation,family);
