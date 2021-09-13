@@ -5,18 +5,11 @@
         <input igxInput name="name" type="text" required="required" [(ngModel)]="name_to_find" placeholder="Szukaj wg imienia i nazwiska..." (change)="findUsers()">
     </igx-input-group>
     <section >
-        <div class="line" *ngFor="let user of user_list"><p >{{user.name}}</p><button class="add-button" (click)="onAdd(user.customerID)" igxButton="raised" igxRipple="white">
+        <div class="line" *ngFor="let user of user_list"><p >{{user.firstName + " " + user.lastName}} </p><button class="add-button" (click)="onAdd(user.customerID)" igxButton="raised" igxRipple="white">
             Dodaj
             </button> 
         </div>
-        <div class="line" ><p >Jan Kowalski</p><button class="add-button" igxButton="raised" igxRipple="white"  (click)="onAdd('58')" >
-            Dodaj
-            </button>
-        </div>
-        <div class="line" ><p >Mariola Strzyna</p><button class="add-button" igxButton="raised" igxRipple="white" (click)="onAdd('59')">
-            Dodaj
-            </button>
-        </div>
+
     </section>
     <igx-dialog #dialog  [closeOnOutsideSelect]="true" class="dialog_window" rightButtonLabel="ANULUJ"
     (onRightButtonSelect)="dialog.close()">

@@ -20,10 +20,7 @@ export class FamilyMemberComponent implements OnInit {
   constructor(private route:ActivatedRoute, private familyMemberService: FamilyMemberService, private router: Router) { }
 
   ngOnInit(): void {
-    debugger;
     this.client_id = this.route.snapshot.paramMap.get("id");
-    console.log(this.client_id);
-   //this.client_id = "80";
     this.findNameById();
   }
 

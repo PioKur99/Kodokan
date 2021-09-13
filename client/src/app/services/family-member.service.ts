@@ -21,7 +21,7 @@ export class FamilyMemberService {
     //     'X-Api-Key': 'Tk7ELmpY47la9onE7aw+nw==mZffkSf3J4ZkYyfa'
     //   })
     // });
-    return this.http.post(config.address+"customers", {lastName: name});
+    return this.http.post(config.address+"customers", {cardID: null, cardState: "", firstName: "",  lastName: name, phone: null});
   }
 
   addRelation(customer_id_1: String, customer_id: String, relation: String) : Observable<any> {
