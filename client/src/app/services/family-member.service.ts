@@ -16,14 +16,15 @@ export class FamilyMemberService {
   }
 
   findUsers(name: String) : Observable<any> {
-    return this.http.get('https://api.celebrityninjas.com/v1/search?name='+name, {
-      headers: new HttpHeaders({
-        'X-Api-Key': 'Tk7ELmpY47la9onE7aw+nw==mZffkSf3J4ZkYyfa'
-      })
-    });
+    // return this.http.get('https://api.celebrityninjas.com/v1/search?name='+name, {
+    //   headers: new HttpHeaders({
+    //     'X-Api-Key': 'Tk7ELmpY47la9onE7aw+nw==mZffkSf3J4ZkYyfa'
+    //   })
+    // });
+    return this.http.post(config.address+"customers", {lastName: name});
   }
 
-  addRelation(customer_id_1: String, customer_id_2: String, relation: String) : Observable<any> {
-    return this.http.post(config.address+"family-member/add", {customer_id_1: customer_id_1, customer_id_2: customer_id_2, relation: relation});
+  addRelation(customer_id_1: String, customer_id: String, relation: String) : Observable<any> {
+    return this.http.post(config.address+"family/add-customer-to-family", { addWho: customer_id_1, relation: relation, toWhom: customer_id,});
   }
 }

@@ -17,6 +17,15 @@ export class FamilyMemberComponent implements OnInit {
 
   @ViewChild ("dialog") dialog;
   @ViewChild ("successDialog") successDialog;
+  constructor(private route:ActivatedRoute, private familyMemberService: FamilyMemberService, private router: Router) { }
+
+  ngOnInit(): void {
+    debugger;
+    this.client_id = this.route.snapshot.paramMap.get("id");
+    console.log(this.client_id);
+   //this.client_id = "80";
+    this.findNameById();
+  }
 
   findNameById():void{
     this.familyMemberService.findCustomerById(this.client_id).subscribe(
@@ -36,10 +45,12 @@ export class FamilyMemberComponent implements OnInit {
       }
     );
   }
+
   onAdd(customer_id: String){
     this.dialog.open();
     this.customer_id_1 = customer_id;
   }
+
   onAddRelation(relation: String):void{
     this.familyMemberService.addRelation(this.customer_id_1, this.client_id, relation).subscribe(
       resp => {
@@ -49,12 +60,6 @@ export class FamilyMemberComponent implements OnInit {
       }
     );
   }
-  constructor(private route:ActivatedRoute, private familyMemberService: FamilyMemberService, private router: Router) { }
 
-  ngOnInit(): void {
-   // this.client_id = this.route.snapshot.paramMap.get("id");
-   this.client_id = "100";
-    this.findNameById();
-  }
 
 }
