@@ -51,6 +51,7 @@ export class FamilyMemberComponent implements OnInit {
   onAddRelation(relation: String):void{
     this.familyMemberService.addRelation(this.customer_id_1, this.client_id, relation).subscribe(
       resp => {
+        this.dialog.close();
         this.successDialog.open();
       },
       err => {
