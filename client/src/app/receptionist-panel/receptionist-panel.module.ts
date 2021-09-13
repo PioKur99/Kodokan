@@ -47,7 +47,7 @@ import { CustomerAddFamilyMemberComponent } from './customer-add-family-member/c
         PassesComponent,
         AddAClientComponent,
         EntryRegistrationComponent,
-        FamilyMemberComponent
+        FamilyMemberComponent,
         PassDetailsComponent,
         CustomerDataComponent,
         CustomerEditDataComponent,
