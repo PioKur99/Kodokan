@@ -1,0 +1,39 @@
+@import '~igniteui-angular/lib/core/styles/themes/index';
+
+
+
+.Button{
+    position: absolute;
+    left: 600px;
+    right: 620px;
+    top: 600px;
+    bottom: 282px;
+    width: 175px;
+    height: 46px;
+
+    /* Gray 4 */
+    background-color: #BDBDBD;
+    border-radius: 4px;
+}
+
+.img{
+    
+    position: absolute;
+    left: 450px;
+    right: 620px;
+    top: 200px;
+    bottom: 282px;
+    width: 500px;
+    height: 300px;
+    
+
+}
+
+.center {
+    margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
