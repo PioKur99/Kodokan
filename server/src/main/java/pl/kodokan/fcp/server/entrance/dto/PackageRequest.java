@@ -12,8 +12,8 @@ public class PackageRequest {
     private String fullName;
     private LocalDateTime endDate;
     private String packageName;
-    private Boolean isPaid;
-    private Boolean isActive;
+    //private Boolean isPaid;
+    //private Boolean isActive;
 
     public Optional<String> getFullName(){
         return Optional.ofNullable(fullName);
@@ -24,10 +24,10 @@ public class PackageRequest {
     public Optional<LocalDateTime> getEndDate(){
         return Optional.ofNullable(endDate);
     }
-    public Optional<Boolean> getIsPaid(){
-        return Optional.ofNullable(isPaid);
-    }
-    public Optional<Boolean> getIsActive(){
-        return Optional.ofNullable(isActive);
-    }
+    //public Optional<Boolean> getIsPaid(){
+    //   return Optional.ofNullable(isPaid);
+    //}
+    //public Optional<Boolean> getIsActive(){
+    //    return Optional.ofNullable(isActive);
+    //}
 }

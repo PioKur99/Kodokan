@@ -63,14 +63,14 @@ public class PackageService {
     private List<Package> filterByPackageName(List<Package> packageList, String packageName) {
         return packageList
                 .stream()
-                .filter(aPackage -> aPackage.getPackageType().getName().equals(packageName))
+                .filter(aPackage -> aPackage.getPackageType().getName().contains(packageName))
                 .collect(Collectors.toList());
     }
 
     private boolean isCustomerInPackage(List<Customer> customers, String fullName) {
         for (Customer customer : customers) {
             String name = customer.getUserData().getFirstName() + " " + customer.getUserData().getLastName();
-            if (name.equals(fullName))
+            if (name.contains(fullName))
                 return true;
         }
         return false;
@@ -95,14 +95,14 @@ public class PackageService {
     public List<PackageResponse> findAllWithParameters(PackageRequest packageRequest) {
         List<Package> packageList = packageRepository.findAll();
         if (packageList != null) {
-            if (packageRequest.getFullName().isPresent())
+            if (packageRequest.getFullName().isPresent() && !packageRequest.getFullName().isEmpty())
                 packageList = filterByFullName(packageList, packageRequest.getFullName().get());
-            if (packageRequest.getPackageName().isPresent())
+            if (packageRequest.getPackageName().isPresent() && !packageRequest.getPackageName().isEmpty())
                 packageList = filterByPackageName(packageList, packageRequest.getPackageName().get());
-            if (packageRequest.getEndDate().isPresent())
+            if (packageRequest.getEndDate().isPresent() && packageRequest.getEndDate() != null)
                 packageList = filterByEndDate(packageList, packageRequest.getEndDate().get());
-            if (packageRequest.getIsActive().isPresent())
-                packageList = filterByIsActive(packageList, packageRequest.getIsActive().get());
+            //if (packageRequest.getIsActive().isPresent() && packageRequest.getIsActive() != null)
+            //    packageList = filterByIsActive(packageList, packageRequest.getIsActive().get());
             if (packageList.size() != 0)
                 return new PackageResponse().toDto(packageList);
             else

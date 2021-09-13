@@ -26,6 +26,7 @@ import { PassesComponent } from './passes/passes.component';
 import { AddAClientComponent } from './add-a-client/add-a-client.component';
 import { EntryRegistrationComponent } from './entry-registration/entry-registration.component';
 import { AddPackageReceptionistComponent } from './add-package-receptionist/add-package-receptionist.component';
+import { FamilyMemberComponent } from './family-member/family-member.component';
 import { FormsModule } from '@angular/forms';
 import { WebcamModule } from 'ngx-webcam';
 import { ImageCropperModule } from 'ngx-image-cropper';
@@ -50,6 +51,7 @@ import { CustomerAddFamilyMemberComponent } from './customer-add-family-member/c
         AddAClientComponent,
         EntryRegistrationComponent,
         AddPackageReceptionistComponent,
+        FamilyMemberComponent,
         PassDetailsComponent,
         CustomerDataComponent,
         CustomerEditDataComponent,

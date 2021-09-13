@@ -69,7 +69,7 @@ public class EntranceController {
             @ApiResponse(code = 400, message = "Entrance can not be deleted")
     })
     @DeleteMapping("/delete")
-    ResponseEntity<Long> deleteEntrance(@RequestBody Long entranceId) {
+    ResponseEntity<Long> deleteEntrance(@RequestParam Long entranceId) {
         Long result = entranceService.deleteEntrance(entranceId);
         return ResponseEntity.ok(result);
     }

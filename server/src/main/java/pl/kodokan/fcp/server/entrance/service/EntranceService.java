@@ -22,12 +22,16 @@ import javax.validation.constraints.Null;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import org.joda.time.DateTimeComparator;
 
 @Service
 @Transactional
@@ -135,8 +139,6 @@ public class EntranceService {
         if (toFilter.isEmpty()) {
             return Collections.emptyList();
         }
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime dateTime = LocalDateTime.parse(entranceFilter.getDate(), formatter);
 
         //TODO: Pewnie mozna jakos ladniej zrobic filtrowanie, jeszcze do przemyslenia
         if (!entranceFilter.getName().isEmpty())
@@ -148,10 +150,14 @@ public class EntranceService {
                     .filter(n -> n.getCustomer().getUserData().getLastName().contains(entranceFilter.getSurname()))
                     .collect(Collectors.toList());
         ;
-        if (!entranceFilter.getDate().isEmpty())
+        if (!entranceFilter.getDate().isEmpty()){
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime dateTime = LocalDateTime.parse(entranceFilter.getDate(), formatter);
             toFilter = toFilter.stream()
-                    .filter(n -> n.getDateTime().equals(dateTime))
+                    .filter(n -> DateTimeComparator.getDateOnlyInstance().compare(Date.from(n.getDateTime().atZone(ZoneId.systemDefault()).toInstant()), Date.from(dateTime.atZone(ZoneId.systemDefault()).toInstant())) == 0)
                     .collect(Collectors.toList());
+        }
+            
         ;
         if (!entranceFilter.getPackageName().isEmpty())
             toFilter = toFilter.stream()
