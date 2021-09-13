@@ -5,7 +5,7 @@
         <igx-card class="card" *ngFor = "let package of packages">
     
             <igx-card-header class="header">
-                <h3 igxCardHeaderTitle>{{ package.title }}  <br> {{ package.subtitle}}</h3>
+                <h3 igxCardHeaderTitle>{{ package.name }} </h3>
     
             </igx-card-header>
             <div class='price'>
@@ -26,7 +26,7 @@
                     <main class="card one-card" >
                     
                         <header class="header">
-                            <h3>{{ package.title }}</h3>
+                            <h3>{{ package.name }}</h3>
                 
                         </header>
                         <div class='price'>
@@ -37,7 +37,7 @@
                             <p>{{ package.description }}</p>
                         </div>
                         <div igxDialogActions>
-                            <button  class="third-button" igxButton igxRipple="white" (click)="createPackage(package.type_id)">
+                            <button  class="third-button" igxButton igxRipple="white" (click)="createPackage(package.packageTypeId)">
                                 <span> DODAJ <br>
                                      NIEOPŁACONY <br>
                                       KARNET</span>
@@ -64,13 +64,13 @@
             
                     </header>
             
-                        <button  class="third-button" igxButton="raised" igxRipple="white" (click)="payForPackage(package.type_id)" >
+                        <button  class="third-button" igxButton="raised" igxRipple="white" (click)="payForPackage(package.packageTypeId)" >
                             <span> GOTÓWKA</span>
                         </button>
-                        <button  class="second-button" igxButton="raised" igxRipple="white" (click)="payForPackage(package.type_id)">
+                        <button  class="second-button" igxButton="raised" igxRipple="white" (click)="payForPackage(package.packageTypeId)">
                             <span> KARTA</span>
                         </button>
-                        <button class="first-button" igxButton="raised" igxRipple="white" (click)="payForPackage(package.type_id)">
+                        <button class="first-button" igxButton="raised" igxRipple="white" (click)="payForPackage(package.packageTypeId)">
                             <span> PRZELEW</span>
                         </button>
                 </main>

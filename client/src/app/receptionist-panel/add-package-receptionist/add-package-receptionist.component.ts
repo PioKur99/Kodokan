@@ -11,49 +11,27 @@ import { PackageType } from 'src/app/data/package/package-type';
 })
 export class AddPackageReceptionistComponent implements OnInit {
 
-  package_1: Package =  {
-    title: 'KARNET JEDNORAZOWY',
-    price: 20,
-    description: 'Karnet ważny w dniu zakupu, upoważnia do jednorazowego wejścia.',
-    type_id: '1'
-
-  }
-  package_2: Package =  {
-    title: 'KARNET MIESIĘCZNY 4 WEJŚCIA ',
-    price: 70,
-    description: 'Karnet upoważnia do 4 wejść w ciągu jednego miesiąca od zakupu',
-    type_id: '2'
-  }
-  package_3: Package =  {
-    title: 'KARNET MIESIĘCZNY',
-    price: 120,
-    description: 'Odpowiedni opis karnetu.',
-    type_id: '3'
-  }
-  package_4: Package =  {
-    title: 'KARNET OPEN',
-    price: 50,
-    description: 'Odpowiedni opis karnetu.',
-    type_id: '4'
-  }
-  package_5: Package =  {
-    title: 'KARNET DZIECIĘCY',
-    price: 100,
-    description: 'Odpowiedni opis karnetu.',
-    type_id: '5'
-  }
   
   @ViewChild ("errordialog") errordialog;
   @ViewChild ("paydialog") paydialog;
   @ViewChild ("dialog") dialog;
 
-  //packages: Array<Package> = [this.package_1, this.package_2, this.package_3, this.package_4, this.package_5, this.package_2, this.package_3, this.package_4,];
-
+  
   packages: Array<PackageType>;
 
   package_id: String;
   name_surname: String;
   client_id: String;
+
+  constructor(private route: ActivatedRoute, private addPackageService: AddPackageReceptionistService, private router: Router, private packageService: PackageService) { 
+  
+  }
+
+  ngOnInit(): void {
+    this.client_id = this.route.snapshot.paramMap.get("id");
+    this.findNameById();
+    this.getPackages();
+  }
 
   findNameById():void{
     this.addPackageService.findCustomerById(this.client_id).subscribe(
@@ -76,7 +54,7 @@ export class AddPackageReceptionistComponent implements OnInit {
     );
   }
 
-  createPackage(chosen_type_id: String):void{
+createPackage(chosen_type_id: String):void{
       this.addPackageService.createPackage(this.client_id, chosen_type_id).subscribe(
       resp => {
         this.package_id = resp;
@@ -110,19 +88,6 @@ export class AddPackageReceptionistComponent implements OnInit {
       }
     );
 
-
-
   }
-  constructor(private route: ActivatedRoute, private addPackageService: AddPackageReceptionistService, private router: Router, private packageService: PackageService) { 
-  
-  }
-
-  ngOnInit(): void {
-    this.client_id = this.route.snapshot.paramMap.get("id");
-    //this.client_id = "100";
-    this.findNameById();
-    this.getPackages();
-  }
-
   
 }
