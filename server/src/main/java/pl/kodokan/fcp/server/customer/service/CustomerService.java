@@ -56,7 +56,9 @@ public class CustomerService {
 
         if (!peselValidator.isCorrect(customer.getUserData().getIdentityNumber()))
             throw new IncorrectPeselException();
-        if (peselValidator.isMale(customer.getUserData().getIdentityNumber()) && customer.getUserData().getGender() == MALE)
+        if (peselValidator.isMale(customer.getUserData().getIdentityNumber()) && customer.getUserData().getGender() == FEMALE)
+            throw new IncorrectGenderException();
+        if (!peselValidator.isMale(customer.getUserData().getIdentityNumber()) && customer.getUserData().getGender() == MALE)
             throw new IncorrectGenderException();
         if (customerRepository.findAllPesels().stream().anyMatch(n -> n.equals(customer.getUserData().getIdentityNumber())))
             throw new RepeatedPeselException();

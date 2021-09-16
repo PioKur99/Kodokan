@@ -39,6 +39,7 @@ export class AddAClientComponent implements OnInit {
   localNumber: String;
   discipline: String;
   discipline_table: String [];
+  errorText:String = "";
 
   private trigger: Subject<void> = new Subject<void>();
   
@@ -141,6 +142,7 @@ imageLoaded() {
       },
       error => {
         this.errorDialog.open();
+        this.errorText = error.error;
       }
     );
   }
@@ -152,6 +154,7 @@ imageLoaded() {
       },
       error => {
         this.errorDialog.open();
+        this.errorText = error.error;
       }
     );
   }
@@ -162,6 +165,7 @@ imageLoaded() {
       },
       error => {
         this.errorDialog.open();
+        this.errorText = error.error;
       }
     );
   }
