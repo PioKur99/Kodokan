@@ -1,0 +1,138 @@
+
+.main{
+    font-family: Helvetica, sans-serif;
+    text-align: center;
+    padding-top: 20px;
+    
+}
+h1{
+    font-size: 1.2rem;
+    font-weight: 100;
+    letter-spacing: 2px;
+    line-height: 1rem;
+
+  }
+.card-wrapper {
+    padding: 1%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    flex-shrink: 3;
+    justify-content: center;
+    text-align: center;
+    font-family: Helvetica, sans-serif;
+
+}
+.price {
+    background-color: black;
+    color: white;
+    height: 90px;
+    padding-top: 5%;
+    margin: 0 7% 0 7%;
+    border-radius: 10px;
+}
+.price h2{
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+.card{
+    margin: 2% 2% 0% 2%;
+    padding: 0 0.7% 0 0.7%;
+    min-width: 200px;
+    width: 19%;
+    display: inline-block;
+    border-radius: 10px;
+    position: relative;
+    height: 310px;
+}
+.errordialog{
+    height: 150px;
+}
+.one-card{
+    height: 460px;
+    max-width: 200px;
+}
+.pay-card{
+    height: 270px;
+    max-width: 200px;
+}
+.one-card p{
+    margin: 4% 0;
+}
+.header{
+    padding: 10% 0 5% 0;
+}
+
+.header h3{
+    font-size: 0.9rem;
+    line-height: 130%;
+    font-weight: 200;
+    letter-spacing: 1px;
+}
+.content p {
+    line-height: 130%;
+}
+.card-wrapper button{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 75%;
+    background-color: #3f3f3f;
+    color: #DAA520;
+    margin: 5% 0;
+    border-radius: 10px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+}
+.card-wrapper button:hover {
+    background-color: #636363;
+    box-shadow: 0px 15px 20px rgba(185, 185, 185, 0.4);
+    color: rgb(236, 235, 235);
+
+  }
+.card-wrapper .first-button {
+    bottom: 20px;
+}
+.card-wrapper .second-button {
+    bottom: 80px;
+}
+.card-wrapper .third-button {
+    bottom: 140px;
+}
+.card-wrapper button span{
+    font-size: 0.9rem;
+    font-weight: 200;
+}
+
+//dialog window
+.dialog-content p{
+    color: #3f3f3f;
+}
+.dialog-content{
+    background-color: #DAA520;
+    width: 100%;
+}
+::ng-deep .igx-dialog__window-content {
+    padding: 0;
+    border-radius: 10px;
+    background-color: #DAA520;
+}
+.dialog-content-pay{
+    background-color: rgb(197, 193, 193);
+}
+
+.header-pay{
+    color: black;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+.card-wrapper .grey-button{
+    background-color: grey;
+    color: #3f3f3f;
+    font-weight: bold;
+}
+.card-wrapper .light-grey-button{
+    background-color: rgb(194, 191, 191);
+    color: #3f3f3f;
+    font-weight: bold;
+}

@@ -2,14 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Entrance } from '../data/entrance/entrance';
-import * as config from '../../assets/config.json';
+import { EntranceToAdd } from '../data/entrance/entrance-to-add';
+import * as config from '../../assets/config.json'
 
 @Injectable({
   providedIn: 'root'
 })
 export class EntranceService {
-
-  constructor(private http: HttpClient) { }
 
   getEntrances(): Observable<Entrance[]>{
     return this.http.get<Entrance[]>(config.address + 'entrances')
@@ -36,5 +35,14 @@ export class EntranceService {
 
   deleteEntrance(entrance_id: number): Observable<number>{
     return this.http.delete<number>(config.address + 'deleteEntrance/' + entrance_id)
+  }
+  actionUrl: string
+  constructor(private http: HttpClient) { 
+    this.actionUrl=config.address
+  }
+
+  postEntrance(newEntrance: EntranceToAdd): Observable<number>{
+    
+    return this.http.post<number>(this.actionUrl+'entrance/add',newEntrance)
   }
 }
