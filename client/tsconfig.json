@@ -16,7 +16,8 @@
       "es2018",
       "dom"
     ],
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false
