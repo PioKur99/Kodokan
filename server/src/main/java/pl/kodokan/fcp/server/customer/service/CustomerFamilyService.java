@@ -123,7 +123,7 @@ public class CustomerFamilyService {
 
         Customer newMember;
         Customer oldMember;
-        Family family;
+        Family family = null;
 
         if(family1ID.isPresent() && !family2ID.isPresent()){
             newMember = findById(customer2ID);
