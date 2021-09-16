@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import * as config from '../../assets/config.json'
-import { Customer } from '../data/customer/customer';
+import { Customer } from '../data/customer/Customer';
 import { PackageDetails } from '../data/package/package-details';
 import { PackageType } from '../data/package/package-type';
 import { Package } from '../data/package/package';

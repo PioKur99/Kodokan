@@ -4,7 +4,7 @@ import { AnyARecord } from 'node:dns';
 import { from, Observable } from 'rxjs';
 import * as config from '../../assets/config.json'
 import { CardState } from '../data/card/card-state';
-import { Customer } from '../data/customer/customer';
+import { Customer } from '../data/customer/Customer';
 
 @Injectable({
   providedIn: 'root'
