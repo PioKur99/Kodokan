@@ -5,7 +5,7 @@ import { Card } from 'src/app/data/card/card';
 import { CardState } from 'src/app/data/card/card-state';
 import { CardStates } from 'src/app/data/card/card-states.enum';
 import { MapState } from 'src/app/data/card/map-state';
-import { Customer } from 'src/app/data/customer/customer';
+import { Customer } from 'src/app/data/customer/Customer';
 import { CustomerAndCardState } from 'src/app/data/customer/customer-and-card-state';
 import { CustomerFilter } from 'src/app/data/customer/customer-filter';
 import { CustomerService } from 'src/app/services/customer.service';

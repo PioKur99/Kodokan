@@ -1,4 +1,4 @@
-import { Customer } from "../customer/customer"
+import { Customer } from "../customer/Customer"
 
 export class PackageDetails {
     name: String

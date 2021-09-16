@@ -1,5 +1,5 @@
 import { CardState } from "../card/card-state";
-import { Customer } from "./customer";
+import { Customer } from "./Customer";
 
 export class CustomerAndCardState {
     customer: Customer
