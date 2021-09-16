@@ -43,8 +43,8 @@ export class CustomerEditDataComponent implements OnInit {
   constructor(private clientService: ClientService, private router: Router, private urlParam: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.getClient(2) // <--- Na potrzeby testów
-    //this.getClient(this.urlParam.snapshot.paramMap.get('id')) <--- ID klienta z adresu URL
+    //this.getClient(2) // <--- Na potrzeby testów
+    this.getClient(parseInt(this.urlParam.snapshot.paramMap.get('id'))) //<--- ID klienta z adresu URL
     this.router.navigate(["/receptionist-panel/customer-edit-data", {card: this.client.identityNumber}])
   }
 

@@ -35,7 +35,7 @@
             {{item.firstName}} {{item.lastName}}
         </td>
         <td class="column column--second"><!--FIXME: link do strony ze szczegółami customera-->
-            <button class="button-table" routerLink="../customer/{{item.customerID}}">Pokaż</button>
+            <button class="button-table" routerLink="../customer-data;id={{item.customerID}}">Pokaż</button>
         </td>
         <td class="column column--third">
             <button class="button-table" (click)="deleteCustomerPrep(item)">Usuń</button>
