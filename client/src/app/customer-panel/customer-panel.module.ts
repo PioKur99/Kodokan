@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 import { CustomerPanelRoutingModule } from './customer-panel-routing.module';
 import { CustomerPanelComponent } from './customer-panel.component';
 import {
-	IgxNavigationDrawerModule,
-	IgxRippleModule,
-	IgxButtonModule,
-	IgxIconModule,
-	IgxBottomNavModule
+    IgxNavigationDrawerModule,
+    IgxRippleModule,
+    IgxButtonModule,
+    IgxIconModule,
+    IgxBottomNavModule
 } from 'igniteui-angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MyDataComponent } from './my-data/my-data.component';
@@ -41,7 +41,7 @@ export function playerFactory() {
         IgxButtonModule,
         IgxIconModule,
         IgxBottomNavModule,
-        LottieModule.forRoot({player: playerFactory})
+        LottieModule.forRoot({ player: playerFactory })
     ]
 })
 export class CustomerPanelModule {

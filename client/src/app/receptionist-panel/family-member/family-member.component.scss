@@ -1,0 +1,71 @@
+
+.main{
+    font-family: Helvetica, sans-serif;
+    text-align: center;
+    padding-top: 20px;
+    
+}
+h1{
+    font-size: 2rem;
+    font-weight: 100;
+    letter-spacing: 1.2px;
+    line-height: 1rem;
+    color: rgb(202, 201, 201);
+    padding: 2%;
+}
+igx-input-group{
+    width: 400px;
+    margin: 0 auto 20px;
+
+}
+p, button{
+    display: inline-block;
+}
+button{
+    border-radius: 8px;
+}
+.add-button{
+    float: right;
+    
+}
+::ng-deep .igx-button--raised{
+    padding: 0px;
+    min-height: 32px;
+}
+p{
+    float: left;
+    padding-left: 10px;
+}
+.line{
+    height: 40px;
+}
+section{
+    width: 400px;
+    margin: 0 auto;
+}
+.dialog-content{
+    height: 220px;
+    text-align: center;
+}
+.success{
+    height: 150px;
+}
+.dialog-buttons{
+    margin: 4%;
+    padding: 5% 5%;
+    width: 150px;
+}
+h6{
+    margin: 6.5% 0;
+    font-size: 1.5rem;
+}
+.yellow{
+    color: #DAA520;
+}
+::ng-deep .igx-dialog{
+    width: 420px;
+    font-family: Helvetica, sans-serif;
+
+}
+
+

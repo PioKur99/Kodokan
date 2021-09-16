@@ -6,9 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import pl.kodokan.fcp.server.customer.dto.CardStateAdviceDTO;
-import pl.kodokan.fcp.server.customer.exception.CustomerNotPresent;
-import pl.kodokan.fcp.server.customer.exception.MaximumCardState;
-import pl.kodokan.fcp.server.customer.exception.MinimumCardState;
+import pl.kodokan.fcp.server.customer.exception.*;
 
 @RestControllerAdvice
 public class CardStateAdvice {
@@ -40,6 +38,22 @@ public class CardStateAdvice {
     ResponseEntity<CardStateAdviceDTO> conversationFailed(ConversionFailedException ex) {
         final CardStateAdviceDTO adviceDTO = new CardStateAdviceDTO();
         adviceDTO.setErrorMsg("Make sure to use correct enum values");
+        adviceDTO.setErrorClass(ex.getClass().getName());
+        return new ResponseEntity<>(adviceDTO, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(CardIDTakenException.class)
+    ResponseEntity<CardStateAdviceDTO> cardIDTaken(CardIDTakenException ex) {
+        final CardStateAdviceDTO adviceDTO = new CardStateAdviceDTO();
+        adviceDTO.setErrorMsg("This card ID is already taken");
+        adviceDTO.setErrorClass(ex.getClass().getName());
+        return new ResponseEntity<>(adviceDTO, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ClubCardAlreadyPresentException.class)
+    ResponseEntity<CardStateAdviceDTO> cardAlreadyPresent(ClubCardAlreadyPresentException ex) {
+        final CardStateAdviceDTO adviceDTO = new CardStateAdviceDTO();
+        adviceDTO.setErrorMsg("This customer already has club card");
         adviceDTO.setErrorClass(ex.getClass().getName());
         return new ResponseEntity<>(adviceDTO, HttpStatus.BAD_REQUEST);
     }
