@@ -3,21 +3,23 @@ import { CommonModule } from '@angular/common';
 import { ReceptionistPanelRoutingModule } from './receptionist-panel-routing.module';
 import { ReceptionistPanelComponent } from './receptionist-panel.component';
 import {
-	IgxRippleModule,
-	IgxButtonModule,
-	IgxBottomNavModule,
-	IgxIconModule,
-	IgxDialogModule,
+    IgxRippleModule,
+    IgxButtonModule,
+    IgxBottomNavModule,
+    IgxIconModule,
+    IgxDialogModule,
+    IgxInputGroupModule,
+    IgxToggleModule,
+    IgxDropDownModule,
+    IgxCheckboxModule,
+    IgxGridModule,
+    IgxRadioModule,
+    IgxSelectModule,
+    IgxSwitchModule,
 	IgxCardModule,
 	IgxButtonGroupModule,
-	IgxInputGroupModule,
-	IgxRadioModule,
-	IgxToggleModule,
-	IgxDropDownModule,
 	IgxListModule,
-    IgxGridModule,
-    IgxComboModule,
-    IgxCheckboxModule
+    IgxComboModule
 } from 'igniteui-angular';
 import { CustomersComponent } from './customers/customers.component';
 import { EntranceComponent } from './entrance/entrance.component';
@@ -73,6 +75,17 @@ import { CustomerAddFamilyMemberComponent } from './customer-add-family-member/c
         IgxBottomNavModule,
         FormsModule,
         IgxIconModule,
+        //BrowserAnimationsModule,
+        IgxDialogModule,
+        IgxInputGroupModule,
+        IgxToggleModule,
+        IgxDropDownModule,
+        IgxCheckboxModule,
+        IgxGridModule,
+        FormsModule,
+        IgxRadioModule,
+        IgxSelectModule,
+        IgxSwitchModule,
         IgxDialogModule,
         IgxCardModule,
         IgxButtonGroupModule,

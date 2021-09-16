@@ -1,1 +1,70 @@
-<p>entrance works!</p>
+<div class="container">
+    <igx-input-group type="search" class="search">
+        <igx-prefix>
+            <igx-icon>search</igx-icon>
+        </igx-prefix><!--(keyup.enter)="send()"-->
+        <input #input1 igxInput placeholder="Search" class="input" id="input"/>
+    </igx-input-group>
+    <div class="drop-down">
+        <button class="drop-down__button" igxButton="raised" [igxToggleAction]="dropdown" [igxDropDownItemNavigation]="dropdown" >
+            Filtry
+        </button>
+        <igx-drop-down #dropdown class="drop-down__item">
+            <igx-drop-down-item>
+                <igx-checkbox>
+                    imię
+                </igx-checkbox>
+            </igx-drop-down-item>
+            <igx-drop-down-item>
+                <igx-checkbox>
+                    nazwisko
+                </igx-checkbox>
+            </igx-drop-down-item>
+            <igx-drop-down-item>
+                <igx-checkbox>
+                    dyscyplina
+                </igx-checkbox>
+            </igx-drop-down-item>
+            <igx-drop-down-item>
+                <igx-checkbox>
+                    numer telefonu
+                </igx-checkbox>
+            </igx-drop-down-item>
+            <igx-drop-down-item>
+                <igx-checkbox>
+                    numer karty
+                </igx-checkbox>
+            </igx-drop-down-item>
+        </igx-drop-down>
+    </div>
+    <button class="button" (click)="dialog.open()">Usuń</button>
+    
+    <table>
+        <tr class="row row--first">
+           <td class="column column--first">Imię</td>
+           <td class="column column--second">Nazwisko</td>
+           <td class="column column--third">Data</td>
+           <td class="column column--fourth">Godzina</td>
+           <td class="column column--fifth">Karnet</td>
+           <td class="column column--sixth">Zajęcia</td>
+        </tr>
+        <tr class="row" *ngFor="let item of entrancesList; let i=index">
+            <td class="column column--first">{{item.name}}</td>
+            <td class="column column--second">{{item.surname}}</td>
+            <td class="column column--third">{{item.date.toLocaleDateString()}}</td>
+            <td class="column column--fourth">
+                {{item.date.getUTCHours()}}:{{item.date.getUTCMinutes()}}
+            </td>
+            <td class="column column--fifth">{{item.package}}</td>
+            <td class="column column--sixth">{{item.training}}</td>
+            <igx-checkbox  (change)="toggleSelection($event,i)" [checked]="checkboxes[i]"></igx-checkbox>            
+        </tr>
+     </table>
+</div>
+
+<!-- do dodania interpolacja z listy Nazwisko i imię -->
+<igx-dialog #dialog message="Czy na pewno chcesz usunąć wejście?" leftButtonLabel="Tak" (onLeftButtonSelect)="deleteEntrances()" rightButtonLabel="Nie" (onRightButtonSelect)="dialog.close()" [closeOnOutsideSelect]="true"></igx-dialog>
+
+<igx-dialog #errorGetEntrances message="Nie udało się wczytać listy wejść?" rightButtonLabel="Wróć" (onRightButtonSelect)="errorGetEntrances.close()" [closeOnOutsideSelect]="true"></igx-dialog>
+
+<igx-dialog #errorDeleteEntrance message="Nie udało się usunąć wybranego wejścia" rightButtonLabel="Wróć" (onRightButtonSelect)="errorDeleteEntrance.close()" [closeOnOutsideSelect]="true"></igx-dialog>
