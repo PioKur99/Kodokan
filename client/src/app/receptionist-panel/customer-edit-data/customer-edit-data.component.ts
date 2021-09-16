@@ -45,21 +45,23 @@ export class CustomerEditDataComponent implements OnInit {
   ngOnInit(): void {
     //this.getClient(2) // <--- Na potrzeby testów
     this.getClient(parseInt(this.urlParam.snapshot.paramMap.get('id'))) //<--- ID klienta z adresu URL
-    this.router.navigate(["/receptionist-panel/customer-edit-data", {card: this.client.identityNumber}])
+    //this.router.navigate(["/receptionist-panel/customer-edit-data", {card: this.client.identityNumber}])
   }
 
   getClient(id: number) : void {
-    this.clientService.getClient(id).toPromise().then(data => {this.client = data
-      this.client.image = this.url /*<--- na potrzeby testów */});
+    this.clientService.getClient(id).toPromise().then(data => {this.client = data; this.client.image = "data:image/jpeg;base64," + this.client.image;
+      /*this.client.image = this.url /*<--- na potrzeby testów */});
   }
 
   patchClient() {
+    this.client.image = this.client.image.split(",")[1]
     this.clientService.editClient(this.client).subscribe(
       data => {
         this.client = data
         this.dialogSuccess.open();
       },
       error => {
+        this.client.image = "data:image/jpeg;base64," + this.client.image;
         this.dialogMessage = error.error;
         this.dialogFailure.open();
       }
@@ -95,5 +97,11 @@ export class CustomerEditDataComponent implements OnInit {
     this.url = this.webImage.imageAsDataUrl;
     this.client.image = this.url
   }
+
+  closeWindow(id_): void{
+      this.dialogSuccess.close();
+      this.router.navigate(["/receptionist-panel/customer-data", {id:id_}]);
+  }
+
 
 }

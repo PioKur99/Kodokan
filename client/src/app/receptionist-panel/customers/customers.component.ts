@@ -132,4 +132,8 @@ export class CustomersComponent implements OnInit {
     this.router.navigate(["/receptionist-panel"])
   }
 
+  toDetails(id_): void {
+    this.router.navigate(['/receptionist-panel/customer-data', {id:id_}])
+  }
+
 }

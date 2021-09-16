@@ -117,8 +117,8 @@ public class CustomerService {
         Customer customerToUpdate = this.findById(customer.getId());
 
         if (customer.getUserData().getEmail() != null) {
-            if (customerRepository.findAllEmails().stream().anyMatch(n -> n.equals((customer.getUserData().getEmail()))))
-                throw new RepeatedEmailException();
+            //if (customerRepository.findAllEmails().stream().anyMatch(n -> n.equals((customer.getUserData().getEmail()))))
+            //    throw new RepeatedEmailException();
             customerToUpdate.getUserData().setEmail(customer.getUserData().getEmail());
         }
 
@@ -140,8 +140,8 @@ public class CustomerService {
             if (peselValidator.isMale(customer.getUserData().getIdentityNumber()) && customer.getUserData().getGender() == FEMALE ||
             !peselValidator.isMale(customer.getUserData().getIdentityNumber()) && customer.getUserData().getGender() == MALE)
                 throw new IncorrectGenderException();
-            if (customerRepository.findAllPesels().stream().anyMatch(n -> n.equals(customer.getUserData().getIdentityNumber())))
-                throw new RepeatedPeselException();
+            //if (customerRepository.findAllPesels().stream().anyMatch(n -> n.equals(customer.getUserData().getIdentityNumber())))
+            //    throw new RepeatedPeselException();
 
             customerToUpdate.getUserData().setIdentityNumber(customer.getUserData().getIdentityNumber());
         }

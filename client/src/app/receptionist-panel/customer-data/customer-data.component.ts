@@ -36,12 +36,20 @@ export class CustomerDataComponent implements OnInit {
   ngOnInit(): void {
     //this.getClient(2) // <--- Na potrzeby testów
     this.getClient(parseInt(this.urlParam.snapshot.paramMap.get('id'))) // <--- ID klienta z adresu URL
-    this.router.navigate(["/receptionist-panel/customer-data", {card: this.client.identityNumber}])
+    //this.router.navigate(["/receptionist-panel/customer-data", {card: this.client.identityNumber}])
   }
 
   getClient(id: number) : void {
-    this.clientService.getClient(id).toPromise().then(data => {this.client = data
-                  this.client.image = "assets/ruda.jpg"/*<---- na potrzeby testów */});
+    this.clientService.getClient(id).toPromise().then(data => {this.client = data; this.client.image = "data:image/jpeg;base64," + this.client.image;
+                  /*this.client.image = "assets/ruda.jpg"/*<---- na potrzeby testów */});
+  }
+
+  toEditData(id_): void {
+    this.router.navigate(['/receptionist-panel/customer-edit-data', {id:id_}])
+  }
+
+  toAddPackage(id_): void {
+    this.router.navigate(['/receptionist-panel/add-package-receptionist', {id:id_}])
   }
 
 }

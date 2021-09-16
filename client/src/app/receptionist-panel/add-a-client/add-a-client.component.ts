@@ -174,11 +174,12 @@ imageLoaded() {
    
     if(type==='error'){
       this.errorDialog.close();
+      this.client.image = "data:image/jpeg;base64," + this.client.image;
     }
     else if(type === 'success'){
       this.successDialog.close();
+      this.router.navigate(["/receptionist-panel/customers"]);
     }
-    this.router.navigate(["receptionist-panel"]);
   }
 
   makePassword(length): String {

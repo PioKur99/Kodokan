@@ -38,8 +38,8 @@
 </section>
 
 <section class = "Buttons">
-    <button igxButton="raised" igxRipple="white" routerLink = "/receptionist-panel/customer-edit-data">EDYTUJ DANE</button>
-    <button igxButton="raised" igxRipple="white"routerLink = "/receptionist-panel/customer-add-pass">DODAJ KARNET</button>
+    <button igxButton="raised" igxRipple="white" (click)="toEditData(this.client.id)">EDYTUJ DANE</button>
+    <button igxButton="raised" igxRipple="white" (click)="toAddPackage(this.client.id)">DODAJ KARNET</button>
     <button igxButton="raised" igxRipple="white" routerLink = "/receptionist-panel/customer-family">RODZINA</button>
     <button igxButton="raised" igxRipple="white" routerLink = "/receptionist-panel/customer-show-passes">POKAŻ KARNETY</button>
     <button igxButton="raised" igxRipple="white" routerLink = "/receptionist-panel/customer-show-entrances">POKAŻ WEJŚCIA</button>

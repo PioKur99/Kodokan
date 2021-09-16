@@ -1,4 +1,3 @@
-<label igxLabel for="Name" class = "edit-label">Tryb edycji danych klienta</label>
 <section class = "Labels">
     <div>
         <div *ngIf="showWebcam">
@@ -57,7 +56,7 @@
 
 <div igxOverlayOutlet>
     <igx-dialog #dialog1  message="Profil klienta został zaktualizowany." 
-    leftButtonLabel="OK" (onLeftButtonSelect)="dialog1.close()"  
+    leftButtonLabel="OK" (onLeftButtonSelect)="closeWindow(this.client.id)"  
     [closeOnOutsideSelect]="true" title = "UDAŁO SIĘ!">
     </igx-dialog>
 </div>
