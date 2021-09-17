@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PackageService } from 'src/app/services/package.service';
 import { PackageDetails} from '../../data/package/package-details'
 
@@ -17,7 +17,7 @@ export class PassDetailsComponent implements OnInit {
 
   @ViewChild("errorGetPassDetails") errorGetPassDetails;
 
-  constructor(private route: ActivatedRoute,private packageService: PackageService) { }
+  constructor(private route: ActivatedRoute,private packageService: PackageService, private router: Router) { }
 
   ngOnInit(): void {
     const routeParams = this.route.snapshot.paramMap
@@ -44,6 +44,10 @@ export class PassDetailsComponent implements OnInit {
 
   openErrorGetPassDetails(){
     this.errorGetPassDetails.open()
+  }
+
+  toClient(id_){
+    this.router.navigate(['/receptionist-panel/customer-data', {id:id_}])
   }
 
 }

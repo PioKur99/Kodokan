@@ -1,32 +1,30 @@
 <div class="container">
     <igx-input-group type="search" class="search">
-        <igx-prefix>
-            <igx-icon>search</igx-icon>
-        </igx-prefix><!--(keyup.enter)="send()"-->
-        <input #input1 igxInput placeholder="Search" class="input" id="input"/>
-    </igx-input-group>
-    <div class="drop-down">
-        <button class="drop-down__button" igxButton="raised" [igxToggleAction]="dropdown" [igxDropDownItemNavigation]="dropdown" >
-            Filtry
-        </button>
-        <igx-drop-down #dropdown class="drop-down__item">
-            <igx-drop-down-item>
-                <igx-checkbox>
-                    imię i nazwisko
-                </igx-checkbox>
-            </igx-drop-down-item>
-            <igx-drop-down-item>
-                <igx-checkbox>
-                    okres ważności
-                </igx-checkbox>
-            </igx-drop-down-item>
-            <igx-drop-down-item>
-                <igx-checkbox>
-                    rodzaj karnetu
-                </igx-checkbox>
-            </igx-drop-down-item>
-        </igx-drop-down>
-    </div>
+       <igx-prefix>
+           <igx-icon>search</igx-icon>
+       </igx-prefix>
+
+       <input #input1 igxInput
+           placeholder="Szukaj" 
+           class="input" 
+           id="input1"
+           [(ngModel)]="searchBox"
+           (keydown.enter)="searchCustomers($event)"
+       />
+   </igx-input-group>
+
+   <div class="drop-down">
+       <igx-combo #combo class="combo" [itemsMaxHeight]="250"
+           [data]="filter_states" placeholder="Filtry" searchPlaceholder=""
+           displayKey="name" valueKey="id"
+           (onSelectionChange)="singleSelection($event)"
+           [(ngModel)]="selectedFilters" >
+       </igx-combo>
+              
+   </div>
+</div>
+<div class="container">
+    
     <button class="button" (click)="dialog.open()">Usuń</button>
     
     <table>

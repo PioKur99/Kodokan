@@ -22,6 +22,7 @@ export class AddPackageReceptionistComponent implements OnInit {
   package_id: String;
   name_surname: String;
   client_id: String;
+  errorMessage: String;
 
   constructor(private route: ActivatedRoute, private addPackageService: AddPackageReceptionistService, private router: Router, private packageService: PackageService) { 
   
@@ -58,10 +59,11 @@ createPackage(chosen_type_id: String):void{
       this.addPackageService.createPackage(this.client_id, chosen_type_id).subscribe(
       resp => {
         this.package_id = resp;
-        this.router.navigate(["/passes"+this.client_id]);
+        this.router.navigate(["/receptionist-panel/passes/"+this.package_id]);
       },
       err => {
         this.dialog.close();
+        this.errorMessage = err.error.message;
         this.errordialog.open();
       }
     );
@@ -73,17 +75,20 @@ createPackage(chosen_type_id: String):void{
         this.package_id = resp;
         this.addPackageService.payForPackage(this.package_id).subscribe(
           resp => {
-            this.router.navigate(["/passes"+ this.client_id]);
+            this.router.navigate(["/receptionist-panel/passes/"+this.package_id]);
           },
           err => {
             this.paydialog.close();
             this.dialog.close();
+            this.errorMessage = err.error.message;
             this.errordialog.open();
           }
         );
       },
       err => {
         this.dialog.close();
+        this.errorMessage = err.error.message;
+        console.log(err.error)
         this.errordialog.open();
       }
     );

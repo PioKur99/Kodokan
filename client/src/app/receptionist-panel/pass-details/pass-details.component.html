@@ -11,7 +11,7 @@
             <td class="column column--first">posiadacz</td>
             <td class="column column--second">
                 <div *ngFor="let item of packageDetails.owners">
-                    <a class="href" href="receptionist-panel/customers/{{item.customerId}}">
+                    <a class="href" (click)="toClient(item.customerId)">
                         {{item.firstName}}
                         {{item.lastName}}
                     </a>

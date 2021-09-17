@@ -10,9 +10,13 @@ import * as config from '../../assets/config.json'
 })
 export class EntranceService {
 
-  getEntrances(): Observable<Entrance[]>{
+  getEntrances(search_entrance?): Observable<Entrance[]>{
     //TODO: ten get nie działa wyskakuje 500
-    return this.http.post<Entrance[]>(config.address + 'entrance/get',{})
+    if(search_entrance)
+      return this.http.post<Entrance[]>(config.address + 'entrance/get',search_entrance)
+    else 
+      return this.http.post<Entrance[]>(config.address + 'entrance/get',{})
+    //return this.http.post<Entrance[]>(config.address + 'entrance/get',{})
     let entrance=[{
       entrance_id: 1,
       name: "Marian",

@@ -11,8 +11,12 @@ export class PassesService {
 
   constructor(private http: HttpClient) { }
 
-  getPasses(): Observable<Passes[]>{
-    return this.http.post<Passes[]>(config.address + 'package',{})
+  getPasses(search_package?): Observable<Passes[]>{
+    if(search_package)
+      return this.http.post<Passes[]>(config.address + 'package',search_package)
+    else 
+      return this.http.post<Passes[]>(config.address + 'package',{})
+    //return this.http.post<Passes[]>(config.address + 'package',{})
     // let passes=[{
     //   package_id: 1,
     //   package_name: 'nazwa karnetu',

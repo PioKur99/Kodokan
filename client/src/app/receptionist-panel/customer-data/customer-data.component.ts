@@ -52,4 +52,8 @@ export class CustomerDataComponent implements OnInit {
     this.router.navigate(['/receptionist-panel/add-package-receptionist', {id:id_}])
   }
 
+  toClientPackage(fName): void {
+    this.router.navigate(['/receptionist-panel/passes', {fullname:fName}])
+  }
+
 }

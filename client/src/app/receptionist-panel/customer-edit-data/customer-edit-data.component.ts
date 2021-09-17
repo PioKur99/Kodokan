@@ -100,6 +100,7 @@ export class CustomerEditDataComponent implements OnInit {
 
   closeWindow(id_): void{
       this.dialogSuccess.close();
+      console.log(id_)
       this.router.navigate(["/receptionist-panel/customer-data", {id:id_}]);
   }
 

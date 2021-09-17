@@ -41,7 +41,7 @@
     <button igxButton="raised" igxRipple="white" (click)="toEditData(this.client.id)">EDYTUJ DANE</button>
     <button igxButton="raised" igxRipple="white" (click)="toAddPackage(this.client.id)">DODAJ KARNET</button>
     <button igxButton="raised" igxRipple="white" routerLink = "/receptionist-panel/customer-family">RODZINA</button>
-    <button igxButton="raised" igxRipple="white" routerLink = "/receptionist-panel/customer-show-passes">POKAŻ KARNETY</button>
+    <button igxButton="raised" igxRipple="white" (click)="toClientPackage(this.client.firstName + ' ' + this.client.lastName)">POKAŻ KARNETY</button>
     <button igxButton="raised" igxRipple="white" routerLink = "/receptionist-panel/customer-show-entrances">POKAŻ WEJŚCIA</button>
     <button igxButton="raised" igxRipple="white" routerLink = "/receptionist-panel/customer-send-mail">WYŚLIJ MAILA</button>    
 </section>

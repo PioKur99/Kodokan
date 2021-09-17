@@ -140,7 +140,15 @@ public class EntranceService {
             return Collections.emptyList();
         }
 
+        entranceFilter.setName(Optional.ofNullable(entranceFilter.getName()).orElse(""));
+        entranceFilter.setSurname(Optional.ofNullable(entranceFilter.getSurname()).orElse(""));
+        entranceFilter.setDate(Optional.ofNullable(entranceFilter.getDate()).orElse(""));
+        entranceFilter.setPackageName(Optional.ofNullable(entranceFilter.getPackageName()).orElse(""));
+        entranceFilter.setTraining(Optional.ofNullable(entranceFilter.getTraining()).orElse(""));
+        entranceFilter.setCardId(Optional.ofNullable(entranceFilter.getCardId()).orElse(""));
+
         //TODO: Pewnie mozna jakos ladniej zrobic filtrowanie, jeszcze do przemyslenia
+        
         if (!entranceFilter.getName().isEmpty())
             toFilter = toFilter.stream()
                     .filter(n -> n.getCustomer().getUserData().getFirstName().contains(entranceFilter.getName()))
