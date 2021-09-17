@@ -51,11 +51,11 @@
         <tr class="row" *ngFor="let item of entrancesList; let i=index">
             <td class="column column--first">{{item.name}}</td>
             <td class="column column--second">{{item.surname}}</td>
-            <td class="column column--third">{{item.date.toLocaleDateString()}}</td>
+            <td class="column column--third">{{item.date}}</td>
             <td class="column column--fourth">
-                {{item.date.getUTCHours()}}:{{item.date.getUTCMinutes()}}
+                {{item.hour}}
             </td>
-            <td class="column column--fifth">{{item.package}}</td>
+            <td class="column column--fifth">{{item.packageName}}</td>
             <td class="column column--sixth">{{item.training}}</td>
             <igx-checkbox  (change)="toggleSelection($event,i)" [checked]="checkboxes[i]"></igx-checkbox>            
         </tr>

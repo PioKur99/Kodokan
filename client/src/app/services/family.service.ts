@@ -11,7 +11,7 @@ export class FamilyService {
   constructor(private http: HttpClient) { }
   baseUrl: String = "http://172.18.0.3:8081/"
 
-  getFamilyMembers(id: String):Observable<FamilyMember[]> {
+  getFamilyMembers(id: Number):Observable<FamilyMember[]> {
     let url = this.baseUrl + `customer/${id}/familyWithNames`
     return this.http.get<FamilyMember[]>(url)
   }

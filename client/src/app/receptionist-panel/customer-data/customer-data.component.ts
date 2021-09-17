@@ -56,4 +56,8 @@ export class CustomerDataComponent implements OnInit {
     this.router.navigate(['/receptionist-panel/passes', {fullname:fName}])
   }
 
+  toFamily(id_): void {
+    this.router.navigate(['/customer-family', {id:id_}])
+  }
+
 }

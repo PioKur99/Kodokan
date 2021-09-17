@@ -123,7 +123,7 @@ export class RegisterComponent implements OnInit {
 
     this.registerService.addClient(this.client).subscribe(
       x=>{
-        this.router.navigate(["/register", {id:x}]);
+        this.router.navigate(["/customer-panel"]);
       },
       error => {
         this.errorDialog.open();
